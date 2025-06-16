@@ -5,3 +5,6 @@ export * from "./useSortable";
 export * from "./useQueryParams";
 export * from "./useDateRange.ts";
 export * from "./useFilter";
+export * from "./useFilter";
+export * from "./useDocumentTitle";
+export * from "./useMediaQuerySizes.ts";
