@@ -5,3 +5,4 @@ export * from "./MyCheckbox";
 export * from "./MySwitch";
 export * from "./MyFilepond";
 export * from "./MyTimePicker";
+export * from "dgz-ui/form";
