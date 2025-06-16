@@ -119,7 +119,8 @@
       "types": "./dist/types/providers/index.d.ts",
       "import": "./dist/providers/index.es.js",
       "require": "./dist/providers/index.umd.js"
-    }
+    },
+    "./dist/dgz-ui-shared.css": "./dist/dgz-ui-shared.css"
   },
   "sideEffects": false,
   "scripts": {
