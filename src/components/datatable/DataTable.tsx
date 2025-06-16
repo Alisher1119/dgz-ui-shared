@@ -13,7 +13,7 @@ import { useTranslation } from "react-i18next";
 import { RiArrowDownSLine, RiLayoutColumnLine } from "@remixicon/react";
 import { useState } from "react";
 import { get, isEmpty } from "lodash";
-import MyTable, { type MyTableProps } from "./MyTable";
+import { MyTable, type MyTableProps } from "./MyTable";
 import { useColumns } from "../../hooks";
 import { type FilterInterface, FilterWrapper, Search } from "../filters";
 

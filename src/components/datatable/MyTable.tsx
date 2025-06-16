@@ -38,7 +38,7 @@ export interface MyTableProps<TData> {
   ) => void;
 }
 
-const MyTable = <TData,>({
+export const MyTable = <TData,>({
   rows = [],
   columns,
   onRowClick,
@@ -191,5 +191,3 @@ const MyTable = <TData,>({
     </ScrollArea>
   );
 };
-
-export default MyTable;
