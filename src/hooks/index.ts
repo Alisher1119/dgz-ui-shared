@@ -8,3 +8,4 @@ export * from "./useFilter";
 export * from "./useFilter";
 export * from "./useDocumentTitle";
 export * from "./useMediaQuerySizes.ts";
+export * from "./useTheme";

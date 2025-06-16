@@ -114,8 +114,7 @@
       "types": "./dist/types/stores/index.d.ts",
       "import": "./dist/stores/index.es.js",
       "require": "./dist/stores/index.umd.js"
-    },
-    "./dist/dgz-ui.css": "./dist/dgz-ui.css"
+    }
   },
   "sideEffects": false,
   "scripts": {
