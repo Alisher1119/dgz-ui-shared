@@ -2,13 +2,13 @@ import { type ReactNode, useEffect, useState } from "react";
 import { ThemeMode } from "../enums";
 import { ThemeProviderContext } from "../contexts";
 
-type ThemeProviderProps = {
+export type ThemeProviderProps = {
   children: ReactNode;
   defaultTheme?: ThemeMode;
   storageKey?: string;
 };
 
-function ThemeProvider({
+export function ThemeProvider({
   children,
   defaultTheme = ThemeMode.SYSTEM,
   storageKey = "theme",
@@ -51,5 +51,3 @@ function ThemeProvider({
     </ThemeProviderContext>
   );
 }
-
-export default ThemeProvider;
