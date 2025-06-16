@@ -30,6 +30,11 @@
       "import": "./dist/index.es.js",
       "require": "./dist/index.umd.js"
     },
+    "./components/form": {
+      "types": "./dist/types/components/form/index.d.ts",
+      "import": "./dist/components/form/index.es.js",
+      "require": "./dist/components/form/index.umd.js"
+    },
     "./components/breadcrumb": {
       "types": "./dist/types/components/breadcrumb/index.d.ts",
       "import": "./dist/components/breadcrumb/index.es.js",
