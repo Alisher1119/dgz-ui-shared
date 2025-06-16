@@ -71,6 +71,7 @@ export default defineConfig({
         "hooks/index": resolve(__dirname, "src/hooks/index.ts"),
         "types/index": resolve(__dirname, "src/types/index.ts"),
         "stores/index": resolve(__dirname, "src/stores/index.ts"),
+        "providers/index": resolve(__dirname, "src/providers/index.ts"),
       },
       formats: ["es", "cjs"],
     },

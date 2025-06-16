@@ -114,6 +114,11 @@
       "types": "./dist/types/stores/index.d.ts",
       "import": "./dist/stores/index.es.js",
       "require": "./dist/stores/index.umd.js"
+    },
+    "./providers": {
+      "types": "./dist/types/providers/index.d.ts",
+      "import": "./dist/providers/index.es.js",
+      "require": "./dist/providers/index.umd.js"
     }
   },
   "sideEffects": false,
