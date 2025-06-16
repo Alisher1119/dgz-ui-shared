@@ -10,7 +10,7 @@ import { Button } from "dgz-ui/button";
 import { ThemeMode } from "../../enums";
 import { useTheme } from "../../hooks/useTheme.ts";
 
-function ThemeToggle({ className }: { className?: string }) {
+export function ThemeToggle({ className }: { className?: string }) {
   const { setTheme } = useTheme();
   const { t } = useTranslation();
 
@@ -37,5 +37,3 @@ function ThemeToggle({ className }: { className?: string }) {
     </DropdownMenu>
   );
 }
-
-export default ThemeToggle;
