@@ -8,7 +8,7 @@ import {
 import { useTranslation } from "react-i18next";
 import { Button } from "dgz-ui/button";
 import { ThemeMode } from "../../enums";
-import { useTheme } from "../../hooks/useTheme.ts";
+import { useTheme } from "../../hooks";
 
 export function ThemeToggle({ className }: { className?: string }) {
   const { setTheme } = useTheme();
