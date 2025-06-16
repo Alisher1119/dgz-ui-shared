@@ -85,6 +85,11 @@
       "import": "./dist/components/tooltip/index.es.js",
       "require": "./dist/components/tooltip/index.umd.js"
     },
+    "./components/theme": {
+      "types": "./dist/types/components/theme/index.d.ts",
+      "import": "./dist/components/theme/index.es.js",
+      "require": "./dist/components/theme/index.umd.js"
+    },
     "./enums": {
       "types": "./dist/types/enums/index.d.ts",
       "import": "./dist/enums/index.es.js",
