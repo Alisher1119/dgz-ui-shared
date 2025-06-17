@@ -12,6 +12,7 @@ export const useConfirm = () => {
       autoClose: false,
     });
     toast.update(toastId, {
+      position: "bottom-left",
       render: (
         <Confirm
           defaultOpen
@@ -28,6 +29,7 @@ export const useConfirm = () => {
     ({ onSubmit }: { onSubmit: (data: ConfirmPasswordDto) => void }) => {
       const toastId = uniqueId();
       toast.warning(<></>, {
+        position: "bottom-left",
         toastId: toastId,
         autoClose: false,
       });

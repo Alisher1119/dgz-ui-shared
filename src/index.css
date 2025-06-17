@@ -528,3 +528,7 @@
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-ring: var(--sidebar-ring);
 }
+
+.Toastify__toast-container.Toastify__toast-container--bottom-left {
+  display: none;
+}
