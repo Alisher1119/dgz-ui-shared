@@ -19,8 +19,8 @@ export const MyBreadcrumb = ({ breadcrumbs = [] }: MyBreadcrumbProps) => {
     <Breadcrumb>
       <BreadcrumbList>
         <BreadcrumbItem>
-          <BreadcrumbLink to="/">
-            <HomeIcon />
+          <BreadcrumbLink asChild to="/">
+            <HomeIcon className={"size-4"} />
           </BreadcrumbLink>
         </BreadcrumbItem>
         <BreadcrumbSeparator />
