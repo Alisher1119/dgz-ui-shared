@@ -39,7 +39,9 @@ export const MyBreadcrumb = ({ breadcrumbs = [] }: MyBreadcrumbProps) => {
             <Fragment key={index}>
               <BreadcrumbItem>
                 {!item.isActive ? (
-                  <BreadcrumbLink to={item.path}>{item.name}</BreadcrumbLink>
+                  <BreadcrumbLink asChild to={item.path}>
+                    {item.name}
+                  </BreadcrumbLink>
                 ) : (
                   <BreadcrumbPage>{item.name}</BreadcrumbPage>
                 )}
