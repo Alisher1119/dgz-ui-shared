@@ -2,13 +2,14 @@ import {
   Breadcrumb,
   type BreadcrumbInterface,
   BreadcrumbItem,
-  BreadcrumbLink,
   BreadcrumbList,
   BreadcrumbPage,
   BreadcrumbSeparator,
 } from "dgz-ui/breadcrumb";
 import { Fragment } from "react";
 import { HomeIcon } from "lucide-react";
+import { Link } from "react-router-dom";
+import { cn } from "dgz-ui";
 
 export interface MyBreadcrumbProps {
   breadcrumbs: BreadcrumbInterface[];
@@ -19,9 +20,14 @@ export const MyBreadcrumb = ({ breadcrumbs = [] }: MyBreadcrumbProps) => {
     <Breadcrumb>
       <BreadcrumbList>
         <BreadcrumbItem>
-          <BreadcrumbLink asChild to="/">
+          <Link
+            className={cn(
+              "transition-colors text-body-md-regular text-secondary hover:text-primary",
+            )}
+            to={"/"}
+          >
             <HomeIcon className={"size-4"} />
-          </BreadcrumbLink>
+          </Link>
         </BreadcrumbItem>
         <BreadcrumbSeparator />
         {breadcrumbs
@@ -39,9 +45,14 @@ export const MyBreadcrumb = ({ breadcrumbs = [] }: MyBreadcrumbProps) => {
             <Fragment key={index}>
               <BreadcrumbItem>
                 {!item.isActive ? (
-                  <BreadcrumbLink asChild to={item.path}>
+                  <Link
+                    className={cn(
+                      "transition-colors text-body-md-regular text-secondary hover:text-primary",
+                    )}
+                    to={item.path}
+                  >
                     {item.name}
-                  </BreadcrumbLink>
+                  </Link>
                 ) : (
                   <BreadcrumbPage>{item.name}</BreadcrumbPage>
                 )}
