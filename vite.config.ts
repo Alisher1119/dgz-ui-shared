@@ -15,10 +15,6 @@ export default defineConfig({
     lib: {
       entry: {
         index: resolve(__dirname, "src/index.ts"),
-        "components/breadcrumb/index": resolve(
-          __dirname,
-          "src/components/breadcrumb/index.ts",
-        ),
         "components/confirm/index": resolve(
           __dirname,
           "src/components/confirm/index.ts",
@@ -50,10 +46,6 @@ export default defineConfig({
         "components/scroll/index": resolve(
           __dirname,
           "src/components/scroll/index.ts",
-        ),
-        "components/title/index": resolve(
-          __dirname,
-          "src/components/title/index.ts",
         ),
         "components/tooltip/index": resolve(
           __dirname,

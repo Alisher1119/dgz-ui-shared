@@ -35,11 +35,6 @@
       "import": "./dist/components/form/index.es.js",
       "require": "./dist/components/form/index.umd.js"
     },
-    "./components/breadcrumb": {
-      "types": "./dist/types/components/breadcrumb/index.d.ts",
-      "import": "./dist/components/breadcrumb/index.es.js",
-      "require": "./dist/components/breadcrumb/index.umd.js"
-    },
     "./components/confirm": {
       "types": "./dist/types/components/confirm/index.d.ts",
       "import": "./dist/components/confirm/index.es.js",
@@ -79,11 +74,6 @@
       "types": "./dist/types/components/scroll/index.d.ts",
       "import": "./dist/components/scroll/index.es.js",
       "require": "./dist/components/scroll/index.umd.js"
-    },
-    "./components/title": {
-      "types": "./dist/types/components/title/index.d.ts",
-      "import": "./dist/components/title/index.es.js",
-      "require": "./dist/components/title/index.umd.js"
     },
     "./components/tooltip": {
       "types": "./dist/types/components/tooltip/index.d.ts",
