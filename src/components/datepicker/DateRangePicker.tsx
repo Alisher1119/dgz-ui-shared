@@ -7,7 +7,7 @@ import {
 } from "react";
 import { type DateRange } from "react-day-picker";
 import { Calendar, DATE } from "dgz-ui/calendar";
-import * as dayjs from "dayjs";
+import dayjs from "dayjs";
 import { useTranslation } from "react-i18next";
 import { cn } from "dgz-ui";
 import { Popover, PopoverContent, PopoverTrigger } from "dgz-ui/popover";
