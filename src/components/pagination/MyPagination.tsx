@@ -85,7 +85,7 @@ const MyPagination = ({
             <PaginationPrevious
               isActive={currentPage > 1}
               size="sm"
-              className={cn(currentPage === 1 ? "disabled" : "shadow")}
+              className={cn(currentPage > 1 ? "disabled" : "shadow")}
               onClick={() => onPageChange(currentPage - 1)}
             />
           </PaginationItem>
@@ -114,7 +114,7 @@ const MyPagination = ({
             <PaginationNext
               size="sm"
               onClick={() => onPageChange(currentPage + 1)}
-              className={cn(currentPage === totalPages ? "disabled" : "shadow")}
+              className={cn(currentPage < totalPages ? "disabled" : "shadow")}
               isActive={currentPage < totalPages}
             />
           </PaginationItem>
