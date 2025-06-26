@@ -8,7 +8,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "dgz-ui/dropdown";
-import { MyLimitSelect, MyPagination } from "../pagination";
+import { MyLimitSelect, Pagination } from "../pagination";
 import { useTranslation } from "react-i18next";
 import { RiArrowDownSLine, RiLayoutColumnLine } from "@remixicon/react";
 import { useState } from "react";
@@ -160,7 +160,7 @@ export const DataTable = <TData,>({
             {selectedRows.length} of {dataSource?.total || 0} row(s) selected.
           </div>
           <div>
-            <MyPagination
+            <Pagination
               onPageChange={(page) => {
                 if (onParamChange) {
                   onParamChange({ ...params, page });

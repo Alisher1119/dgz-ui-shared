@@ -1,4 +1,4 @@
-import MyPagination from "./MyPagination";
+import Pagination from "./Pagination";
 import MyLimitSelect from "./MyLimitSelect";
 
-export { MyPagination, MyLimitSelect };
+export { Pagination, MyLimitSelect };
