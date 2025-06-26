@@ -65,7 +65,7 @@ const MyPagination = ({
         <div className={"font-semibold min-w-20"}>{t("Go to page")}:</div>
         <Select
           onValueChange={(page) => onPageChange(parseInt(page))}
-          defaultValue={`1`}
+          value={`${currentPage}`}
         >
           <SelectTrigger className="w-14 h-8.5">
             <SelectValue />
