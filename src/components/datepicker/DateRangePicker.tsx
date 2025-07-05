@@ -1,24 +1,19 @@
-import {
-  type HTMLAttributes,
-  type ReactNode,
-  useEffect,
-  useMemo,
-  useState,
-} from "react";
+import { type ReactNode, useEffect, useMemo, useState } from "react";
 import { type DateRange } from "react-day-picker";
 import { Calendar, DATE } from "dgz-ui/calendar";
 import dayjs from "dayjs";
 import { useTranslation } from "react-i18next";
 import { cn } from "dgz-ui";
 import { Popover, PopoverContent, PopoverTrigger } from "dgz-ui/popover";
-import { Button } from "dgz-ui/button";
+import { Button, type ButtonProps } from "dgz-ui/button";
 import { Calendar1 } from "lucide-react";
 
-type DateRangePickerProps = HTMLAttributes<HTMLDivElement> & {
+type DateRangePickerProps = ButtonProps & {
   format?: string;
   placeholder?: string;
   selected?: DateRange;
   timezone?: string;
+  error?: string;
   onRangeSelected?: (value?: DateRange) => void;
 };
 
@@ -31,6 +26,8 @@ export const DateRangePicker = ({
   timezone,
   onRangeSelected = () => {},
   placeholder,
+  error,
+  ...props
 }: DateRangePickerProps) => {
   const { t } = useTranslation();
   const [open, setOpen] = useState(false);
@@ -104,9 +101,12 @@ export const DateRangePicker = ({
             size={"sm"}
             variant={"secondary"}
             className={cn(
-              "min-w-[170px] text-body-xs-regular justify-between",
+              "pl-3 mb-0 text-left min-w-[170px] text-secondary justify-between !text-body-sm-regular font-normal border-alpha-strong bg-transparent hover:bg-transparent focus:ring-item-primary",
+              error &&
+                "focus:ring-item-destructive border-item-destructive bg-item-destructive-focus text-item-destructive hover:bg-item-destructive-focus dark:bg-transparent",
               !date && "text-primary",
             )}
+            {...props}
           >
             {date?.from ? (
               date.to ? (

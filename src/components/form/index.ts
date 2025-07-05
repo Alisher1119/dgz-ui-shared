@@ -1,6 +1,7 @@
 export * from "./MyInput";
 export * from "./MySelect";
 export * from "./MyDatePicker";
+export * from "./MyDateRangePicker";
 export * from "./MyCheckbox";
 export * from "./MySwitch";
 export * from "./MyFilepond";
