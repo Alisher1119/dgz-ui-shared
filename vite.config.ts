@@ -65,7 +65,6 @@ export default defineConfig({
         "stores/index": resolve(__dirname, "src/stores/index.ts"),
         "providers/index": resolve(__dirname, "src/providers/index.ts"),
       },
-      formats: ["es", "cjs"],
     },
     rollupOptions: {
       external: ["react", "react-dom"],
