@@ -101,7 +101,7 @@ export const DateRangePicker = ({
             size={"sm"}
             variant={"secondary"}
             className={cn(
-              "pl-3 mb-0 text-left min-w-[170px] text-secondary justify-between !text-body-sm-regular font-normal border-alpha-strong bg-transparent hover:bg-transparent focus:ring-item-primary",
+              "pl-3 mb-0 text-left min-w-[170px] text-secondary justify-between !text-body-sm-regular font-normal border-border-alpha-strong bg-transparent hover:bg-transparent focus:ring-item-primary",
               error &&
                 "focus:ring-item-destructive border-item-destructive bg-item-destructive-focus text-item-destructive hover:bg-item-destructive-focus dark:bg-transparent",
               !date && "text-primary",
