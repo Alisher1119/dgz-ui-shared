@@ -57,4 +57,4 @@ const MyRadio = <TFieldValues extends FieldValues>({
   );
 };
 
-export default MyRadio;
+export { MyRadio };
