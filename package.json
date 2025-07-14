@@ -1,6 +1,6 @@
 {
   "name": "dgz-ui-shared",
-  "version": "1.0.34",
+  "version": "1.0.35",
   "type": "module",
   "files": [
     "dist"
