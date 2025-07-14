@@ -1,7 +1,7 @@
-import { useCallback, useEffect, useMemo } from "react";
-import { get, isEmpty, set } from "lodash";
-import type { ColumnType } from "../types";
-import { useColumnsStore } from "../stores";
+import { useCallback, useEffect, useMemo } from 'react';
+import { get, isEmpty, set } from 'lodash';
+import type { ColumnType } from '../types';
+import { useColumnsStore } from '../stores';
 
 export interface UseColumnsProps<TData> {
   key: string;
@@ -49,7 +49,7 @@ export const useColumns = <TData>({
         [key]: columnsObj,
       });
     },
-    [key, setColumns, storedColumns],
+    [key, setColumns, storedColumns]
   );
 
   const resetColumns = useCallback(() => {

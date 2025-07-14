@@ -1,6 +1,6 @@
-import { useCallback, useEffect, useState } from "react";
-import type { CheckedState } from "@radix-ui/react-checkbox";
-import { isEqual } from "lodash";
+import { useCallback, useEffect, useState } from 'react';
+import type { CheckedState } from '@radix-ui/react-checkbox';
+import { isEqual } from 'lodash';
 
 export interface UseDataTableProps<TData> {
   rows?: TData[];
@@ -18,7 +18,7 @@ export const useDataTable = <TData>({
       setSelectedRows((oldSelectedRows) => {
         const currentPageRowKeys = rows.map((item) => item[rowKey]) || [];
         const otherPagesSelected = oldSelectedRows.filter(
-          (key) => !currentPageRowKeys.includes(key),
+          (key) => !currentPageRowKeys.includes(key)
         );
 
         if (checked) {
@@ -28,7 +28,7 @@ export const useDataTable = <TData>({
         }
       });
     },
-    [rows],
+    [rows]
   );
 
   useEffect(() => {
@@ -36,7 +36,7 @@ export const useDataTable = <TData>({
       setSelectedRows((prevSelectedRows) =>
         isEqual(prevSelectedRows, defaultSelectedRows)
           ? prevSelectedRows
-          : defaultSelectedRows,
+          : defaultSelectedRows
       );
     }
   }, [defaultSelectedRows]);
@@ -51,14 +51,14 @@ export const useDataTable = <TData>({
         }
       });
     },
-    [],
+    []
   );
 
   const isRowSelected = useCallback(
     (key: TData[keyof TData]) => {
       return selectedRows.includes(key);
     },
-    [selectedRows],
+    [selectedRows]
   );
 
   const isAllRowsSelected = useCallback(
@@ -73,10 +73,10 @@ export const useDataTable = <TData>({
       return currentPageRowKeys.length === selectedRowsCountInPage
         ? true
         : selectedRowsCountInPage
-          ? "indeterminate"
+          ? 'indeterminate'
           : false;
     },
-    [selectedRows, rows],
+    [selectedRows, rows]
   );
 
   return {

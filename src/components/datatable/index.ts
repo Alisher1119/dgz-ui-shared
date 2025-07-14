@@ -1,2 +1,2 @@
-export * from "./DataTable";
-export * from "./MyTable";
+export * from './DataTable';
+export * from './MyTable';

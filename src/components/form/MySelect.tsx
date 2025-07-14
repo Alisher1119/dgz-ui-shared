@@ -8,10 +8,10 @@ import {
   FormMessage,
   ReactSelect,
   type ReactSelectProps,
-} from "dgz-ui/form";
-import { get } from "lodash";
-import type { FieldPath, FieldValues } from "react-hook-form";
-import { cn } from "dgz-ui";
+} from 'dgz-ui/form';
+import { get } from 'lodash';
+import type { FieldPath, FieldValues } from 'react-hook-form';
+import { cn } from 'dgz-ui';
 
 export type MySelectProps<TFieldValues extends FieldValues> =
   FormItemProps<TFieldValues> &
@@ -32,8 +32,8 @@ export const MySelect = <TFieldValues extends FieldValues>({
   ...props
 }: MySelectProps<TFieldValues>) => {
   const labelElm = label && (
-    <FormLabel className={"my-3"}>
-      {label} {required && <span className={"text-red-600"}>*</span>}
+    <FormLabel className={'my-3'}>
+      {label} {required && <span className={'text-red-600'}>*</span>}
     </FormLabel>
   );
 
@@ -42,7 +42,7 @@ export const MySelect = <TFieldValues extends FieldValues>({
       <>
         {labelElm}
         <ReactSelect
-          className={cn("mt-2", className)}
+          className={cn('mt-2', className)}
           {...props}
           options={options}
         />
@@ -69,7 +69,7 @@ export const MySelect = <TFieldValues extends FieldValues>({
             {labelElm}
             <FormControl>
               <ReactSelect
-                className={cn("mt-2", className)}
+                className={cn('mt-2', className)}
                 {...props}
                 {...field}
                 onChange={handleChange}

@@ -2,7 +2,7 @@ import {
   ArrowDownWideNarrow,
   ArrowUpDown,
   ArrowUpWideNarrow,
-} from "lucide-react";
+} from 'lucide-react';
 import {
   Table,
   TableBody,
@@ -10,17 +10,17 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "dgz-ui/table";
-import { get } from "lodash";
-import { useEffect } from "react";
-import type { ColumnType } from "../../types";
-import { DEFAULT_LIMIT } from "../pagination/MyLimitSelect";
-import { useDataTable, useSortable, type UseSortableProps } from "../../hooks";
-import { ScrollArea } from "../scroll";
-import { Checkbox } from "dgz-ui/form";
-import { cn } from "dgz-ui";
-import { SortOrder } from "../../enums";
-import { Empty } from "../empty";
+} from 'dgz-ui/table';
+import { get } from 'lodash';
+import { useEffect } from 'react';
+import type { ColumnType } from '../../types';
+import { DEFAULT_LIMIT } from '../pagination/MyLimitSelect';
+import { useDataTable, useSortable, type UseSortableProps } from '../../hooks';
+import { ScrollArea } from '../scroll';
+import { Checkbox } from 'dgz-ui/form';
+import { cn } from 'dgz-ui';
+import { SortOrder } from '../../enums';
+import { Empty } from '../empty';
 
 export interface MyTableProps<TData> {
   rows?: TData[];
@@ -34,7 +34,7 @@ export interface MyTableProps<TData> {
   selectedItems?: TData[keyof TData][];
   onSelectedItemsChange?: (selectedItems: TData[keyof TData][]) => void;
   onSortOrderChange?: (
-    params: Omit<UseSortableProps<TData>, "onSortOrderChange">,
+    params: Omit<UseSortableProps<TData>, 'onSortOrderChange'>
   ) => void;
 }
 
@@ -73,14 +73,14 @@ export const MyTable = <TData,>({
   }, [selectedRows]);
 
   return (
-    <ScrollArea className="border-y h-full shrink">
+    <ScrollArea className="h-full shrink border-y">
       <Table>
         <TableHeader>
           <TableRow>
             {hasCheckbox && (
-              <TableHead className={"w-12 p-3"}>
+              <TableHead className={'w-12 p-3'}>
                 <Checkbox
-                  className={"mt-1"}
+                  className={'mt-1'}
                   checked={isAllRowsSelected(rowKey)}
                   onCheckedChange={(value) =>
                     handleSelectAllRows(rowKey, !!value)
@@ -89,18 +89,18 @@ export const MyTable = <TData,>({
                 />
               </TableHead>
             )}
-            {hasNumbers && <TableHead className={"w-12 p-2"}>#</TableHead>}
+            {hasNumbers && <TableHead className={'w-12 p-2'}>#</TableHead>}
             {columns
               .filter((column) => !column.hidden)
               .map((column) => (
                 <TableHead
                   key={column.key}
                   style={column.styles}
-                  className={cn("p-2", column.sortable && "cursor-pointer")}
+                  className={cn('p-2', column.sortable && 'cursor-pointer')}
                   onClick={() => handleSort(column.dataIndex)}
                 >
-                  <div className={"flex gap-2 items-center"}>
-                    {column.name}{" "}
+                  <div className={'flex items-center gap-2'}>
+                    {column.name}{' '}
                     {column.sortable &&
                       (sortObject?.sortField === column.key ? (
                         <>
@@ -119,7 +119,7 @@ export const MyTable = <TData,>({
               ))}
           </TableRow>
         </TableHeader>
-        <TableBody className={"[&>tr:nth-child(even)]:bg-bg-secondary"}>
+        <TableBody className={'[&>tr:nth-child(even)]:bg-bg-secondary'}>
           {rows.length ? (
             rows.map((row, index) => (
               <TableRow
@@ -129,15 +129,15 @@ export const MyTable = <TData,>({
                     onRowClick(row);
                   }
                 }}
-                data-state={isRowSelected(row[rowKey]) && "selected"}
+                data-state={isRowSelected(row[rowKey]) && 'selected'}
               >
                 {hasCheckbox && (
                   <TableCell
-                    className={"w-12 p-3"}
+                    className={'w-12 p-3'}
                     onClick={(evt) => evt.stopPropagation()}
                   >
                     <Checkbox
-                      className={"mt-1"}
+                      className={'mt-1'}
                       checked={isRowSelected(row[rowKey])}
                       onCheckedChange={(value) =>
                         handleSelectRow(row[rowKey], !!value)
@@ -147,7 +147,7 @@ export const MyTable = <TData,>({
                   </TableCell>
                 )}
                 {hasNumbers && (
-                  <TableCell className={"w-12 p-2"}>
+                  <TableCell className={'w-12 p-2'}>
                     {((params.page as number) - 1) *
                       ((params.limit || DEFAULT_LIMIT) as number) +
                       index +
@@ -159,14 +159,14 @@ export const MyTable = <TData,>({
                   .map((column) => (
                     <TableCell
                       className={
-                        "max-w-xs overflow-hidden text-ellipsis p-2 text-body-xs-medium"
+                        'text-body-xs-medium max-w-xs overflow-hidden p-2 text-ellipsis'
                       }
                       style={column.styles}
                       key={`${index}-${column.key}`}
                     >
                       {column.render
                         ? column.render(get(row, column.dataIndex), row)
-                        : get(row, column.dataIndex, "")}
+                        : get(row, column.dataIndex, '')}
                     </TableCell>
                   ))}
               </TableRow>

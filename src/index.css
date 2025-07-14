@@ -1,5 +1,5 @@
-@import "tailwindcss";
-@import "tw-animate-css";
+@import 'tailwindcss';
+@import 'tw-animate-css';
 
 @custom-variant dark (&:is(.dark *));
 @config "../tailwind.config.js";
@@ -514,7 +514,7 @@
   }
 
   body {
-    @apply font-inter antialiased bg-background text-primary;
+    @apply font-inter bg-background text-primary antialiased;
   }
 }
 

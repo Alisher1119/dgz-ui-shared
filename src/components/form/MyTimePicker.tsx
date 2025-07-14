@@ -6,10 +6,10 @@ import {
   type FormItemProps,
   FormLabel,
   FormMessage,
-} from "dgz-ui/form";
-import type { FieldPath, FieldValues } from "react-hook-form";
-import { TIME, TimePicker, type TimePickerProps } from "dgz-ui/calendar";
-import { cn } from "dgz-ui";
+} from 'dgz-ui/form';
+import type { FieldPath, FieldValues } from 'react-hook-form';
+import { TIME, TimePicker, type TimePickerProps } from 'dgz-ui/calendar';
+import { cn } from 'dgz-ui';
 
 export type MyTimePickerProps<TFieldValues extends FieldValues> =
   FormItemProps<TFieldValues> &
@@ -30,8 +30,8 @@ export const MyTimePicker = <TFieldValues extends FieldValues>({
   ...props
 }: MyTimePickerProps<TFieldValues>) => {
   const labelElm = label && (
-    <FormLabel className={"my-3"}>
-      {label} {required && <span className={"text-red-600"}>*</span>}
+    <FormLabel className={'my-3'}>
+      {label} {required && <span className={'text-red-600'}>*</span>}
     </FormLabel>
   );
 
@@ -45,7 +45,7 @@ export const MyTimePicker = <TFieldValues extends FieldValues>({
           {labelElm}
           <FormControl>
             <TimePicker
-              className={"mt-1"}
+              className={'mt-1'}
               value={field.value}
               onChange={(time) => {
                 field.onChange(time.format(TIME));
@@ -54,15 +54,14 @@ export const MyTimePicker = <TFieldValues extends FieldValues>({
             />
           </FormControl>
           <FormDescription>{helperText}</FormDescription>
-          <FormMessage className={cn(floatingError && "absolute")} />
+          <FormMessage className={cn(floatingError && 'absolute')} />
         </FormItem>
       )}
     />
   ) : (
     <>
       {labelElm}
-      <TimePicker className={"mt-1"} {...props} />
-      <FormDescription>{helperText}</FormDescription>
+      <TimePicker className={'mt-1'} {...props} />
     </>
   );
 };

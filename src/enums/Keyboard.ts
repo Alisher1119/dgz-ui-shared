@@ -1,3 +1,3 @@
 export enum Keyboard {
-  ENTER = "Enter",
+  ENTER = 'Enter',
 }

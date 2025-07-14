@@ -1,6 +1,6 @@
-import { useCallback, useMemo } from "react";
-import { useSearchParams } from "react-router-dom";
-import { isNil } from "lodash";
+import { useCallback, useMemo } from 'react';
+import { useSearchParams } from 'react-router-dom';
+import { isNil } from 'lodash';
 
 type UseQueryParamsProps = {
   dateRangeKey?: string;
@@ -12,7 +12,7 @@ export const useQueryParams = (props?: UseQueryParamsProps) => {
 
   const excludeParams = useMemo(
     () => props?.excludeParams || [],
-    [props?.excludeParams],
+    [props?.excludeParams]
   );
 
   const params = useMemo(() => {
@@ -44,7 +44,7 @@ export const useQueryParams = (props?: UseQueryParamsProps) => {
 
       setSearchParams(newParams, { replace: true });
     },
-    [setSearchParams],
+    [setSearchParams]
   );
 
   return {

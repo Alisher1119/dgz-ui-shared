@@ -1,7 +1,7 @@
-import { useDateRange } from "../../hooks";
-import { DateRangePicker } from "../datepicker";
+import { useDateRange } from '../../hooks';
+import { DateRangePicker } from '../datepicker';
 
-export const DEFAULT_DATE_RANGE_KEY = "date";
+export const DEFAULT_DATE_RANGE_KEY = 'date';
 export type DateRangePickerProps = {
   dateKey?: string;
 };

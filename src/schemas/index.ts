@@ -1,1 +1,1 @@
-export * from "./createConfirmPasswordSchema";
+export * from './createConfirmPasswordSchema';

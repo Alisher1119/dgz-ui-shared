@@ -1,9 +1,9 @@
-import { persist } from "zustand/middleware";
-import { create } from "zustand";
+import { persist } from 'zustand/middleware';
+import { create } from 'zustand';
 
 export type ColumnsStoreState = {
   storedColumns: Record<string, Record<string, boolean>>;
-  setColumns: (storedColumns: ColumnsStoreState["storedColumns"]) => void;
+  setColumns: (storedColumns: ColumnsStoreState['storedColumns']) => void;
 };
 export const useColumnsStore = create<ColumnsStoreState>()(
   persist(
@@ -14,7 +14,7 @@ export const useColumnsStore = create<ColumnsStoreState>()(
       storedColumns: {},
     }),
     {
-      name: "columnsStore",
-    },
-  ),
+      name: 'columnsStore',
+    }
+  )
 );

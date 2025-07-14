@@ -1,4 +1,4 @@
-import { registerPlugin } from "react-filepond";
+import { registerPlugin } from 'react-filepond';
 import {
   FileUpload,
   type FileUploadProps,
@@ -9,21 +9,21 @@ import {
   type FormItemProps,
   FormLabel,
   FormMessage,
-} from "dgz-ui/form";
-import { FilePondFile } from "filepond";
-import type { FieldPath, FieldValues } from "react-hook-form";
-import { twMerge } from "tailwind-merge";
-import { get, isArray } from "lodash";
-import { cn } from "dgz-ui";
-import FilePondPluginImagePreview from "filepond-plugin-image-preview";
-import FilePondPluginFileValidateType from "filepond-plugin-file-validate-type";
-import FilePondPluginFileValidateSize from "filepond-plugin-file-validate-size";
-import "filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css";
+} from 'dgz-ui/form';
+import type { FilePondFile } from 'filepond';
+import type { FieldPath, FieldValues } from 'react-hook-form';
+import { twMerge } from 'tailwind-merge';
+import { get, isArray } from 'lodash';
+import { cn } from 'dgz-ui';
+import FilePondPluginImagePreview from 'filepond-plugin-image-preview';
+import FilePondPluginFileValidateType from 'filepond-plugin-file-validate-type';
+import FilePondPluginFileValidateSize from 'filepond-plugin-file-validate-size';
+import 'filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css';
 
 registerPlugin(
   FilePondPluginFileValidateType,
   FilePondPluginImagePreview,
-  FilePondPluginFileValidateSize,
+  FilePondPluginFileValidateSize
 );
 
 export type MyFilepondProps<TFieldValues extends FieldValues> =
@@ -43,15 +43,15 @@ export const MyFilepond = <TFieldValues extends FieldValues>({
   className,
   floatingError,
   maxFiles = 1,
-  maxFileSize = "10MB",
+  maxFileSize = '10MB',
   onChange,
   rules,
   beforeRemoveFile,
   ...props
 }: MyFilepondProps<TFieldValues>) => {
   const labelElm = label && (
-    <FormLabel className={"my-3 text-body-xs-medium"}>
-      {label} {required && <span className={"text-red-600"}>*</span>}
+    <FormLabel className={'text-body-xs-medium my-3'}>
+      {label} {required && <span className={'text-red-600'}>*</span>}
     </FormLabel>
   );
 
@@ -65,7 +65,7 @@ export const MyFilepond = <TFieldValues extends FieldValues>({
           {labelElm}
           <FormControl>
             <FileUpload
-              variant={get(formState.errors, `${name}`) ? "failure" : "default"}
+              variant={get(formState.errors, `${name}`) ? 'failure' : 'default'}
               files={
                 field.value
                   ? isArray(field.value)
@@ -75,14 +75,14 @@ export const MyFilepond = <TFieldValues extends FieldValues>({
               }
               name={field.name}
               {...props}
-              className={twMerge(["mb-0 mt-2 rounded-xl", className])}
+              className={twMerge(['mt-2 mb-0 rounded-xl', className])}
               onupdatefiles={(files = []) => {
                 if (maxFiles && maxFiles > 1) {
                   field.onChange(
-                    files.map((file) => get(file, "source") as File | string),
+                    files.map((file) => get(file, 'source') as File | string)
                   );
                 } else {
-                  field.onChange(get(files, "[0].source", undefined));
+                  field.onChange(get(files, '[0].source', undefined));
                 }
                 if (onChange) {
                   onChange(files);
@@ -103,7 +103,7 @@ export const MyFilepond = <TFieldValues extends FieldValues>({
             />
           </FormControl>
           <FormDescription>{helperText}</FormDescription>
-          <FormMessage className={cn(floatingError && "absolute")} />
+          <FormMessage className={cn(floatingError && 'absolute')} />
         </FormItem>
       )}
     />
@@ -116,9 +116,8 @@ export const MyFilepond = <TFieldValues extends FieldValues>({
         maxFileSize={maxFileSize}
         onupdatefiles={onChange}
         beforeRemoveFile={beforeRemoveFile}
-        className={twMerge(["mb-0 mt-2 rounded-xl", className])}
+        className={twMerge(['mt-2 mb-0 rounded-xl', className])}
       />
-      <FormDescription>{helperText}</FormDescription>
     </>
   );
 };

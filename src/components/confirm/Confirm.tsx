@@ -1,4 +1,4 @@
-import { type ReactNode } from "react";
+import { type ReactNode } from 'react';
 import {
   AlertDialog,
   AlertDialogAction,
@@ -9,9 +9,9 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
   AlertDialogTrigger,
-} from "dgz-ui/alert-dialog";
-import { useTranslation } from "react-i18next";
-import { type AlertDialogProps } from "@radix-ui/react-alert-dialog";
+} from 'dgz-ui/alert-dialog';
+import { useTranslation } from 'react-i18next';
+import { type AlertDialogProps } from '@radix-ui/react-alert-dialog';
 
 export type ConfirmProps = AlertDialogProps & {
   children?: ReactNode;
@@ -35,19 +35,19 @@ export const Confirm = ({
       <AlertDialogContent>
         <AlertDialogHeader>
           <AlertDialogTitle>
-            {title || t("Are you absolutely sure?")}
+            {title || t('Are you absolutely sure?')}
           </AlertDialogTitle>
           <AlertDialogDescription>
             {description ||
               t(
-                "This action cannot be undone. This will permanently delete your data from our servers.",
+                'This action cannot be undone. This will permanently delete your data from our servers.'
               )}
           </AlertDialogDescription>
         </AlertDialogHeader>
         <AlertDialogFooter>
-          <AlertDialogCancel>{t("Cancel")}</AlertDialogCancel>
+          <AlertDialogCancel>{t('Cancel')}</AlertDialogCancel>
           <AlertDialogAction onClick={onConfirm}>
-            {t("Confirm")}
+            {t('Confirm')}
           </AlertDialogAction>
         </AlertDialogFooter>
       </AlertDialogContent>

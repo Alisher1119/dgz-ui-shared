@@ -27,7 +27,7 @@
     "outDir": "dist",
 
     "removeComments": false,
-
+    "rootDir": "./src",
     "baseUrl": "."
   },
   "include": ["src"]

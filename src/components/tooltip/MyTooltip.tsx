@@ -1,8 +1,8 @@
-import { Tooltip, TooltipContent, TooltipTrigger } from "dgz-ui/tooltip";
-import { type ReactNode } from "react";
-import { type TooltipContentProps } from "@radix-ui/react-tooltip";
+import { Tooltip, TooltipContent, TooltipTrigger } from 'dgz-ui/tooltip';
+import { type ReactNode } from 'react';
+import { type TooltipContentProps } from '@radix-ui/react-tooltip';
 
-export type MyTooltipProps = Omit<TooltipContentProps, "content"> & {
+export type MyTooltipProps = Omit<TooltipContentProps, 'content'> & {
   children: ReactNode;
   content: ReactNode;
   show?: boolean;

@@ -7,20 +7,20 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
   AlertDialogTrigger,
-} from "dgz-ui/alert-dialog";
-import { useTranslation } from "react-i18next";
-import { type ConfirmProps } from "./Confirm";
-import { Form } from "dgz-ui/form";
-import { MyInput } from "../form";
-import { useMemo } from "react";
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
+} from 'dgz-ui/alert-dialog';
+import { useTranslation } from 'react-i18next';
+import { type ConfirmProps } from './Confirm';
+import { Form } from 'dgz-ui/form';
+import { MyInput } from '../form';
+import { useMemo } from 'react';
+import { useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
 import {
   type ConfirmPasswordDto,
   createConfirmPasswordSchema,
-} from "../../schemas";
+} from '../../schemas';
 
-export interface PasswordConfirmProps extends Omit<ConfirmProps, "onConfirm"> {
+export interface PasswordConfirmProps extends Omit<ConfirmProps, 'onConfirm'> {
   onSubmit: (data: ConfirmPasswordDto) => void;
 }
 
@@ -36,7 +36,7 @@ export const PasswordConfirm = ({
   const form = useForm<ConfirmPasswordDto>({
     resolver: zodResolver(schema),
     defaultValues: {
-      password: "",
+      password: '',
     },
   });
 
@@ -45,29 +45,29 @@ export const PasswordConfirm = ({
       {children && <AlertDialogTrigger>{children}</AlertDialogTrigger>}
       <AlertDialogContent>
         <Form {...form}>
-          <form onSubmit={form.handleSubmit(onSubmit)} className={"space-y-3"}>
+          <form onSubmit={form.handleSubmit(onSubmit)} className={'space-y-3'}>
             <AlertDialogHeader>
               <AlertDialogTitle>
-                {title || t("Confirm your password")}
+                {title || t('Confirm your password')}
               </AlertDialogTitle>
-              <div className={"space-y-3 text-secondary text-body-sm-medium"}>
+              <div className={'text-secondary text-body-sm-medium space-y-3'}>
                 {description ||
-                  t("Enter your account password to complete this action")}
+                  t('Enter your account password to complete this action')}
                 <MyInput<ConfirmPasswordDto>
                   required
-                  type={"password"}
+                  type={'password'}
                   control={form.control}
-                  name={"password"}
-                  placeholder={t("Password")}
+                  name={'password'}
+                  placeholder={t('Password')}
                 />
               </div>
             </AlertDialogHeader>
             <AlertDialogFooter>
-              <AlertDialogCancel type={"reset"} onClick={() => form.reset()}>
-                {t("Cancel")}
+              <AlertDialogCancel type={'reset'} onClick={() => form.reset()}>
+                {t('Cancel')}
               </AlertDialogCancel>
-              <AlertDialogAction type={"submit"}>
-                {t("Confirm")}
+              <AlertDialogAction type={'submit'}>
+                {t('Confirm')}
               </AlertDialogAction>
             </AlertDialogFooter>
           </form>

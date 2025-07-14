@@ -1,5 +1,5 @@
-import { RefreshCw } from "lucide-react";
-import { Button } from "dgz-ui/button";
+import { RefreshCw } from 'lucide-react';
+import { Button } from 'dgz-ui/button';
 import {
   DropdownMenu,
   DropdownMenuCheckboxItem,
@@ -7,15 +7,15 @@ import {
   DropdownMenuItem,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "dgz-ui/dropdown";
-import { MyLimitSelect, MyPagination } from "../pagination";
-import { useTranslation } from "react-i18next";
-import { RiArrowDownSLine, RiLayoutColumnLine } from "@remixicon/react";
-import { useState } from "react";
-import { get, isEmpty } from "lodash";
-import { MyTable, type MyTableProps } from "./MyTable";
-import { useColumns } from "../../hooks";
-import { type FilterInterface, FilterWrapper, Search } from "../filters";
+} from 'dgz-ui/dropdown';
+import { MyLimitSelect, MyPagination } from '../pagination';
+import { useTranslation } from 'react-i18next';
+import { RiArrowDownSLine, RiLayoutColumnLine } from '@remixicon/react';
+import { useState } from 'react';
+import { get, isEmpty } from 'lodash';
+import { MyTable, type MyTableProps } from './MyTable';
+import { useColumns } from '../../hooks';
+import { type FilterInterface, FilterWrapper, Search } from '../filters';
 
 export interface PaginationInterface<TData> {
   docs: TData[];
@@ -32,7 +32,7 @@ export interface PaginationInterface<TData> {
 }
 
 export interface DataTableProps<TData>
-  extends Omit<MyTableProps<TData>, "rows"> {
+  extends Omit<MyTableProps<TData>, 'rows'> {
   dataSource?: PaginationInterface<TData>;
   onParamChange?: (param: Record<string, unknown>) => void;
   hasPagination?: boolean;
@@ -67,33 +67,33 @@ export const DataTable = <TData,>({
   return (
     <div
       className={
-        "border border-border-light overflow-hidden rounded-xl w-full shadow-xs !max-h-[calc(100vh-var(--spacing)*24)] flex flex-col"
+        'border-border-light flex !max-h-[calc(100vh-var(--spacing)*24)] w-full flex-col overflow-hidden rounded-xl border shadow-xs'
       }
     >
       {(hasSearch ||
         (hasColumnsVisibilityDropdown && tableKey) ||
         !isEmpty(filters)) && (
-        <div className="flex items-center justify-between p-4 gap-3 shrink-0">
-          <div className={"shrink w-full"}>
+        <div className="flex shrink-0 items-center justify-between gap-3 p-4">
+          <div className={'w-full shrink'}>
             {hasSearch && (
               <Search
-                defaultValue={get(params, "search", "") as string}
+                defaultValue={get(params, 'search', '') as string}
                 onSearchChange={(search) => ({ ...params, search, page: 1 })}
               />
             )}
           </div>
-          <div className={"flex shrink-0 items-center justify-end gap-3"}>
+          <div className={'flex shrink-0 items-center justify-end gap-3'}>
             {hasColumnsVisibilityDropdown && tableKey && (
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
                   <Button
                     variant="secondary"
-                    size={"sm"}
-                    className={"ml-auto px-3 rounded-lg"}
+                    size={'sm'}
+                    className={'ml-auto rounded-lg px-3'}
                   >
-                    <RiLayoutColumnLine />{" "}
-                    <span className={"hidden md:inline"}>
-                      {t("Customize columns")}
+                    <RiLayoutColumnLine />{' '}
+                    <span className={'hidden md:inline'}>
+                      {t('Customize columns')}
                     </span>
                     <RiArrowDownSLine />
                   </Button>
@@ -103,7 +103,7 @@ export const DataTable = <TData,>({
                     className="capitalize"
                     onClick={resetColumns}
                   >
-                    <RefreshCw /> {t("Reset columns")}
+                    <RefreshCw /> {t('Reset columns')}
                   </DropdownMenuItem>
                   <DropdownMenuSeparator />
                   {formattedColumns.map((column) => {
@@ -145,7 +145,7 @@ export const DataTable = <TData,>({
         }}
       />
       {hasPagination && (
-        <div className="flex flex-col lg:flex-row items-center justify-between gap-3 p-4 shrink-0">
+        <div className="flex shrink-0 flex-col items-center justify-between gap-3 p-4 lg:flex-row">
           <div className="text-sm">
             <MyLimitSelect
               onLimitChange={(limit) => {
@@ -156,7 +156,7 @@ export const DataTable = <TData,>({
               defaultValue={dataSource?.limit}
             />
           </div>
-          <div className="text-sm text-muted-foreground">
+          <div className="text-muted-foreground text-sm">
             {selectedRows.length} of {dataSource?.total || 0} row(s) selected.
           </div>
           <div>

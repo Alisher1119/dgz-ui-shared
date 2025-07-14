@@ -5,17 +5,17 @@ import {
   PaginationLink,
   PaginationNext,
   PaginationPrevious,
-} from "dgz-ui/pagination";
-import { cn } from "dgz-ui";
-import { useTranslation } from "react-i18next";
+} from 'dgz-ui/pagination';
+import { cn } from 'dgz-ui';
+import { useTranslation } from 'react-i18next';
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "dgz-ui/form";
-import { useCallback } from "react";
+} from 'dgz-ui/form';
+import { useCallback } from 'react';
 
 interface MyPaginationProps {
   currentPage?: number;
@@ -37,7 +37,7 @@ const MyPagination = ({
     pages.push(1);
 
     if (currentPage - visibleRange > 2) {
-      pages.push("...");
+      pages.push('...');
     }
 
     for (
@@ -49,7 +49,7 @@ const MyPagination = ({
     }
 
     if (currentPage + visibleRange < totalPages - 1) {
-      pages.push("...");
+      pages.push('...');
     }
 
     if (totalPages > 1) {
@@ -60,14 +60,14 @@ const MyPagination = ({
   }, [currentPage, totalPages]);
 
   return (
-    <div className={"flex flex-col lg:flex-row items-center justify-end gap-3"}>
-      <div className={"flex gap-3 text-sm items-center"}>
-        <div className={"font-semibold min-w-20"}>{t("Go to page")}:</div>
+    <div className={'flex flex-col items-center justify-end gap-3 lg:flex-row'}>
+      <div className={'flex items-center gap-3 text-sm'}>
+        <div className={'min-w-20 font-semibold'}>{t('Go to page')}:</div>
         <Select
           onValueChange={(page) => onPageChange(parseInt(page))}
           value={`${currentPage}`}
         >
-          <SelectTrigger className="w-14 h-8.5">
+          <SelectTrigger className="h-8.5 w-14">
             <SelectValue />
           </SelectTrigger>
           <SelectContent>
@@ -79,13 +79,13 @@ const MyPagination = ({
           </SelectContent>
         </Select>
       </div>
-      <Pagination className={"justify-end"}>
+      <Pagination className={'justify-end'}>
         <PaginationContent>
           <PaginationItem>
             <PaginationPrevious
               isActive={currentPage > 1}
               size="sm"
-              className={cn(currentPage > 1 ? "disabled" : "shadow")}
+              className={cn(currentPage > 1 ? 'disabled' : 'shadow')}
               onClick={() => {
                 if (currentPage > 1) {
                   onPageChange(currentPage - 1);
@@ -97,16 +97,16 @@ const MyPagination = ({
             <PaginationItem
               key={index}
               onClick={() => {
-                if (typeof page === "number") {
+                if (typeof page === 'number') {
                   onPageChange(page);
                 }
               }}
             >
               <PaginationLink
-                size={"sm"}
+                size={'sm'}
                 className={cn(
-                  "w-9 text-center px-0",
-                  page === currentPage && "shadow",
+                  'w-9 px-0 text-center',
+                  page === currentPage && 'shadow'
                 )}
                 isActive={page === currentPage}
               >
@@ -122,7 +122,7 @@ const MyPagination = ({
                   onPageChange(currentPage + 1);
                 }
               }}
-              className={cn(currentPage < totalPages ? "disabled" : "shadow")}
+              className={cn(currentPage < totalPages ? 'disabled' : 'shadow')}
               isActive={currentPage < totalPages}
             />
           </PaginationItem>

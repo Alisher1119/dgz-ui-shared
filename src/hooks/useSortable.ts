@@ -1,11 +1,11 @@
-import { useCallback, useEffect, useState } from "react";
-import { SortOrder } from "../enums";
+import { useCallback, useEffect, useState } from 'react';
+import { SortOrder } from '../enums';
 
 export interface UseSortableProps<TData> {
   sortField?: keyof TData;
   sortOrder?: SortOrder;
   onSortOrderChange?: (
-    newSortOrder: Omit<UseSortableProps<TData>, "onSortOrderChange">,
+    newSortOrder: Omit<UseSortableProps<TData>, 'onSortOrderChange'>
   ) => void;
 }
 
@@ -27,7 +27,7 @@ export const useSortable = <TData>({
           : {
               sortField,
               sortOrder: sortOrder || undefined,
-            },
+            }
       );
     }
   }, [sortField, sortOrder]);
@@ -53,7 +53,7 @@ export const useSortable = <TData>({
         return newSortObject;
       });
     },
-    [onSortOrderChange],
+    [onSortOrderChange]
   );
 
   return {

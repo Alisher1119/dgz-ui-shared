@@ -1,4 +1,4 @@
-import type { FieldPath, FieldValues } from "react-hook-form";
+import type { FieldPath, FieldValues } from 'react-hook-form';
 import {
   Checkbox,
   type CheckboxProps,
@@ -8,7 +8,7 @@ import {
   FormItem,
   type FormItemProps,
   FormLabel,
-} from "dgz-ui/form";
+} from 'dgz-ui/form';
 
 export type MyCheckboxProps<TFieldValues extends FieldValues> =
   FormItemProps<TFieldValues> & CheckboxProps;
@@ -43,11 +43,10 @@ export const MyCheckbox = <TFieldValues extends FieldValues>({
       )}
     />
   ) : (
-    <div className="flex flex-row items-start space-x-3 space-y-0 rounded-md border p-4">
+    <div className="flex flex-row items-start space-y-0 space-x-3 rounded-md border p-4">
       <Checkbox {...props} />
       <div className="space-y-1 leading-none">
         {label && <FormLabel>{label}</FormLabel>}
-        <FormDescription>{helperText}</FormDescription>
       </div>
     </div>
   );

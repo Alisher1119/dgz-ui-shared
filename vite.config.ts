@@ -1,83 +1,83 @@
 /// <reference types="vitest/config" />
-import { resolve } from "path";
-import tailwindcss from "@tailwindcss/vite";
-import react from "@vitejs/plugin-react";
-import { defineConfig } from "vite";
+import { resolve } from 'path';
+import tailwindcss from '@tailwindcss/vite';
+import react from '@vitejs/plugin-react';
+import { defineConfig } from 'vite';
 
 export default defineConfig({
   plugins: [react(), tailwindcss()],
   test: {
     globals: true,
-    environment: "jsdom",
-    setupFiles: "./src/setupTests.ts",
+    environment: 'jsdom',
+    setupFiles: './src/setupTests.ts',
   },
   build: {
     lib: {
       entry: {
-        index: resolve(__dirname, "src/index.ts"),
-        "components/confirm/index": resolve(
+        index: resolve(__dirname, 'src/index.ts'),
+        'components/confirm/index': resolve(
           __dirname,
-          "src/components/confirm/index.ts",
+          'src/components/confirm/index.ts'
         ),
-        "components/datatable/index": resolve(
+        'components/datatable/index': resolve(
           __dirname,
-          "src/components/datatable/index.ts",
+          'src/components/datatable/index.ts'
         ),
-        "components/datepicker/index": resolve(
+        'components/datepicker/index': resolve(
           __dirname,
-          "src/components/datepicker/index.ts",
+          'src/components/datepicker/index.ts'
         ),
-        "components/empty/index": resolve(
+        'components/empty/index': resolve(
           __dirname,
-          "src/components/empty/index.ts",
+          'src/components/empty/index.ts'
         ),
-        "components/filters/index": resolve(
+        'components/filters/index': resolve(
           __dirname,
-          "src/components/filters/index.ts",
+          'src/components/filters/index.ts'
         ),
-        "components/modal/index": resolve(
+        'components/modal/index': resolve(
           __dirname,
-          "src/components/modal/index.ts",
+          'src/components/modal/index.ts'
         ),
-        "components/pagination/index": resolve(
+        'components/pagination/index': resolve(
           __dirname,
-          "src/components/pagination/index.ts",
+          'src/components/pagination/index.ts'
         ),
-        "components/scroll/index": resolve(
+        'components/scroll/index': resolve(
           __dirname,
-          "src/components/scroll/index.ts",
+          'src/components/scroll/index.ts'
         ),
-        "components/tooltip/index": resolve(
+        'components/tooltip/index': resolve(
           __dirname,
-          "src/components/tooltip/index.ts",
+          'src/components/tooltip/index.ts'
         ),
-        "components/form/index": resolve(
+        'components/form/index': resolve(
           __dirname,
-          "src/components/form/index.ts",
+          'src/components/form/index.ts'
         ),
-        "components/theme/index": resolve(
+        'components/theme/index': resolve(
           __dirname,
-          "src/components/theme/index.ts",
+          'src/components/theme/index.ts'
         ),
-        "enums/index": resolve(__dirname, "src/enums/index.ts"),
-        "hooks/index": resolve(__dirname, "src/hooks/index.ts"),
-        "types/index": resolve(__dirname, "src/types/index.ts"),
-        "stores/index": resolve(__dirname, "src/stores/index.ts"),
-        "providers/index": resolve(__dirname, "src/providers/index.ts"),
+        'enums/index': resolve(__dirname, 'src/enums/index.ts'),
+        'hooks/index': resolve(__dirname, 'src/hooks/index.ts'),
+        'types/index': resolve(__dirname, 'src/types/index.ts'),
+        'stores/index': resolve(__dirname, 'src/stores/index.ts'),
+        'providers/index': resolve(__dirname, 'src/providers/index.ts'),
       },
     },
     rollupOptions: {
-      external: ["react", "react-dom"],
+      external: ['react', 'react-dom'],
       output: [
         {
-          format: "es",
-          dir: "dist",
-          entryFileNames: "[name].es.js",
+          format: 'es',
+          dir: 'dist',
+          entryFileNames: '[name].es.js',
         },
         {
-          format: "cjs",
-          dir: "dist",
-          entryFileNames: "[name].umd.js",
+          format: 'cjs',
+          dir: 'dist',
+          entryFileNames: '[name].umd.js',
         },
       ],
     },

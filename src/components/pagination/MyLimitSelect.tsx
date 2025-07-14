@@ -1,11 +1,11 @@
-import { useTranslation } from "react-i18next";
+import { useTranslation } from 'react-i18next';
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "dgz-ui";
+} from 'dgz-ui';
 
 export const DEFAULT_LIMIT = 50;
 export const DEFAULT_ITEMS_LIMIT = 12;
@@ -22,13 +22,13 @@ export const MyLimitSelect = ({
   const { t } = useTranslation();
 
   return (
-    <div className={"flex gap-3 items-center"}>
-      <span className={"font-semibold"}>{t("Rows per page")}:</span>
+    <div className={'flex items-center gap-3'}>
+      <span className={'font-semibold'}>{t('Rows per page')}:</span>
       <Select
         onValueChange={(limit) => onLimitChange(limit)}
         value={`${defaultValue}`}
       >
-        <SelectTrigger className="w-17 h-8.5">
+        <SelectTrigger className="h-8.5 w-17">
           <SelectValue />
         </SelectTrigger>
         <SelectContent>

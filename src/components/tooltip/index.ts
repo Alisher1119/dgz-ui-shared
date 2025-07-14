@@ -1,2 +1,2 @@
-export * from "./MyTooltip";
-export * from "dgz-ui/tooltip";
+export * from './MyTooltip';
+export * from 'dgz-ui/tooltip';

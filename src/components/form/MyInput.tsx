@@ -8,11 +8,11 @@ import {
   FormMessage,
   Input,
   type InputProps,
-} from "dgz-ui/form";
-import type { FieldPath, FieldValues } from "react-hook-form";
-import { twMerge } from "tailwind-merge";
-import { get } from "lodash";
-import { cn } from "dgz-ui";
+} from 'dgz-ui/form';
+import type { FieldPath, FieldValues } from 'react-hook-form';
+import { twMerge } from 'tailwind-merge';
+import { get } from 'lodash';
+import { cn } from 'dgz-ui';
 
 export type MyInputProps<TFieldValues extends FieldValues> =
   FormItemProps<TFieldValues> & InputProps;
@@ -29,8 +29,8 @@ export const MyInput = <TFieldValues extends FieldValues>({
   ...props
 }: MyInputProps<TFieldValues>) => {
   const labelElm = label && (
-    <FormLabel className={"my-3"}>
-      {label} {required && <span className={"text-red-600"}>*</span>}
+    <FormLabel className={'my-3'}>
+      {label} {required && <span className={'text-red-600'}>*</span>}
     </FormLabel>
   );
 
@@ -45,31 +45,30 @@ export const MyInput = <TFieldValues extends FieldValues>({
           <FormControl>
             <Input
               variant={
-                get(formState.errors, `${name}.message`) ? "failure" : "default"
+                get(formState.errors, `${name}.message`) ? 'failure' : 'default'
               }
               {...props}
               {...field}
               onChange={(event) => {
                 const value = event.target.value;
-                if (props.type === "number") {
+                if (props.type === 'number') {
                   field.onChange(value ? Number(value) : undefined);
                 } else {
                   field.onChange(value);
                 }
               }}
-              className={twMerge(["mt-2", className])}
+              className={twMerge(['mt-2', className])}
             />
           </FormControl>
           <FormDescription>{helperText}</FormDescription>
-          <FormMessage className={cn(floatingError && "absolute")} />
+          <FormMessage className={cn(floatingError && 'absolute')} />
         </FormItem>
       )}
     />
   ) : (
     <>
       {labelElm}
-      <Input {...props} className={twMerge(["mt-2", className])} />
-      <FormDescription>{helperText}</FormDescription>
+      <Input {...props} className={twMerge(['mt-2', className])} />
     </>
   );
 };

@@ -1,10 +1,10 @@
-import { create } from "zustand";
-import { createJSONStorage, persist } from "zustand/middleware";
-import type { DateRange } from "react-day-picker";
+import { create } from 'zustand';
+import { createJSONStorage, persist } from 'zustand/middleware';
+import type { DateRange } from 'react-day-picker';
 
 export type DateRangeStoreState = {
   storedRanges: Record<string, DateRange>;
-  setStoredRange: (storedRanges: DateRangeStoreState["storedRanges"]) => void;
+  setStoredRange: (storedRanges: DateRangeStoreState['storedRanges']) => void;
 };
 
 export const useDateRangeStore = create<DateRangeStoreState>()(
@@ -16,8 +16,8 @@ export const useDateRangeStore = create<DateRangeStoreState>()(
       storedRanges: {},
     }),
     {
-      name: "dateRangesStore",
+      name: 'dateRangesStore',
       storage: createJSONStorage(() => localStorage),
-    },
-  ),
+    }
+  )
 );

@@ -8,11 +8,11 @@ import {
   FormMessage,
   Textarea,
   type TextareaProps,
-} from "dgz-ui/form";
-import type { FieldPath, FieldValues } from "react-hook-form";
-import { twMerge } from "tailwind-merge";
-import { get } from "lodash";
-import { cn } from "dgz-ui";
+} from 'dgz-ui/form';
+import type { FieldPath, FieldValues } from 'react-hook-form';
+import { twMerge } from 'tailwind-merge';
+import { get } from 'lodash';
+import { cn } from 'dgz-ui';
 
 export type MyTextareaProps<TFieldValues extends FieldValues> =
   FormItemProps<TFieldValues> & TextareaProps;
@@ -29,8 +29,8 @@ export const MyTextarea = <TFieldValues extends FieldValues>({
   ...props
 }: MyTextareaProps<TFieldValues>) => {
   const labelElm = label && (
-    <FormLabel className={"my-3 text-body-xs-medium"}>
-      {label} {required && <span className={"text-red-600"}>*</span>}
+    <FormLabel className={'text-body-xs-medium my-3'}>
+      {label} {required && <span className={'text-red-600'}>*</span>}
     </FormLabel>
   );
 
@@ -44,22 +44,21 @@ export const MyTextarea = <TFieldValues extends FieldValues>({
           {labelElm}
           <FormControl>
             <Textarea
-              variant={get(formState.errors, `${name}`) ? "failure" : "default"}
+              variant={get(formState.errors, `${name}`) ? 'failure' : 'default'}
               {...props}
               {...field}
-              className={twMerge(["mt-2", className])}
+              className={twMerge(['mt-2', className])}
             />
           </FormControl>
           <FormDescription>{helperText}</FormDescription>
-          <FormMessage className={cn(floatingError && "absolute")} />
+          <FormMessage className={cn(floatingError && 'absolute')} />
         </FormItem>
       )}
     />
   ) : (
     <>
       {labelElm}
-      <Textarea {...props} className={twMerge(["mt-2", className])} />
-      <FormDescription>{helperText}</FormDescription>
+      <Textarea {...props} className={twMerge(['mt-2', className])} />
     </>
   );
 };

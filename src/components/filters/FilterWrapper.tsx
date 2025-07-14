@@ -1,13 +1,13 @@
-import { memo, type ReactNode, useCallback, useEffect, useState } from "react";
-import { useTranslation } from "react-i18next";
-import { get } from "lodash";
-import type { FieldValues } from "react-hook-form";
-import { ChevronDown, ListFilterIcon, ListFilterPlusIcon } from "lucide-react";
-import { Button, type ButtonProps } from "dgz-ui/button";
-import { Popover, PopoverContent, PopoverTrigger } from "dgz-ui/popover";
-import { Form, type Option } from "dgz-ui/form";
-import { MyInput, MySelect } from "../form";
-import { useFilter } from "../../hooks";
+import { memo, type ReactNode, useCallback, useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
+import { get } from 'lodash';
+import type { FieldValues } from 'react-hook-form';
+import { ChevronDown, ListFilterIcon, ListFilterPlusIcon } from 'lucide-react';
+import { Button, type ButtonProps } from 'dgz-ui/button';
+import { Popover, PopoverContent, PopoverTrigger } from 'dgz-ui/popover';
+import { Form, type Option } from 'dgz-ui/form';
+import { MyInput, MySelect } from '../form';
+import { useFilter } from '../../hooks';
 
 export interface FilterInterface {
   label?: ReactNode;
@@ -66,7 +66,7 @@ export const FilterWrapper = memo(function FilterWrapper({
       }
       setOpen(false);
     },
-    [onFilter],
+    [onFilter]
   );
 
   const handleReset = useCallback(() => {
@@ -75,7 +75,7 @@ export const FilterWrapper = memo(function FilterWrapper({
       onFilter({
         ...params,
         ...Object.fromEntries(
-          filters.map((filter) => [filter.name, undefined]),
+          filters.map((filter) => [filter.name, undefined])
         ),
       });
     }
@@ -87,26 +87,26 @@ export const FilterWrapper = memo(function FilterWrapper({
       <PopoverTrigger>
         <Button
           asChild
-          size={"sm"}
+          size={'sm'}
           variant="secondary"
-          className={"ml-auto px-3"}
+          className={'ml-auto px-3'}
           {...btnProps}
         >
-          <div className={"flex items-center"}>
+          <div className={'flex items-center'}>
             {isFiltered ? (
               <ListFilterPlusIcon size={20} />
             ) : (
               <ListFilterIcon size={20} />
-            )}{" "}
-            <span className={"hidden md:inline"}>{t("Filter")}</span>
+            )}{' '}
+            <span className={'hidden md:inline'}>{t('Filter')}</span>
             <ChevronDown />
           </div>
         </Button>
       </PopoverTrigger>
-      <PopoverContent side={"bottom"} align={"end"} className={""}>
+      <PopoverContent side={'bottom'} align={'end'} className={''}>
         <Form {...form}>
-          <form onSubmit={handleSubmit(handleFilter)} className={"space-y-2"}>
-            <div className={"h-full shrink p-1"}>
+          <form onSubmit={handleSubmit(handleFilter)} className={'space-y-2'}>
+            <div className={'h-full shrink p-1'}>
               {filters.map((filter) =>
                 filter.options ? (
                   <MySelect
@@ -126,20 +126,20 @@ export const FilterWrapper = memo(function FilterWrapper({
                     name={filter.name}
                     label={filter.label}
                   />
-                ),
+                )
               )}
             </div>
-            <div className={"flex shrink-0 justify-end gap-2"}>
+            <div className={'flex shrink-0 justify-end gap-2'}>
               <Button
-                variant={"destructive"}
+                variant={'destructive'}
                 type="reset"
-                size={"sm"}
+                size={'sm'}
                 onClick={handleReset}
               >
-                {t("Reset")}
+                {t('Reset')}
               </Button>
-              <Button type="submit" size={"sm"}>
-                {t("Apply")}
+              <Button type="submit" size={'sm'}>
+                {t('Apply')}
               </Button>
             </div>
           </form>

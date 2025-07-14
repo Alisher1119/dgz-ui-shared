@@ -1,13 +1,13 @@
-import { useForm } from "react-hook-form";
-import { useEffect } from "react";
-import { entries } from "lodash";
+import { useForm } from 'react-hook-form';
+import { useEffect } from 'react';
+import { entries } from 'lodash';
 
 export interface UseFilterProps {
   params?: Record<string, unknown>;
 }
 
 export const useFilter = ({ params }: UseFilterProps) => {
-  const form = useForm({ mode: "onChange" });
+  const form = useForm({ mode: 'onChange' });
 
   useEffect(() => {
     entries(params || {}).forEach(([key, value]) => {

@@ -1,5 +1,5 @@
-import { createContext } from "react";
-import { ThemeMode } from "../enums";
+import { createContext } from 'react';
+import { ThemeMode } from '../enums';
 
 type ThemeProviderState = {
   theme: ThemeMode;
