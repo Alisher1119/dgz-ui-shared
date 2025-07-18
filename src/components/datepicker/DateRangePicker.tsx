@@ -157,7 +157,7 @@ export const DateRangePicker = ({
                 : undefined
             }
             onSelect={(from) => {
-              setDate({ ...date, from });
+              setDate({ ...date, from: from as Date | undefined });
             }}
           />
           <Calendar
@@ -176,7 +176,7 @@ export const DateRangePicker = ({
             selectedFromDate={date?.from}
             onSelect={(to) => {
               if (date) {
-                handleRangeSelect({ ...date, to });
+                handleRangeSelect({ ...date, to: to as Date | undefined });
               }
             }}
           />

@@ -8,7 +8,7 @@ import {
   FormMessage,
 } from 'dgz-ui/form';
 import type { FieldPath, FieldValues } from 'react-hook-form';
-import { TIME, TimePicker, type TimePickerProps } from 'dgz-ui/calendar';
+import { TimePicker, type TimePickerProps } from 'dgz-ui/calendar';
 import { cn } from 'dgz-ui';
 
 export type MyTimePickerProps<TFieldValues extends FieldValues> =
@@ -44,14 +44,7 @@ export const MyTimePicker = <TFieldValues extends FieldValues>({
         <FormItem>
           {labelElm}
           <FormControl>
-            <TimePicker
-              className={'mt-1'}
-              value={field.value}
-              onChange={(time) => {
-                field.onChange(time.format(TIME));
-              }}
-              {...props}
-            />
+            <TimePicker className={'mt-1'} {...field} {...props} />
           </FormControl>
           <FormDescription>{helperText}</FormDescription>
           <FormMessage className={cn(floatingError && 'absolute')} />
