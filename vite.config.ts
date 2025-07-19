@@ -77,7 +77,7 @@ export default defineConfig({
         {
           format: 'cjs',
           dir: 'dist',
-          entryFileNames: '[name].umd.js',
+          entryFileNames: '[name].cjs.js',
         },
       ],
     },

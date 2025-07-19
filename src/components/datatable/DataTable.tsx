@@ -67,7 +67,7 @@ export const DataTable = <TData,>({
   return (
     <div
       className={
-        'border-border-light flex !max-h-[calc(100vh-var(--spacing)*24)] w-full flex-col overflow-hidden rounded-xl border shadow-xs'
+        'border-border-light flex size-full shrink flex-col overflow-hidden rounded-xl border shadow-xs'
       }
     >
       {(hasSearch ||
