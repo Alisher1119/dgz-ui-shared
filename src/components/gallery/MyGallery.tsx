@@ -169,14 +169,12 @@ const MyGalleryComponent = ({
         >
           <div>
             {currentImage.title && (
-              <h2 className="bg-opacity-50 text-body-lg-semi-bold">
-                {currentImage.title}
-              </h2>
+              <h2 className="text-body-lg-semi-bold">{currentImage.title}</h2>
             )}
           </div>
 
           {/* Top Bar with Actions and Close */}
-          <div className="flex items-center gap-2 p-2">
+          <div className="flex items-center gap-2">
             {/* Action Buttons */}
             {allActionButtons.map((action, index) => (
               <button
@@ -240,10 +238,8 @@ const MyGalleryComponent = ({
               <div
                 key={image.id}
                 className={cn(
-                  `h-16 min-w-16 flex-shrink-0 cursor-pointer overflow-hidden rounded border-2 transition-all`,
-                  index === selectedIndex
-                    ? 'border-item-primary'
-                    : 'hover:border-item-primary border-transparent'
+                  `hover:border-item-primary h-16 min-w-16 cursor-pointer rounded border-2 border-transparent transition-all`,
+                  index === selectedIndex && 'border-item-primary'
                 )}
                 onClick={() => setSelectedIndex(index)}
               >
