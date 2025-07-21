@@ -236,7 +236,7 @@ const MyGalleryComponent = ({
             {images.map((image, index) => (
               <div
                 key={image.id}
-                className={`size-16 flex-shrink-0 cursor-pointer overflow-hidden rounded border-2 transition-all ${
+                className={`size-16 min-w-12 flex-shrink-0 cursor-pointer overflow-hidden rounded border-2 transition-all ${
                   index === selectedIndex
                     ? 'border-item-primary'
                     : 'hover:border-item-primary border-transparent'
