@@ -35,7 +35,7 @@ export type MyGalleryProps = HTMLAttributes<HTMLDivElement> & {
 // Default action buttons moved outside component to prevent recreation on each render
 const createDefaultActions = (): GalleryActionButton[] => [
   {
-    icon: <Download size={20} />,
+    icon: <Download size={16} />,
     onClick: (image) => {
       saveAs(image.src, image.title);
     },
@@ -161,38 +161,43 @@ const MyGalleryComponent = ({
     if (!isFullscreen || !currentImage) return null;
 
     return (
-      <div className="bg-opacity-95 bg-bg fixed inset-0 z-50 flex items-center justify-center">
-        {/* Title - Top Left */}
-        {currentImage.title && (
-          <div className="absolute top-4 left-2">
-            <h2 className="bg-opacity-50 bg-bg text-secondary rounded-lg px-4 py-2 text-xl font-semibold">
-              {currentImage.title}
-            </h2>
+      <div className="bg-opacity-95 bg-bg fixed inset-0 z-50 flex flex-col items-center justify-center">
+        <div
+          className={
+            'absolute top-0 flex w-full items-start justify-between p-3'
+          }
+        >
+          <div>
+            {currentImage.title && (
+              <h2 className="bg-opacity-50 text-body-lg-semi-bold">
+                {currentImage.title}
+              </h2>
+            )}
           </div>
-        )}
 
-        {/* Top Bar with Actions and Close */}
-        <div className="absolute top-4 right-2 z-[99] flex items-center space-x-2">
-          {/* Action Buttons */}
-          {allActionButtons.map((action, index) => (
+          {/* Top Bar with Actions and Close */}
+          <div className="flex items-center gap-2 p-2">
+            {/* Action Buttons */}
+            {allActionButtons.map((action, index) => (
+              <button
+                key={index}
+                onClick={() => action.onClick(currentImage)}
+                className="cursor-pointer"
+                title={action.label}
+              >
+                {action.icon}
+              </button>
+            ))}
+
+            {/* Close Button */}
             <button
-              key={index}
-              onClick={() => action.onClick(currentImage)}
-              className="bg-opacity-50 hover:bg-opacity-70 bg-bg text-secondary rounded-full p-2 transition-all"
-              title={action.label}
+              onClick={closeFullscreen}
+              className="cursor-pointer"
+              title="Close (Esc)"
             >
-              {action.icon}
+              <X size={16} />
             </button>
-          ))}
-
-          {/* Close Button */}
-          <button
-            onClick={closeFullscreen}
-            className="bg-opacity-50 hover:bg-opacity-70 bg-bg text-secondary rounded-full p-2 transition-all"
-            title="Close (Esc)"
-          >
-            <X size={20} />
-          </button>
+          </div>
         </div>
 
         {/* Left Navigation */}
@@ -226,14 +231,16 @@ const MyGalleryComponent = ({
         </div>
 
         <div
-          className={'bg-bg absolute bottom-0 flex items-center justify-center'}
+          className={
+            'bg-bg absolute bottom-0 flex w-full items-center justify-center'
+          }
         >
-          <div className="flex space-x-2 overflow-x-auto p-3">
+          <div className="flex gap-2 overflow-x-auto p-3">
             {images.map((image, index) => (
               <div
                 key={image.id}
                 className={cn(
-                  `h-16 min-w-12 flex-shrink-0 cursor-pointer overflow-hidden rounded border-2 transition-all`,
+                  `h-16 min-w-16 flex-shrink-0 cursor-pointer overflow-hidden rounded border-2 transition-all`,
                   index === selectedIndex
                     ? 'border-item-primary'
                     : 'hover:border-item-primary border-transparent'
