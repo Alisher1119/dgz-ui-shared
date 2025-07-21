@@ -280,7 +280,7 @@ const MyGalleryComponent = ({
       <div className="bg-opacity-95 bg-bg fixed inset-0 z-50 flex items-center justify-center">
         {/* Title - Top Left */}
         {currentImage.title && (
-          <div className="absolute top-4 left-4 z-60">
+          <div className="absolute top-4 left-2">
             <h2 className="bg-opacity-50 bg-bg text-secondary rounded-lg px-4 py-2 text-xl font-semibold">
               {currentImage.title}
             </h2>
@@ -288,7 +288,7 @@ const MyGalleryComponent = ({
         )}
 
         {/* Top Bar with Actions and Close */}
-        <div className="absolute top-4 right-4 z-60 flex items-center space-x-2">
+        <div className="absolute top-4 right-2 z-[99] flex items-center space-x-2">
           {/* Action Buttons */}
           {allActionButtons.map((action, index) => (
             <button
@@ -315,7 +315,7 @@ const MyGalleryComponent = ({
         {isNumber(selectedIndex) && selectedIndex > 0 && (
           <button
             onClick={goToPrevious}
-            className="bg-opacity-50 hover:bg-opacity-70 bg-bg text-secondary absolute top-1/2 left-4 z-60 -translate-y-1/2 rounded-full p-3 transition-all"
+            className="bg-opacity-50 hover:bg-opacity-70 bg-bg text-secondary absolute top-1/2 left-2 z-50 -translate-y-1/2 rounded-full p-3 transition-all"
             title="Previous (←)"
           >
             <ChevronLeft size={24} />
@@ -326,7 +326,7 @@ const MyGalleryComponent = ({
         {isNumber(selectedIndex) && selectedIndex < images.length - 1 && (
           <button
             onClick={goToNext}
-            className="bg-opacity-0 hover:bg-opacity-100 text-secondary absolute top-1/2 right-4 z-60 -translate-y-1/2 rounded-full bg-black p-3 transition-all"
+            className="bg-opacity-0 hover:bg-opacity-100 text-secondary bg-bg absolute top-1/2 right-2 z-50 -translate-y-1/2 rounded-full p-3 transition-all"
             title="Next (→)"
           >
             <ChevronRight size={24} />
@@ -370,17 +370,17 @@ const MyGalleryComponent = ({
             {images.map((image, index) => (
               <div
                 key={image.id}
-                className={`h-16 w-16 flex-shrink-0 cursor-pointer overflow-hidden rounded border-2 transition-all ${
+                className={`size-16 flex-shrink-0 cursor-pointer overflow-hidden rounded border-2 transition-all ${
                   index === selectedIndex
-                    ? 'border-white'
-                    : 'border-transparent hover:border-gray-400'
+                    ? 'border-secondary'
+                    : 'hover:border-secondary border-transparent'
                 }`}
                 onClick={() => setSelectedIndex(index)}
               >
                 <img
                   src={image.thumbnail || image.src}
                   alt={image.alt || `Thumbnail ${index + 1}`}
-                  className="h-full w-full object-cover"
+                  className="size-full object-cover"
                 />
               </div>
             ))}
