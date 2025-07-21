@@ -52,7 +52,7 @@ function App() {
         <h1 className="mb-8 text-center text-3xl font-bold text-gray-800">
           Image Gallery Demo
         </h1>
-        <MyGallery images={sampleImages} />
+        <MyGallery images={sampleImages} hasInfo />
       </div>
     </div>
   );

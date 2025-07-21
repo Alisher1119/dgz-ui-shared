@@ -228,7 +228,7 @@ const MyGalleryComponent = ({
           />
         </div>
 
-        <div className={'bg-bg absolute bottom-0'}>
+        <div className={'bg-bg absolute bottom-0 w-full'}>
           <div className="flex gap-2 overflow-x-auto p-3">
             {images.map((image, index) => {
               console.log(index, selectedIndex);
@@ -236,7 +236,7 @@ const MyGalleryComponent = ({
                 <div
                   key={image.id}
                   className={cn(
-                    `hover:border-item-primary h-16 min-w-16 shrink-0 cursor-pointer rounded border-2 border-transparent transition-all`,
+                    `hover:border-item-primary h-16 min-w-16 shrink-0 cursor-pointer rounded border-3 border-transparent transition-all`,
                     index == selectedIndex && 'border-item-primary'
                   )}
                   onClick={() => setSelectedIndex(index)}
@@ -269,7 +269,7 @@ const MyGalleryComponent = ({
       <div
         {...props}
         className={cn(
-          'grid grid-cols-1 gap-4 p-4 sm:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3 2xl:grid-cols-4',
+          'grid grid-cols-1 gap-4 p-4 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4',
           className
         )}
       >
@@ -279,7 +279,7 @@ const MyGalleryComponent = ({
             {hasInfo && image.title && (
               <div
                 className={
-                  'bg-bg/50 text-secondary absolute bottom-0 flex min-h-10 w-full items-center justify-center'
+                  'bg-bg/70 absolute bottom-0 flex min-h-10 w-full items-center justify-center'
                 }
               >
                 {image.title}
