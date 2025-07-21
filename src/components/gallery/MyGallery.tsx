@@ -217,30 +217,27 @@ const MyGalleryComponent = ({
           </button>
         )}
 
-        {/* Main Image */}
         <div className="flex max-h-full max-w-full items-center justify-center overflow-hidden p-8">
           <img
             src={currentImage.src}
             alt={currentImage.alt || `Image ${selectedIndex}`}
             className="max-h-full max-w-full object-contain"
-            draggable={false}
           />
         </div>
 
         <div
-          className={
-            'bg-bg absolute bottom-0 flex w-full items-center justify-center'
-          }
+          className={'bg-bg absolute bottom-0 flex items-center justify-center'}
         >
           <div className="flex space-x-2 overflow-x-auto p-3">
             {images.map((image, index) => (
               <div
                 key={image.id}
-                className={`size-16 min-w-12 flex-shrink-0 cursor-pointer overflow-hidden rounded border-2 transition-all ${
+                className={cn(
+                  `h-16 min-w-12 flex-shrink-0 cursor-pointer overflow-hidden rounded border-2 transition-all`,
                   index === selectedIndex
                     ? 'border-item-primary'
                     : 'hover:border-item-primary border-transparent'
-                }`}
+                )}
                 onClick={() => setSelectedIndex(index)}
               >
                 <img
