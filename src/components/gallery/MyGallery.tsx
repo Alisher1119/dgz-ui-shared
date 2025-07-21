@@ -1,18 +1,3 @@
-/**
- * MyGallery Component
- *
- * A performant image gallery component with the following optimizations:
- * - Component memoization with React.memo to prevent unnecessary re-renders
- * - Memoized child components (Thumbnail) to optimize grid rendering
- * - Memoized FullscreenView to prevent recreation on state changes
- * - useCallback for all event handlers to maintain referential equality
- * - useMemo for computed values and arrays to prevent recreation
- * - Proper dependency arrays for all hooks
- *
- * These optimizations significantly improve performance, especially with large image collections
- * or when the component is part of a complex UI.
- */
-
 import React, {
   type HTMLAttributes,
   memo,
@@ -32,8 +17,9 @@ import {
 } from 'lucide-react';
 import { isNumber } from 'lodash';
 import { cn } from 'dgz-ui';
+import { saveAs } from 'file-saver';
 
-export interface ImageItem {
+export interface GalleryItem {
   id: string;
   src: string;
   thumbnail: string;
@@ -41,23 +27,23 @@ export interface ImageItem {
   title?: string;
 }
 
-export interface ActionButton {
+export interface GalleryActionButton {
   icon: React.ReactNode;
   label: string;
-  onClick: (image: ImageItem) => void;
+  onClick: (image: GalleryItem) => void;
   className?: string;
 }
 
 export type MyGalleryProps = HTMLAttributes<HTMLDivElement> & {
-  images: ImageItem[];
-  actionButtons?: ActionButton[];
+  images: GalleryItem[];
+  actionButtons?: GalleryActionButton[];
   hasInfo?: true;
 };
 // Default action buttons moved outside component to prevent recreation on each render
 const createDefaultActions = (
   setZoom: React.Dispatch<React.SetStateAction<number>>,
   setRotation: React.Dispatch<React.SetStateAction<number>>
-): ActionButton[] => [
+): GalleryActionButton[] => [
   {
     icon: <ZoomIn size={20} />,
     onClick: () => setZoom((prev) => Math.min(prev * 1.5, 5)),
@@ -76,10 +62,7 @@ const createDefaultActions = (
   {
     icon: <Download size={20} />,
     onClick: (image) => {
-      const link = document.createElement('a');
-      link.href = image.src;
-      link.download = `image-${image.id}`;
-      link.click();
+      saveAs(image.src, image.title);
     },
     label: 'Download',
   },
@@ -92,14 +75,14 @@ const Thumbnail = memo(
     index,
     onClick,
   }: {
-    image: ImageItem;
+    image: GalleryItem;
     index: number;
     onClick: (index: number) => void;
   }) => {
     return (
       <div
         key={image.id}
-        className="aspect-square cursor-pointer overflow-hidden rounded-lg bg-gray-200 transition-opacity hover:opacity-80"
+        className="aspect-auto max-h-60 cursor-pointer overflow-hidden rounded-lg bg-gray-200 transition-opacity hover:opacity-80"
         onClick={() => onClick(index)}
       >
         <img
@@ -294,11 +277,11 @@ const MyGalleryComponent = ({
     if (!isFullscreen || !currentImage) return null;
 
     return (
-      <div className="bg-opacity-95 fixed inset-0 z-50 flex items-center justify-center bg-black">
+      <div className="bg-opacity-95 bg-bg fixed inset-0 z-50 flex items-center justify-center">
         {/* Title - Top Left */}
         {currentImage.title && (
           <div className="absolute top-4 left-4 z-60">
-            <h2 className="bg-opacity-50 rounded-lg bg-black px-4 py-2 text-xl font-semibold text-white">
+            <h2 className="bg-opacity-50 bg-bg text-secondary rounded-lg px-4 py-2 text-xl font-semibold">
               {currentImage.title}
             </h2>
           </div>
@@ -311,7 +294,7 @@ const MyGalleryComponent = ({
             <button
               key={index}
               onClick={() => action.onClick(currentImage)}
-              className="bg-opacity-50 hover:bg-opacity-70 rounded-full bg-black p-2 text-white transition-all"
+              className="bg-opacity-50 hover:bg-opacity-70 bg-bg text-secondary rounded-full p-2 transition-all"
               title={action.label}
             >
               {action.icon}
@@ -321,7 +304,7 @@ const MyGalleryComponent = ({
           {/* Close Button */}
           <button
             onClick={closeFullscreen}
-            className="bg-opacity-50 hover:bg-opacity-70 rounded-full bg-black p-2 text-white transition-all"
+            className="bg-opacity-50 hover:bg-opacity-70 bg-bg text-secondary rounded-full p-2 transition-all"
             title="Close (Esc)"
           >
             <X size={20} />
@@ -332,7 +315,7 @@ const MyGalleryComponent = ({
         {isNumber(selectedIndex) && selectedIndex > 0 && (
           <button
             onClick={goToPrevious}
-            className="bg-opacity-50 hover:bg-opacity-70 absolute top-1/2 left-4 z-60 -translate-y-1/2 rounded-full bg-black p-3 text-white transition-all"
+            className="bg-opacity-50 hover:bg-opacity-70 bg-bg text-secondary absolute top-1/2 left-4 z-60 -translate-y-1/2 rounded-full p-3 transition-all"
             title="Previous (←)"
           >
             <ChevronLeft size={24} />
@@ -343,7 +326,7 @@ const MyGalleryComponent = ({
         {isNumber(selectedIndex) && selectedIndex < images.length - 1 && (
           <button
             onClick={goToNext}
-            className="bg-opacity-50 hover:bg-opacity-70 absolute top-1/2 right-4 z-60 -translate-y-1/2 rounded-full bg-black p-3 text-white transition-all"
+            className="bg-opacity-0 hover:bg-opacity-100 text-secondary absolute top-1/2 right-4 z-60 -translate-y-1/2 rounded-full bg-black p-3 transition-all"
             title="Next (→)"
           >
             <ChevronRight size={24} />
@@ -378,24 +361,30 @@ const MyGalleryComponent = ({
           />
         </div>
 
-        <div className="bg-opacity-50 absolute bottom-4 left-1/2 flex max-w-full -translate-x-1/2 space-x-2 overflow-x-auto rounded-lg bg-black p-3">
-          {images.map((image, index) => (
-            <div
-              key={image.id}
-              className={`h-16 w-16 flex-shrink-0 cursor-pointer overflow-hidden rounded border-2 transition-all ${
-                index === selectedIndex
-                  ? 'border-white'
-                  : 'border-transparent hover:border-gray-400'
-              }`}
-              onClick={() => setSelectedIndex(index)}
-            >
-              <img
-                src={image.thumbnail || image.src}
-                alt={image.alt || `Thumbnail ${index + 1}`}
-                className="h-full w-full object-cover"
-              />
-            </div>
-          ))}
+        <div
+          className={
+            'bg-bg absolute bottom-0 flex w-full items-center justify-center'
+          }
+        >
+          <div className="flex space-x-2 overflow-x-auto p-3">
+            {images.map((image, index) => (
+              <div
+                key={image.id}
+                className={`h-16 w-16 flex-shrink-0 cursor-pointer overflow-hidden rounded border-2 transition-all ${
+                  index === selectedIndex
+                    ? 'border-white'
+                    : 'border-transparent hover:border-gray-400'
+                }`}
+                onClick={() => setSelectedIndex(index)}
+              >
+                <img
+                  src={image.thumbnail || image.src}
+                  alt={image.alt || `Thumbnail ${index + 1}`}
+                  className="h-full w-full object-cover"
+                />
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     );
@@ -423,7 +412,7 @@ const MyGalleryComponent = ({
   ]);
 
   return (
-    <>
+    <div className={'w-full'}>
       <div
         {...props}
         className={cn(
@@ -453,7 +442,7 @@ const MyGalleryComponent = ({
       </div>
 
       {FullscreenView}
-    </>
+    </div>
   );
 };
 

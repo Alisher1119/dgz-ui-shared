@@ -1,7 +1,7 @@
-import { type ImageItem, MyGallery } from './components/gallery';
+import { type GalleryItem, MyGallery } from './components/gallery';
 
 function App() {
-  const sampleImages: ImageItem[] = [
+  const sampleImages: GalleryItem[] = [
     {
       id: '1',
       src: 'https://picsum.photos/id/1000/1000/1000',
