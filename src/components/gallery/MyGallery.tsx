@@ -35,7 +35,7 @@ export type MyGalleryProps = HTMLAttributes<HTMLDivElement> & {
 // Default action buttons moved outside component to prevent recreation on each render
 const createDefaultActions = (): GalleryActionButton[] => [
   {
-    icon: <Download size={16} />,
+    icon: <Download size={20} />,
     onClick: (image) => {
       saveAs(image.src, image.title);
     },
@@ -57,7 +57,7 @@ const Thumbnail = memo(
     return (
       <div
         key={image.id}
-        className="aspect-auto max-h-60 cursor-pointer overflow-hidden rounded-lg bg-gray-200 transition-opacity hover:opacity-80"
+        className="aspect-video cursor-pointer overflow-hidden rounded-lg bg-gray-200 transition-opacity hover:opacity-80"
         onClick={() => onClick(index)}
       >
         <img
@@ -174,7 +174,7 @@ const MyGalleryComponent = ({
           </div>
 
           {/* Top Bar with Actions and Close */}
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-4 py-1">
             {/* Action Buttons */}
             {allActionButtons.map((action, index) => (
               <button
@@ -193,7 +193,7 @@ const MyGalleryComponent = ({
               className="cursor-pointer"
               title="Close (Esc)"
             >
-              <X size={16} />
+              <X size={20} />
             </button>
           </div>
         </div>
@@ -231,7 +231,6 @@ const MyGalleryComponent = ({
         <div className={'bg-bg absolute bottom-0 w-full'}>
           <div className="flex gap-2 overflow-x-auto p-3">
             {images.map((image, index) => {
-              console.log(index, selectedIndex);
               return (
                 <div
                   key={image.id}
