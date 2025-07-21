@@ -28,10 +28,6 @@ export const DEFAULT_OPTIONS: Option[] = [
     value: 100,
     label: '100',
   },
-  {
-    value: 10,
-    label: '10',
-  },
 ];
 
 export interface MyLimitSelectProps {
