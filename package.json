@@ -81,6 +81,11 @@
       "import": "./dist/components/tooltip/index.es.js",
       "require": "./dist/components/tooltip/index.cjs.js"
     },
+    "./components/gallery": {
+      "types": "./dist/types/components/gallery/index.d.ts",
+      "import": "./dist/components/gallery/index.es.js",
+      "require": "./dist/components/gallery/index.cjs.js"
+    },
     "./components/theme": {
       "types": "./dist/types/components/theme/index.d.ts",
       "import": "./dist/components/theme/index.es.js",
@@ -138,6 +143,7 @@
     "filepond-plugin-file-validate-type": "^1.2.9",
     "filepond-plugin-image-preview": "^4.6.12",
     "i18next": "^25.2.1",
+    "lightgallery": "^2.9.0-beta.1",
     "lodash": "^4.17.21",
     "lucide-react": "^0.511.0",
     "next-themes": "^0.4.6",

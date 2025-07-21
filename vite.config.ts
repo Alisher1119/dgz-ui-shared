@@ -51,6 +51,10 @@ export default defineConfig({
           __dirname,
           'src/components/tooltip/index.ts'
         ),
+        'components/gallery/index': resolve(
+          __dirname,
+          'src/components/gallery/index.ts'
+        ),
         'components/form/index': resolve(
           __dirname,
           'src/components/form/index.ts'
