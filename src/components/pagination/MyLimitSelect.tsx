@@ -6,17 +6,43 @@ import {
   SelectTrigger,
   SelectValue,
 } from 'dgz-ui';
+import type { Option } from 'dgz-ui/form';
 
 export const DEFAULT_LIMIT = 50;
 export const DEFAULT_ITEMS_LIMIT = 12;
 
+export const DEFAULT_OPTIONS: Option[] = [
+  {
+    value: 10,
+    label: '10',
+  },
+  {
+    value: 20,
+    label: '20',
+  },
+  {
+    value: 50,
+    label: '50',
+  },
+  {
+    value: 100,
+    label: '100',
+  },
+  {
+    value: 10,
+    label: '10',
+  },
+];
+
 export interface MyLimitSelectProps {
   defaultValue?: number;
+  options?: Option[];
   onLimitChange: (limit: string) => void;
 }
 
 export const MyLimitSelect = ({
   defaultValue = DEFAULT_LIMIT,
+  options = DEFAULT_OPTIONS,
   onLimitChange,
 }: MyLimitSelectProps) => {
   const { t } = useTranslation();
@@ -32,14 +58,13 @@ export const MyLimitSelect = ({
           <SelectValue />
         </SelectTrigger>
         <SelectContent>
-          <SelectItem value="10">10</SelectItem>
-          <SelectItem value="20">20</SelectItem>
-          <SelectItem value="50">50</SelectItem>
-          <SelectItem value="100">100</SelectItem>
+          {options?.map((option) => (
+            <SelectItem key={option.value} value={`${option.value}`}>
+              {option.label}
+            </SelectItem>
+          ))}
         </SelectContent>
       </Select>
     </div>
   );
 };
-
-export default MyLimitSelect;

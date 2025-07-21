@@ -23,7 +23,7 @@ interface MyPaginationProps {
   onPageChange: (page: number) => void;
 }
 
-const MyPagination = ({
+export const MyPagination = ({
   currentPage = 1,
   totalPages = 0,
   onPageChange,
@@ -131,5 +131,3 @@ const MyPagination = ({
     </div>
   );
 };
-
-export default MyPagination;
