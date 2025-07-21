@@ -278,7 +278,7 @@ const MyGalleryComponent = ({
             {hasInfo && image.title && (
               <div
                 className={
-                  'bg-bg/70 absolute bottom-0 flex min-h-10 w-full items-center justify-center'
+                  'bg-bg/70 absolute bottom-0 flex min-h-10 w-full items-center justify-center text-center'
                 }
               >
                 {image.title}
