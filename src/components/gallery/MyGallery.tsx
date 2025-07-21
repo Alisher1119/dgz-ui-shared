@@ -1,57 +1,460 @@
-import LightGallery, { type LightGalleryProps } from 'lightgallery/react';
+/**
+ * MyGallery Component
+ *
+ * A performant image gallery component with the following optimizations:
+ * - Component memoization with React.memo to prevent unnecessary re-renders
+ * - Memoized child components (Thumbnail) to optimize grid rendering
+ * - Memoized FullscreenView to prevent recreation on state changes
+ * - useCallback for all event handlers to maintain referential equality
+ * - useMemo for computed values and arrays to prevent recreation
+ * - Proper dependency arrays for all hooks
+ *
+ * These optimizations significantly improve performance, especially with large image collections
+ * or when the component is part of a complex UI.
+ */
 
-import 'lightgallery/css/lightgallery.css';
-import 'lightgallery/css/lg-zoom.css';
-import 'lightgallery/css/lg-thumbnail.css';
-
-import lgThumbnail from 'lightgallery/plugins/thumbnail';
-import lgZoom from 'lightgallery/plugins/zoom';
+import React, {
+  type HTMLAttributes,
+  memo,
+  useCallback,
+  useEffect,
+  useMemo,
+  useState,
+} from 'react';
+import {
+  ChevronLeft,
+  ChevronRight,
+  Download,
+  RotateCw,
+  X,
+  ZoomIn,
+  ZoomOut,
+} from 'lucide-react';
+import { isNumber } from 'lodash';
 import { cn } from 'dgz-ui';
 
-export interface GalleryItem {
+export interface ImageItem {
+  id: string;
   src: string;
   thumbnail: string;
-  subHtml?: string;
+  alt: string;
+  title?: string;
+}
+
+export interface ActionButton {
+  icon: React.ReactNode;
+  label: string;
+  onClick: (image: ImageItem) => void;
   className?: string;
 }
 
-export type MyGalleryProps = LightGalleryProps & {
-  images: GalleryItem[];
+export type MyGalleryProps = HTMLAttributes<HTMLDivElement> & {
+  images: ImageItem[];
+  actionButtons?: ActionButton[];
   hasInfo?: true;
 };
+// Default action buttons moved outside component to prevent recreation on each render
+const createDefaultActions = (
+  setZoom: React.Dispatch<React.SetStateAction<number>>,
+  setRotation: React.Dispatch<React.SetStateAction<number>>
+): ActionButton[] => [
+  {
+    icon: <ZoomIn size={20} />,
+    onClick: () => setZoom((prev) => Math.min(prev * 1.5, 5)),
+    label: 'Zoom In',
+  },
+  {
+    icon: <ZoomOut size={20} />,
+    onClick: () => setZoom((prev) => Math.max(prev / 1.5, 0.5)),
+    label: 'Zoom Out',
+  },
+  {
+    icon: <RotateCw size={20} />,
+    onClick: () => setRotation((prev) => (prev + 90) % 360),
+    label: 'Rotate',
+  },
+  {
+    icon: <Download size={20} />,
+    onClick: (image) => {
+      const link = document.createElement('a');
+      link.href = image.src;
+      link.download = `image-${image.id}`;
+      link.click();
+    },
+    label: 'Download',
+  },
+];
 
-export const MyGallery = ({
+// Thumbnail component to optimize rendering of grid items
+const Thumbnail = memo(
+  ({
+    image,
+    index,
+    onClick,
+  }: {
+    image: ImageItem;
+    index: number;
+    onClick: (index: number) => void;
+  }) => {
+    return (
+      <div
+        key={image.id}
+        className="aspect-square cursor-pointer overflow-hidden rounded-lg bg-gray-200 transition-opacity hover:opacity-80"
+        onClick={() => onClick(index)}
+      >
+        <img
+          src={image.thumbnail || image.src}
+          alt={image.alt || `Image ${index + 1}`}
+          className="h-full w-full object-cover"
+        />
+      </div>
+    );
+  }
+);
+
+// Main component implementation
+const MyGalleryComponent = ({
   images,
-  speed = 500,
-  plugins = [],
+  actionButtons = [],
+  className,
   hasInfo,
-  elementClassNames,
   ...props
 }: MyGalleryProps) => {
-  return (
-    <LightGallery
-      {...props}
-      speed={speed}
-      plugins={[lgThumbnail, lgZoom, ...plugins]}
-      elementClassNames={cn(
-        'grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-4',
-        elementClassNames
-      )}
-    >
-      {images?.map(({ src, thumbnail, subHtml, className }, index) => (
-        <a
-          key={index}
-          href={thumbnail || src}
-          className={cn('rounded-3 relative overflow-hidden', className)}
+  const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
+  const [isFullscreen, setIsFullscreen] = useState(false);
+  const [zoom, setZoom] = useState(1);
+  const [rotation, setRotation] = useState(0);
+  const [dragPosition, setDragPosition] = useState({ x: 0, y: 0 });
+  const [isDragging, setIsDragging] = useState(false);
+  const [dragStart, setDragStart] = useState({ x: 0, y: 0 });
+
+  // Memoize default actions to prevent recreation on each render
+  const defaultActions = useMemo(
+    () => createDefaultActions(setZoom, setRotation),
+    [setZoom, setRotation]
+  );
+
+  // Memoize combined action buttons
+  const allActionButtons = useMemo(
+    () => [...defaultActions, ...actionButtons],
+    [defaultActions, actionButtons]
+  );
+
+  // Memoize event handlers to prevent recreation on each render
+  const openFullscreen = useCallback((index: number) => {
+    setSelectedIndex(index);
+    setIsFullscreen(true);
+    setZoom(1);
+    setRotation(0);
+    setDragPosition({ x: 0, y: 0 });
+  }, []);
+
+  const closeFullscreen = useCallback(() => {
+    setIsFullscreen(false);
+    setSelectedIndex(null);
+    setZoom(1);
+    setRotation(0);
+    setDragPosition({ x: 0, y: 0 });
+  }, []);
+
+  const goToPrevious = useCallback(() => {
+    if (selectedIndex !== null && selectedIndex > 0) {
+      setSelectedIndex(selectedIndex - 1);
+      setZoom(1);
+      setRotation(0);
+      setDragPosition({ x: 0, y: 0 }); // Reset drag position when navigating
+    }
+  }, [selectedIndex]);
+
+  const goToNext = useCallback(() => {
+    if (selectedIndex !== null && selectedIndex < images.length - 1) {
+      setSelectedIndex(selectedIndex + 1);
+      setZoom(1);
+      setRotation(0);
+      setDragPosition({ x: 0, y: 0 }); // Reset drag position when navigating
+    }
+  }, [selectedIndex, images.length]);
+
+  // Drag handlers for all zoom levels with smooth performance
+  const handleMouseDown = useCallback(
+    (e: React.MouseEvent) => {
+      setIsDragging(true);
+      setDragStart({
+        x: e.clientX - dragPosition.x,
+        y: e.clientY - dragPosition.y,
+      });
+      e.preventDefault();
+    },
+    [dragPosition]
+  );
+
+  const handleMouseMove = useCallback(
+    (e: React.MouseEvent) => {
+      if (isDragging) {
+        const newX = e.clientX - dragStart.x;
+        const newY = e.clientY - dragStart.y;
+
+        // Smooth drag with momentum
+        setDragPosition({
+          x: newX,
+          y: newY,
+        });
+      }
+    },
+    [isDragging, dragStart]
+  );
+
+  const handleMouseUp = useCallback(() => {
+    setIsDragging(false);
+  }, []);
+
+  const handleMouseLeave = useCallback(() => {
+    setIsDragging(false);
+  }, []);
+
+  // Touch events for mobile drag support
+  const handleTouchStart = useCallback(
+    (e: React.TouchEvent) => {
+      const touch = e.touches[0];
+      setIsDragging(true);
+      setDragStart({
+        x: touch.clientX - dragPosition.x,
+        y: touch.clientY - dragPosition.y,
+      });
+      e.preventDefault();
+    },
+    [dragPosition]
+  );
+
+  const handleTouchMove = useCallback(
+    (e: React.TouchEvent) => {
+      if (isDragging) {
+        const touch = e.touches[0];
+        const newX = touch.clientX - dragStart.x;
+        const newY = touch.clientY - dragStart.y;
+
+        setDragPosition({
+          x: newX,
+          y: newY,
+        });
+      }
+    },
+    [isDragging, dragStart]
+  );
+
+  const handleTouchEnd = useCallback(() => {
+    setIsDragging(false);
+  }, []);
+
+  // Keyboard navigation
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (!isFullscreen) return;
+
+      switch (e.key) {
+        case 'Escape':
+          closeFullscreen();
+          break;
+        case 'ArrowLeft':
+          e.preventDefault();
+          goToPrevious();
+          break;
+        case 'ArrowRight':
+          e.preventDefault();
+          goToNext();
+          break;
+      }
+    };
+
+    document.addEventListener('keydown', handleKeyDown);
+    return () => document.removeEventListener('keydown', handleKeyDown);
+  }, [isFullscreen, goToPrevious, goToNext, closeFullscreen]);
+
+  // Prevent body scroll when fullscreen is open
+  useEffect(() => {
+    if (isFullscreen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'unset';
+    }
+
+    return () => {
+      document.body.style.overflow = 'unset';
+    };
+  }, [isFullscreen]);
+
+  // Memoize currentImage to prevent unnecessary calculations
+  const currentImage = useMemo(
+    () => (selectedIndex !== null ? images[selectedIndex] : null),
+    [selectedIndex, images]
+  );
+
+  // Memoized FullscreenView component
+  const FullscreenView = useMemo(() => {
+    if (!isFullscreen || !currentImage) return null;
+
+    return (
+      <div className="bg-opacity-95 fixed inset-0 z-50 flex items-center justify-center bg-black">
+        {/* Title - Top Left */}
+        {currentImage.title && (
+          <div className="absolute top-4 left-4 z-60">
+            <h2 className="bg-opacity-50 rounded-lg bg-black px-4 py-2 text-xl font-semibold text-white">
+              {currentImage.title}
+            </h2>
+          </div>
+        )}
+
+        {/* Top Bar with Actions and Close */}
+        <div className="absolute top-4 right-4 z-60 flex items-center space-x-2">
+          {/* Action Buttons */}
+          {allActionButtons.map((action, index) => (
+            <button
+              key={index}
+              onClick={() => action.onClick(currentImage)}
+              className="bg-opacity-50 hover:bg-opacity-70 rounded-full bg-black p-2 text-white transition-all"
+              title={action.label}
+            >
+              {action.icon}
+            </button>
+          ))}
+
+          {/* Close Button */}
+          <button
+            onClick={closeFullscreen}
+            className="bg-opacity-50 hover:bg-opacity-70 rounded-full bg-black p-2 text-white transition-all"
+            title="Close (Esc)"
+          >
+            <X size={20} />
+          </button>
+        </div>
+
+        {/* Left Navigation */}
+        {isNumber(selectedIndex) && selectedIndex > 0 && (
+          <button
+            onClick={goToPrevious}
+            className="bg-opacity-50 hover:bg-opacity-70 absolute top-1/2 left-4 z-60 -translate-y-1/2 rounded-full bg-black p-3 text-white transition-all"
+            title="Previous (←)"
+          >
+            <ChevronLeft size={24} />
+          </button>
+        )}
+
+        {/* Right Navigation */}
+        {isNumber(selectedIndex) && selectedIndex < images.length - 1 && (
+          <button
+            onClick={goToNext}
+            className="bg-opacity-50 hover:bg-opacity-70 absolute top-1/2 right-4 z-60 -translate-y-1/2 rounded-full bg-black p-3 text-white transition-all"
+            title="Next (→)"
+          >
+            <ChevronRight size={24} />
+          </button>
+        )}
+
+        {/* Main Image */}
+        <div
+          className="flex max-h-full max-w-full items-center justify-center overflow-hidden p-8 select-none"
+          onMouseDown={handleMouseDown}
+          onMouseMove={handleMouseMove}
+          onMouseUp={handleMouseUp}
+          onMouseLeave={handleMouseLeave}
+          onTouchStart={handleTouchStart}
+          onTouchMove={handleTouchMove}
+          onTouchEnd={handleTouchEnd}
+          style={{ cursor: isDragging ? 'grabbing' : 'grab' }}
         >
-          <img alt={subHtml} src={thumbnail || src} />
-          {hasInfo && (
-            <div className="bg-opacity-50 bg-bg/50 text-secondary absolute bottom-0 left-0 flex min-h-10 w-full items-center justify-center">
-              {subHtml}
+          <img
+            src={currentImage.src}
+            alt={currentImage.alt || `Image ${selectedIndex}`}
+            className="object-contain transition-transform duration-100 ease-out"
+            style={{
+              transform: `scale(${zoom}) rotate(${rotation}deg) translate(${dragPosition.x / zoom}px, ${dragPosition.y / zoom}px)`,
+              willChange: isDragging ? 'transform' : 'auto',
+              maxWidth: 'none',
+              maxHeight: 'none',
+              width: 'auto',
+              height: 'auto',
+            }}
+            draggable={false}
+          />
+        </div>
+
+        <div className="bg-opacity-50 absolute bottom-4 left-1/2 flex max-w-full -translate-x-1/2 space-x-2 overflow-x-auto rounded-lg bg-black p-3">
+          {images.map((image, index) => (
+            <div
+              key={image.id}
+              className={`h-16 w-16 flex-shrink-0 cursor-pointer overflow-hidden rounded border-2 transition-all ${
+                index === selectedIndex
+                  ? 'border-white'
+                  : 'border-transparent hover:border-gray-400'
+              }`}
+              onClick={() => setSelectedIndex(index)}
+            >
+              <img
+                src={image.thumbnail || image.src}
+                alt={image.alt || `Thumbnail ${index + 1}`}
+                className="h-full w-full object-cover"
+              />
             </div>
-          )}
-        </a>
-      ))}
-    </LightGallery>
+          ))}
+        </div>
+      </div>
+    );
+  }, [
+    isFullscreen,
+    currentImage,
+    allActionButtons,
+    closeFullscreen,
+    selectedIndex,
+    goToPrevious,
+    images,
+    goToNext,
+    handleMouseDown,
+    handleMouseMove,
+    handleMouseUp,
+    handleMouseLeave,
+    handleTouchStart,
+    handleTouchMove,
+    handleTouchEnd,
+    isDragging,
+    zoom,
+    rotation,
+    dragPosition.x,
+    dragPosition.y,
+  ]);
+
+  return (
+    <>
+      <div
+        {...props}
+        className={cn(
+          'grid grid-cols-1 gap-4 p-4 sm:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3 2xl:grid-cols-4',
+          className
+        )}
+      >
+        {images.map((image, index) => (
+          <div className={'relative'}>
+            <Thumbnail
+              key={image.id}
+              image={image}
+              index={index}
+              onClick={openFullscreen}
+            />
+            {hasInfo && image.title && (
+              <div
+                className={
+                  'bg-bg/50 text-secondary absolute bottom-0 flex min-h-10 w-full items-center justify-center'
+                }
+              >
+                {image.title}
+              </div>
+            )}
+          </div>
+        ))}
+      </div>
+
+      {FullscreenView}
+    </>
   );
 };
+
+export const MyGallery = memo(MyGalleryComponent);
