@@ -12,7 +12,7 @@ type SearchWithCtrlProps = Omit<CardProps, 'title'> & {
   onSearchChange: (search?: string) => void;
 };
 
-const SearchWithCtrl = ({
+export const SearchWithCtrl = ({
   placeholder,
   onSearchChange,
 }: SearchWithCtrlProps) => {
@@ -30,6 +30,8 @@ const SearchWithCtrl = ({
           if (evt.key === Keyboard.ENTER && evt.ctrlKey) {
             onSearchChange(search);
           }
+          evt.stopPropagation();
+          evt.preventDefault();
         }}
       />
       <Button
@@ -45,5 +47,3 @@ const SearchWithCtrl = ({
     </div>
   );
 };
-
-export default SearchWithCtrl;
