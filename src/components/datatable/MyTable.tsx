@@ -36,6 +36,7 @@ export interface MyTableProps<TData> {
   onSortOrderChange?: (
     params: Omit<UseSortableProps<TData>, 'onSortOrderChange'>
   ) => void;
+  isStickyHeader?: true;
 }
 
 export const MyTable = <TData,>({

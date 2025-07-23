@@ -35,12 +35,12 @@ export interface DataTableProps<TData>
   extends Omit<MyTableProps<TData>, 'rows'> {
   dataSource?: PaginationInterface<TData>;
   onParamChange?: (param: Record<string, unknown>) => void;
-  hasPagination?: boolean;
-  hasSearch?: boolean;
+  hasPagination?: true;
+  hasSearch?: true;
   filters?: FilterInterface[];
   handleFilterChange?: (filters: Record<string, unknown>) => void;
   tableKey: string;
-  hasColumnsVisibilityDropdown?: boolean;
+  hasColumnsVisibilityDropdown?: true;
 }
 
 export const DataTable = <TData,>({
@@ -48,16 +48,17 @@ export const DataTable = <TData,>({
   columns,
   onRowClick,
   rowKey,
-  hasNumbers = false,
-  hasSearch = false,
-  hasCheckbox = false,
-  hasPagination = false,
+  hasNumbers,
+  hasSearch,
+  hasCheckbox,
+  hasPagination,
+  isStickyHeader,
   onParamChange,
   tableKey,
   filters = [],
   handleFilterChange,
   params,
-  hasColumnsVisibilityDropdown = false,
+  hasColumnsVisibilityDropdown,
 }: DataTableProps<TData>) => {
   const { t } = useTranslation();
   const [selectedRows, setSelectedRows] = useState<TData[keyof TData][]>([]);
@@ -67,7 +68,7 @@ export const DataTable = <TData,>({
   return (
     <div
       className={
-        'border-border-light flex size-full shrink flex-col overflow-hidden rounded-xl border shadow-xs'
+        'border-border-alpha-light flex grow flex-col overflow-auto rounded-xl border shadow-xs'
       }
     >
       {(hasSearch ||
@@ -129,21 +130,24 @@ export const DataTable = <TData,>({
           </div>
         </div>
       )}
-      <MyTable
-        params={params}
-        rows={dataSource?.docs}
-        rowKey={rowKey}
-        columns={formattedColumns}
-        hasCheckbox={hasCheckbox}
-        hasNumbers={hasNumbers}
-        onRowClick={onRowClick}
-        onSelectedItemsChange={setSelectedRows}
-        onSortOrderChange={({ sortField, sortOrder }) => {
-          if (onParamChange) {
-            onParamChange({ ...params, sortField, sortOrder });
-          }
-        }}
-      />
+      <div className={'shrink grow overflow-auto border-y'}>
+        <MyTable
+          params={params}
+          rows={dataSource?.docs}
+          rowKey={rowKey}
+          isStickyHeader={isStickyHeader}
+          columns={formattedColumns}
+          hasCheckbox={hasCheckbox}
+          hasNumbers={hasNumbers}
+          onRowClick={onRowClick}
+          onSelectedItemsChange={setSelectedRows}
+          onSortOrderChange={({ sortField, sortOrder }) => {
+            if (onParamChange) {
+              onParamChange({ ...params, sortField, sortOrder });
+            }
+          }}
+        />
+      </div>
       {hasPagination && (
         <div className="flex shrink-0 flex-col items-center justify-between gap-3 p-4 lg:flex-row">
           <div className="text-sm">
