@@ -135,6 +135,7 @@ export const DataTable = <TData,>({
           params={params}
           rows={dataSource?.docs}
           rowKey={rowKey}
+          selectedItems={selectedRows}
           isStickyHeader={isStickyHeader}
           columns={formattedColumns}
           hasCheckbox={hasCheckbox}
@@ -150,10 +151,9 @@ export const DataTable = <TData,>({
         <div className="flex shrink-0 flex-col items-center justify-between gap-3 p-4 lg:flex-row">
           <div className="text-sm">
             <MyLimitSelect
-              onLimitChange={(limit) => {
-                console.log(limit);
-                onParamChange?.({ ...params, limit, page: 1 });
-              }}
+              onLimitChange={(limit) =>
+                onParamChange?.({ ...params, limit, page: 1 })
+              }
               defaultValue={dataSource?.limit}
             />
           </div>
@@ -162,11 +162,7 @@ export const DataTable = <TData,>({
           </div>
           <div>
             <MyPagination
-              onPageChange={(page) => {
-                if (onParamChange) {
-                  onParamChange({ ...params, page });
-                }
-              }}
+              onPageChange={(page) => onParamChange?.({ ...params, page })}
               currentPage={dataSource?.page}
               totalPages={dataSource?.totalPages}
             />

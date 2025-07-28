@@ -11,8 +11,8 @@ import { ThemeMode } from '../../enums';
 import { useTheme } from '../../hooks';
 
 export function ThemeToggle({ className }: { className?: string }) {
-  const { setTheme } = useTheme();
   const { t } = useTranslation();
+  const { setTheme } = useTheme();
 
   return (
     <DropdownMenu>

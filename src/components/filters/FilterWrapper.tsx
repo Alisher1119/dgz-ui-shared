@@ -54,16 +54,12 @@ export const FilterWrapper = memo(function FilterWrapper({
   }, [filters, params]);
 
   useEffect(() => {
-    if (onChange) {
-      onChange(getValues());
-    }
+    onChange?.(getValues());
   }, [watch()]);
 
   const handleFilter = useCallback(
     (data = {}) => {
-      if (onFilter) {
-        onFilter(data);
-      }
+      onFilter?.(data);
       setOpen(false);
     },
     [onFilter]
