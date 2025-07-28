@@ -46,10 +46,7 @@ export const MyLimitSelect = ({
   return (
     <div className={'flex items-center gap-3'}>
       <span className={'font-semibold'}>{t('Rows per page')}:</span>
-      <Select
-        onValueChange={(limit) => onLimitChange(limit)}
-        value={`${defaultValue}`}
-      >
+      <Select onValueChange={onLimitChange} value={`${defaultValue}`}>
         <SelectTrigger className="h-8.5 w-17">
           <SelectValue />
         </SelectTrigger>

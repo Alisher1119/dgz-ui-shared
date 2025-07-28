@@ -16,7 +16,6 @@ import { useEffect } from 'react';
 import type { ColumnType } from '../../types';
 import { DEFAULT_LIMIT } from '../pagination/MyLimitSelect';
 import { useDataTable, useSortable, type UseSortableProps } from '../../hooks';
-import { ScrollArea } from '../scroll';
 import { Checkbox } from 'dgz-ui/form';
 import { cn } from 'dgz-ui';
 import { SortOrder } from '../../enums';
@@ -53,6 +52,7 @@ export const MyTable = <TData,>({
   selectedItems,
   onSelectedItemsChange,
   onSortOrderChange,
+  isStickyHeader,
 }: MyTableProps<TData>) => {
   const { sortObject, handleSort } = useSortable<TData>({
     sortField: params?.sortField as keyof TData | undefined,
@@ -74,121 +74,119 @@ export const MyTable = <TData,>({
   }, [selectedRows]);
 
   return (
-    <ScrollArea className="h-full shrink border-y">
-      <Table>
-        <TableHeader>
-          <TableRow>
-            {hasCheckbox && (
-              <TableHead className={'w-12 p-3'}>
-                <Checkbox
-                  className={'mt-1'}
-                  checked={isAllRowsSelected(rowKey)}
-                  onCheckedChange={(value) =>
-                    handleSelectAllRows(rowKey, !!value)
-                  }
-                  aria-label="Select all"
-                />
-              </TableHead>
-            )}
-            {hasNumbers && <TableHead className={'w-12 p-2'}>#</TableHead>}
-            {columns
-              .filter((column) => !column.hidden)
-              .map((column) => (
-                <TableHead
-                  key={column.key}
-                  style={column.styles}
-                  className={cn('p-2', column.sortable && 'cursor-pointer')}
-                  onClick={() => handleSort(column.dataIndex)}
-                >
-                  <div className={'flex items-center gap-2'}>
-                    {column.name}{' '}
-                    {column.sortable &&
-                      (sortObject?.sortField === column.key ? (
-                        <>
-                          {sortObject?.sortOrder === SortOrder.DESC && (
-                            <ArrowDownWideNarrow size={15} />
-                          )}
-                          {sortObject?.sortOrder === SortOrder.ASC && (
-                            <ArrowUpWideNarrow size={15} />
-                          )}
-                        </>
-                      ) : (
-                        <ArrowUpDown size={15} />
-                      ))}
-                  </div>
-                </TableHead>
-              ))}
-          </TableRow>
-        </TableHeader>
-        <TableBody className={'[&>tr:nth-child(even)]:bg-bg-secondary'}>
-          {rows.length ? (
-            rows.map((row, index) => (
-              <TableRow
-                key={`${row[rowKey]}`}
-                onClick={() => {
-                  if (onRowClick) {
-                    onRowClick(row);
-                  }
-                }}
-                data-state={isRowSelected(row[rowKey]) && 'selected'}
-              >
-                {hasCheckbox && (
-                  <TableCell
-                    className={'w-12 p-3'}
-                    onClick={(evt) => evt.stopPropagation()}
-                  >
-                    <Checkbox
-                      className={'mt-1'}
-                      checked={isRowSelected(row[rowKey])}
-                      onCheckedChange={(value) =>
-                        handleSelectRow(row[rowKey], !!value)
-                      }
-                      aria-label="Select row"
-                    />
-                  </TableCell>
-                )}
-                {hasNumbers && (
-                  <TableCell className={'w-12 p-2'}>
-                    {((params.page as number) - 1) *
-                      ((params.limit || DEFAULT_LIMIT) as number) +
-                      index +
-                      1}
-                  </TableCell>
-                )}
-                {columns
-                  .filter((column) => !column.hidden)
-                  .map((column) => (
-                    <TableCell
-                      className={
-                        'text-body-xs-medium max-w-xs overflow-hidden p-2 text-ellipsis'
-                      }
-                      style={column.styles}
-                      key={`${index}-${column.key}`}
-                    >
-                      {column.render
-                        ? column.render(get(row, column.dataIndex), row)
-                        : get(row, column.dataIndex, '')}
-                    </TableCell>
-                  ))}
-              </TableRow>
-            ))
-          ) : (
-            <TableRow>
-              <TableCell
-                colSpan={
-                  hasNumbers
-                    ? hasCheckbox
-                      ? columns.length + 2
-                      : columns.length + 1
-                    : columns.length
+    <Table className={'relative'}>
+      <TableHeader className={cn(isStickyHeader && 'sticky top-0 z-10')}>
+        <TableRow>
+          {hasCheckbox && (
+            <TableHead className={'w-12 p-3'}>
+              <Checkbox
+                className={'mt-1'}
+                checked={isAllRowsSelected(rowKey)}
+                onCheckedChange={(value) =>
+                  handleSelectAllRows(rowKey, !!value)
                 }
-              >
-                <Empty />
-              </TableCell>
-            </TableRow>
+                aria-label="Select all"
+              />
+            </TableHead>
           )}
-        </TableBody>
-      </Table>
-    </ScrollArea>
+          {hasNumbers && <TableHead className={'w-12 p-2'}>#</TableHead>}
+          {columns
+            .filter((column) => !column.hidden)
+            .map((column) => (
+              <TableHead
+                key={column.key}
+                style={column.styles}
+                className={cn('p-2', column.sortable && 'cursor-pointer')}
+                onClick={() => handleSort(column.dataIndex)}
+              >
+                <div className={'flex items-center gap-2'}>
+                  {column.name}{' '}
+                  {column.sortable &&
+                    (sortObject?.sortField === column.key ? (
+                      <>
+                        {sortObject?.sortOrder === SortOrder.DESC && (
+                          <ArrowDownWideNarrow size={15} />
+                        )}
+                        {sortObject?.sortOrder === SortOrder.ASC && (
+                          <ArrowUpWideNarrow size={15} />
+                        )}
+                      </>
+                    ) : (
+                      <ArrowUpDown size={15} />
+                    ))}
+                </div>
+              </TableHead>
+            ))}
+        </TableRow>
+      </TableHeader>
+      <TableBody className={'[&>tr:nth-child(even)]:bg-bg-secondary'}>
+        {rows.length ? (
+          rows.map((row, index) => (
+            <TableRow
+              key={`${row[rowKey]}`}
+              onClick={() => {
+                if (onRowClick) {
+                  onRowClick(row);
+                }
+              }}
+              data-state={isRowSelected(row[rowKey]) && 'selected'}
+            >
+              {hasCheckbox && (
+                <TableCell
+                  className={'w-12 p-3'}
+                  onClick={(evt) => evt.stopPropagation()}
+                >
+                  <Checkbox
+                    className={'mt-1'}
+                    checked={isRowSelected(row[rowKey])}
+                    onCheckedChange={(value) =>
+                      handleSelectRow(row[rowKey], !!value)
+                    }
+                    aria-label="Select row"
+                  />
+                </TableCell>
+              )}
+              {hasNumbers && (
+                <TableCell className={'w-12 p-2'}>
+                  {((params.page as number) - 1) *
+                    ((params.limit || DEFAULT_LIMIT) as number) +
+                    index +
+                    1}
+                </TableCell>
+              )}
+              {columns
+                .filter((column) => !column.hidden)
+                .map((column) => (
+                  <TableCell
+                    className={
+                      'text-body-xs-medium max-w-xs overflow-hidden p-2 text-ellipsis'
+                    }
+                    style={column.styles}
+                    key={`${index}-${column.key}`}
+                  >
+                    {column.render
+                      ? column.render(get(row, column.dataIndex), row)
+                      : get(row, column.dataIndex, '')}
+                  </TableCell>
+                ))}
+            </TableRow>
+          ))
+        ) : (
+          <TableRow>
+            <TableCell
+              colSpan={
+                hasNumbers
+                  ? hasCheckbox
+                    ? columns.length + 2
+                    : columns.length + 1
+                  : columns.length
+              }
+            >
+              <Empty />
+            </TableCell>
+          </TableRow>
+        )}
+      </TableBody>
+    </Table>
   );
 };

@@ -27,11 +27,13 @@ export const SearchWithCtrl = ({
         }
         onInput={(evt) => setSearch(get(evt, 'target.value', ''))}
         onKeyUp={(evt) => {
-          if (evt.key === Keyboard.ENTER && evt.ctrlKey) {
-            onSearchChange(search);
+          if (evt.key === Keyboard.ENTER) {
+            if (evt.ctrlKey) {
+              onSearchChange(search);
+            }
+            evt.stopPropagation();
+            evt.preventDefault();
           }
-          evt.stopPropagation();
-          evt.preventDefault();
         }}
       />
       <Button

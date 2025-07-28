@@ -130,7 +130,7 @@ export const DataTable = <TData,>({
           </div>
         </div>
       )}
-      <div className={'shrink grow overflow-auto border-y'}>
+      <div className={'flex flex-col overflow-auto border-y'}>
         <MyTable
           params={params}
           rows={dataSource?.docs}
@@ -142,9 +142,7 @@ export const DataTable = <TData,>({
           onRowClick={onRowClick}
           onSelectedItemsChange={setSelectedRows}
           onSortOrderChange={({ sortField, sortOrder }) => {
-            if (onParamChange) {
-              onParamChange({ ...params, sortField, sortOrder });
-            }
+            onParamChange?.({ ...params, sortField, sortOrder });
           }}
         />
       </div>
@@ -153,9 +151,8 @@ export const DataTable = <TData,>({
           <div className="text-sm">
             <MyLimitSelect
               onLimitChange={(limit) => {
-                if (onParamChange) {
-                  onParamChange({ ...params, limit, page: 1 });
-                }
+                console.log(limit);
+                onParamChange?.({ ...params, limit, page: 1 });
               }}
               defaultValue={dataSource?.limit}
             />
