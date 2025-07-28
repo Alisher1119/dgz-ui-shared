@@ -75,7 +75,9 @@ export const MyTable = <TData,>({
 
   return (
     <Table className={'relative'}>
-      <TableHeader className={cn(isStickyHeader && 'sticky top-0 z-10')}>
+      <TableHeader
+        className={cn('bg-bg', isStickyHeader && 'sticky top-0 z-10')}
+      >
         <TableRow>
           {hasCheckbox && (
             <TableHead className={'w-12 p-3'}>
