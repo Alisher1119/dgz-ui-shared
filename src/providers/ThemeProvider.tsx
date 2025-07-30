@@ -31,6 +31,7 @@ export function ThemeProvider({
 
       root.classList.add(systemTheme);
       root.style.colorScheme = systemTheme;
+      setTheme(systemTheme);
       return;
     }
 

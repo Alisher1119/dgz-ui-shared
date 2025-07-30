@@ -93,7 +93,7 @@ export const DataTable = <TData,>({
                     className={'ml-auto rounded-lg px-3'}
                   >
                     <RiLayoutColumnLine />{' '}
-                    <span className={'hidden md:inline'}>
+                    <span className={'hidden lg:!inline'}>
                       {t('Customize columns')}
                     </span>
                     <RiArrowDownSLine />

@@ -94,7 +94,7 @@ export const FilterWrapper = memo(function FilterWrapper({
             ) : (
               <ListFilterIcon size={20} />
             )}{' '}
-            <span className={'hidden md:inline'}>{t('Filter')}</span>
+            <span className={'hidden lg:!inline'}>{t('Filter')}</span>
             <ChevronDown />
           </div>
         </Button>
