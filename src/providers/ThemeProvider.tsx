@@ -22,7 +22,6 @@ export function ThemeProvider({
     const root = window.document.documentElement;
 
     root.classList.remove(ThemeMode.LIGHT, ThemeMode.DARK);
-    root.style.colorScheme = theme;
     if (theme === ThemeMode.SYSTEM) {
       const systemTheme = window.matchMedia('(prefers-color-scheme: dark)')
         .matches
@@ -30,11 +29,11 @@ export function ThemeProvider({
         : ThemeMode.LIGHT;
 
       root.classList.add(systemTheme);
-      root.style.colorScheme = systemTheme;
       setTheme(systemTheme);
       return;
     }
 
+    root.style.colorScheme = theme;
     root.classList.add(theme);
   }, [theme]);
 
