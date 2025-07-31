@@ -90,6 +90,11 @@
       "import": "./dist/components/theme/index.es.js",
       "require": "./dist/components/theme/index.cjs.js"
     },
+    "./components/loader": {
+      "types": "./dist/types/components/loader/index.d.ts",
+      "import": "./dist/components/loader/index.es.js",
+      "require": "./dist/components/loader/index.cjs.js"
+    },
     "./enums": {
       "types": "./dist/types/enums/index.d.ts",
       "import": "./dist/enums/index.es.js",

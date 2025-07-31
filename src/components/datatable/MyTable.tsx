@@ -126,11 +126,8 @@ export const MyTable = <TData,>({
           rows.map((row, index) => (
             <TableRow
               key={`${row[rowKey]}`}
-              onClick={() => {
-                if (onRowClick) {
-                  onRowClick(row);
-                }
-              }}
+              onClick={() => onRowClick?.(row)}
+              className={cn(onRowClick && 'cursor-pointer')}
               data-state={isRowSelected(row[rowKey]) && 'selected'}
             >
               {hasCheckbox && (

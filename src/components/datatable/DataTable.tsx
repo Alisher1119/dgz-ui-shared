@@ -16,6 +16,7 @@ import { get, isEmpty } from 'lodash';
 import { MyTable, type MyTableProps } from './MyTable';
 import { useColumns } from '../../hooks';
 import { type FilterInterface, FilterWrapper, Search } from '../filters';
+import { Loader } from '../loader';
 
 export interface PaginationInterface<TData> {
   docs: TData[];
@@ -37,6 +38,7 @@ export interface DataTableProps<TData>
   onParamChange?: (param: Record<string, unknown>) => void;
   hasPagination?: true;
   hasSearch?: true;
+  loading?: boolean;
   filters?: FilterInterface[];
   handleFilterChange?: (filters: Record<string, unknown>) => void;
   tableKey: string;
@@ -54,6 +56,7 @@ export const DataTable = <TData,>({
   hasPagination,
   isStickyHeader,
   onParamChange,
+  loading,
   tableKey,
   filters = [],
   handleFilterChange,
@@ -131,21 +134,25 @@ export const DataTable = <TData,>({
         </div>
       )}
       <div className={'flex flex-col overflow-auto border-y'}>
-        <MyTable
-          params={params}
-          rows={dataSource?.docs}
-          rowKey={rowKey}
-          selectedItems={selectedRows}
-          isStickyHeader={isStickyHeader}
-          columns={formattedColumns}
-          hasCheckbox={hasCheckbox}
-          hasNumbers={hasNumbers}
-          onRowClick={onRowClick}
-          onSelectedItemsChange={setSelectedRows}
-          onSortOrderChange={({ sortField, sortOrder }) => {
-            onParamChange?.({ ...params, sortField, sortOrder });
-          }}
-        />
+        {!loading ? (
+          <MyTable
+            params={params}
+            rows={dataSource?.docs}
+            rowKey={rowKey}
+            selectedItems={selectedRows}
+            isStickyHeader={isStickyHeader}
+            columns={formattedColumns}
+            hasCheckbox={hasCheckbox}
+            hasNumbers={hasNumbers}
+            onRowClick={onRowClick}
+            onSelectedItemsChange={setSelectedRows}
+            onSortOrderChange={({ sortField, sortOrder }) => {
+              onParamChange?.({ ...params, sortField, sortOrder });
+            }}
+          />
+        ) : (
+          <Loader />
+        )}
       </div>
       {hasPagination && (
         <div className="flex shrink-0 flex-col items-center justify-between gap-3 p-4 lg:flex-row">

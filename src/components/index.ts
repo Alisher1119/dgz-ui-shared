@@ -11,3 +11,4 @@ export * from './modal';
 export * from './scroll';
 export * from './filters';
 export * from './theme';
+export * from './loader';
