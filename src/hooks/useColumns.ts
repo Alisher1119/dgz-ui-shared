@@ -15,8 +15,8 @@ export const useColumns = <TData>({
   const { storedColumns, setColumns } = useColumnsStore();
 
   useEffect(() => {
-    if (isEmpty(get(storedColumns, key))) {
-      const columnsObj = get(storedColumns, key, {});
+    if (isEmpty(get(storedColumns, key)) && !isEmpty(columns)) {
+      const columnsObj = {};
       columns.forEach((column) => {
         set(columnsObj, column.key, !!column.hidden);
       });
