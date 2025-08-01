@@ -20,10 +20,10 @@ import { Loader } from '../loader';
 
 export interface PaginationInterface<TData> {
   docs: TData[];
-  total: number;
   offset: number;
   limit: number;
   totalPages: number;
+  total: number;
   page: number;
   pagingCounter: number;
   hasPrevPage: boolean;
@@ -32,9 +32,11 @@ export interface PaginationInterface<TData> {
   nextPage: number;
 }
 
-export interface DataTableProps<TData>
-  extends Omit<MyTableProps<TData>, 'rows'> {
-  dataSource?: PaginationInterface<TData>;
+export interface DataTableProps<
+  TData,
+  TPaginationData extends PaginationInterface<TData>,
+> extends Omit<MyTableProps<TData>, 'rows'> {
+  dataSource?: TPaginationData;
   onParamChange?: (param: Record<string, unknown>) => void;
   hasPagination?: true;
   hasSearch?: true;
@@ -42,10 +44,15 @@ export interface DataTableProps<TData>
   filters?: FilterInterface[];
   handleFilterChange?: (filters: Record<string, unknown>) => void;
   tableKey: string;
+  dataKey?: keyof TPaginationData;
   hasColumnsVisibilityDropdown?: true;
 }
 
-export const DataTable = <TData,>({
+export const DataTable = <
+  TData,
+  TPaginationData extends
+    PaginationInterface<TData> = PaginationInterface<TData>,
+>({
   dataSource,
   columns,
   onRowClick,
@@ -56,13 +63,14 @@ export const DataTable = <TData,>({
   hasPagination,
   isStickyHeader,
   onParamChange,
+  dataKey = 'docs',
   loading,
   tableKey,
   filters = [],
   handleFilterChange,
   params,
   hasColumnsVisibilityDropdown,
-}: DataTableProps<TData>) => {
+}: DataTableProps<TData, TPaginationData>) => {
   const { t } = useTranslation();
   const [selectedRows, setSelectedRows] = useState<TData[keyof TData][]>([]);
   const { formattedColumns, handleColumnsChange, resetColumns } =
@@ -135,9 +143,9 @@ export const DataTable = <TData,>({
       )}
       <div className={'flex flex-col overflow-auto border-y'}>
         {!loading ? (
-          <MyTable
+          <MyTable<TData>
             params={params}
-            rows={dataSource?.docs}
+            rows={get(dataSource, dataKey, []) as TData[]}
             rowKey={rowKey}
             selectedItems={selectedRows}
             isStickyHeader={isStickyHeader}
