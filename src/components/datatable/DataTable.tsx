@@ -19,17 +19,17 @@ import { type FilterInterface, FilterWrapper, Search } from '../filters';
 import { Loader } from '../loader';
 
 export interface PaginationInterface<TData> {
-  docs: TData[];
-  offset: number;
+  docs?: TData[];
+  offset?: number;
   limit: number;
   totalPages: number;
-  total: number;
+  total?: number;
   page: number;
-  pagingCounter: number;
-  hasPrevPage: boolean;
-  hasNextPage: boolean;
-  prevPage: number;
-  nextPage: number;
+  pagingCounter?: number;
+  hasPrevPage?: boolean;
+  hasNextPage?: boolean;
+  prevPage?: number;
+  nextPage?: number;
 }
 
 export interface DataTableProps<
@@ -90,7 +90,9 @@ export const DataTable = <
             {hasSearch && (
               <Search
                 defaultValue={get(params, 'search', '') as string}
-                onSearchChange={(search) => ({ ...params, search, page: 1 })}
+                onSearchChange={(search) =>
+                  onParamChange?.({ ...params, search, page: 1 })
+                }
               />
             )}
           </div>
@@ -136,7 +138,13 @@ export const DataTable = <
               </DropdownMenu>
             )}
             {!isEmpty(filters) && (
-              <FilterWrapper filters={filters} onFilter={handleFilterChange} />
+              <FilterWrapper
+                filters={filters}
+                onFilter={(filter) => {
+                  onParamChange?.({ ...params, ...filter, page: 1 });
+                  handleFilterChange?.(filter);
+                }}
+              />
             )}
           </div>
         </div>
