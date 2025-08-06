@@ -45,7 +45,9 @@ export const Confirm = ({
           </AlertDialogDescription>
         </AlertDialogHeader>
         <AlertDialogFooter>
-          <AlertDialogCancel>{t('Cancel')}</AlertDialogCancel>
+          <AlertDialogCancel className={'mt-0'}>
+            {t('Cancel')}
+          </AlertDialogCancel>
           <AlertDialogAction onClick={onConfirm}>
             {t('Confirm')}
           </AlertDialogAction>

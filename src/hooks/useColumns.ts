@@ -30,13 +30,15 @@ export const useColumns = <TData>({
   const formattedColumns = useMemo(() => {
     const columnsObj = get(storedColumns, key, {});
 
-    return columns.map((column) => {
-      const { hidden, ...rest } = column;
-      return {
-        ...rest,
-        hidden: get(columnsObj, column.key, !!hidden),
-      };
-    });
+    return columns
+      .filter((column) => column.type !== 'action')
+      .map((column) => {
+        const { hidden, ...rest } = column;
+        return {
+          ...rest,
+          hidden: get(columnsObj, column.key, !!hidden),
+        };
+      });
   }, [key, storedColumns, columns]);
 
   const handleColumnsChange = useCallback(

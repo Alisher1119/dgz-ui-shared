@@ -9,6 +9,7 @@ export type ColumnType<TData> = {
     access?: string[];
     hidden?: boolean;
     sortable?: boolean;
+    type?: 'data' | 'action';
     render?: (value: TData[K], record: TData) => ReactNode;
   };
 }[keyof TData];

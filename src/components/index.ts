@@ -12,3 +12,4 @@ export * from './scroll';
 export * from './filters';
 export * from './theme';
 export * from './loader';
+export * from 'react-toastify';
