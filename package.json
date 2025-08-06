@@ -142,7 +142,7 @@
     "@hookform/resolvers": "^5.0.1",
     "@tailwindcss/vite": "^4.1.7",
     "dayjs": "^1.11.13",
-    "dgz-ui": "^1.2.21",
+    "dgz-ui": "^1.2.22",
     "file-saver": "^2.0.5",
     "filepond-plugin-file-validate-size": "^2.2.8",
     "filepond-plugin-file-validate-type": "^1.2.9",
