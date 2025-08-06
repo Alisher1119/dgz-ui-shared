@@ -29,7 +29,7 @@ export const SearchWithCtrl = ({
         onKeyUp={(evt) => {
           if (evt.key === Keyboard.ENTER) {
             if (evt.ctrlKey) {
-              onSearchChange(search);
+              onSearchChange(search || undefined);
             }
             evt.stopPropagation();
             evt.preventDefault();

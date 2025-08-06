@@ -7,7 +7,7 @@ import type { FormEvent } from 'react';
 export interface SearchProps {
   name?: string;
   defaultValue?: FormDataEntryValue | null;
-  onSearchChange: (search: FormDataEntryValue | null) => void;
+  onSearchChange: (search?: FormDataEntryValue) => void;
 }
 
 export const Search = ({
@@ -19,7 +19,7 @@ export const Search = ({
 
   const handleSearch = (evt: FormEvent<HTMLFormElement>) => {
     const formData = new FormData(evt.currentTarget);
-    onSearchChange(formData.get(name));
+    onSearchChange(formData.get(name) || undefined);
     evt.preventDefault();
   };
 

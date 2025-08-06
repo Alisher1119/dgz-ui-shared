@@ -99,7 +99,7 @@ export const MyTable = <TData,>({
                 key={column.key}
                 style={column.styles}
                 className={cn('p-2', column.sortable && 'cursor-pointer')}
-                onClick={() => handleSort(column.dataIndex)}
+                onClick={() => column.sortable && handleSort(column.dataIndex)}
               >
                 <div className={'flex items-center gap-2'}>
                   {column.name}{' '}
@@ -157,9 +157,7 @@ export const MyTable = <TData,>({
                 .filter((column) => !column.hidden)
                 .map((column) => (
                   <TableCell
-                    className={
-                      'text-body-xs-medium max-w-xs overflow-hidden p-2 text-ellipsis'
-                    }
+                    className={'text-body-xs-medium max-w-xs p-2'}
                     style={column.styles}
                     key={`${index}-${column.key}`}
                   >
