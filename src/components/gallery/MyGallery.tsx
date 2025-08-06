@@ -1,6 +1,7 @@
-import React, {
+import {
   type HTMLAttributes,
   memo,
+  type ReactNode,
   useCallback,
   useEffect,
   useMemo,
@@ -20,7 +21,7 @@ export interface GalleryItem {
 }
 
 export interface GalleryActionButton {
-  icon: React.ReactNode;
+  icon: ReactNode;
   label: string;
   onClick: (image: GalleryItem) => void;
   className?: string;
@@ -28,6 +29,7 @@ export interface GalleryActionButton {
 
 export type MyGalleryProps = HTMLAttributes<HTMLDivElement> & {
   images: GalleryItem[];
+  fallbackImage?: string;
   actionButtons?: GalleryActionButton[];
   hasInfo?: true;
 };
@@ -43,17 +45,53 @@ const createDefaultActions = (): GalleryActionButton[] => [
   },
 ];
 
+// FullscreenImage component to handle image loading errors
+const FullscreenImage = memo(
+  ({
+    src,
+    alt,
+    fallbackImage,
+  }: {
+    src: string;
+    alt: string;
+    fallbackImage?: string;
+  }) => {
+    const [imgError, setImgError] = useState(false);
+
+    const handleError = () => {
+      setImgError(true);
+    };
+
+    return (
+      <img
+        src={imgError && fallbackImage ? fallbackImage : src}
+        alt={alt}
+        className="max-h-full max-w-full object-contain"
+        onError={handleError}
+      />
+    );
+  }
+);
+
 // Thumbnail component to optimize rendering of grid items
 const Thumbnail = memo(
   ({
     image,
     index,
     onClick,
+    fallbackImage,
   }: {
     image: GalleryItem;
     index: number;
     onClick: (index: number) => void;
+    fallbackImage?: string;
   }) => {
+    const [imgError, setImgError] = useState(false);
+
+    const handleError = () => {
+      setImgError(true);
+    };
+
     return (
       <div
         key={image.id}
@@ -61,9 +99,14 @@ const Thumbnail = memo(
         onClick={() => onClick(index)}
       >
         <img
-          src={image.thumbnail || image.src}
+          src={
+            imgError && fallbackImage
+              ? fallbackImage
+              : image.thumbnail || image.src
+          }
           alt={image.alt || `Image ${index + 1}`}
           className="h-full w-full object-cover"
+          onError={handleError}
         />
       </div>
     );
@@ -74,6 +117,7 @@ const Thumbnail = memo(
 const MyGalleryComponent = ({
   images,
   actionButtons = [],
+  fallbackImage,
   className,
   hasInfo,
   ...props
@@ -221,10 +265,10 @@ const MyGalleryComponent = ({
         )}
 
         <div className="flex max-h-full max-w-full items-center justify-center overflow-hidden p-8">
-          <img
+          <FullscreenImage
             src={currentImage.src}
             alt={currentImage.alt || `Image ${selectedIndex}`}
-            className="max-h-full max-w-full object-contain"
+            fallbackImage={fallbackImage}
           />
         </div>
 
@@ -244,6 +288,11 @@ const MyGalleryComponent = ({
                     src={image.thumbnail || image.src}
                     alt={image.alt || `Thumbnail ${index + 1}`}
                     className="size-full object-cover"
+                    onError={(e) => {
+                      if (fallbackImage) {
+                        e.currentTarget.src = fallbackImage;
+                      }
+                    }}
                   />
                 </div>
               );
@@ -254,6 +303,7 @@ const MyGalleryComponent = ({
     );
   }, [
     isFullscreen,
+    fallbackImage,
     currentImage,
     allActionButtons,
     closeFullscreen,
@@ -274,7 +324,12 @@ const MyGalleryComponent = ({
       >
         {images.map((image, index) => (
           <div className={'relative'} key={image.id}>
-            <Thumbnail image={image} index={index} onClick={openFullscreen} />
+            <Thumbnail
+              image={image}
+              index={index}
+              onClick={openFullscreen}
+              fallbackImage={fallbackImage}
+            />
             {hasInfo && image.title && (
               <div
                 className={
