@@ -95,6 +95,11 @@
       "import": "./dist/components/loader/index.es.js",
       "require": "./dist/components/loader/index.cjs.js"
     },
+    "./components/actions": {
+      "types": "./dist/types/components/actions/index.d.ts",
+      "import": "./dist/components/actions/index.es.js",
+      "require": "./dist/components/actions/index.cjs.js"
+    },
     "./enums": {
       "types": "./dist/types/enums/index.d.ts",
       "import": "./dist/enums/index.es.js",

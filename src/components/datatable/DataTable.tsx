@@ -17,6 +17,7 @@ import { MyTable, type MyTableProps } from './MyTable';
 import { useColumns } from '../../hooks';
 import { type FilterInterface, FilterWrapper, Search } from '../filters';
 import { Loader } from '../loader';
+import { type ActionInterface, Actions } from '../actions';
 
 export interface PaginationInterface<TData> {
   docs?: TData[];
@@ -42,6 +43,7 @@ export interface DataTableProps<
   hasSearch?: true;
   loading?: boolean;
   filters?: FilterInterface[];
+  actions?: ActionInterface[];
   handleFilterChange?: (filters: Record<string, unknown>) => void;
   tableKey: string;
   dataKey?: keyof TPaginationData;
@@ -67,6 +69,7 @@ export const DataTable = <
   loading,
   tableKey,
   filters = [],
+  actions = [],
   handleFilterChange,
   params,
   hasColumnsVisibilityDropdown,
@@ -85,7 +88,7 @@ export const DataTable = <
       {(hasSearch ||
         (hasColumnsVisibilityDropdown && tableKey) ||
         !isEmpty(filters)) && (
-        <div className="flex shrink-0 items-center justify-between gap-3 p-4">
+        <div className="flex shrink-0 flex-col items-center justify-between gap-3 p-4 lg:flex-row">
           <div className={'w-full shrink'}>
             {hasSearch && (
               <Search
@@ -137,6 +140,7 @@ export const DataTable = <
                 </DropdownMenuContent>
               </DropdownMenu>
             )}
+            {!isEmpty(actions) && <Actions actions={actions} />}
             {!isEmpty(filters) && (
               <FilterWrapper
                 filters={filters}
