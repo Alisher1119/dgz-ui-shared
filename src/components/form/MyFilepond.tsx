@@ -26,7 +26,7 @@ registerPlugin(
   FilePondPluginFileValidateSize
 );
 
-export type MyFilepondProps<TFieldValues extends FieldValues> =
+type MyFilepondProps<TFieldValues extends FieldValues> =
   FormItemProps<TFieldValues> &
     FileUploadProps & {
       onChange?: (files: FilePondFile[]) => void;
@@ -34,7 +34,7 @@ export type MyFilepondProps<TFieldValues extends FieldValues> =
       beforeRemoveFile?: (file: unknown) => void;
     };
 
-export const MyFilepond = <TFieldValues extends FieldValues>({
+const MyFilepond = <TFieldValues extends FieldValues>({
   control,
   name,
   label,
@@ -121,3 +121,5 @@ export const MyFilepond = <TFieldValues extends FieldValues>({
     </>
   );
 };
+
+export { registerPlugin, type MyFilepondProps, MyFilepond };
