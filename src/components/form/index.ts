@@ -4,7 +4,6 @@ export * from './MyDatePicker';
 export * from './MyDateRangePicker';
 export * from './MyCheckbox';
 export * from './MySwitch';
-export * from './MyFilepond';
 export * from './MyTimePicker';
 export * from './MyTextarea';
 export * from './MyRadio';
