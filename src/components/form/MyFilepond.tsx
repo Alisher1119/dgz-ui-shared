@@ -9,16 +9,18 @@ import {
   FormLabel,
   FormMessage,
 } from 'dgz-ui/form';
-import type { FilePondFile } from 'filepond';
+import { type FilePondFile, registerPlugin } from 'filepond';
 import type { FieldPath, FieldValues } from 'react-hook-form';
 import { twMerge } from 'tailwind-merge';
 import { get, isArray } from 'lodash';
 import { cn } from 'dgz-ui';
+import { useEffect } from 'react';
 
 export type MyFilepondProps<TFieldValues extends FieldValues> =
   FormItemProps<TFieldValues> &
     FileUploadProps & {
       onChange?: (files: FilePondFile[]) => void;
+      plugins?: unknown[];
       containerClassName?: string;
       beforeRemoveFile?: (file: unknown) => void;
     };
@@ -35,8 +37,15 @@ export const MyFilepond = <TFieldValues extends FieldValues>({
   onChange,
   rules,
   beforeRemoveFile,
+  plugins,
   ...props
 }: MyFilepondProps<TFieldValues>) => {
+  useEffect(() => {
+    if (plugins) {
+      registerPlugin(...plugins);
+    }
+  }, [plugins]);
+
   const labelElm = label && (
     <FormLabel className={'text-body-xs-medium my-3'}>
       {label} {required && <span className={'text-red-600'}>*</span>}
