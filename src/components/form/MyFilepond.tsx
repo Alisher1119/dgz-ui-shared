@@ -1,4 +1,3 @@
-import { registerPlugin } from 'react-filepond';
 import {
   FileUpload,
   type FileUploadProps,
@@ -15,18 +14,8 @@ import type { FieldPath, FieldValues } from 'react-hook-form';
 import { twMerge } from 'tailwind-merge';
 import { get, isArray } from 'lodash';
 import { cn } from 'dgz-ui';
-import FilePondPluginImagePreview from 'filepond-plugin-image-preview';
-import FilePondPluginFileValidateType from 'filepond-plugin-file-validate-type';
-import FilePondPluginFileValidateSize from 'filepond-plugin-file-validate-size';
-import 'filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css';
 
-registerPlugin(
-  FilePondPluginFileValidateType,
-  FilePondPluginImagePreview,
-  FilePondPluginFileValidateSize
-);
-
-type MyFilepondProps<TFieldValues extends FieldValues> =
+export type MyFilepondProps<TFieldValues extends FieldValues> =
   FormItemProps<TFieldValues> &
     FileUploadProps & {
       onChange?: (files: FilePondFile[]) => void;
@@ -34,7 +23,7 @@ type MyFilepondProps<TFieldValues extends FieldValues> =
       beforeRemoveFile?: (file: unknown) => void;
     };
 
-const MyFilepond = <TFieldValues extends FieldValues>({
+export const MyFilepond = <TFieldValues extends FieldValues>({
   control,
   name,
   label,
@@ -43,7 +32,6 @@ const MyFilepond = <TFieldValues extends FieldValues>({
   className,
   floatingError,
   maxFiles = 1,
-  maxFileSize = '10MB',
   onChange,
   rules,
   beforeRemoveFile,
@@ -95,10 +83,6 @@ const MyFilepond = <TFieldValues extends FieldValues>({
                 return true;
               }}
               maxFiles={maxFiles}
-              maxFileSize={maxFileSize}
-              allowImagePreview
-              allowFileTypeValidation
-              allowFileSizeValidation
               {...props}
             />
           </FormControl>
@@ -113,7 +97,6 @@ const MyFilepond = <TFieldValues extends FieldValues>({
       <FileUpload
         {...props}
         maxFiles={maxFiles}
-        maxFileSize={maxFileSize}
         onupdatefiles={onChange}
         beforeRemoveFile={beforeRemoveFile}
         className={twMerge(['mt-2 mb-0 rounded-xl', className])}
@@ -121,5 +104,3 @@ const MyFilepond = <TFieldValues extends FieldValues>({
     </>
   );
 };
-
-export { registerPlugin, type MyFilepondProps, MyFilepond };
