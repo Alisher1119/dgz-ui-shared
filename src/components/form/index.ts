@@ -7,4 +7,6 @@ export * from './MySwitch';
 export * from './MyTimePicker';
 export * from './MyTextarea';
 export * from './MyRadio';
+export * from './MyHtmlEditor';
+export * from './MyMaskInput';
 export * from 'dgz-ui/form';

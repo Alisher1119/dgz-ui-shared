@@ -67,7 +67,7 @@ export const MyInput = <TFieldValues extends FieldValues>({
               className={twMerge(['mt-2', className])}
             />
           </FormControl>
-          <FormDescription>{helperText}</FormDescription>
+          {helperText && <FormDescription>{helperText}</FormDescription>}
           <FormMessage className={cn(floatingError && 'absolute')} />
         </FormItem>
       )}
@@ -76,6 +76,7 @@ export const MyInput = <TFieldValues extends FieldValues>({
     <>
       {labelElm}
       <Input {...props} className={twMerge(['mt-2', className])} />
+      {helperText && <FormDescription>{helperText}</FormDescription>}
     </>
   );
 };
