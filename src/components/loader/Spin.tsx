@@ -1,6 +1,11 @@
 import type { HTMLAttributes } from 'react';
 import { cn } from 'dgz-ui';
 
+/**
+ * Spin renders a simple SVG spinner. You can override className to change size/color.
+ *
+ * @param props - Optional HTML/SVG attributes applied to the svg element.
+ */
 const Spin = (props?: HTMLAttributes<HTMLOrSVGElement>) => {
   return (
     <svg

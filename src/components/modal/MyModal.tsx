@@ -19,6 +19,14 @@ export type MyModalProps = DialogProps & {
   size?: 'lg' | 'xl' | '2xl' | '3xl' | '4xl' | '5xl' | '6xl' | '7xl' | 'full';
 };
 
+/**
+ * MyModal is a convenience wrapper around Dialog with a header, content and optional footer.
+ *
+ * @param props.header - Header content.
+ * @param props.trigger - Optional trigger element.
+ * @param props.footer - Footer content.
+ * @param props.size - Content max width size.
+ */
 export const MyModal = ({
   header,
   footer,

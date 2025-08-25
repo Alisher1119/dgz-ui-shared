@@ -13,6 +13,12 @@ import {
 export type MyCheckboxProps<TFieldValues extends FieldValues> =
   FormItemProps<TFieldValues> & CheckboxProps;
 
+/**
+ * MyCheckbox is a checkbox component with optional react-hook-form integration.
+ *
+ * @template TFieldValues - Form values type used by react-hook-form.
+ * @param props - Checkbox and form item props.
+ */
 export const MyCheckbox = <TFieldValues extends FieldValues>({
   control,
   name,

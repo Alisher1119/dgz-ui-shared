@@ -17,6 +17,13 @@ import { cn } from 'dgz-ui';
 export type MyInputProps<TFieldValues extends FieldValues> =
   FormItemProps<TFieldValues> & InputProps;
 
+/**
+ * MyInput is a form-aware input field that integrates with react-hook-form.
+ * Works in both controlled (with control/name) and uncontrolled modes.
+ *
+ * @template TFieldValues - Form values type used by react-hook-form.
+ * @param props - Input and form item props.
+ */
 export const MyInput = <TFieldValues extends FieldValues>({
   control,
   name,

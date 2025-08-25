@@ -4,6 +4,12 @@ import { uniqueId } from 'lodash';
 import { Confirm, PasswordConfirm } from '../components';
 import type { ConfirmPasswordDto } from '../schemas';
 
+/**
+ * useConfirm provides helpers to prompt the user for confirmation.
+ * It renders toast-based dialogs for simple confirm and password-confirm.
+ *
+ * @returns confirm and confirmPassword functions.
+ */
 export const useConfirm = () => {
   const confirm = useCallback(({ onConfirm }: { onConfirm: () => void }) => {
     const toastId = uniqueId();

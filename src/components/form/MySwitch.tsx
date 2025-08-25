@@ -14,6 +14,12 @@ import { cn } from 'dgz-ui';
 export type MySwitchProps<TFieldValues extends FieldValues> =
   FormItemProps<TFieldValues> & SwitchProps;
 
+/**
+ * MySwitch is a toggle switch with optional react-hook-form integration.
+ *
+ * @template TFieldValues - Form values type used by react-hook-form.
+ * @param props - Switch and form item props.
+ */
 export const MySwitch = <TFieldValues extends FieldValues>({
   control,
   name,

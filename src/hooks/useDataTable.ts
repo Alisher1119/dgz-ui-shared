@@ -7,6 +7,14 @@ export interface UseDataTableProps<TData> {
   defaultSelectedRows?: TData[keyof TData][];
 }
 
+/**
+ * useDataTable manages row selection state for data tables.
+ * Provides helpers to select all on current page, select one, and query selection.
+ *
+ * @template TData - Row data type.
+ * @param props.rows - Current rows rendered on the page.
+ * @param props.defaultSelectedRows - Pre-selected row keys.
+ */
 export const useDataTable = <TData>({
   rows = [],
   defaultSelectedRows = [],

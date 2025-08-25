@@ -1,5 +1,10 @@
 import { useMediaQuery } from 'react-responsive';
 
+/**
+ * useMediaQuerySizes exposes a set of media query booleans for responsive breakpoints.
+ *
+ * @returns Flags for xxxl, xxl, xl, lg, md, sm, xs breakpoints.
+ */
 export const useMediaQuerySizes = () => {
   const xxxl = useMediaQuery({
     query: '(min-width: 116rem)',

@@ -10,6 +10,11 @@ import { Button } from 'dgz-ui/button';
 import { ThemeMode } from '../../enums';
 import { useTheme } from '../../hooks';
 
+/**
+ * ThemeToggle provides a dropdown to switch between Light, Dark, and System themes.
+ *
+ * @param props.className - Optional className passed to the trigger button.
+ */
 export function ThemeToggle({ className }: { className?: string }) {
   const { t } = useTranslation();
   const { setTheme } = useTheme();

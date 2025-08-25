@@ -19,6 +19,13 @@ export type MySelectProps<TFieldValues extends FieldValues> =
       onChange?: (value: unknown) => void;
     };
 
+/**
+ * MySelect wraps a ReactSelect with react-hook-form support.
+ * Can also be used standalone when no control/name are provided.
+ *
+ * @template TFieldValues - Form values type used by react-hook-form.
+ * @param props - Select and form item props.
+ */
 export const MySelect = <TFieldValues extends FieldValues>({
   control,
   name,

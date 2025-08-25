@@ -19,6 +19,16 @@ type DateRangePickerProps = ButtonProps & {
 
 type PresetType = DateRange & { label: ReactNode };
 
+/**
+ * DateRangePicker displays a two-month range picker with helpful presets.
+ *
+ * @param props.format - Display date format.
+ * @param props.selected - Currently selected date range.
+ * @param props.timezone - Time zone for date calculations.
+ * @param props.onRangeSelected - Callback when a full range is selected.
+ * @param props.placeholder - Placeholder when no date selected.
+ * @param props.error - Optional error message that adjusts styling.
+ */
 export const DateRangePicker = ({
   className,
   format = DATE,

@@ -26,6 +26,15 @@ export interface FilterWrapperProps extends ButtonProps {
   onChange?: (filters: FieldValues) => void;
 }
 
+/**
+ * FilterWrapper shows a popover with a dynamic list of field filters and emits selected filter values.
+ *
+ * @param props.filters - Array of filter definitions to render.
+ * @param props.params - Current params used to detect active filters.
+ * @param props.onFilter - Callback fired when user applies filters.
+ * @param props.onCancel - Callback fired on cancel.
+ * @param props.onChange - Callback fired whenever filter form values change.
+ */
 export const FilterWrapper = memo(function FilterWrapper({
   filters,
   params,

@@ -24,6 +24,13 @@ export type MyDatePickerProps<TFieldValues extends FieldValues> =
       format?: string;
     };
 
+/**
+ * MyDatePicker shows a calendar popover to pick a single date, integrated with react-hook-form.
+ * Can also be used standalone when no control/name are provided.
+ *
+ * @template TFieldValues - Form values type used by react-hook-form.
+ * @param props - Calendar, button and form item props.
+ */
 export const MyDatePicker = <TFieldValues extends FieldValues>({
   control,
   name,

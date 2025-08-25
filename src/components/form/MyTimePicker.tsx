@@ -18,6 +18,12 @@ export type MyTimePickerProps<TFieldValues extends FieldValues> =
       className?: string;
     };
 
+/**
+ * MyTimePicker is a time selection input with optional react-hook-form integration.
+ *
+ * @template TFieldValues - Form values type used by react-hook-form.
+ * @param props - TimePicker and form item props.
+ */
 export const MyTimePicker = <TFieldValues extends FieldValues>({
   control,
   name,

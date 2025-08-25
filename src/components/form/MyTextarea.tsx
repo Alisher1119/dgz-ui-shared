@@ -17,6 +17,13 @@ import { cn } from 'dgz-ui';
 export type MyTextareaProps<TFieldValues extends FieldValues> =
   FormItemProps<TFieldValues> & TextareaProps;
 
+/**
+ * MyTextarea is a textarea component with optional react-hook-form integration.
+ * Supports floating error message styling.
+ *
+ * @template TFieldValues - Form values type used by react-hook-form.
+ * @param props - Textarea and form item props.
+ */
 export const MyTextarea = <TFieldValues extends FieldValues>({
   control,
   name,

@@ -12,6 +12,13 @@ type SearchWithCtrlProps = Omit<CardProps, 'title'> & {
   onSearchChange: (search?: string) => void;
 };
 
+/**
+ * SearchWithCtrl is a search input that submits when user presses Ctrl + Enter
+ * or clicks the search button.
+ *
+ * @param props.placeholder - Custom placeholder text.
+ * @param props.onSearchChange - Callback fired with search value.
+ */
 export const SearchWithCtrl = ({
   placeholder,
   onSearchChange,

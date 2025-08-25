@@ -18,6 +18,12 @@ export interface ActionsProps {
   actions: ActionInterface[];
 }
 
+/**
+ * Actions renders a dropdown menu with a list of action items.
+ *
+ * @param props.actions - Array of actions with label and onClick handler.
+ * @returns React element rendering the actions dropdown.
+ */
 export const Actions = ({ actions = [] }: ActionsProps) => {
   const { t } = useTranslation();
 
