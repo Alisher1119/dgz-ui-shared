@@ -22,6 +22,14 @@ export type MyInputProps<TFieldValues extends FieldValues> =
  * Works in both controlled (with control/name) and uncontrolled modes.
  *
  * @template TFieldValues - Form values type used by react-hook-form.
+ * @param control
+ * @param name
+ * @param label
+ * @param helperText
+ * @param required
+ * @param className
+ * @param rules
+ * @param floatingError
  * @param props - Input and form item props.
  */
 export const MyInput = <TFieldValues extends FieldValues>({

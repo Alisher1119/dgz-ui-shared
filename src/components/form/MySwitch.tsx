@@ -18,6 +18,11 @@ export type MySwitchProps<TFieldValues extends FieldValues> =
  * MySwitch is a toggle switch with optional react-hook-form integration.
  *
  * @template TFieldValues - Form values type used by react-hook-form.
+ * @param control
+ * @param name
+ * @param label
+ * @param helperText
+ * @param rules
  * @param props - Switch and form item props.
  */
 export const MySwitch = <TFieldValues extends FieldValues>({
@@ -51,7 +56,7 @@ export const MySwitch = <TFieldValues extends FieldValues>({
                 {label}
               </FormLabel>
             )}
-            <FormDescription>{helperText}</FormDescription>
+            {helperText && <FormDescription>{helperText}</FormDescription>}
           </div>
         </FormItem>
       )}

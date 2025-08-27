@@ -22,6 +22,14 @@ export type MyTextareaProps<TFieldValues extends FieldValues> =
  * Supports floating error message styling.
  *
  * @template TFieldValues - Form values type used by react-hook-form.
+ * @param control
+ * @param name
+ * @param label
+ * @param helperText
+ * @param required
+ * @param rules
+ * @param className
+ * @param floatingError
  * @param props - Textarea and form item props.
  */
 export const MyTextarea = <TFieldValues extends FieldValues>({
@@ -57,7 +65,7 @@ export const MyTextarea = <TFieldValues extends FieldValues>({
               className={twMerge(['mt-2', className])}
             />
           </FormControl>
-          <FormDescription>{helperText}</FormDescription>
+          {helperText && <FormDescription>{helperText}</FormDescription>}
           <FormMessage className={cn(floatingError && 'absolute')} />
         </FormItem>
       )}

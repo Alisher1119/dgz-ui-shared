@@ -25,6 +25,14 @@ export type MyDateRangePickerProps<TFieldValues extends FieldValues> =
  * MyDateRangePicker renders a date range selector integrated with react-hook-form.
  *
  * @template TFieldValues - Form values type used by react-hook-form.
+ * @param control
+ * @param name
+ * @param label
+ * @param helperText
+ * @param required
+ * @param rules
+ * @param format
+ * @param placeholder
  * @param props - DateRangePicker props and form item props.
  */
 export const MyDateRangePicker = <TFieldValues extends FieldValues>({
@@ -64,7 +72,7 @@ export const MyDateRangePicker = <TFieldValues extends FieldValues>({
                   placeholder={placeholder}
                 />
               </FormControl>
-              <FormDescription>{helperText}</FormDescription>
+              {helperText && <FormDescription>{helperText}</FormDescription>}
               <div className={'relative'}>
                 <FormMessage />
               </div>

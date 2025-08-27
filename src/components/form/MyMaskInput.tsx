@@ -25,6 +25,13 @@ export type MyMaskInputProps<TFieldValues extends FieldValues> =
  * unmasked value on change.
  *
  * @template TFieldValues - Form values type used by react-hook-form.
+ * @param control
+ * @param name
+ * @param label
+ * @param rules
+ * @param helperText
+ * @param required
+ * @param floatingError
  * @param props - MaskInput and form item props such as control, name, label, rules, helperText.
  * @returns React element rendering a masked input with label, helper text, and validation message.
  */

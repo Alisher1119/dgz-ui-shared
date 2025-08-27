@@ -24,6 +24,15 @@ export type MySelectProps<TFieldValues extends FieldValues> =
  * Can also be used standalone when no control/name are provided.
  *
  * @template TFieldValues - Form values type used by react-hook-form.
+ * @param control
+ * @param name
+ * @param label
+ * @param helperText
+ * @param required
+ * @param className
+ * @param rules
+ * @param options
+ * @param onChange
  * @param props - Select and form item props.
  */
 export const MySelect = <TFieldValues extends FieldValues>({
@@ -53,7 +62,7 @@ export const MySelect = <TFieldValues extends FieldValues>({
           {...props}
           options={options}
         />
-        <FormDescription>{helperText}</FormDescription>
+        {helperText && <FormDescription>{helperText}</FormDescription>}
       </>
     );
   }
@@ -84,7 +93,7 @@ export const MySelect = <TFieldValues extends FieldValues>({
                 error={!!get(formState.errors, `${name}`)}
               />
             </FormControl>
-            <FormDescription>{helperText}</FormDescription>
+            {helperText && <FormDescription>{helperText}</FormDescription>}
             <FormMessage />
           </FormItem>
         );

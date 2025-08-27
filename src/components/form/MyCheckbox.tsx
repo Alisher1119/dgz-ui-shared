@@ -17,6 +17,11 @@ export type MyCheckboxProps<TFieldValues extends FieldValues> =
  * MyCheckbox is a checkbox component with optional react-hook-form integration.
  *
  * @template TFieldValues - Form values type used by react-hook-form.
+ * @param control
+ * @param name
+ * @param label
+ * @param rules
+ * @param helperText
  * @param props - Checkbox and form item props.
  */
 export const MyCheckbox = <TFieldValues extends FieldValues>({
@@ -43,7 +48,7 @@ export const MyCheckbox = <TFieldValues extends FieldValues>({
           </FormControl>
           <div className="space-y-1 leading-none">
             {label && <FormLabel>{label}</FormLabel>}
-            <FormDescription>{helperText}</FormDescription>
+            {helperText && <FormDescription>{helperText}</FormDescription>}
           </div>
         </FormItem>
       )}
