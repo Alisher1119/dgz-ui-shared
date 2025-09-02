@@ -23,6 +23,13 @@ interface MyPaginationProps {
   onPageChange: (page: number) => void;
 }
 
+/**
+ * MyPagination renders a pagination control with page links and a "go to page" selector.
+ *
+ * @param props.currentPage - Current page number.
+ * @param props.totalPages - Total number of pages.
+ * @param props.onPageChange - Callback to change page.
+ */
 export const MyPagination = ({
   currentPage = 1,
   totalPages = 0,

@@ -36,6 +36,13 @@ export interface MyLimitSelectProps {
   onLimitChange: (limit: string) => void;
 }
 
+/**
+ * MyLimitSelect lets the user change the number of rows per page.
+ *
+ * @param props.defaultValue - Default limit value.
+ * @param props.options - Select options to show.
+ * @param props.onLimitChange - Callback when a new limit is selected.
+ */
 export const MyLimitSelect = ({
   defaultValue = DEFAULT_LIMIT,
   options = DEFAULT_OPTIONS,

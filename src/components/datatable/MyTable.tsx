@@ -38,6 +38,15 @@ export interface MyTableProps<TData> {
   isStickyHeader?: true;
 }
 
+/**
+ * MyTable renders a generic data table with optional numbering, selection checkboxes,
+ * sortable columns and sticky header. It is a presentational component and delegates
+ * sorting/selection state via hooks and callbacks.
+ *
+ * @template TData - The row data type.
+ * @param props - Component props.
+ * @returns React element containing the table.
+ */
 export const MyTable = <TData,>({
   rows = [],
   columns,

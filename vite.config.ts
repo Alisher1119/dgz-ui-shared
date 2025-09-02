@@ -67,6 +67,10 @@ export default defineConfig({
           __dirname,
           'src/components/loader/index.ts'
         ),
+        'components/actions/index': resolve(
+          __dirname,
+          'src/components/actions/index.ts'
+        ),
         'enums/index': resolve(__dirname, 'src/enums/index.ts'),
         'hooks/index': resolve(__dirname, 'src/hooks/index.ts'),
         'types/index': resolve(__dirname, 'src/types/index.ts'),

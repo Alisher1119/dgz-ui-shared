@@ -1,6 +1,11 @@
 import type { HTMLAttributes } from 'react';
 import Spin from './Spin.tsx';
 
+/**
+ * Loader shows a centered spinning indicator inside a container.
+ *
+ * @param props - Optional div HTML attributes.
+ */
 const Loader = (props?: HTMLAttributes<HTMLDivElement>) => {
   return (
     <div

@@ -10,6 +10,13 @@ export interface SearchProps {
   onSearchChange: (search?: FormDataEntryValue) => void;
 }
 
+/**
+ * Search input with submit button that emits value via onSearchChange on submit.
+ *
+ * @param props.name - Form field name for search input. Defaults to "search".
+ * @param props.defaultValue - Default search value.
+ * @param props.onSearchChange - Callback fired with submitted value.
+ */
 export const Search = ({
   name = 'search',
   defaultValue,

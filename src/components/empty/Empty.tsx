@@ -7,6 +7,12 @@ export interface EmptyProps {
   icon?: ReactNode;
 }
 
+/**
+ * Empty displays a simple empty state with an optional icon and message.
+ *
+ * @param props.children - Optional custom message/content.
+ * @param props.icon - Optional custom icon. Defaults to a folder icon.
+ */
 export const Empty = ({ children, icon }: EmptyProps) => {
   const { t } = useTranslation();
 

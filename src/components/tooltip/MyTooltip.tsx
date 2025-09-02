@@ -8,6 +8,13 @@ export type MyTooltipProps = Omit<TooltipContentProps, 'content'> & {
   show?: boolean;
 };
 
+/**
+ * MyTooltip wraps children with a tooltip that can be conditionally shown.
+ *
+ * @param props.content - Content shown inside the tooltip.
+ * @param props.children - Element that triggers the tooltip.
+ * @param props.show - Whether to render the tooltip; if false, renders children only.
+ */
 export const MyTooltip = ({
   content,
   children,

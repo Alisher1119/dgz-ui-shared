@@ -114,6 +114,15 @@ const Thumbnail = memo(
 );
 
 // Main component implementation
+/**
+ * MyGallery displays a grid of image thumbnails with an immersive fullscreen viewer.
+ * Includes keyboard navigation, download action, optional info overlay, and fallbacks.
+ *
+ * @param props.images - Array of gallery items to display.
+ * @param props.fallbackImage - URL used when an image fails to load.
+ * @param props.actionButtons - Custom action buttons rendered in fullscreen.
+ * @param props.hasInfo - Whether to show image title overlay on thumbnails.
+ */
 const MyGalleryComponent = ({
   images,
   actionButtons = [],
@@ -348,4 +357,7 @@ const MyGalleryComponent = ({
   );
 };
 
+/**
+ * Memoized MyGallery component.
+ */
 export const MyGallery = memo(MyGalleryComponent);

@@ -20,6 +20,11 @@ export type ConfirmProps = AlertDialogProps & {
   onConfirm: () => void;
 };
 
+/**
+ * Confirm renders a confirmation dialog and calls onConfirm when user confirms.
+ *
+ * @param props - Radix AlertDialog props plus content and onConfirm callback.
+ */
 export const Confirm = ({
   title,
   description,

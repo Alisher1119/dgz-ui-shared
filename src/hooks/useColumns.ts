@@ -8,6 +8,14 @@ export interface UseColumnsProps<TData> {
   columns: ColumnType<TData>[];
 }
 
+/**
+ * useColumns manages visibility of table columns using a persisted store.
+ * Returns formatted columns and helpers to toggle/reset visibility.
+ *
+ * @template TData - Row data type.
+ * @param props.key - Unique key for storing visibility per table.
+ * @param props.columns - Original column definitions.
+ */
 export const useColumns = <TData>({
   key,
   columns = [],

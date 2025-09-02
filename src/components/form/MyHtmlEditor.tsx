@@ -1,3 +1,4 @@
+import type { FieldPath, FieldValues } from 'react-hook-form';
 import {
   FormControl,
   FormDescription,
@@ -6,43 +7,42 @@ import {
   type FormItemProps,
   FormLabel,
   FormMessage,
-  Textarea,
-  type TextareaProps,
+  HtmlEditor,
+  type HtmlEditorProps,
 } from 'dgz-ui/form';
-import type { FieldPath, FieldValues } from 'react-hook-form';
-import { twMerge } from 'tailwind-merge';
-import { get } from 'lodash';
 import { cn } from 'dgz-ui';
 
-export type MyTextareaProps<TFieldValues extends FieldValues> =
-  FormItemProps<TFieldValues> & TextareaProps;
+export type MyHtmlEditorProps<TFieldValues extends FieldValues> =
+  FormItemProps<TFieldValues> &
+    HtmlEditorProps & {
+      required?: boolean;
+    };
 
 /**
- * MyTextarea is a textarea component with optional react-hook-form integration.
- * Supports floating error message styling.
+ * MyHtmlEditor is a rich-text HTML editor with optional react-hook-form integration.
+ * Works in both controlled (with control/name) and uncontrolled modes.
  *
  * @template TFieldValues - Form values type used by react-hook-form.
  * @param control
  * @param name
  * @param label
+ * @param rules
  * @param helperText
  * @param required
- * @param rules
- * @param className
  * @param floatingError
- * @param props - Textarea and form item props.
+ * @param props - HtmlEditor and form item props such as control, name, label, rules, helperText.
+ * @returns React element rendering an HtmlEditor with label, helper text, and validation message.
  */
-export const MyTextarea = <TFieldValues extends FieldValues>({
+export const MyHtmlEditor = <TFieldValues extends FieldValues>({
   control,
   name,
   label,
+  rules,
   helperText,
   required,
-  rules,
-  className,
   floatingError,
   ...props
-}: MyTextareaProps<TFieldValues>) => {
+}: MyHtmlEditorProps<TFieldValues>) => {
   const labelElm = label && (
     <FormLabel className={'text-body-xs-medium my-3'}>
       {label} {required && <span className={'text-red-600'}>*</span>}
@@ -54,16 +54,11 @@ export const MyTextarea = <TFieldValues extends FieldValues>({
       control={control}
       name={name}
       rules={rules}
-      render={({ field, formState }) => (
+      render={({ field }) => (
         <FormItem>
           {labelElm}
           <FormControl>
-            <Textarea
-              variant={get(formState.errors, `${name}`) ? 'failure' : 'default'}
-              {...props}
-              {...field}
-              className={twMerge(['mt-2', className])}
-            />
+            <HtmlEditor {...field} {...props} />
           </FormControl>
           {helperText && <FormDescription>{helperText}</FormDescription>}
           <FormMessage className={cn(floatingError && 'absolute')} />
@@ -73,7 +68,8 @@ export const MyTextarea = <TFieldValues extends FieldValues>({
   ) : (
     <>
       {labelElm}
-      <Textarea {...props} className={twMerge(['mt-2', className])} />
+      <HtmlEditor {...props} />
+      {helperText && <FormDescription>{helperText}</FormDescription>}
     </>
   );
 };

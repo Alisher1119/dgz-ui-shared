@@ -1,5 +1,11 @@
 import { useEffect, useRef } from 'react';
 
+/**
+ * useDocumentTitle sets document.title and optionally restores it on unmount.
+ *
+ * @param title - Title to set.
+ * @param restoreOnUnmount - Whether to restore previous title on unmount (default false).
+ */
 export const useDocumentTitle = (
   title: string,
   restoreOnUnmount: boolean = false

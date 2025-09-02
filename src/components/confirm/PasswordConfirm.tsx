@@ -24,6 +24,11 @@ export interface PasswordConfirmProps extends Omit<ConfirmProps, 'onConfirm'> {
   onSubmit: (data: ConfirmPasswordDto) => void;
 }
 
+/**
+ * PasswordConfirm prompts the user to enter their password to confirm an action and submits via onSubmit.
+ *
+ * @param props - Dialog props with title/description/trigger and onSubmit handler.
+ */
 export const PasswordConfirm = ({
   title,
   description,

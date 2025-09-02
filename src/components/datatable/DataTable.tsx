@@ -17,6 +17,7 @@ import { MyTable, type MyTableProps } from './MyTable';
 import { useColumns } from '../../hooks';
 import { type FilterInterface, FilterWrapper, Search } from '../filters';
 import { Loader } from '../loader';
+import { type ActionInterface, Actions } from '../actions';
 
 export interface PaginationInterface<TData> {
   docs?: TData[];
@@ -42,12 +43,40 @@ export interface DataTableProps<
   hasSearch?: true;
   loading?: boolean;
   filters?: FilterInterface[];
+  actions?: ActionInterface[];
   handleFilterChange?: (filters: Record<string, unknown>) => void;
   tableKey: string;
   dataKey?: keyof TPaginationData;
   hasColumnsVisibilityDropdown?: true;
 }
 
+/**
+ * DataTable is a high-level table component that composes search, filters, column visibility, actions and pagination.
+ * It renders a MyTable for rows and optionally header controls and footer pagination.
+ *
+ * @template TData - The row data type.
+ * @template TPaginationData - The pagination wrapper type that contains rows and pagination meta.
+ * @param props - Component props.
+ * @param props.dataSource - Paginated data source object.
+ * @param props.columns - Column definitions for the table.
+ * @param props.onRowClick - Callback when a row is clicked.
+ * @param props.rowKey - Property name used as a unique row key.
+ * @param props.hasNumbers - Show row numbers column.
+ * @param props.hasSearch - Show search input.
+ * @param props.hasCheckbox - Show selection checkbox column.
+ * @param props.hasPagination - Show pagination footer.
+ * @param props.isStickyHeader - Make table header sticky.
+ * @param props.onParamChange - Emit table/search/filter/pagination parameter changes.
+ * @param props.dataKey - Key within dataSource containing row array. Defaults to "docs".
+ * @param props.loading - Show loading state.
+ * @param props.tableKey - Unique key for storing column visibility state.
+ * @param props.filters - Filter configurations to render.
+ * @param props.actions - Row-independent header actions.
+ * @param props.handleFilterChange - Callback on filter value changes.
+ * @param props.params - Current parameters used for listing (pagination, sort, search, filters).
+ * @param props.hasColumnsVisibilityDropdown - Show columns customize dropdown.
+ * @returns React element rendering a complete data table.
+ */
 export const DataTable = <
   TData,
   TPaginationData extends
@@ -67,6 +96,7 @@ export const DataTable = <
   loading,
   tableKey,
   filters = [],
+  actions = [],
   handleFilterChange,
   params,
   hasColumnsVisibilityDropdown,
@@ -85,7 +115,7 @@ export const DataTable = <
       {(hasSearch ||
         (hasColumnsVisibilityDropdown && tableKey) ||
         !isEmpty(filters)) && (
-        <div className="flex shrink-0 items-center justify-between gap-3 p-4">
+        <div className="flex shrink-0 flex-col items-center justify-between gap-3 p-4 lg:flex-row">
           <div className={'w-full shrink'}>
             {hasSearch && (
               <Search
@@ -137,6 +167,7 @@ export const DataTable = <
                 </DropdownMenuContent>
               </DropdownMenu>
             )}
+            {!isEmpty(actions) && <Actions actions={actions} />}
             {!isEmpty(filters) && (
               <FilterWrapper
                 filters={filters}

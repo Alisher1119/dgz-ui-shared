@@ -9,6 +9,15 @@ export interface UseSortableProps<TData> {
   ) => void;
 }
 
+/**
+ * useSortable manages sort field and order for tables and lists.
+ * Cycles through ASC -> DESC -> none for a given field and emits changes.
+ *
+ * @template TData - Row data type.
+ * @param props.sortField - Current sorted field.
+ * @param props.sortOrder - Current sort order.
+ * @param props.onSortOrderChange - Callback with new sort state.
+ */
 export const useSortable = <TData>({
   sortField,
   sortOrder,

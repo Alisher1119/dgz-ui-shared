@@ -15,6 +15,19 @@ type RadioItemProps = React.ComponentPropsWithoutRef<typeof RadioGroupItem>;
 type MyRadioProps<TFieldValues extends FieldValues> =
   FormItemProps<TFieldValues> & RadioItemProps;
 
+/**
+ * MyRadio is a radio input that can integrate with react-hook-form when control and name are provided.
+ * Falls back to an uncontrolled radio item when not used inside a form.
+ *
+ * @template TFieldValues - Form values type used by react-hook-form.
+ * @param control
+ * @param name
+ * @param label
+ * @param rules
+ * @param helperText
+ * @param value
+ * @param props - Radio item and form item props.
+ */
 const MyRadio = <TFieldValues extends FieldValues>({
   control,
   name,
@@ -41,7 +54,7 @@ const MyRadio = <TFieldValues extends FieldValues>({
           </FormControl>
           <div className="space-y-1 leading-none">
             {label && <FormLabel>{label}</FormLabel>}
-            <FormDescription>{helperText}</FormDescription>
+            {helperText && <FormDescription>{helperText}</FormDescription>}
           </div>
         </FormItem>
       )}
