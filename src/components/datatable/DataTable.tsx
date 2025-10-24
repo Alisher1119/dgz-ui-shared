@@ -10,8 +10,12 @@ import {
 } from 'dgz-ui/dropdown';
 import { MyLimitSelect, MyPagination } from '../pagination';
 import { useTranslation } from 'react-i18next';
-import { RiArrowDownSLine, RiLayoutColumnLine } from '@remixicon/react';
-import { useState } from 'react';
+import {
+  RiArrowDownSLine,
+  RiLayoutColumnLine,
+  RiFileChartLine,
+} from '@remixicon/react';
+import { type ReactNode, useState } from 'react';
 import { get, isEmpty } from 'lodash';
 import { MyTable, type MyTableProps } from './MyTable';
 import { useColumns } from '../../hooks';
@@ -40,6 +44,7 @@ export interface DataTableProps<
   dataSource?: TPaginationData;
   onParamChange?: (param: Record<string, unknown>) => void;
   hasPagination?: true;
+  exportOptions?: ReactNode[];
   hasSearch?: true;
   loading?: boolean;
   filters?: FilterInterface[];
@@ -63,6 +68,7 @@ export interface DataTableProps<
  * @param props.rowKey - Property name used as a unique row key.
  * @param props.hasNumbers - Show row numbers column.
  * @param props.hasSearch - Show search input.
+ * @param props.exportOptions - ReactNode elements for export options.
  * @param props.hasCheckbox - Show selection checkbox column.
  * @param props.hasPagination - Show pagination footer.
  * @param props.isStickyHeader - Make table header sticky.
@@ -88,6 +94,7 @@ export const DataTable = <
   rowKey,
   hasNumbers,
   hasSearch,
+  exportOptions,
   hasCheckbox,
   hasPagination,
   isStickyHeader,
@@ -114,6 +121,7 @@ export const DataTable = <
     >
       {(hasSearch ||
         (hasColumnsVisibilityDropdown && tableKey) ||
+        !isEmpty(exportOptions) ||
         !isEmpty(filters)) && (
         <div className="flex shrink-0 flex-col items-center justify-between gap-3 p-4 lg:flex-row">
           <div className={'w-full shrink'}>
@@ -127,6 +135,24 @@ export const DataTable = <
             )}
           </div>
           <div className={'flex shrink-0 items-center justify-end gap-3'}>
+            {exportOptions && (
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <Button
+                    variant="secondary"
+                    size={'sm'}
+                    className={'ml-auto rounded-lg px-3'}
+                  >
+                    <RiFileChartLine />{' '}
+                    <span className={'hidden lg:!inline'}>{t('Export')}</span>
+                    <RiArrowDownSLine />
+                  </Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent align="end">
+                  {exportOptions}
+                </DropdownMenuContent>
+              </DropdownMenu>
+            )}
             {hasColumnsVisibilityDropdown && tableKey && (
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
