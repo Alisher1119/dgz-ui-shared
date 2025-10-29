@@ -43,7 +43,7 @@ export const Actions = ({ actions = [] }: ActionsProps) => {
       <DropdownMenuContent align="end">
         {actions.map((action, index) => {
           return (
-            <DropdownMenuItem key={index} onClick={action.onClick}>
+            <DropdownMenuItem key={index} onClick={() => action.onClick()}>
               {action.label}
             </DropdownMenuItem>
           );

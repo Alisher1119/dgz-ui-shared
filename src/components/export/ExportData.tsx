@@ -62,10 +62,10 @@ export const ExportData = ({ options = [] }: ExportDataProps) => {
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end">
-        {options.map((action, index) => {
+        {options.map((option, index) => {
           return (
-            <DropdownMenuItem key={index} onClick={action.onClick}>
-              {action.label}
+            <DropdownMenuItem key={index} onClick={() => option.onClick()}>
+              {option.label}
             </DropdownMenuItem>
           );
         })}
