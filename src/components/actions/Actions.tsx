@@ -24,7 +24,7 @@ export interface ActionsProps {
  * @param props.actions - Array of actions with label and onClick handler.
  * @returns React element rendering the actions dropdown.
  */
-export const Actions = ({ actions = [] }: ActionsProps) => {
+export const Actions = ({ actions }: ActionsProps) => {
   const { t } = useTranslation();
 
   return (

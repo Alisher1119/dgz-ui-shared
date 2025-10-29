@@ -72,6 +72,7 @@ export interface DataTableProps<
   dataKey?: keyof TPaginationData;
   hasColumnsVisibilityDropdown?: true;
   onColumnsUpdate?: (columns: ColumnType<TData>[]) => void;
+  exportLoading?: boolean;
 }
 
 /**
@@ -97,6 +98,7 @@ export interface DataTableProps<
  * - `hasNumbers` — Whether to show the row numbers column.
  * - `hasSearch` — Set to `true` to display the search input in the header.
  * - `exportOptions` — Export menu options shown by `ExportData` (see `ExportDataInterface[]`).
+ * - `exportLoading` — When `true`, shows a spinner in the Export button to indicate an export action is in progress.
  * - `hasCheckbox` — Whether to show the selection checkbox column.
  * - `hasPagination` — Set to `true` to render the pagination footer.
  * - `isStickyHeader` — Whether to keep the table header sticky.
@@ -193,6 +195,7 @@ export const DataTable = <
   actions,
   handleFilterChange,
   params,
+  exportLoading = false,
   onColumnsUpdate,
   hasColumnsVisibilityDropdown,
 }: DataTableProps<TData, TPaginationData>) => {
@@ -227,7 +230,9 @@ export const DataTable = <
             )}
           </div>
           <div className={'flex shrink-0 items-center justify-end gap-3'}>
-            {exportOptions && <ExportData options={exportOptions} />}
+            {exportOptions && (
+              <ExportData options={exportOptions} loading={exportLoading} />
+            )}
             {hasColumnsVisibilityDropdown && tableKey && (
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>

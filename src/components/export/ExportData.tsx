@@ -8,6 +8,7 @@ import { Button } from 'dgz-ui/button';
 import { RiArrowDownSLine, RiFileChartLine } from '@remixicon/react';
 import { useTranslation } from 'react-i18next';
 import type { ReactNode } from 'react';
+import { Spin } from '../loader';
 
 /**
  * Describes a single export option in the ExportData dropdown.
@@ -26,9 +27,13 @@ export interface ExportDataInterface {
  * Props for the `ExportData` component.
  *
  * - `options` — A list of export actions displayed in the dropdown.
+ * - `loading` — When `true`, shows a small spinner in the button to indicate an export is in progress.
  */
 export interface ExportDataProps {
+  /** Export actions displayed in the dropdown. */
   options: ExportDataInterface[];
+  /** If `true`, renders a spinner icon in the button. */
+  loading?: boolean;
 }
 
 /**
@@ -45,7 +50,7 @@ export interface ExportDataProps {
  * Internationalization
  * - The button label is translated via `react-i18next` using the `Export` key.
  */
-export const ExportData = ({ options = [] }: ExportDataProps) => {
+export const ExportData = ({ options, loading = false }: ExportDataProps) => {
   const { t } = useTranslation();
 
   return (
@@ -56,7 +61,7 @@ export const ExportData = ({ options = [] }: ExportDataProps) => {
           size={'sm'}
           className={'ml-auto rounded-lg px-3'}
         >
-          <RiFileChartLine />{' '}
+          {loading ? <Spin /> : <RiFileChartLine />}{' '}
           <span className={'hidden lg:!inline'}>{t('Export')}</span>
           <RiArrowDownSLine />
         </Button>
