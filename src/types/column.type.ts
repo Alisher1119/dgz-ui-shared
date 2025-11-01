@@ -11,5 +11,6 @@ export type ColumnType<TData> = {
     sortable?: boolean;
     type?: 'data' | 'action';
     render?: (value: TData[K], record: TData) => ReactNode;
+    renderExport?: (value: TData[K], record: TData) => string;
   };
 }[keyof TData];
