@@ -11,7 +11,7 @@ import {
 } from 'dgz-ui/form';
 import { get } from 'lodash';
 import type { FieldPath, FieldValues } from 'react-hook-form';
-import { cn } from 'dgz-ui';
+import { cn } from 'dgz-ui/utils';
 
 export type MySelectProps<TFieldValues extends FieldValues> =
   FormItemProps<TFieldValues> &

@@ -1,4 +1,4 @@
-import { cn } from 'dgz-ui';
+import { cn } from 'dgz-ui/utils';
 import type { ComponentProps } from 'react';
 
 /**

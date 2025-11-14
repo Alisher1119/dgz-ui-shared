@@ -10,7 +10,7 @@ import {
   HtmlEditor,
   type HtmlEditorProps,
 } from 'dgz-ui/form';
-import { cn } from 'dgz-ui';
+import { cn } from 'dgz-ui/utils';
 
 export type MyHtmlEditorProps<TFieldValues extends FieldValues> =
   FormItemProps<TFieldValues> &

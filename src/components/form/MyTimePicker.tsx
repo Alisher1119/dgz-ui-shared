@@ -9,7 +9,7 @@ import {
 } from 'dgz-ui/form';
 import type { FieldPath, FieldValues } from 'react-hook-form';
 import { TimePicker, type TimePickerProps } from 'dgz-ui/calendar';
-import { cn } from 'dgz-ui';
+import { cn } from 'dgz-ui/utils';
 
 export type MyTimePickerProps<TFieldValues extends FieldValues> =
   FormItemProps<TFieldValues> &

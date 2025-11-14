@@ -5,8 +5,8 @@ import {
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from 'dgz-ui';
-import type { Option } from 'dgz-ui/form';
+  type Option,
+} from 'dgz-ui/form';
 
 export const DEFAULT_LIMIT = 50;
 export const DEFAULT_ITEMS_LIMIT = 12;

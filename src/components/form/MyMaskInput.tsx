@@ -10,7 +10,7 @@ import {
   MaskInput,
   type MaskInputProps,
 } from 'dgz-ui/form';
-import { cn } from 'dgz-ui';
+import { cn } from 'dgz-ui/utils';
 
 export type MyMaskInputProps<TFieldValues extends FieldValues> =
   FormItemProps<TFieldValues> &

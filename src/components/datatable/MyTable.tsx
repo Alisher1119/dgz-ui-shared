@@ -17,7 +17,7 @@ import type { ColumnType } from '../../types';
 import { DEFAULT_LIMIT } from '../pagination/MyLimitSelect';
 import { useDataTable, useSortable, type UseSortableProps } from '../../hooks';
 import { Checkbox } from 'dgz-ui/form';
-import { cn } from 'dgz-ui';
+import { cn } from 'dgz-ui/utils';
 import { SortOrder } from '../../enums';
 import { Empty } from '../empty';
 

@@ -9,7 +9,7 @@ import {
 } from 'react';
 import { ChevronLeft, ChevronRight, Download, X } from 'lucide-react';
 import { isNumber } from 'lodash';
-import { cn } from 'dgz-ui';
+import { cn } from 'dgz-ui/utils';
 import { saveAs } from 'file-saver';
 
 export interface GalleryItem {

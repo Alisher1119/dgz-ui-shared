@@ -9,7 +9,7 @@ import {
   DialogTrigger,
 } from 'dgz-ui/dialog';
 import type { DialogProps } from '@radix-ui/react-dialog';
-import { cn } from 'dgz-ui';
+import { cn } from 'dgz-ui/utils';
 
 export type MyModalProps = DialogProps & {
   header?: ReactNode;

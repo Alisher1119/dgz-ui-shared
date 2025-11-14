@@ -6,7 +6,7 @@ import {
   PaginationNext,
   PaginationPrevious,
 } from 'dgz-ui/pagination';
-import { cn } from 'dgz-ui';
+import { cn } from 'dgz-ui/utils';
 import { useTranslation } from 'react-i18next';
 import {
   Select,

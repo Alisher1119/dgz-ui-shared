@@ -1,4 +1,9 @@
-import { Tooltip, TooltipContent, TooltipTrigger } from 'dgz-ui/tooltip';
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from 'dgz-ui/tooltip';
 import { type ReactNode } from 'react';
 import { type TooltipContentProps } from '@radix-ui/react-tooltip';
 
@@ -22,10 +27,12 @@ export const MyTooltip = ({
   ...props
 }: MyTooltipProps) => {
   return show ? (
-    <Tooltip>
-      <TooltipContent {...props}>{content}</TooltipContent>
-      <TooltipTrigger>{children}</TooltipTrigger>
-    </Tooltip>
+    <TooltipProvider>
+      <Tooltip>
+        <TooltipContent {...props}>{content}</TooltipContent>
+        <TooltipTrigger>{children}</TooltipTrigger>
+      </Tooltip>
+    </TooltipProvider>
   ) : (
     children
   );

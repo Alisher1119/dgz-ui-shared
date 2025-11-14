@@ -3,7 +3,7 @@ import { type DateRange } from 'react-day-picker';
 import { Calendar, DATE } from 'dgz-ui/calendar';
 import dayjs from 'dayjs';
 import { useTranslation } from 'react-i18next';
-import { cn } from 'dgz-ui';
+import { cn } from 'dgz-ui/utils';
 import { Popover, PopoverContent, PopoverTrigger } from 'dgz-ui/popover';
 import { Button, type ButtonProps } from 'dgz-ui/button';
 import { Calendar1 } from 'lucide-react';

@@ -12,7 +12,7 @@ import {
 import type { FieldPath, FieldValues } from 'react-hook-form';
 import { twMerge } from 'tailwind-merge';
 import { get } from 'lodash';
-import { cn } from 'dgz-ui';
+import { cn } from 'dgz-ui/utils';
 
 export type MyInputProps<TFieldValues extends FieldValues> =
   FormItemProps<TFieldValues> & InputProps;

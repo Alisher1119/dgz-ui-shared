@@ -9,7 +9,7 @@ import {
   type SwitchProps,
 } from 'dgz-ui/form';
 import type { FieldPath, FieldValues } from 'react-hook-form';
-import { cn } from 'dgz-ui';
+import { cn } from 'dgz-ui/utils';
 
 export type MySwitchProps<TFieldValues extends FieldValues> =
   FormItemProps<TFieldValues> & SwitchProps;

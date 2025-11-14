@@ -1,5 +1,5 @@
 import type { HTMLAttributes } from 'react';
-import { cn } from 'dgz-ui';
+import { cn } from 'dgz-ui/utils';
 
 /**
  * Spin renders a simple SVG spinner. You can override className to change size/color.
