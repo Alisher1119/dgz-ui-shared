@@ -8,14 +8,8 @@ import {
 } from 'dgz-ui/pagination';
 import { cn } from 'dgz-ui/utils';
 import { useTranslation } from 'react-i18next';
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from 'dgz-ui/form';
-import { useCallback } from 'react';
+import { type Option, ReactSelect } from 'dgz-ui/form';
+import { useCallback, useMemo } from 'react';
 
 interface MyPaginationProps {
   currentPage?: number;
@@ -66,25 +60,28 @@ export const MyPagination = ({
     return pages;
   }, [currentPage, totalPages]);
 
+  const pageOptions = useMemo(() => {
+    const options: Option[] = [];
+    for (let i = 0; i < totalPages; i++) {
+      options.push({
+        value: `${i + 1}`,
+        label: `${i + 1}`,
+      });
+    }
+    return options;
+  }, [totalPages]);
+
   return (
     <div className={'flex flex-col items-center justify-end gap-3 lg:flex-row'}>
       <div className={'flex items-center gap-3 text-sm'}>
         <div className={'min-w-20 font-semibold'}>{t('Go to page')}:</div>
-        <Select
-          onValueChange={(page) => onPageChange(parseInt(page))}
+        <ReactSelect
+          className={'min-w-20'}
+          isClearable={false}
+          options={pageOptions}
           value={`${currentPage}`}
-        >
-          <SelectTrigger className="h-8.5 w-14">
-            <SelectValue />
-          </SelectTrigger>
-          <SelectContent>
-            {new Array(totalPages).fill(0).map((_page, index) => (
-              <SelectItem key={index + 1} value={`${index + 1}`}>
-                {index + 1}
-              </SelectItem>
-            ))}
-          </SelectContent>
-        </Select>
+          onChange={(page) => onPageChange(parseInt(page as string))}
+        />
       </div>
       <Pagination className={'justify-end'}>
         <PaginationContent>
