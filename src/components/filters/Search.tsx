@@ -2,9 +2,11 @@ import { Input } from 'dgz-ui/form';
 import { useTranslation } from 'react-i18next';
 import { Button } from 'dgz-ui/button';
 import { SearchIcon } from 'lucide-react';
-import type { FormEvent } from 'react';
+import type { FormEvent, HTMLAttributes } from 'react';
+import { cn } from 'dgz-ui/utils';
 
-export interface SearchProps {
+export interface SearchProps
+  extends Omit<HTMLAttributes<HTMLInputElement>, 'defaultValue' | 'name'> {
   name?: string;
   defaultValue?: FormDataEntryValue | null;
   onSearchChange: (search?: FormDataEntryValue) => void;
@@ -21,6 +23,8 @@ export const Search = ({
   name = 'search',
   defaultValue,
   onSearchChange,
+  className,
+  ...props
 }: SearchProps) => {
   const { t } = useTranslation();
 
@@ -28,14 +32,16 @@ export const Search = ({
     const formData = new FormData(evt.currentTarget);
     onSearchChange(formData.get(name) || undefined);
     evt.preventDefault();
+    evt.stopPropagation();
   };
 
   return (
     <form
-      className={'relative w-full max-w-64 min-w-40'}
+      className={cn('relative w-full max-w-64 min-w-40', className)}
       onSubmit={handleSearch}
     >
       <Input
+        {...props}
         className={'h-8 rounded-lg'}
         name={name}
         placeholder={t('Search...')}
