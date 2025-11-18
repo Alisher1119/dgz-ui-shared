@@ -55,7 +55,7 @@ export const MyModal = ({
         )}
       >
         <DialogHeader>
-          <DialogTitle>{header}</DialogTitle>
+          <DialogTitle className={'mb-0'}>{header}</DialogTitle>
           <DialogDescription className={'hidden'} />
         </DialogHeader>
         {children}
