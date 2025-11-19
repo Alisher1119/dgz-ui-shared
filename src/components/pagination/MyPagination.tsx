@@ -8,7 +8,13 @@ import {
 } from 'dgz-ui/pagination';
 import { cn } from 'dgz-ui/utils';
 import { useTranslation } from 'react-i18next';
-import { type Option, ReactSelect } from 'dgz-ui/form';
+import {
+  type Option,
+  Select,
+  SelectTrigger,
+  SelectValue,
+  VirtualizedSelectContent,
+} from 'dgz-ui/form';
 import { useCallback, useMemo } from 'react';
 
 interface MyPaginationProps {
@@ -18,11 +24,28 @@ interface MyPaginationProps {
 }
 
 /**
- * MyPagination renders a pagination control with page links and a "go to page" selector.
+ * Renders a pagination control with page links and a "Go to page" selector.
  *
- * @param props.currentPage - Current page number.
- * @param props.totalPages - Total number of pages.
- * @param props.onPageChange - Callback to change page.
+ * Notes
+ * - `currentPage` is 1-based. Defaults to 1 when not provided.
+ * - `totalPages` is the total number of pages. Defaults to 0 (no pages).
+ * - `onPageChange` is called with the 1-based page number whenever the user
+ *   selects a page via the page links or the dropdown.
+ * - The component uses i18n for the "Go to page" label via `react-i18next`.
+ *
+ * @param props - Component props
+ * @param props.currentPage - The current 1-based page index. Defaults to 1.
+ * @param props.totalPages - Total number of pages. Defaults to 0.
+ * @param props.onPageChange - Callback invoked with the new 1-based page number.
+ * @returns A pagination UI element.
+ * @example
+ * ```tsx
+ * <MyPagination
+ *   currentPage={3}
+ *   totalPages={10}
+ *   onPageChange={(p) => console.log('go to', p)}
+ * />
+ * ```
  */
 export const MyPagination = ({
   currentPage = 1,
@@ -75,13 +98,15 @@ export const MyPagination = ({
     <div className={'flex flex-col items-center justify-end gap-3 lg:flex-row'}>
       <div className={'flex items-center gap-3 text-sm'}>
         <div className={'min-w-20 font-semibold'}>{t('Go to page')}:</div>
-        <ReactSelect
-          className={'min-w-20'}
-          isClearable={false}
-          options={pageOptions}
+        <Select
+          onValueChange={(page) => onPageChange(parseInt(page))}
           value={`${currentPage}`}
-          onChange={(page) => onPageChange(parseInt(page as string))}
-        />
+        >
+          <SelectTrigger className="h-8.5 w-16">
+            <SelectValue />
+          </SelectTrigger>
+          <VirtualizedSelectContent options={pageOptions} />
+        </Select>
       </div>
       <Pagination className={'justify-end'}>
         <PaginationContent>
