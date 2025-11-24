@@ -1,10 +1,5 @@
 function App() {
-  // const { confirm } = useConfirm();
-  return (
-    <>
-      {/*<MyPagination onPageChange={console.log} currentPage={1} totalPages={10000} />*/}
-    </>
-  );
+  return <div className={'grid grid-cols-2 gap-4 p-4'}></div>;
 }
 
 export default App;

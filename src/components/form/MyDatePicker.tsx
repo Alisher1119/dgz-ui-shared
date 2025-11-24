@@ -52,10 +52,11 @@ export const MyDatePicker = <TFieldValues extends FieldValues>({
   placeholder,
   floatingError,
   register,
+  className,
   ...props
 }: MyDatePickerProps<TFieldValues>) => {
   const labelElm = label && (
-    <FormLabel className={'text-body-xs-medium my-3'}>
+    <FormLabel className={'my-3'}>
       {label} {required && <span className={'text-red-600'}>*</span>}
     </FormLabel>
   );
@@ -76,10 +77,11 @@ export const MyDatePicker = <TFieldValues extends FieldValues>({
                     <Button
                       variant={'secondary'}
                       className={cn(
-                        'text-secondary !text-body-sm-regular border-alpha-strong focus:ring-item-primary mb-0 bg-transparent pl-3 text-left font-normal hover:bg-transparent',
+                        'text-secondary !text-body-sm-regular border-border-alpha-strong focus:ring-item-primary mt-2 bg-transparent pl-3 text-left font-normal hover:bg-transparent',
                         get(formState.errors, `${name}`) &&
                           'focus:ring-item-destructive border-item-destructive bg-item-destructive-focus text-item-destructive hover:bg-item-destructive-focus dark:bg-transparent',
-                        field.value && 'text-primary'
+                        field.value && 'text-primary',
+                        className
                       )}
                     >
                       {field.value
@@ -115,8 +117,9 @@ export const MyDatePicker = <TFieldValues extends FieldValues>({
               <Button
                 variant={'secondary'}
                 className={cn(
-                  'text-secondary !text-body-sm-regular border-border-alpha-strong focus:ring-item-primary mb-0 bg-transparent pl-3 text-left font-normal hover:bg-transparent',
-                  props.selected && 'text-primary'
+                  'text-secondary !text-body-sm-regular border-border-alpha-strong focus:ring-item-primary mt-2 bg-transparent pl-3 text-left font-normal hover:bg-transparent',
+                  props.selected && 'text-primary',
+                  className
                 )}
               >
                 {props.selected
