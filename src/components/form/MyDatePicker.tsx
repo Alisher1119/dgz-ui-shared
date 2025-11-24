@@ -56,7 +56,7 @@ export const MyDatePicker = <TFieldValues extends FieldValues>({
   ...props
 }: MyDatePickerProps<TFieldValues>) => {
   const labelElm = label && (
-    <FormLabel className={'my-3'}>
+    <FormLabel>
       {label} {required && <span className={'text-red-600'}>*</span>}
     </FormLabel>
   );
@@ -69,7 +69,7 @@ export const MyDatePicker = <TFieldValues extends FieldValues>({
           name={name}
           rules={rules}
           render={({ field, formState }) => (
-            <FormItem className="relative flex flex-col">
+            <FormItem>
               {labelElm}
               <Popover>
                 <PopoverTrigger asChild>
@@ -77,7 +77,7 @@ export const MyDatePicker = <TFieldValues extends FieldValues>({
                     <Button
                       variant={'secondary'}
                       className={cn(
-                        'text-secondary !text-body-sm-regular border-border-alpha-strong focus:ring-item-primary mt-2 bg-transparent pl-3 text-left font-normal hover:bg-transparent',
+                        'text-secondary !text-body-sm-regular border-border-alpha-strong focus:ring-item-primary mt-2 flex w-full bg-transparent pl-3 text-left font-normal hover:bg-transparent',
                         get(formState.errors, `${name}`) &&
                           'focus:ring-item-destructive border-item-destructive bg-item-destructive-focus text-item-destructive hover:bg-item-destructive-focus dark:bg-transparent',
                         field.value && 'text-primary',
@@ -110,7 +110,7 @@ export const MyDatePicker = <TFieldValues extends FieldValues>({
           )}
         />
       ) : (
-        <div className="relative flex flex-col">
+        <div className="relative flex flex-col space-y-2">
           {labelElm}
           <Popover>
             <PopoverTrigger asChild>

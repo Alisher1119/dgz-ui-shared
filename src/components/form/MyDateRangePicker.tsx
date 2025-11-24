@@ -54,13 +54,13 @@ export const MyDateRangePicker = <TFieldValues extends FieldValues>({
 
   return (
     <>
-      {name && control && (
+      {name && control ? (
         <FormField<TFieldValues, FieldPath<TFieldValues>>
           control={control}
           name={name}
           rules={rules}
           render={({ field, formState }) => (
-            <FormItem className="relative flex flex-col">
+            <FormItem>
               {labelElm}
               <FormControl>
                 <DateRangePicker
@@ -79,6 +79,8 @@ export const MyDateRangePicker = <TFieldValues extends FieldValues>({
             </FormItem>
           )}
         />
+      ) : (
+        <DateRangePicker {...props} />
       )}
     </>
   );

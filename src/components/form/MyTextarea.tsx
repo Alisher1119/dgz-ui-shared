@@ -71,9 +71,6 @@ export const MyTextarea = <TFieldValues extends FieldValues>({
       )}
     />
   ) : (
-    <>
-      {labelElm}
-      <Textarea {...props} className={twMerge(['mt-2', className])} />
-    </>
+    <Textarea {...props} className={twMerge(['mt-2', className])} />
   );
 };

@@ -66,10 +66,6 @@ export const MyHtmlEditor = <TFieldValues extends FieldValues>({
       )}
     />
   ) : (
-    <>
-      {labelElm}
-      <HtmlEditor {...props} />
-      {helperText && <FormDescription>{helperText}</FormDescription>}
-    </>
+    <HtmlEditor {...props} />
   );
 };

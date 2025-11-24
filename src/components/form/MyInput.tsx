@@ -44,7 +44,7 @@ export const MyInput = <TFieldValues extends FieldValues>({
   ...props
 }: MyInputProps<TFieldValues>) => {
   const labelElm = label && (
-    <FormLabel className={'my-3'}>
+    <FormLabel>
       {label} {required && <span className={'text-red-600'}>*</span>}
     </FormLabel>
   );

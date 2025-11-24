@@ -48,22 +48,18 @@ export const MySelect = <TFieldValues extends FieldValues>({
   ...props
 }: MySelectProps<TFieldValues>) => {
   const labelElm = label && (
-    <FormLabel className={'my-3'}>
+    <FormLabel>
       {label} {required && <span className={'text-red-600'}>*</span>}
     </FormLabel>
   );
 
   if (!name || !control) {
     return (
-      <>
-        {labelElm}
-        <ReactSelect
-          className={cn('mt-2', className)}
-          {...props}
-          options={options}
-        />
-        {helperText && <FormDescription>{helperText}</FormDescription>}
-      </>
+      <ReactSelect
+        className={cn('mt-2', className)}
+        {...props}
+        options={options}
+      />
     );
   }
 

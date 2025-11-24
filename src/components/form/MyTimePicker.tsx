@@ -44,7 +44,7 @@ export const MyTimePicker = <TFieldValues extends FieldValues>({
   ...props
 }: MyTimePickerProps<TFieldValues>) => {
   const labelElm = label && (
-    <FormLabel className={'my-3'}>
+    <FormLabel>
       {label} {required && <span className={'text-red-600'}>*</span>}
     </FormLabel>
   );
@@ -58,7 +58,7 @@ export const MyTimePicker = <TFieldValues extends FieldValues>({
         <FormItem>
           {labelElm}
           <FormControl>
-            <TimePicker className={'mt-1'} {...field} {...props} />
+            <TimePicker className={'mt-2'} {...field} {...props} />
           </FormControl>
           {helperText && <FormDescription>{helperText}</FormDescription>}
           <FormMessage className={cn(floatingError && 'absolute')} />
@@ -66,9 +66,6 @@ export const MyTimePicker = <TFieldValues extends FieldValues>({
       )}
     />
   ) : (
-    <>
-      {labelElm}
-      <TimePicker className={'mt-1'} {...props} />
-    </>
+    <TimePicker className={'mt-2'} {...props} />
   );
 };

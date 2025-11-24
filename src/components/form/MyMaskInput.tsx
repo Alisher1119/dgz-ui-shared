@@ -76,16 +76,12 @@ export const MyMaskInput = <TFieldValues extends FieldValues>({
       )}
     />
   ) : (
-    <>
-      {labelElm}
-      <MaskInput
-        thousandsSeparator={' '}
-        lazy={false}
-        placeholderChar="_"
-        unmask
-        {...props}
-      />
-      {helperText && <FormDescription>{helperText}</FormDescription>}
-    </>
+    <MaskInput
+      thousandsSeparator={' '}
+      lazy={false}
+      placeholderChar="_"
+      unmask
+      {...props}
+    />
   );
 };

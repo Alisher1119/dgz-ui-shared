@@ -1,5 +1,5 @@
 function App() {
-  return <div className={'grid grid-cols-2 gap-4 p-4'}></div>;
+  return <></>;
 }
 
 export default App;
