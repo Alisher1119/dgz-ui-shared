@@ -65,7 +65,7 @@ export const MyTable = <TData,>({
 }: MyTableProps<TData>) => {
   const { sortObject, handleSort } = useSortable<TData>({
     sortField: params?.sortField as keyof TData | undefined,
-    sortOrder: params?.sortField as SortOrder | undefined,
+    sortOrder: params?.sortOrder as SortOrder | undefined,
     onSortOrderChange,
   });
   const {
