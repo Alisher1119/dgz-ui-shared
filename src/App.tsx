@@ -2,6 +2,7 @@ function App() {
   // const [params, setParams] = useState<Record<string, unknown>>({
   //   page: 1,
   //   limit: 10,
+  //   test: ['test 1'],
   // });
   // const [data] = useState<
   //   PaginationInterface<{ name: string; id: string; date: string }>
@@ -54,6 +55,22 @@ function App() {
   //   ],
   //   []
   // );
+  //
+  // const filters = useMemo<FilterInterface[]>(
+  //   () => [
+  //     {
+  //       name: 'test',
+  //       label: 'test',
+  //       isMulti: true,
+  //       options: [
+  //         { label: 'test 1', value: 'test 1' },
+  //         { label: 'test 2', value: 'test 2' },
+  //       ],
+  //     },
+  //   ],
+  //   []
+  // );
+  //
   // console.log(params);
   return (
     <></>
@@ -61,6 +78,7 @@ function App() {
     //   columns={columns}
     //   tableKey={'table'}
     //   rowKey={'id'}
+    //   filters={filters}
     //   params={params}
     //   onParamChange={setParams}
     //   dataSource={data}

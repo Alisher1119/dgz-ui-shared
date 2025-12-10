@@ -277,6 +277,7 @@ export const DataTable = <
             {filters && (
               <FilterWrapper
                 filters={filters}
+                params={params}
                 onFilter={(filter) => {
                   onParamChange?.({ ...params, ...filter, page: 1 });
                   handleFilterChange?.(filter);
