@@ -8,6 +8,7 @@ import { cn } from 'dgz-ui/utils';
 export interface SearchProps
   extends Omit<HTMLAttributes<HTMLInputElement>, 'defaultValue' | 'name'> {
   name?: string;
+  placeholder?: string;
   defaultValue?: FormDataEntryValue | null;
   onSearchChange: (search?: FormDataEntryValue) => void;
 }
@@ -23,6 +24,7 @@ export const Search = ({
   name = 'search',
   defaultValue,
   onSearchChange,
+  placeholder,
   className,
   ...props
 }: SearchProps) => {
@@ -44,7 +46,7 @@ export const Search = ({
         {...props}
         className={'h-8 rounded-lg'}
         name={name}
-        placeholder={t('Search...')}
+        placeholder={placeholder || t('Search...')}
         defaultValue={defaultValue ? `${defaultValue}` : ''}
       />
       <Button

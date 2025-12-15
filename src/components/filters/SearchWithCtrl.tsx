@@ -6,6 +6,7 @@ import { Button } from 'dgz-ui/button';
 import { RiSearchLine } from '@remixicon/react';
 import { get } from 'lodash';
 import { Keyboard } from '../../enums';
+import { cn } from 'dgz-ui/utils';
 
 type SearchWithCtrlProps = Omit<CardProps, 'title'> & {
   placeholder?: string;
@@ -22,12 +23,13 @@ type SearchWithCtrlProps = Omit<CardProps, 'title'> & {
 export const SearchWithCtrl = ({
   placeholder,
   onSearchChange,
+  className,
 }: SearchWithCtrlProps) => {
   const { t } = useTranslation();
   const [search, setSearch] = useState('');
 
   return (
-    <div className={'relative my-2 w-full'}>
+    <div className={cn('relative my-2 w-full', className)}>
       <Input
         placeholder={
           placeholder ? placeholder : t('Type text and press CTRL + Enter')
