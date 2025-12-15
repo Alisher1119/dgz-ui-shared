@@ -290,7 +290,11 @@ export const DataTable = <
       <div className={'flex flex-col overflow-auto border-y'}>
         {!loading ? (
           <MyTable<TData>
-            params={params}
+            params={{
+              page: dataSource?.page || 1,
+              limit: dataSource?.limit,
+              ...params,
+            }}
             rows={get(dataSource, dataKey, []) as TData[]}
             rowKey={rowKey}
             selectedItems={selectedRows}
