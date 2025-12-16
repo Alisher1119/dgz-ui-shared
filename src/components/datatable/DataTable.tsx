@@ -198,6 +198,7 @@ export const DataTable = <
   exportLoading = false,
   onColumnsUpdate,
   hasColumnsVisibilityDropdown,
+  onSelectedItemsChange,
 }: DataTableProps<TData, TPaginationData>) => {
   const { t } = useTranslation();
   const [selectedRows, setSelectedRows] = useState<TData[keyof TData][]>([]);
@@ -207,6 +208,10 @@ export const DataTable = <
   useEffect(() => {
     onColumnsUpdate?.(formattedColumns);
   }, [formattedColumns, onColumnsUpdate]);
+
+  useEffect(() => {
+    onSelectedItemsChange?.(selectedRows);
+  }, [selectedRows, onSelectedItemsChange]);
 
   return (
     <div
