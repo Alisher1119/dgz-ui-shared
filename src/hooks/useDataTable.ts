@@ -17,7 +17,7 @@ export interface UseDataTableProps<TData> {
  */
 export const useDataTable = <TData>({
   rows = [],
-  defaultSelectedRows = [],
+  defaultSelectedRows,
 }: UseDataTableProps<TData>) => {
   const [selectedRows, setSelectedRows] = useState<TData[keyof TData][]>();
 
