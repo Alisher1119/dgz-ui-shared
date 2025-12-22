@@ -77,10 +77,10 @@ export const MyTable = <TData,>({
   } = useDataTable<TData>({ rows, defaultSelectedRows: selectedItems });
 
   useEffect(() => {
-    if (onSelectedItemsChange) {
-      onSelectedItemsChange(selectedRows);
+    if (JSON.stringify(selectedItems) !== JSON.stringify(selectedRows)) {
+      onSelectedItemsChange?.(selectedRows);
     }
-  }, [selectedRows]);
+  }, [selectedRows, selectedItems, onSelectedItemsChange]);
 
   return (
     <Table className={'relative'}>
