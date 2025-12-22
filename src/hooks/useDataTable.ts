@@ -19,15 +19,15 @@ export const useDataTable = <TData>({
   rows = [],
   defaultSelectedRows = [],
 }: UseDataTableProps<TData>) => {
-  const [selectedRows, setSelectedRows] = useState<TData[keyof TData][]>([]);
+  const [selectedRows, setSelectedRows] = useState<TData[keyof TData][]>();
 
   const handleSelectAllRows = useCallback(
     (rowKey: keyof TData, checked: boolean) => {
       setSelectedRows((oldSelectedRows) => {
         const currentPageRowKeys = rows.map((item) => item[rowKey]) || [];
-        const otherPagesSelected = oldSelectedRows.filter(
-          (key) => !currentPageRowKeys.includes(key)
-        );
+        const otherPagesSelected =
+          oldSelectedRows?.filter((key) => !currentPageRowKeys.includes(key)) ||
+          [];
 
         if (checked) {
           return [...otherPagesSelected, ...currentPageRowKeys];
@@ -52,10 +52,11 @@ export const useDataTable = <TData>({
   const handleSelectRow = useCallback(
     (key: TData[keyof TData], checked: boolean) => {
       setSelectedRows((oldSelectedRows) => {
+        const oldRows = oldSelectedRows || [];
         if (checked) {
-          return [...oldSelectedRows, key];
+          return [...oldRows, key];
         } else {
-          return oldSelectedRows.filter((rowKey) => rowKey !== key);
+          return oldRows.filter((rowKey) => rowKey !== key);
         }
       });
     },
@@ -64,7 +65,7 @@ export const useDataTable = <TData>({
 
   const isRowSelected = useCallback(
     (key: TData[keyof TData]) => {
-      return selectedRows.includes(key);
+      return !!selectedRows?.includes(key);
     },
     [selectedRows]
   );
@@ -74,7 +75,7 @@ export const useDataTable = <TData>({
       const currentPageRowKeys = rows.map((item) => item[rowKey]) || [];
       let selectedRowsCountInPage = 0;
       for (const key of currentPageRowKeys) {
-        if (selectedRows.includes(key)) {
+        if (selectedRows?.includes(key)) {
           selectedRowsCountInPage++;
         }
       }

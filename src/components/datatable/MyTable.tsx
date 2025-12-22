@@ -77,7 +77,10 @@ export const MyTable = <TData,>({
   } = useDataTable<TData>({ rows, defaultSelectedRows: selectedItems });
 
   useEffect(() => {
-    if (JSON.stringify(selectedItems) !== JSON.stringify(selectedRows)) {
+    if (
+      JSON.stringify(selectedItems) !== JSON.stringify(selectedRows) &&
+      selectedRows
+    ) {
       onSelectedItemsChange?.(selectedRows);
     }
   }, [selectedRows, selectedItems, onSelectedItemsChange]);
