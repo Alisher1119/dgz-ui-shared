@@ -1,6 +1,6 @@
 {
   "name": "dgz-ui-shared",
-  "version": "1.1.23",
+  "version": "1.1.24",
   "type": "module",
   "files": [
     "dist"
@@ -152,7 +152,7 @@
     "@hookform/resolvers": "^5.0.1",
     "@tailwindcss/vite": "^4.1.7",
     "dayjs": "^1.11.13",
-    "dgz-ui": "^1.3.12",
+    "dgz-ui": "^1.3.13",
     "file-saver": "^2.0.5",
     "i18next": "^25.2.1",
     "lodash": "^4.17.21",
