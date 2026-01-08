@@ -12,25 +12,47 @@ import { isNumber } from 'lodash';
 import { cn } from 'dgz-ui/utils';
 import { saveAs } from 'file-saver';
 
+/**
+ * Interface representing an image item in the gallery.
+ */
 export interface GalleryItem {
+  /** Unique identifier for the image. */
   id: string;
+  /** URL of the full-resolution image. */
   src: string;
+  /** URL of the thumbnail image. */
   thumbnail: string;
+  /** Alt text for the image. */
   alt: string;
+  /** Optional title or description for the image. */
   title?: string;
 }
 
+/**
+ * Interface representing a custom action button in the fullscreen view.
+ */
 export interface GalleryActionButton {
+  /** Icon to display on the button. */
   icon: ReactNode;
+  /** Label for the button (used as title/tooltip). */
   label: string;
+  /** Callback executed when the button is clicked. */
   onClick: (image: GalleryItem) => void;
+  /** Custom CSS class name for the button. */
   className?: string;
 }
 
+/**
+ * Props for the MyGallery component.
+ */
 export type MyGalleryProps = HTMLAttributes<HTMLDivElement> & {
+  /** Array of gallery items to display. */
   images: GalleryItem[];
+  /** URL used when an image fails to load. */
   fallbackImage?: string;
+  /** Custom action buttons rendered in fullscreen. */
   actionButtons?: GalleryActionButton[];
+  /** Whether to show image title overlay on thumbnails. */
   hasInfo?: true;
 };
 

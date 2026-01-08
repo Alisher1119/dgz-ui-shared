@@ -11,12 +11,21 @@ import {
 import type { DialogProps } from '@radix-ui/react-dialog';
 import { cn } from 'dgz-ui/utils';
 
+/**
+ * Props for the MyModal component.
+ */
 export type MyModalProps = DialogProps & {
+  /** Header content. */
   header?: ReactNode;
+  /** Optional trigger element. */
   trigger?: ReactNode;
+  /** Modal content. */
   children?: ReactNode;
+  /** Footer content. */
   footer?: ReactNode;
+  /** Custom CSS class name. */
   className?: string;
+  /** Content max width size. */
   size?: 'lg' | 'xl' | '2xl' | '3xl' | '4xl' | '5xl' | '6xl' | '7xl' | 'full';
 };
 

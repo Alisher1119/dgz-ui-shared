@@ -30,9 +30,15 @@ export const DEFAULT_OPTIONS: Option[] = [
   },
 ];
 
+/**
+ * Props for the MyLimitSelect component.
+ */
 export interface MyLimitSelectProps {
+  /** Default limit value. */
   defaultValue?: number;
+  /** Select options to show. */
   options?: Option[];
+  /** Callback when a new limit is selected. */
   onLimitChange: (limit: string) => void;
 }
 

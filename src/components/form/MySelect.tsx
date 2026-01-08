@@ -13,9 +13,14 @@ import { get } from 'lodash';
 import type { FieldPath, FieldValues } from 'react-hook-form';
 import { cn } from 'dgz-ui/utils';
 
+/**
+ * Props for the MySelect component.
+ * @template TFieldValues - The type of the form values.
+ */
 export type MySelectProps<TFieldValues extends FieldValues> =
   FormItemProps<TFieldValues> &
     ReactSelectProps & {
+      /** Optional callback for change events. */
       onChange?: (value: unknown) => void;
     };
 

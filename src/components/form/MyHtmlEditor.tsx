@@ -12,9 +12,14 @@ import {
 } from 'dgz-ui/form';
 import { cn } from 'dgz-ui/utils';
 
+/**
+ * Props for the MyHtmlEditor component.
+ * @template TFieldValues - The type of the form values.
+ */
 export type MyHtmlEditorProps<TFieldValues extends FieldValues> =
   FormItemProps<TFieldValues> &
     HtmlEditorProps & {
+      /** Whether the field is required. */
       required?: boolean;
     };
 

@@ -2,8 +2,14 @@ import { useCallback, useEffect, useState } from 'react';
 import type { CheckedState } from '@radix-ui/react-checkbox';
 import { isEqual } from 'lodash';
 
+/**
+ * Props for the useDataTable hook.
+ * @template TData - The type of the data items.
+ */
 export interface UseDataTableProps<TData> {
+  /** Array of data rows. */
   rows?: TData[];
+  /** Array of initially selected row keys. */
   defaultSelectedRows?: TData[keyof TData][];
 }
 

@@ -5,11 +5,18 @@ import { SearchIcon } from 'lucide-react';
 import type { FormEvent, HTMLAttributes } from 'react';
 import { cn } from 'dgz-ui/utils';
 
+/**
+ * Props for the Search component.
+ */
 export interface SearchProps
   extends Omit<HTMLAttributes<HTMLInputElement>, 'defaultValue' | 'name'> {
+  /** The name attribute for the input field. */
   name?: string;
+  /** Placeholder text for the search input. */
   placeholder?: string;
+  /** Default value for the search input. */
   defaultValue?: FormDataEntryValue | null;
+  /** Callback function executed when search is submitted. */
   onSearchChange: (search?: FormDataEntryValue) => void;
 }
 

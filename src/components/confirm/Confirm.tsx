@@ -13,10 +13,17 @@ import {
 import { useTranslation } from 'react-i18next';
 import { type AlertDialogProps } from '@radix-ui/react-alert-dialog';
 
+/**
+ * Props for the Confirm component.
+ */
 export type ConfirmProps = AlertDialogProps & {
+  /** The content to trigger the dialog (optional). */
   children?: ReactNode;
+  /** Custom title for the dialog. */
   title?: ReactNode;
+  /** Custom description for the dialog. */
   description?: ReactNode;
+  /** Callback function when the confirm action is triggered. */
   onConfirm: () => void;
 };
 

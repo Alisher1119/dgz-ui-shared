@@ -10,6 +10,10 @@ import {
   FormLabel,
 } from 'dgz-ui/form';
 
+/**
+ * Props for the MyCheckbox component.
+ * @template TFieldValues - The type of the form values.
+ */
 export type MyCheckboxProps<TFieldValues extends FieldValues> =
   FormItemProps<TFieldValues> & CheckboxProps;
 

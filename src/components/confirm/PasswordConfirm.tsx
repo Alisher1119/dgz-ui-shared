@@ -20,7 +20,11 @@ import {
   createConfirmPasswordSchema,
 } from '../../schemas';
 
+/**
+ * Props for the PasswordConfirm component.
+ */
 export interface PasswordConfirmProps extends Omit<ConfirmProps, 'onConfirm'> {
+  /** Callback function executed with the password data upon successful submission. */
   onSubmit: (data: ConfirmPasswordDto) => void;
 }
 

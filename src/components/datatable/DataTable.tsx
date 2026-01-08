@@ -55,23 +55,43 @@ export interface PaginationInterface<TData> {
   nextPage?: number;
 }
 
+/**
+ * Props for the DataTable component.
+ *
+ * @template TData - Row data type.
+ * @template TPaginationData - Pagination wrapper type.
+ */
 export interface DataTableProps<
   TData,
   TPaginationData extends PaginationInterface<TData>,
 > extends Omit<MyTableProps<TData>, 'rows'> {
+  /** Pagination data source. */
   dataSource?: TPaginationData;
+  /** Callback for parameter changes (pagination, sorting, filtering). */
   onParamChange?: (param: Record<string, unknown>) => void;
+  /** Whether to enable pagination. */
   hasPagination?: true;
+  /** Options for the export data dropdown. */
   exportOptions?: ExportDataInterface[];
+  /** Whether to enable search functionality. */
   hasSearch?: true;
+  /** Whether the table data is loading. */
   loading?: boolean;
+  /** Array of filters to display. */
   filters?: FilterInterface[];
+  /** Array of actions to display. */
   actions?: ActionInterface[];
+  /** Callback for filter changes. */
   handleFilterChange?: (filters: Record<string, unknown>) => void;
+  /** Unique key for the table, used for column persistence. */
   tableKey: string;
+  /** The key in dataSource where the data array is located. Defaults to "docs". */
   dataKey?: keyof TPaginationData;
+  /** Whether to show the columns visibility dropdown. */
   hasColumnsVisibilityDropdown?: true;
+  /** Callback when columns are updated (e.g., visibility toggled). */
   onColumnsUpdate?: (columns: ColumnType<TData>[]) => void;
+  /** Whether the export action is loading. */
   exportLoading?: boolean;
 }
 

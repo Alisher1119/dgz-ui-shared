@@ -21,20 +21,36 @@ import { cn } from 'dgz-ui/utils';
 import { SortOrder } from '../../enums';
 import { Empty } from '../empty';
 
+/**
+ * Props for the MyTable component.
+ * @template TData - The type of data in the table.
+ */
 export interface MyTableProps<TData> {
+  /** Array of data rows to display. */
   rows?: TData[];
+  /** Column definitions. */
   columns: ColumnType<TData>[];
+  /** Callback when a row is clicked. */
   onRowClick?: (row: TData) => void;
+  /** Whether to show row numbers. */
   hasNumbers?: boolean;
+  /** Whether to show selection checkboxes. */
   hasCheckbox?: boolean;
+  /** Unique key for each row. */
   rowKey: keyof TData;
+  /** Current table parameters (page, limit, sort). */
   params?: Record<string, unknown>;
+  /** Total number of items (optional, often used with pagination context). */
   total?: number;
+  /** Array of currently selected item keys. */
   selectedItems?: TData[keyof TData][];
+  /** Callback when selected items change. */
   onSelectedItemsChange?: (selectedItems: TData[keyof TData][]) => void;
+  /** Callback when sort order changes. */
   onSortOrderChange?: (
     params: Omit<UseSortableProps<TData>, 'onSortOrderChange'>
   ) => void;
+  /** Whether the header should stick to the top. */
   isStickyHeader?: true;
 }
 

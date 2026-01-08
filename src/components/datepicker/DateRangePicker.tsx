@@ -8,16 +8,31 @@ import { Popover, PopoverContent, PopoverTrigger } from 'dgz-ui/popover';
 import { Button, type ButtonProps } from 'dgz-ui/button';
 import { Calendar1 } from 'lucide-react';
 
+/**
+ * Props for the DateRangePicker component.
+ */
 type DateRangePickerProps = ButtonProps & {
+  /** The date format string (e.g., 'YYYY-MM-DD'). */
   format?: string;
+  /** Placeholder text when no date is selected. */
   placeholder?: string;
+  /** The currently selected date range. */
   selected?: DateRange;
+  /** Timezone for date calculations. */
   timezone?: string;
+  /** Error message to display (modifies styling). */
   error?: string;
+  /** Callback function when a date range is selected. */
   onRangeSelected?: (value?: DateRange) => void;
 };
 
-type PresetType = DateRange & { label: ReactNode };
+/**
+ * Type definition for a date range preset configuration.
+ */
+type PresetType = DateRange & {
+  /** Label for the preset (e.g., "Last 7 days"). */
+  label: ReactNode;
+};
 
 /**
  * DateRangePicker displays a two-month range picker with helpful presets.

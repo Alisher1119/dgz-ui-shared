@@ -17,10 +17,15 @@ import { Calendar, type CalendarProps, DATE } from 'dgz-ui/calendar';
 import dayjs from 'dayjs';
 import { cn } from 'dgz-ui/utils';
 
+/**
+ * Props for the MyDatePicker component.
+ * @template TFieldValues - The type of the form values.
+ */
 export type MyDatePickerProps<TFieldValues extends FieldValues> =
   FormItemProps<TFieldValues> &
     Omit<InputProps, 'onSelect'> &
     Omit<CalendarProps, 'mode'> & {
+      /** Date format string for display. */
       format?: string;
     };
 

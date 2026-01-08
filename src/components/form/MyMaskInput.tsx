@@ -12,9 +12,14 @@ import {
 } from 'dgz-ui/form';
 import { cn } from 'dgz-ui/utils';
 
+/**
+ * Props for the MyMaskInput component.
+ * @template TFieldValues - The type of the form values.
+ */
 export type MyMaskInputProps<TFieldValues extends FieldValues> =
   FormItemProps<TFieldValues> &
     MaskInputProps & {
+      /** Whether the field is required. */
       required?: boolean;
     };
 

@@ -11,6 +11,10 @@ import {
 import type { FieldPath, FieldValues } from 'react-hook-form';
 import { cn } from 'dgz-ui/utils';
 
+/**
+ * Props for the MySwitch component.
+ * @template TFieldValues - The type of the form values.
+ */
 export type MySwitchProps<TFieldValues extends FieldValues> =
   FormItemProps<TFieldValues> & SwitchProps;
 

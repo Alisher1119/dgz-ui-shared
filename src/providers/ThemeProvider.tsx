@@ -2,12 +2,26 @@ import { type ReactNode, useEffect, useState } from 'react';
 import { ThemeMode } from '../enums';
 import { ThemeProviderContext } from '../contexts';
 
+/**
+ * Props for the ThemeProvider component.
+ */
 export type ThemeProviderProps = {
+  /** The content to be wrapped by the provider. */
   children: ReactNode;
+  /** The default theme to use if no preferred theme is stored. Defaults to SYSTEM. */
   defaultTheme?: ThemeMode;
+  /** The key used to store the theme preference in localStorage. Defaults to "theme". */
   storageKey?: string;
 };
 
+/**
+ * ThemeProvider manages the application's theme state.
+ * It syncs the theme with localStorage and applies the corresponding CSS class to the document root.
+ *
+ * @param props.children - Child components.
+ * @param props.defaultTheme - Default theme mode.
+ * @param props.storageKey - Local storage key for persistence.
+ */
 export function ThemeProvider({
   children,
   defaultTheme = ThemeMode.SYSTEM,

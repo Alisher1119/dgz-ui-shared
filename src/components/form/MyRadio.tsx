@@ -12,6 +12,10 @@ import React from 'react';
 
 type RadioItemProps = React.ComponentPropsWithoutRef<typeof RadioGroupItem>;
 
+/**
+ * Props for the MyRadio component.
+ * @template TFieldValues - The type of the form values.
+ */
 type MyRadioProps<TFieldValues extends FieldValues> =
   FormItemProps<TFieldValues> & RadioItemProps;
 

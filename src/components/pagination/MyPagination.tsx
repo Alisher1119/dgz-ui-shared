@@ -17,9 +17,15 @@ import {
 } from 'dgz-ui/form';
 import { useCallback, useMemo } from 'react';
 
+/**
+ * Props for the MyPagination component.
+ */
 interface MyPaginationProps {
+  /** The current 1-based page index. Defaults to 1. */
   currentPage?: number;
+  /** Total number of pages. Defaults to 0. */
   totalPages?: number;
+  /** Callback invoked with the new 1-based page number. */
   onPageChange: (page: number) => void;
 }
 

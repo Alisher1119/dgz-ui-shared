@@ -14,10 +14,15 @@ import { DateRangePicker } from '../datepicker';
 import { get } from 'lodash';
 import type { ButtonProps } from 'dgz-ui/button';
 
+/**
+ * Props for the MyDateRangePicker component.
+ * @template TFieldValues - The type of the form values.
+ */
 export type MyDateRangePickerProps<TFieldValues extends FieldValues> =
   FormItemProps<TFieldValues> &
     ButtonProps &
     InputProps & {
+      /** Date format string for display. */
       format?: string;
     };
 

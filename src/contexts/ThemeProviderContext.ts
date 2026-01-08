@@ -1,8 +1,13 @@
 import { createContext } from 'react';
 import { ThemeMode } from '../enums';
 
+/**
+ * State shape for the ThemeProvider context.
+ */
 type ThemeProviderState = {
+  /** Current active theme mode. */
   theme: ThemeMode;
+  /** Function to update the theme. */
   setTheme: (theme: ThemeMode) => void;
 };
 

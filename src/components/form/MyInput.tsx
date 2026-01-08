@@ -14,6 +14,10 @@ import { twMerge } from 'tailwind-merge';
 import { get } from 'lodash';
 import { cn } from 'dgz-ui/utils';
 
+/**
+ * Props for the MyInput component.
+ * @template TFieldValues - The type of the form values.
+ */
 export type MyInputProps<TFieldValues extends FieldValues> =
   FormItemProps<TFieldValues> & InputProps;
 

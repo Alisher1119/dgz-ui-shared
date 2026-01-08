@@ -2,10 +2,21 @@ import { useForm } from 'react-hook-form';
 import { useEffect } from 'react';
 import { entries } from 'lodash';
 
+/**
+ * Props for the useFilter hook.
+ */
 export interface UseFilterProps {
+  /** Initial filter parameters. */
   params?: Record<string, unknown>;
 }
 
+/**
+ * useFilter syncs URL parameters or object params with a react-hook-form instance.
+ * Useful for initializing filter forms with data from URL or state.
+ *
+ * @param props.params - Key-value pairs to set as form values.
+ * @returns Object containing the passed params and the form instance.
+ */
 export const useFilter = ({ params }: UseFilterProps) => {
   const form = useForm({ mode: 'onChange' });
 

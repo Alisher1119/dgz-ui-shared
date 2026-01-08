@@ -3,8 +3,14 @@ import { get, isEmpty, set } from 'lodash';
 import type { ColumnType } from '../types';
 import { useColumnsStore } from '../stores';
 
+/**
+ * Props for the useColumns hook.
+ * @template TData - The type of data associated with the columns.
+ */
 export interface UseColumnsProps<TData> {
+  /** Unique key to identify the table for persisting column state. */
   key: string;
+  /** Array of column definitions. */
   columns: ColumnType<TData>[];
 }
 

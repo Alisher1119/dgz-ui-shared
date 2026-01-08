@@ -9,20 +9,37 @@ import { Form, type Option } from 'dgz-ui/form';
 import { MyInput, MySelect } from '../form';
 import { useFilter } from '../../hooks';
 
+/**
+ * Interface representing a filter configuration.
+ */
 export interface FilterInterface {
+  /** Label for the filter field. */
   label?: ReactNode;
+  /** Placeholder text for the input/select. */
   placeholder?: string;
+  /** Default value for the filter. */
   value?: string | string[];
+  /** Name of the filter field (used as key). */
   name: string;
+  /** Whether the filter supports multiple values (for select inputs). */
   isMulti?: boolean;
+  /** Options for select inputs. */
   options?: Option[];
 }
 
+/**
+ * Props for the FilterWrapper component.
+ */
 export interface FilterWrapperProps extends ButtonProps {
+  /** Array of filter definitions to render. */
   filters: FilterInterface[];
+  /** Current active parameters/filters. */
   params?: Record<string, unknown>;
+  /** Callback fired when filters are applied. */
   onFilter?: (filters: Record<string, unknown>) => void;
+  /** Callback fired when the filter popover is closed/cancelled. */
   onCancel?: () => void;
+  /** Callback fired when filter form values change. */
   onChange?: (filters: FieldValues) => void;
 }
 

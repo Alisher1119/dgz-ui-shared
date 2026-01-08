@@ -7,9 +7,15 @@ import {
 import { type ReactNode } from 'react';
 import { type TooltipContentProps } from '@radix-ui/react-tooltip';
 
+/**
+ * Props for the MyTooltip component.
+ */
 export type MyTooltipProps = Omit<TooltipContentProps, 'content'> & {
+  /** Element that triggers the tooltip. */
   children: ReactNode;
+  /** Content shown inside the tooltip. */
   content: ReactNode;
+  /** Whether to render the tooltip; if false, renders children only. */
   show?: boolean;
 };
 

@@ -8,8 +8,13 @@ import { get } from 'lodash';
 import { Keyboard } from '../../enums';
 import { cn } from 'dgz-ui/utils';
 
+/**
+ * Props for the SearchWithCtrl component.
+ */
 type SearchWithCtrlProps = Omit<CardProps, 'title'> & {
+  /** Custom placeholder text for the input. */
   placeholder?: string;
+  /** Callback fired when the search is triggered. */
   onSearchChange: (search?: string) => void;
 };
 

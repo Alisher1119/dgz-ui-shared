@@ -9,12 +9,21 @@ import { RiArrowDownSLine, RiPlayList2Line } from '@remixicon/react';
 import { useTranslation } from 'react-i18next';
 import type { ReactNode } from 'react';
 
+/**
+ * Interface representing a single action item.
+ */
 export interface ActionInterface {
+  /** The content to display for the action item. */
   label: ReactNode;
+  /** Callback function to execute when the action is clicked. */
   onClick: () => void;
 }
 
+/**
+ * Props for the Actions component.
+ */
 export interface ActionsProps {
+  /** Array of action items to be displayed in the dropdown. */
   actions: ActionInterface[];
 }
 

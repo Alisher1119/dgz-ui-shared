@@ -11,10 +11,16 @@ import type { FieldPath, FieldValues } from 'react-hook-form';
 import { TimePicker, type TimePickerProps } from 'dgz-ui/calendar';
 import { cn } from 'dgz-ui/utils';
 
+/**
+ * Props for the MyTimePicker component.
+ * @template TFieldValues - The type of the form values.
+ */
 export type MyTimePickerProps<TFieldValues extends FieldValues> =
   FormItemProps<TFieldValues> &
     TimePickerProps & {
+      /** Whether the field is required. */
       required?: boolean;
+      /** Custom CSS class name. */
       className?: string;
     };
 
