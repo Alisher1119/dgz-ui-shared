@@ -1,4 +1,5 @@
 import {
+  type DropdownContainerProps,
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
@@ -6,7 +7,6 @@ import {
 } from 'dgz-ui/dropdown';
 import { Button } from 'dgz-ui/button';
 import { RiArrowDownSLine, RiFileChartLine } from '@remixicon/react';
-import { useTranslation } from 'react-i18next';
 import type { ReactNode } from 'react';
 import { Spin } from '../loader';
 
@@ -29,11 +29,13 @@ export interface ExportDataInterface {
  * - `options` — A list of export actions displayed in the dropdown.
  * - `loading` — When `true`, shows a small spinner in the button to indicate an export is in progress.
  */
-export interface ExportDataProps {
+export interface ExportDataProps extends DropdownContainerProps {
   /** Export actions displayed in the dropdown. */
   options: ExportDataInterface[];
   /** If `true`, renders a spinner icon in the button. */
   loading?: boolean;
+  /** Title for the export button. */
+  title?: ReactNode;
 }
 
 /**
@@ -50,23 +52,27 @@ export interface ExportDataProps {
  * Internationalization
  * - The button label is translated via `react-i18next` using the `Export` key.
  */
-export const ExportData = ({ options, loading = false }: ExportDataProps) => {
-  const { t } = useTranslation();
-
+export const ExportData = ({
+  options,
+  loading = false,
+  triggerProps,
+  contentProps,
+  title,
+}: ExportDataProps) => {
   return (
     <DropdownMenu>
-      <DropdownMenuTrigger asChild>
+      <DropdownMenuTrigger asChild {...triggerProps}>
         <Button
           variant="secondary"
           size={'sm'}
           className={'ml-auto rounded-lg px-3'}
         >
           {loading ? <Spin /> : <RiFileChartLine />}{' '}
-          <span className={'hidden lg:!inline'}>{t('Export')}</span>
+          <span className={'hidden lg:!inline'}>{title || 'Export'}</span>
           <RiArrowDownSLine />
         </Button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent align="end">
+      <DropdownMenuContent align="end" {...contentProps}>
         {options.map((option, index) => {
           return (
             <DropdownMenuItem key={index} onClick={() => option.onClick()}>

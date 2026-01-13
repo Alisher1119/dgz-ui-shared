@@ -1,4 +1,5 @@
 import {
+  type DropdownContainerProps,
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
@@ -6,7 +7,6 @@ import {
 } from 'dgz-ui/dropdown';
 import { Button } from 'dgz-ui/button';
 import { RiArrowDownSLine, RiPlayList2Line } from '@remixicon/react';
-import { useTranslation } from 'react-i18next';
 import type { ReactNode } from 'react';
 
 /**
@@ -22,9 +22,11 @@ export interface ActionInterface {
 /**
  * Props for the Actions component.
  */
-export interface ActionsProps {
+export interface ActionsProps extends DropdownContainerProps {
   /** Array of action items to be displayed in the dropdown. */
   actions: ActionInterface[];
+  /** Title for the actions button. */
+  title?: ReactNode;
 }
 
 /**
@@ -33,23 +35,26 @@ export interface ActionsProps {
  * @param props.actions - Array of actions with label and onClick handler.
  * @returns React element rendering the actions dropdown.
  */
-export const Actions = ({ actions }: ActionsProps) => {
-  const { t } = useTranslation();
-
+export const Actions = ({
+  actions,
+  triggerProps,
+  contentProps,
+  title,
+}: ActionsProps) => {
   return (
     <DropdownMenu>
-      <DropdownMenuTrigger asChild>
+      <DropdownMenuTrigger asChild {...triggerProps}>
         <Button
           variant="secondary"
           size={'sm'}
           className={'ml-auto rounded-lg px-3'}
         >
           <RiPlayList2Line />{' '}
-          <span className={'hidden lg:!inline'}>{t('Actions')}</span>
+          <span className={'hidden lg:!inline'}>{title || 'Actions'}</span>
           <RiArrowDownSLine />
         </Button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent align="end">
+      <DropdownMenuContent align="end" {...contentProps}>
         {actions.map((action, index) => {
           return (
             <DropdownMenuItem key={index} onClick={() => action.onClick()}>

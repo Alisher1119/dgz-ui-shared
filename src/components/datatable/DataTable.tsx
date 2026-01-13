@@ -1,6 +1,7 @@
 import { RefreshCw } from 'lucide-react';
 import { Button } from 'dgz-ui/button';
 import {
+  type DropdownContainerProps,
   DropdownMenu,
   DropdownMenuCheckboxItem,
   DropdownMenuContent,
@@ -11,14 +12,23 @@ import {
 import { MyLimitSelect, MyPagination } from '../pagination';
 import { useTranslation } from 'react-i18next';
 import { RiArrowDownSLine, RiLayoutColumnLine } from '@remixicon/react';
-import { useEffect, useState } from 'react';
+import { type ReactNode, useEffect, useState } from 'react';
 import { get, isEmpty } from 'lodash';
 import { MyTable, type MyTableProps } from './MyTable';
 import { useColumns } from '../../hooks';
-import { type FilterInterface, FilterWrapper, Search } from '../filters';
+import {
+  type FilterInterface,
+  FilterWrapper,
+  type FilterWrapperProps,
+  Search,
+} from '../filters';
 import { Loader } from '../loader';
-import { type ActionInterface, Actions } from '../actions';
-import { ExportData, type ExportDataInterface } from '../export';
+import { type ActionInterface, Actions, type ActionsProps } from '../actions';
+import {
+  ExportData,
+  type ExportDataInterface,
+  type ExportDataProps,
+} from '../export';
 import type { ColumnType } from '../../types';
 
 /**
@@ -93,6 +103,24 @@ export interface DataTableProps<
   onColumnsUpdate?: (columns: ColumnType<TData>[]) => void;
   /** Whether the export action is loading. */
   exportLoading?: boolean;
+  /** Props for the Actions component. */
+  actionProps?: ActionsProps;
+  /** Props for the FilterWrapper component. */
+  filterWrapperProps?: FilterWrapperProps;
+  /** Props for the ExportData component. */
+  exportOptionsProps?: ExportDataProps;
+  /** Props for the columns visibility dropdown. */
+  columnsVisibilityProps?: DropdownContainerProps & {
+    title?: ReactNode;
+  };
+  /** Title for the filter button. */
+  filterTitle?: ReactNode;
+  /** Title for the actions button. */
+  actionsTitle?: ReactNode;
+  /** Title for the export options button. */
+  exportOptionsTitle?: ReactNode;
+  /** Title for the columns visibility button. */
+  columnsVisibilityTitle?: ReactNode;
 }
 
 /**
@@ -219,6 +247,11 @@ export const DataTable = <
   onColumnsUpdate,
   hasColumnsVisibilityDropdown,
   onSelectedItemsChange,
+  actionProps,
+  filterWrapperProps,
+  exportOptionsProps,
+  columnsVisibilityProps,
+  ...props
 }: DataTableProps<TData, TPaginationData>) => {
   const { t } = useTranslation();
   const [selectedRows, setSelectedRows] = useState<TData[keyof TData][]>([]);
@@ -256,24 +289,38 @@ export const DataTable = <
           </div>
           <div className={'flex shrink-0 items-center justify-end gap-3'}>
             {exportOptions && (
-              <ExportData options={exportOptions} loading={exportLoading} />
+              <ExportData
+                {...exportOptionsProps}
+                options={exportOptions}
+                loading={exportLoading}
+              />
             )}
             {hasColumnsVisibilityDropdown && tableKey && (
               <DropdownMenu>
-                <DropdownMenuTrigger asChild>
+                <DropdownMenuTrigger
+                  asChild
+                  {...columnsVisibilityProps?.triggerProps}
+                >
                   <Button
                     variant="secondary"
                     size={'sm'}
                     className={'ml-auto rounded-lg px-3'}
                   >
-                    <RiLayoutColumnLine />{' '}
-                    <span className={'hidden lg:!inline'}>
-                      {t('Customize columns')}
-                    </span>
-                    <RiArrowDownSLine />
+                    {columnsVisibilityProps?.title || (
+                      <>
+                        <RiLayoutColumnLine />{' '}
+                        <span className={'hidden lg:!inline'}>
+                          {t('Customize columns')}
+                        </span>
+                        <RiArrowDownSLine />
+                      </>
+                    )}
                   </Button>
                 </DropdownMenuTrigger>
-                <DropdownMenuContent align="end">
+                <DropdownMenuContent
+                  align="end"
+                  {...columnsVisibilityProps?.contentProps}
+                >
                   <DropdownMenuItem
                     className="capitalize"
                     onClick={resetColumns}
@@ -298,9 +345,10 @@ export const DataTable = <
                 </DropdownMenuContent>
               </DropdownMenu>
             )}
-            {actions && <Actions actions={actions} />}
+            {actions && <Actions {...actionProps} actions={actions} />}
             {filters && (
               <FilterWrapper
+                {...filterWrapperProps}
                 filters={filters}
                 params={params}
                 onFilter={(filter) => {
@@ -315,6 +363,7 @@ export const DataTable = <
       <div className={'flex flex-col overflow-auto border-y'}>
         {!loading ? (
           <MyTable<TData>
+            {...props}
             params={{
               page: dataSource?.page || 1,
               limit: dataSource?.limit,

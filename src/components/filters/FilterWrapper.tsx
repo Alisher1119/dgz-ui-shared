@@ -1,10 +1,14 @@
 import { memo, type ReactNode, useCallback, useEffect, useState } from 'react';
-import { useTranslation } from 'react-i18next';
 import { get } from 'lodash';
 import type { FieldValues } from 'react-hook-form';
 import { ChevronDown, ListFilterIcon, ListFilterPlusIcon } from 'lucide-react';
 import { Button, type ButtonProps } from 'dgz-ui/button';
-import { Popover, PopoverContent, PopoverTrigger } from 'dgz-ui/popover';
+import {
+  Popover,
+  type PopoverContainerProps,
+  PopoverContent,
+  PopoverTrigger,
+} from 'dgz-ui/popover';
 import { Form, type Option } from 'dgz-ui/form';
 import { MyInput, MySelect } from '../form';
 import { useFilter } from '../../hooks';
@@ -30,7 +34,9 @@ export interface FilterInterface {
 /**
  * Props for the FilterWrapper component.
  */
-export interface FilterWrapperProps extends ButtonProps {
+export interface FilterWrapperProps
+  extends Omit<ButtonProps, 'title'>,
+    PopoverContainerProps {
   /** Array of filter definitions to render. */
   filters: FilterInterface[];
   /** Current active parameters/filters. */
@@ -41,6 +47,12 @@ export interface FilterWrapperProps extends ButtonProps {
   onCancel?: () => void;
   /** Callback fired when filter form values change. */
   onChange?: (filters: FieldValues) => void;
+  /** Title for the filter button. */
+  title?: ReactNode;
+  /** Text for the reset button. */
+  resetText?: ReactNode;
+  /** Text for the apply button. */
+  applyText?: ReactNode;
 }
 
 /**
@@ -58,9 +70,13 @@ export const FilterWrapper = memo(function FilterWrapper({
   onFilter,
   onChange,
   onCancel,
+  triggerProps,
+  contentProps,
+  title,
+  resetText,
+  applyText,
   ...btnProps
 }: FilterWrapperProps) {
-  const { t } = useTranslation();
   const [isFiltered, setIsFiltered] = useState(false);
   const [open, setOpen] = useState(false);
   const { form } = useFilter({ params });
@@ -79,9 +95,11 @@ export const FilterWrapper = memo(function FilterWrapper({
     });
   }, [filters, params]);
 
+  const values = watch();
+
   useEffect(() => {
     onChange?.(getValues());
-  }, [watch()]);
+  }, [values]);
 
   const handleFilter = useCallback(
     (data = {}) => {
@@ -106,7 +124,7 @@ export const FilterWrapper = memo(function FilterWrapper({
 
   return (
     <Popover open={open} onOpenChange={setOpen}>
-      <PopoverTrigger>
+      <PopoverTrigger {...triggerProps}>
         <Button
           asChild
           size={'sm'}
@@ -116,16 +134,16 @@ export const FilterWrapper = memo(function FilterWrapper({
         >
           <div className={'flex items-center'}>
             {isFiltered ? (
-              <ListFilterPlusIcon size={20} />
+              <ListFilterPlusIcon className={'size-5'} />
             ) : (
-              <ListFilterIcon size={20} />
+              <ListFilterIcon className={'size-5'} />
             )}{' '}
-            <span className={'hidden lg:!inline'}>{t('Filter')}</span>
+            <span className={'hidden lg:!inline'}>{title || 'Filter'}</span>
             <ChevronDown />
           </div>
         </Button>
       </PopoverTrigger>
-      <PopoverContent side={'bottom'} align={'end'} className={''}>
+      <PopoverContent side={'bottom'} align={'end'} {...contentProps}>
         <Form {...form}>
           <form onSubmit={handleSubmit(handleFilter)} className={'space-y-2'}>
             <div className={'h-full shrink p-1'}>
@@ -158,10 +176,10 @@ export const FilterWrapper = memo(function FilterWrapper({
                 size={'sm'}
                 onClick={handleReset}
               >
-                {t('Reset')}
+                {resetText || 'Reset'}
               </Button>
               <Button type="submit" size={'sm'}>
-                {t('Apply')}
+                {applyText || 'Apply'}
               </Button>
             </div>
           </form>

@@ -29,12 +29,13 @@ export const SearchWithCtrl = ({
   placeholder,
   onSearchChange,
   className,
+  ...props
 }: SearchWithCtrlProps) => {
   const { t } = useTranslation();
   const [search, setSearch] = useState('');
 
   return (
-    <div className={cn('relative my-2 w-full', className)}>
+    <div {...props} className={cn('relative my-2 w-full', className)}>
       <Input
         placeholder={
           placeholder ? placeholder : t('Type text and press CTRL + Enter')

@@ -12,7 +12,7 @@ import {
   TableRow,
 } from 'dgz-ui/table';
 import { get } from 'lodash';
-import { useEffect } from 'react';
+import { type ComponentProps, useEffect } from 'react';
 import type { ColumnType } from '../../types';
 import { DEFAULT_LIMIT } from '../pagination/MyLimitSelect';
 import { useDataTable, useSortable, type UseSortableProps } from '../../hooks';
@@ -25,7 +25,7 @@ import { Empty } from '../empty';
  * Props for the MyTable component.
  * @template TData - The type of data in the table.
  */
-export interface MyTableProps<TData> {
+export interface MyTableProps<TData> extends ComponentProps<'table'> {
   /** Array of data rows to display. */
   rows?: TData[];
   /** Column definitions. */
@@ -78,6 +78,8 @@ export const MyTable = <TData,>({
   onSelectedItemsChange,
   onSortOrderChange,
   isStickyHeader,
+  className,
+  ...props
 }: MyTableProps<TData>) => {
   const { sortObject, handleSort } = useSortable<TData>({
     sortField: params?.sortField as keyof TData | undefined,
@@ -102,7 +104,7 @@ export const MyTable = <TData,>({
   }, [selectedRows, selectedItems, onSelectedItemsChange]);
 
   return (
-    <Table className={'relative'}>
+    <Table {...props} className={cn('relative', className)}>
       <TableHeader
         className={cn('bg-bg', isStickyHeader && 'sticky top-0 z-10')}
       >
