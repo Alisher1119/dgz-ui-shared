@@ -26,14 +26,14 @@ export type MyTextareaProps<TFieldValues extends FieldValues> =
  * Supports floating error message styling.
  *
  * @template TFieldValues - Form values type used by react-hook-form.
- * @param control
- * @param name
- * @param label
- * @param helperText
- * @param required
- * @param rules
- * @param className
- * @param floatingError
+ * @param control - The `react-hook-form` control object.
+ * @param name - The name of the field in `react-hook-form`.
+ * @param label - The label to display for the textarea.
+ * @param helperText - Helper text to display below the textarea.
+ * @param required - Whether the field is required.
+ * @param rules - The `react-hook-form` validation rules.
+ * @param className - Custom CSS class name.
+ * @param floatingError - Whether to show the error message in a floating container.
  * @param props - Textarea and form item props.
  */
 export const MyTextarea = <TFieldValues extends FieldValues>({
@@ -53,28 +53,31 @@ export const MyTextarea = <TFieldValues extends FieldValues>({
     </FormLabel>
   );
 
-  return name && control ? (
-    <FormField<TFieldValues, FieldPath<TFieldValues>>
-      control={control}
-      name={name}
-      rules={rules}
-      render={({ field, formState }) => (
-        <FormItem>
-          {labelElm}
-          <FormControl>
-            <Textarea
-              variant={get(formState.errors, `${name}`) ? 'failure' : 'default'}
-              {...props}
-              {...field}
-              className={twMerge(['mt-2', className])}
-            />
-          </FormControl>
-          {helperText && <FormDescription>{helperText}</FormDescription>}
-          <FormMessage className={cn(floatingError && 'absolute')} />
-        </FormItem>
-      )}
-    />
-  ) : (
-    <Textarea {...props} className={twMerge(['mt-2', className])} />
+  return (
+    (name && control && (
+      <FormField<TFieldValues, FieldPath<TFieldValues>>
+        control={control}
+        name={name}
+        rules={rules}
+        render={({ field, formState }) => (
+          <FormItem>
+            {labelElm}
+            <FormControl>
+              <Textarea
+                variant={
+                  get(formState.errors, `${name}`) ? 'failure' : 'default'
+                }
+                {...props}
+                {...field}
+                className={twMerge(['mt-2', className])}
+              />
+            </FormControl>
+            {helperText && <FormDescription>{helperText}</FormDescription>}
+            <FormMessage className={cn(floatingError && 'absolute')} />
+          </FormItem>
+        )}
+      />
+    )) ||
+    null
   );
 };

@@ -30,14 +30,14 @@ export type MyMaskInputProps<TFieldValues extends FieldValues> =
  * unmasked value on change.
  *
  * @template TFieldValues - Form values type used by react-hook-form.
- * @param control
- * @param name
- * @param label
- * @param rules
- * @param helperText
- * @param required
- * @param floatingError
- * @param props - MaskInput and form item props such as control, name, label, rules, helperText.
+ * @param control - The `react-hook-form` control object.
+ * @param name - The name of the field in `react-hook-form`.
+ * @param label - The label to display for the mask input.
+ * @param rules - The `react-hook-form` validation rules.
+ * @param helperText - Helper text to display below the mask input.
+ * @param required - Whether the field is required.
+ * @param floatingError - Whether to show the error message in a floating container.
+ * @param props - MaskInput and form item props.
  * @returns React element rendering a masked input with label, helper text, and validation message.
  */
 export const MyMaskInput = <TFieldValues extends FieldValues>({
@@ -56,37 +56,32 @@ export const MyMaskInput = <TFieldValues extends FieldValues>({
     </FormLabel>
   );
 
-  return name && control ? (
-    <FormField<TFieldValues, FieldPath<TFieldValues>>
-      control={control}
-      name={name}
-      rules={rules}
-      render={({ field }) => (
-        <FormItem>
-          {labelElm}
-          <FormControl>
-            <MaskInput
-              thousandsSeparator={' '}
-              lazy={false}
-              placeholderChar="_"
-              unmask
-              {...field}
-              {...props}
-              onAccept={(value) => field.onChange(value)}
-            />
-          </FormControl>
-          {helperText && <FormDescription>{helperText}</FormDescription>}
-          <FormMessage className={cn(floatingError && 'absolute')} />
-        </FormItem>
-      )}
-    />
-  ) : (
-    <MaskInput
-      thousandsSeparator={' '}
-      lazy={false}
-      placeholderChar="_"
-      unmask
-      {...props}
-    />
+  return (
+    (name && control && (
+      <FormField<TFieldValues, FieldPath<TFieldValues>>
+        control={control}
+        name={name}
+        rules={rules}
+        render={({ field }) => (
+          <FormItem>
+            {labelElm}
+            <FormControl>
+              <MaskInput
+                thousandsSeparator={' '}
+                lazy={false}
+                placeholderChar="_"
+                unmask
+                {...field}
+                {...props}
+                onAccept={(value) => field.onChange(value)}
+              />
+            </FormControl>
+            {helperText && <FormDescription>{helperText}</FormDescription>}
+            <FormMessage className={cn(floatingError && 'absolute')} />
+          </FormItem>
+        )}
+      />
+    )) ||
+    null
   );
 };

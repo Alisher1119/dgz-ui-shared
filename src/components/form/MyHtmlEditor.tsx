@@ -28,14 +28,14 @@ export type MyHtmlEditorProps<TFieldValues extends FieldValues> =
  * Works in both controlled (with control/name) and uncontrolled modes.
  *
  * @template TFieldValues - Form values type used by react-hook-form.
- * @param control
- * @param name
- * @param label
- * @param rules
- * @param helperText
- * @param required
- * @param floatingError
- * @param props - HtmlEditor and form item props such as control, name, label, rules, helperText.
+ * @param control - The `react-hook-form` control object.
+ * @param name - The name of the field in `react-hook-form`.
+ * @param label - The label to display for the HTML editor.
+ * @param rules - The `react-hook-form` validation rules.
+ * @param helperText - Helper text to display below the HTML editor.
+ * @param required - Whether the field is required.
+ * @param floatingError - Whether to show the error message in a floating container.
+ * @param props - HtmlEditor and form item props.
  * @returns React element rendering an HtmlEditor with label, helper text, and validation message.
  */
 export const MyHtmlEditor = <TFieldValues extends FieldValues>({

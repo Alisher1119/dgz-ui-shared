@@ -29,15 +29,15 @@ export type MySelectProps<TFieldValues extends FieldValues> =
  * Can also be used standalone when no control/name are provided.
  *
  * @template TFieldValues - Form values type used by react-hook-form.
- * @param control
- * @param name
- * @param label
- * @param helperText
- * @param required
- * @param className
- * @param rules
- * @param options
- * @param onChange
+ * @param control - The `react-hook-form` control object.
+ * @param name - The name of the field in `react-hook-form`.
+ * @param label - The label to display for the select.
+ * @param helperText - Helper text to display below the select.
+ * @param required - Whether the field is required.
+ * @param className - Custom CSS class name.
+ * @param rules - The `react-hook-form` validation rules.
+ * @param options - The options to display in the select.
+ * @param onChange - Optional callback for change events.
  * @param props - Select and form item props.
  */
 export const MySelect = <TFieldValues extends FieldValues>({
@@ -58,47 +58,40 @@ export const MySelect = <TFieldValues extends FieldValues>({
     </FormLabel>
   );
 
-  if (!name || !control) {
-    return (
-      <ReactSelect
-        className={cn('mt-2', className)}
-        {...props}
-        options={options}
-      />
-    );
-  }
-
   return (
-    <FormField<TFieldValues, FieldPath<TFieldValues>>
-      control={control}
-      name={name}
-      rules={rules}
-      render={({ field, formState }) => {
-        const handleChange = (value: unknown) => {
-          field.onChange(value);
-          if (onChange) {
-            onChange(value);
-          }
-        };
+    (name && control && (
+      <FormField<TFieldValues, FieldPath<TFieldValues>>
+        control={control}
+        name={name}
+        rules={rules}
+        render={({ field, formState }) => {
+          const handleChange = (value: unknown) => {
+            field.onChange(value);
+            if (onChange) {
+              onChange(value);
+            }
+          };
 
-        return (
-          <FormItem>
-            {labelElm}
-            <FormControl>
-              <ReactSelect
-                className={cn('mt-2', className)}
-                {...props}
-                {...field}
-                onChange={handleChange}
-                options={options}
-                error={!!get(formState.errors, `${name}`)}
-              />
-            </FormControl>
-            {helperText && <FormDescription>{helperText}</FormDescription>}
-            <FormMessage />
-          </FormItem>
-        );
-      }}
-    />
+          return (
+            <FormItem>
+              {labelElm}
+              <FormControl>
+                <ReactSelect
+                  className={cn('mt-2', className)}
+                  {...props}
+                  {...field}
+                  onChange={handleChange}
+                  options={options}
+                  error={!!get(formState.errors, `${name}`)}
+                />
+              </FormControl>
+              {helperText && <FormDescription>{helperText}</FormDescription>}
+              <FormMessage />
+            </FormItem>
+          );
+        }}
+      />
+    )) ||
+    null
   );
 };

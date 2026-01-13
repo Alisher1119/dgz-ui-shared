@@ -34,16 +34,16 @@ export type MyDatePickerProps<TFieldValues extends FieldValues> =
  * Can also be used standalone when no control/name are provided.
  *
  * @template TFieldValues - Form values type used by react-hook-form.
- * @param control
- * @param name
- * @param label
- * @param helperText
- * @param required
- * @param rules
- * @param format
- * @param placeholder
- * @param floatingError
- * @param register
+ * @param control - The `react-hook-form` control object.
+ * @param name - The name of the field in `react-hook-form`.
+ * @param label - The label to display for the date picker.
+ * @param helperText - Helper text to display below the date picker.
+ * @param required - Whether the field is required.
+ * @param rules - The `react-hook-form` validation rules.
+ * @param format - The date format for display.
+ * @param placeholder - The placeholder text when no date selected.
+ * @param floatingError - Whether to show the error message in a floating container.
+ * @param register - The `react-hook-form` register function.
  * @param props - Calendar, button and form item props.
  */
 export const MyDatePicker = <TFieldValues extends FieldValues>({
@@ -67,80 +67,53 @@ export const MyDatePicker = <TFieldValues extends FieldValues>({
   );
 
   return (
-    <>
-      {name && control ? (
-        <FormField<TFieldValues, FieldPath<TFieldValues>>
-          control={control}
-          name={name}
-          rules={rules}
-          render={({ field, formState }) => (
-            <FormItem>
-              {labelElm}
-              <Popover>
-                <PopoverTrigger asChild>
-                  <FormControl>
-                    <Button
-                      variant={'secondary'}
-                      className={cn(
-                        'text-secondary !text-body-sm-regular border-border-alpha-strong focus:ring-item-primary mt-2 flex w-full bg-transparent pl-3 text-left font-normal hover:bg-transparent',
-                        get(formState.errors, `${name}`) &&
-                          'focus:ring-item-destructive border-item-destructive bg-item-destructive-focus text-item-destructive hover:bg-item-destructive-focus dark:bg-transparent',
-                        field.value && 'text-primary',
-                        className
-                      )}
-                    >
-                      {field.value
-                        ? dayjs(field.value).format(format)
-                        : placeholder
-                          ? placeholder
-                          : 'Pick a date'}
-                      <CalendarIcon className="ml-auto h-4 w-4" />
-                    </Button>
-                  </FormControl>
-                </PopoverTrigger>
-                <PopoverContent className="w-auto p-0" align="start">
-                  <Calendar
-                    {...props}
-                    mode="single"
-                    selected={field.value}
-                    onSelect={field.onChange}
-                  />
-                </PopoverContent>
-              </Popover>
-              <FormDescription>{helperText}</FormDescription>
-              <div className={'relative'}>
-                <FormMessage />
-              </div>
-            </FormItem>
-          )}
-        />
-      ) : (
-        <div className="relative flex flex-col space-y-2">
-          {labelElm}
-          <Popover>
-            <PopoverTrigger asChild>
-              <Button
-                variant={'secondary'}
-                className={cn(
-                  'text-secondary !text-body-sm-regular border-border-alpha-strong focus:ring-item-primary mt-2 bg-transparent pl-3 text-left font-normal hover:bg-transparent',
-                  props.selected && 'text-primary',
-                  className
-                )}
-              >
-                {props.selected
-                  ? dayjs(props.selected).format(format)
-                  : placeholder
-                    ? placeholder
-                    : 'Pick a date'}
-                <CalendarIcon className="ml-auto h-4 w-4" />
-              </Button>
-            </PopoverTrigger>
-            <PopoverContent className="w-auto p-0" align="start">
-              <Calendar {...props} mode="single" />
-            </PopoverContent>
-          </Popover>
-        </div>
-      )}
-    </>
+    (name && control && (
+      <FormField<TFieldValues, FieldPath<TFieldValues>>
+        control={control}
+        name={name}
+        rules={rules}
+        render={({ field, formState }) => (
+          <FormItem>
+            {labelElm}
+            <Popover>
+              <PopoverTrigger asChild>
+                <FormControl>
+                  <Button
+                    variant={'secondary'}
+                    className={cn(
+                      'text-secondary !text-body-sm-regular border-border-alpha-strong focus:ring-item-primary mt-2 flex w-full bg-transparent pl-3 text-left font-normal hover:bg-transparent',
+                      get(formState.errors, `${name}`) &&
+                        'focus:ring-item-destructive border-item-destructive bg-item-destructive-focus text-item-destructive hover:bg-item-destructive-focus dark:bg-transparent',
+                      field.value && 'text-primary',
+                      className
+                    )}
+                  >
+                    {field.value
+                      ? dayjs(field.value).format(format)
+                      : placeholder
+                        ? placeholder
+                        : 'Pick a date'}
+                    <CalendarIcon className="ml-auto h-4 w-4" />
+                  </Button>
+                </FormControl>
+              </PopoverTrigger>
+              <PopoverContent className="w-auto p-0" align="start">
+                <Calendar
+                  {...props}
+                  mode="single"
+                  selected={field.value}
+                  onSelect={field.onChange}
+                />
+              </PopoverContent>
+            </Popover>
+            <FormDescription>{helperText}</FormDescription>
+            <div className={'relative'}>
+              <FormMessage />
+            </div>
+          </FormItem>
+        )}
+      />
+    )) ||
+    null
   );
 };

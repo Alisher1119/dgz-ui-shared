@@ -26,14 +26,14 @@ export type MyInputProps<TFieldValues extends FieldValues> =
  * Works in both controlled (with control/name) and uncontrolled modes.
  *
  * @template TFieldValues - Form values type used by react-hook-form.
- * @param control
- * @param name
- * @param label
- * @param helperText
- * @param required
- * @param className
- * @param rules
- * @param floatingError
+ * @param control - The `react-hook-form` control object.
+ * @param name - The name of the field in `react-hook-form`.
+ * @param label - The label to display for the input.
+ * @param helperText - Helper text to display below the input.
+ * @param required - Whether the field is required.
+ * @param className - Custom CSS class name.
+ * @param rules - The `react-hook-form` validation rules.
+ * @param floatingError - Whether to show the error message in a floating container.
  * @param props - Input and form item props.
  */
 export const MyInput = <TFieldValues extends FieldValues>({
@@ -53,42 +53,41 @@ export const MyInput = <TFieldValues extends FieldValues>({
     </FormLabel>
   );
 
-  return name && control ? (
-    <FormField<TFieldValues, FieldPath<TFieldValues>>
-      control={control}
-      name={name}
-      rules={rules}
-      render={({ field, formState }) => (
-        <FormItem>
-          {labelElm}
-          <FormControl>
-            <Input
-              variant={
-                get(formState.errors, `${name}.message`) ? 'failure' : 'default'
-              }
-              {...props}
-              {...field}
-              onChange={(event) => {
-                const value = event.target.value;
-                if (props.type === 'number') {
-                  field.onChange(value ? Number(value) : undefined);
-                } else {
-                  field.onChange(value);
+  return (
+    (name && control && (
+      <FormField<TFieldValues, FieldPath<TFieldValues>>
+        control={control}
+        name={name}
+        rules={rules}
+        render={({ field, formState }) => (
+          <FormItem>
+            {labelElm}
+            <FormControl>
+              <Input
+                variant={
+                  get(formState.errors, `${name}.message`)
+                    ? 'failure'
+                    : 'default'
                 }
-              }}
-              className={twMerge(['mt-2', className])}
-            />
-          </FormControl>
-          {helperText && <FormDescription>{helperText}</FormDescription>}
-          <FormMessage className={cn(floatingError && 'absolute')} />
-        </FormItem>
-      )}
-    />
-  ) : (
-    <>
-      {labelElm}
-      <Input {...props} className={twMerge(['mt-2', className])} />
-      {helperText && <FormDescription>{helperText}</FormDescription>}
-    </>
+                {...props}
+                {...field}
+                onChange={(event) => {
+                  const value = event.target.value;
+                  if (props.type === 'number') {
+                    field.onChange(value ? Number(value) : undefined);
+                  } else {
+                    field.onChange(value);
+                  }
+                }}
+                className={twMerge(['mt-2', className])}
+              />
+            </FormControl>
+            {helperText && <FormDescription>{helperText}</FormDescription>}
+            <FormMessage className={cn(floatingError && 'absolute')} />
+          </FormItem>
+        )}
+      />
+    )) ||
+    null
   );
 };
