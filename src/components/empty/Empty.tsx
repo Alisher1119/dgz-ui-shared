@@ -1,9 +1,9 @@
 import { FolderOpen } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
-import type { ReactNode } from 'react';
+import type { HTMLAttributes, ReactNode } from 'react';
+import { cn } from 'dgz-ui/utils';
 
-export interface EmptyProps {
-  children?: ReactNode;
+export interface EmptyProps extends HTMLAttributes<HTMLDivElement> {
   icon?: ReactNode;
 }
 
@@ -13,11 +13,17 @@ export interface EmptyProps {
  * @param props.children - Optional custom message/content.
  * @param props.icon - Optional custom icon. Defaults to a folder icon.
  */
-export const Empty = ({ children, icon }: EmptyProps) => {
+export const Empty = ({ children, icon, className, ...props }: EmptyProps) => {
   const { t } = useTranslation();
 
   return (
-    <div className="flex h-16 flex-col items-center justify-center text-center text-base">
+    <div
+      {...props}
+      className={cn(
+        'flex h-16 flex-col items-center justify-center text-center text-base',
+        className
+      )}
+    >
       {icon || <FolderOpen size={48} strokeWidth={1} />}
       {children || t('No results')}
     </div>

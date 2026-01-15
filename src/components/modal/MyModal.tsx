@@ -41,8 +41,15 @@ export type MyModalProps = DialogProps &
  * It provides a structured layout with a header, scrollable content area, and optional footer.
  *
  * @component
+ * @param header
+ * @param footer
+ * @param trigger
+ * @param children
+ * @param size
+ * @param className
+ * @param triggerProps
+ * @param contentProps
  * @param {MyModalProps} props - The props for the MyModal component.
- * @returns {JSX.Element} The rendered MyModal component.
  *
  * @example
  * <MyModal
