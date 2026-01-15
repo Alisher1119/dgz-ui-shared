@@ -1,6 +1,7 @@
 import type { ReactNode } from 'react';
 import {
   Dialog,
+  type DialogContainerProps,
   DialogContent,
   DialogDescription,
   DialogFooter,
@@ -22,15 +23,18 @@ import { cn } from 'dgz-ui/utils';
  * @property {ReactNode} [footer] - The content to be displayed in the modal footer.
  * @property {string} [className] - Additional CSS classes for the modal content.
  * @property {'lg' | 'xl' | '2xl' | '3xl' | '4xl' | '5xl' | '6xl' | '7xl' | 'full'} [size='lg'] - The maximum width size of the modal.
+ * @property {DialogContainerProps['triggerProps']} [triggerProps] - Props passed to the DialogTrigger component.
+ * @property {DialogContainerProps['contentProps']} [contentProps] - Props passed to the DialogContent component.
  */
-export type MyModalProps = DialogProps & {
-  header?: ReactNode;
-  trigger?: ReactNode;
-  children?: ReactNode;
-  footer?: ReactNode;
-  className?: string;
-  size?: 'lg' | 'xl' | '2xl' | '3xl' | '4xl' | '5xl' | '6xl' | '7xl' | 'full';
-};
+export type MyModalProps = DialogProps &
+  DialogContainerProps & {
+    header?: ReactNode;
+    trigger?: ReactNode;
+    children?: ReactNode;
+    footer?: ReactNode;
+    className?: string;
+    size?: 'lg' | 'xl' | '2xl' | '3xl' | '4xl' | '5xl' | '6xl' | '7xl' | 'full';
+  };
 
 /**
  * A reusable modal component that wraps the Dialog component from dgz-ui.
@@ -56,11 +60,17 @@ export const MyModal = ({
   children,
   size = 'lg',
   className,
+  triggerProps,
+  contentProps,
   ...props
 }: MyModalProps) => {
   return (
     <Dialog {...props}>
-      {trigger && <DialogTrigger asChild>{trigger}</DialogTrigger>}
+      {trigger && (
+        <DialogTrigger asChild {...triggerProps}>
+          {trigger}
+        </DialogTrigger>
+      )}
       <DialogContent
         className={cn(
           `data-[state=open]:animate-contentShowTop top-4 bottom-auto max-h-[calc(100vh-2rem)] max-w-lg translate-y-0 overflow-y-auto`,
@@ -74,6 +84,7 @@ export const MyModal = ({
           size === 'full' && 'max-w-[95%]',
           className
         )}
+        {...contentProps}
       >
         <DialogHeader>
           <DialogTitle className={'mb-0'}>{header}</DialogTitle>

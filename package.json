@@ -1,6 +1,6 @@
 {
   "name": "dgz-ui-shared",
-  "version": "1.1.28",
+  "version": "1.1.29",
   "type": "module",
   "files": [
     "dist"
@@ -143,16 +143,13 @@
     "format:check": "prettier . --check",
     "lint": "eslint ./src --fix --max-warnings 50",
     "typecheck": "tsc --noEmit",
-    "publish:major": "npm version major && npm publish",
-    "publish:minor": "npm version minor && npm publish",
-    "publish:patch": "npm version patch && npm publish",
     "prepare": "husky"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.0.1",
     "@tailwindcss/vite": "^4.1.7",
     "dayjs": "^1.11.13",
-    "dgz-ui": "^1.3.15",
+    "dgz-ui": "^1.3.18",
     "file-saver": "^2.0.5",
     "i18next": "^25.2.1",
     "lodash": "^4.17.21",
@@ -201,7 +198,6 @@
     "vitest": "^3.1.4"
   },
   "peerDependencies": {
-    "dayjs": "^1.11.13",
     "react": "^19.1.2",
     "react-dom": "^19.1.2"
   }

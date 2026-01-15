@@ -104,23 +104,15 @@ export interface DataTableProps<
   /** Whether the export action is loading. */
   exportLoading?: boolean;
   /** Props for the Actions component. */
-  actionProps?: ActionsProps;
+  actionProps?: Partial<ActionsProps>;
   /** Props for the FilterWrapper component. */
-  filterWrapperProps?: FilterWrapperProps;
+  filterWrapperProps?: Partial<FilterWrapperProps>;
   /** Props for the ExportData component. */
-  exportOptionsProps?: ExportDataProps;
+  exportOptionsProps?: Partial<ExportDataProps>;
   /** Props for the columns visibility dropdown. */
   columnsVisibilityProps?: DropdownContainerProps & {
     title?: ReactNode;
   };
-  /** Title for the filter button. */
-  filterTitle?: ReactNode;
-  /** Title for the actions button. */
-  actionsTitle?: ReactNode;
-  /** Title for the export options button. */
-  exportOptionsTitle?: ReactNode;
-  /** Title for the columns visibility button. */
-  columnsVisibilityTitle?: ReactNode;
 }
 
 /**
@@ -160,6 +152,11 @@ export interface DataTableProps<
  * - `params` — Current list parameters (pagination, sort, search, filters).
  * - `hasColumnsVisibilityDropdown` — Set to `true` to show the columns customize dropdown.
  * - `onColumnsUpdate` — Notifies parent whenever the internal columns state changes (after formatting/visibility).
+ * - `actionProps` — Props passed to the `Actions` component.
+ * - `filterWrapperProps` — Props passed to the `FilterWrapper` component.
+ * - `exportOptionsProps` — Props passed to the `ExportData` component.
+ * - `columnsVisibilityProps` — Props passed to the columns visibility dropdown.
+ * - `onSelectedItemsChange` — Callback when selected rows change (requires `hasCheckbox`).
  *
  * Accessibility
  * - Header controls and dropdowns reuse shared primitives that include keyboard and ARIA support.
