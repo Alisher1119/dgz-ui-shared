@@ -21,6 +21,7 @@ import {
   FilterWrapper,
   type FilterWrapperProps,
   Search,
+  type SearchProps,
 } from '../filters';
 import { Loader } from '../loader';
 import { type ActionInterface, Actions, type ActionsProps } from '../actions';
@@ -30,6 +31,7 @@ import {
   type ExportDataProps,
 } from '../export';
 import type { ColumnType } from '../../types';
+import type { MyPaginationProps } from '../pagination/MyPagination.tsx';
 
 /**
  * Minimal pagination wrapper contract used by `DataTable`.
@@ -109,9 +111,12 @@ export interface DataTableProps<
   filterWrapperProps?: Partial<FilterWrapperProps>;
   /** Props for the ExportData component. */
   exportOptionsProps?: Partial<ExportDataProps>;
+  searchProps?: Partial<SearchProps>;
+  paginationProps?: Partial<MyPaginationProps>;
   /** Props for the columns visibility dropdown. */
   columnsVisibilityProps?: DropdownContainerProps & {
     title?: ReactNode;
+    resetText?: ReactNode;
   };
 }
 
@@ -248,6 +253,8 @@ export const DataTable = <
   filterWrapperProps,
   exportOptionsProps,
   columnsVisibilityProps,
+  paginationProps,
+  searchProps,
   ...props
 }: DataTableProps<TData, TPaginationData>) => {
   const { t } = useTranslation();
@@ -277,6 +284,7 @@ export const DataTable = <
           <div className={'w-full shrink'}>
             {hasSearch && (
               <Search
+                {...searchProps}
                 defaultValue={get(params, 'search', '') as string}
                 onSearchChange={(search) =>
                   onParamChange?.({ ...params, search, page: 1 })
@@ -322,7 +330,8 @@ export const DataTable = <
                     className="capitalize"
                     onClick={resetColumns}
                   >
-                    <RefreshCw /> {t('Reset columns')}
+                    <RefreshCw />{' '}
+                    {columnsVisibilityProps?.resetText || 'Reset columns'}
                   </DropdownMenuItem>
                   <DropdownMenuSeparator />
                   {formattedColumns.map((column) => {
@@ -398,6 +407,7 @@ export const DataTable = <
           </div>
           <div>
             <MyPagination
+              {...paginationProps}
               onPageChange={(page) => onParamChange?.({ ...params, page })}
               currentPage={dataSource?.page}
               totalPages={dataSource?.totalPages}

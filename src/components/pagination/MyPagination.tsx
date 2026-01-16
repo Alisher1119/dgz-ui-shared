@@ -15,12 +15,12 @@ import {
   SelectValue,
   VirtualizedSelectContent,
 } from 'dgz-ui/form';
-import { useCallback, useMemo } from 'react';
+import { type HTMLAttributes, useCallback, useMemo } from 'react';
 
 /**
  * Props for the MyPagination component.
  */
-interface MyPaginationProps {
+export interface MyPaginationProps extends HTMLAttributes<HTMLDivElement> {
   /** The current 1-based page index. Defaults to 1. */
   currentPage?: number;
   /** Total number of pages. Defaults to 0. */
@@ -39,6 +39,7 @@ interface MyPaginationProps {
  *   selects a page via the page links or the dropdown.
  * - The component uses i18n for the "Go to page" label via `react-i18next`.
  *
+ * @param className
  * @param props - Component props
  * @param props.currentPage - The current 1-based page index. Defaults to 1.
  * @param props.totalPages - Total number of pages. Defaults to 0.
@@ -57,6 +58,8 @@ export const MyPagination = ({
   currentPage = 1,
   totalPages = 0,
   onPageChange,
+  className,
+  ...props
 }: MyPaginationProps) => {
   const { t } = useTranslation();
 
@@ -101,7 +104,13 @@ export const MyPagination = ({
   }, [totalPages]);
 
   return (
-    <div className={'flex flex-col items-center justify-end gap-3 lg:flex-row'}>
+    <div
+      {...props}
+      className={cn(
+        'flex flex-col items-center justify-end gap-3 lg:flex-row',
+        className
+      )}
+    >
       <div className={'flex items-center gap-3 text-sm'}>
         <div className={'min-w-20 font-semibold'}>{t('Go to page')}:</div>
         <Select
