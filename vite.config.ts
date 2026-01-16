@@ -83,7 +83,7 @@ export default defineConfig({
       },
     },
     rollupOptions: {
-      external: ['react', 'react-dom'],
+      external: ['react', 'react-dom', 'i18next', 'react-i18next'],
       output: [
         {
           format: 'es',
