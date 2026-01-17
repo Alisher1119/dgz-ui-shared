@@ -331,7 +331,7 @@ export const DataTable = <
                     onClick={resetColumns}
                   >
                     <RefreshCw />{' '}
-                    {columnsVisibilityProps?.resetText || 'Reset columns'}
+                    {columnsVisibilityProps?.resetText || t('Reset columns')}
                   </DropdownMenuItem>
                   <DropdownMenuSeparator />
                   {formattedColumns.map((column) => {
@@ -403,7 +403,10 @@ export const DataTable = <
             />
           </div>
           <div className="text-muted-foreground text-sm">
-            {selectedRows.length} of {dataSource?.total || 0} row(s) selected.
+            {t('{{selectedCount}} of {{total}} row(s) selected', {
+              selectedCount: selectedRows.length,
+              total: dataSource?.total || 0,
+            })}
           </div>
           <div>
             <MyPagination
