@@ -6,6 +6,9 @@ import { defineConfig } from 'vite';
 
 export default defineConfig({
   plugins: [react(), tailwindcss()],
+  resolve: {
+    dedupe: ['react', 'react-dom', 'i18next', 'react-i18next'],
+  },
   test: {
     globals: true,
     environment: 'jsdom',
