@@ -17,6 +17,7 @@ export type MyTooltipProps = Omit<TooltipContentProps, 'content'> & {
   content: ReactNode;
   /** Whether to render the tooltip; if false, renders children only. */
   show?: boolean;
+  asChild?: boolean;
 };
 
 /**
@@ -25,18 +26,20 @@ export type MyTooltipProps = Omit<TooltipContentProps, 'content'> & {
  * @param props.content - Content shown inside the tooltip.
  * @param props.children - Element that triggers the tooltip.
  * @param props.show - Whether to render the tooltip; if false, renders children only.
+ * @param props.asChild - Whether to render the tooltip tigger as child element.
  */
 export const MyTooltip = ({
   content,
   children,
   show = true,
+  asChild,
   ...props
 }: MyTooltipProps) => {
   return show ? (
     <TooltipProvider>
       <Tooltip>
         <TooltipContent {...props}>{content}</TooltipContent>
-        <TooltipTrigger>{children}</TooltipTrigger>
+        <TooltipTrigger asChild={asChild}>{children}</TooltipTrigger>
       </Tooltip>
     </TooltipProvider>
   ) : (
