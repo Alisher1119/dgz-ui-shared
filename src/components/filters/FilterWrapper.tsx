@@ -27,6 +27,8 @@ export interface FilterInterface {
   name: string;
   /** Whether the filter supports multiple values (for select inputs). */
   isMulti?: boolean;
+  /** Whether the filter supports searchable inputs (for select inputs). */
+  isSearchable?: boolean;
   /** Options for select inputs. */
   options?: Option[];
 }
@@ -153,6 +155,7 @@ export const FilterWrapper = memo(function FilterWrapper({
                     key={filter.name}
                     control={control}
                     name={filter.name}
+                    isSearchable={filter.isSearchable}
                     placeholder={filter.placeholder}
                     isMulti={filter.isMulti}
                     options={filter.options}
