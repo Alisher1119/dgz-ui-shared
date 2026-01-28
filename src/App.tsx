@@ -1,11 +1,14 @@
 import { useForm } from 'react-hook-form';
-import { Form } from 'dgz-ui/form';
+import { Form, RadioGroup } from 'dgz-ui/form';
 import {
   MyCheckbox,
   MyDateRangePicker,
   MyInput,
+  MyMaskInput,
+  MyRadio,
   MySelect,
   MyTextarea,
+  MyTimePicker,
 } from './components';
 import { Button } from 'dgz-ui/button';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -85,7 +88,13 @@ function App() {
   // );
   //
   // console.log(params);
-  const form = useForm<{ name: string; range: { from: Date; to: Date } }>({
+  const form = useForm<{
+    name: string;
+    range: { from: Date; to: Date };
+    checkbox: boolean;
+    radio: string;
+    time: string;
+  }>({
     resolver: zodResolver(
       z.object({
         name: z.string().nonempty('this field is required'),
@@ -93,6 +102,9 @@ function App() {
           from: z.date(),
           to: z.date(),
         }),
+        checkbox: z.boolean(),
+        radio: z.string(),
+        time: z.string(),
       })
     ),
   });
@@ -110,6 +122,24 @@ function App() {
           control={form.control}
           name={'range'}
           placeholder={'Select date range'}
+        />
+        <MyMaskInput
+          floatingError
+          label={'Label'}
+          required
+          mask={'000000'}
+          control={form.control}
+          name={'name'}
+          placeholder={'Placeholder'}
+        />
+        <MyMaskInput
+          floatingError
+          label={'Label'}
+          required
+          mask={'000000'}
+          control={form.control}
+          name={'name'}
+          placeholder={'Placeholder'}
         />
         <div className={'flex items-end gap-3'}>
           <MyInput
@@ -140,7 +170,23 @@ function App() {
           placeholder={'Placeholder'}
         />
 
-        <MyCheckbox label={'Label'} control={form.control} name={'name'} />
+        <MyTimePicker
+          floatingError
+          label={'Label'}
+          required
+          control={form.control}
+          name={'time'}
+        />
+
+        <MyCheckbox label={'Label'} control={form.control} name={'checkbox'} />
+        <RadioGroup>
+          <MyRadio
+            value={'ll'}
+            label={'Label'}
+            control={form.control}
+            name={'radio'}
+          />{' '}
+        </RadioGroup>
       </form>
     </Form>
   );

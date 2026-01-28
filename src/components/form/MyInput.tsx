@@ -37,7 +37,6 @@ export const MyInput = <TFieldValues extends FieldValues>({
   control,
   name,
   label,
-  helperText,
   required,
   className,
   rules,

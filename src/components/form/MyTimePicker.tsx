@@ -59,7 +59,7 @@ export const MyTimePicker = <TFieldValues extends FieldValues>({
             </FormLabel>
           )}
           <FormControl>
-            <TimePicker className={'mt-2'} {...field} {...props} />
+            <TimePicker {...field} {...props} />
           </FormControl>
           <FormMessage className={cn(floatingError && 'absolute -bottom-5')} />
         </FormItem>

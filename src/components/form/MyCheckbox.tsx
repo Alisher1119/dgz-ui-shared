@@ -8,6 +8,7 @@ import {
   type FormItemProps,
   FormLabel,
 } from 'dgz-ui/form';
+import { useId } from 'react';
 
 /**
  * Props for the MyCheckbox component.
@@ -33,6 +34,7 @@ export const MyCheckbox = <TFieldValues extends FieldValues>({
   rules,
   ...props
 }: MyCheckboxProps<TFieldValues>) => {
+  const id = useId();
   return (
     (name && control && (
       <FormField<TFieldValues, FieldPath<TFieldValues>>
@@ -40,20 +42,19 @@ export const MyCheckbox = <TFieldValues extends FieldValues>({
         name={name}
         rules={rules}
         render={({ field }) => (
-          <FormLabel className={'block'}>
+          <FormLabel className={'block'} htmlFor={props.id || id}>
             <FormItem className="flex flex-row items-start gap-3">
               <FormControl>
-                <>
-                  <Checkbox
-                    checked={field.value}
-                    onCheckedChange={field.onChange}
-                    {...props}
-                  />
-                  <div className="space-y-1 leading-none">
-                    {label && <div>{label}</div>}
-                  </div>
-                </>
+                <Checkbox
+                  id={props.id || id}
+                  checked={field.value}
+                  onCheckedChange={field.onChange}
+                  {...props}
+                />
               </FormControl>
+              <div className="space-y-1 leading-none">
+                {label && <div>{label}</div>}
+              </div>
             </FormItem>
           </FormLabel>
         )}

@@ -8,6 +8,7 @@ import {
   type SwitchProps,
 } from 'dgz-ui/form';
 import type { FieldPath, FieldValues } from 'react-hook-form';
+import { useId } from 'react';
 
 /**
  * Props for the MySwitch component.
@@ -33,6 +34,7 @@ export const MySwitch = <TFieldValues extends FieldValues>({
   rules,
   ...props
 }: MySwitchProps<TFieldValues>) => {
+  const id = useId();
   return (
     (name && control && (
       <FormField<TFieldValues, FieldPath<TFieldValues>>
@@ -40,21 +42,20 @@ export const MySwitch = <TFieldValues extends FieldValues>({
         name={name}
         rules={rules}
         render={({ field }) => (
-          <FormLabel className={'block'}>
+          <FormLabel className={'block'} htmlFor={props.id || id}>
             <FormItem className="flex flex-row items-start gap-3">
               <FormControl>
-                <>
-                  <Switch
-                    className={'m-0'}
-                    checked={field.value}
-                    onCheckedChange={field.onChange}
-                    {...props}
-                  />
-                  <div className="space-y-1 leading-none">
-                    {label && <div>{label}</div>}
-                  </div>
-                </>
+                <Switch
+                  id={props.id || id}
+                  className={'m-0'}
+                  checked={field.value}
+                  onCheckedChange={field.onChange}
+                  {...props}
+                />
               </FormControl>
+              <div className="space-y-1 leading-none">
+                {label && <div>{label}</div>}
+              </div>
             </FormItem>
           </FormLabel>
         )}

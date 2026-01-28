@@ -7,7 +7,7 @@ import {
   RadioGroupItem,
 } from 'dgz-ui/form';
 import type { FieldPath, FieldValues } from 'react-hook-form';
-import React from 'react';
+import React, { useId } from 'react';
 
 type RadioItemProps = React.ComponentPropsWithoutRef<typeof RadioGroupItem>;
 
@@ -38,6 +38,7 @@ const MyRadio = <TFieldValues extends FieldValues>({
   value,
   ...props
 }: MyRadioProps<TFieldValues>) => {
+  const id = useId();
   return (
     (name && control && (
       <FormField<TFieldValues, FieldPath<TFieldValues>>
@@ -45,21 +46,24 @@ const MyRadio = <TFieldValues extends FieldValues>({
         name={name}
         rules={rules}
         render={({ field }) => (
-          <FormLabel className={'block'}>
+          <FormLabel className={'block'} htmlFor={props.id || id}>
             <FormItem className="flex flex-row items-start gap-3">
               <FormControl>
-                <>
-                  <RadioGroupItem
-                    value={value}
-                    checked={field.value === value}
-                    onClick={() => field.onChange(value)}
-                    {...props}
-                  />
-                  <div className="space-y-1 leading-none">
-                    {label && <div>{label}</div>}
-                  </div>
-                </>
+                <RadioGroupItem
+                  id={props.id || id}
+                  value={value}
+                  checked={field.value === value}
+                  onClick={() => {
+                    if (field.value !== value) {
+                      field.onChange(value);
+                    }
+                  }}
+                  {...props}
+                />
               </FormControl>
+              <div className="space-y-1 leading-none">
+                {label && <div>{label}</div>}
+              </div>
             </FormItem>
           </FormLabel>
         )}

@@ -1,7 +1,6 @@
 import type { FieldPath, FieldValues } from 'react-hook-form';
 import {
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   type FormItemProps,
@@ -44,17 +43,10 @@ export const MyMaskInput = <TFieldValues extends FieldValues>({
   name,
   label,
   rules,
-  helperText,
   required,
   floatingError,
   ...props
 }: MyMaskInputProps<TFieldValues>) => {
-  const labelElm = label && (
-    <FormLabel className={'text-body-xs-medium my-3'}>
-      {label} {required && <span className={'text-red-600'}>*</span>}
-    </FormLabel>
-  );
-
   return (
     (name && control && (
       <FormField<TFieldValues, FieldPath<TFieldValues>>
@@ -62,8 +54,12 @@ export const MyMaskInput = <TFieldValues extends FieldValues>({
         name={name}
         rules={rules}
         render={({ field }) => (
-          <FormItem>
-            {labelElm}
+          <FormItem className={cn(floatingError && 'space-y-0')}>
+            {label && (
+              <FormLabel>
+                {label} {required && <span className={'text-red-600'}>*</span>}
+              </FormLabel>
+            )}
             <FormControl>
               <MaskInput
                 thousandsSeparator={' '}
@@ -75,8 +71,9 @@ export const MyMaskInput = <TFieldValues extends FieldValues>({
                 onAccept={(value) => field.onChange(value)}
               />
             </FormControl>
-            {helperText && <FormDescription>{helperText}</FormDescription>}
-            <FormMessage className={cn(floatingError && 'absolute')} />
+            <FormMessage
+              className={cn(floatingError && 'absolute -bottom-5')}
+            />
           </FormItem>
         )}
       />
