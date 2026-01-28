@@ -149,7 +149,6 @@
     "@hookform/resolvers": "^5.0.1",
     "@tailwindcss/vite": "^4.1.7",
     "dayjs": "^1.11.13",
-    "dgz-ui": "^1.3.23",
     "file-saver": "^2.0.5",
     "lodash": "^4.17.21",
     "lucide-react": "^0.511.0",
@@ -196,6 +195,7 @@
     "vitest": "^3.1.4"
   },
   "peerDependencies": {
+    "dgz-ui": "^1.3.23",
     "react": "^19.1.2",
     "react-dom": "^19.1.2"
   }

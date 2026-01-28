@@ -1,7 +1,6 @@
 import type { FieldPath, FieldValues } from 'react-hook-form';
 import {
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   type FormItemProps,
@@ -32,7 +31,6 @@ export type MyHtmlEditorProps<TFieldValues extends FieldValues> =
  * @param name - The name of the field in `react-hook-form`.
  * @param label - The label to display for the HTML editor.
  * @param rules - The `react-hook-form` validation rules.
- * @param helperText - Helper text to display below the HTML editor.
  * @param required - Whether the field is required.
  * @param floatingError - Whether to show the error message in a floating container.
  * @param props - HtmlEditor and form item props.
@@ -43,30 +41,26 @@ export const MyHtmlEditor = <TFieldValues extends FieldValues>({
   name,
   label,
   rules,
-  helperText,
   required,
   floatingError,
   ...props
 }: MyHtmlEditorProps<TFieldValues>) => {
-  const labelElm = label && (
-    <FormLabel className={'text-body-xs-medium my-3'}>
-      {label} {required && <span className={'text-red-600'}>*</span>}
-    </FormLabel>
-  );
-
   return name && control ? (
     <FormField<TFieldValues, FieldPath<TFieldValues>>
       control={control}
       name={name}
       rules={rules}
       render={({ field }) => (
-        <FormItem>
-          {labelElm}
+        <FormItem className={cn(floatingError && 'space-y-0')}>
+          {label && (
+            <FormLabel>
+              {label} {required && <span className={'text-red-600'}>*</span>}
+            </FormLabel>
+          )}
           <FormControl>
             <HtmlEditor {...field} {...props} />
           </FormControl>
-          {helperText && <FormDescription>{helperText}</FormDescription>}
-          <FormMessage className={cn(floatingError && 'absolute')} />
+          <FormMessage className={cn(floatingError && 'absolute -bottom-5')} />
         </FormItem>
       )}
     />

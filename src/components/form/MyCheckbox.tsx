@@ -3,7 +3,6 @@ import {
   Checkbox,
   type CheckboxProps,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   type FormItemProps,
@@ -25,7 +24,6 @@ export type MyCheckboxProps<TFieldValues extends FieldValues> =
  * @param name - The name of the field in `react-hook-form`.
  * @param label - The label to display for the checkbox.
  * @param rules - The `react-hook-form` validation rules.
- * @param helperText - Helper text to display below the checkbox.
  * @param props - Checkbox and form item props.
  */
 export const MyCheckbox = <TFieldValues extends FieldValues>({
@@ -33,7 +31,6 @@ export const MyCheckbox = <TFieldValues extends FieldValues>({
   name,
   label,
   rules,
-  helperText,
   ...props
 }: MyCheckboxProps<TFieldValues>) => {
   return (
@@ -43,19 +40,22 @@ export const MyCheckbox = <TFieldValues extends FieldValues>({
         name={name}
         rules={rules}
         render={({ field }) => (
-          <FormItem className="flex flex-row items-start space-x-3">
-            <FormControl>
-              <Checkbox
-                checked={field.value}
-                onCheckedChange={field.onChange}
-                {...props}
-              />
-            </FormControl>
-            <div className="space-y-1 leading-none">
-              {label && <FormLabel>{label}</FormLabel>}
-              {helperText && <FormDescription>{helperText}</FormDescription>}
-            </div>
-          </FormItem>
+          <FormLabel className={'block'}>
+            <FormItem className="flex flex-row items-start gap-3">
+              <FormControl>
+                <>
+                  <Checkbox
+                    checked={field.value}
+                    onCheckedChange={field.onChange}
+                    {...props}
+                  />
+                  <div className="space-y-1 leading-none">
+                    {label && <div>{label}</div>}
+                  </div>
+                </>
+              </FormControl>
+            </FormItem>
+          </FormLabel>
         )}
       />
     )) ||

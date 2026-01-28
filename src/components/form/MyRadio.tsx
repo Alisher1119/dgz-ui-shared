@@ -1,6 +1,5 @@
 import {
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   type FormItemProps,
@@ -28,7 +27,6 @@ type MyRadioProps<TFieldValues extends FieldValues> =
  * @param name - The name of the field in `react-hook-form`.
  * @param label - The label to display for the radio input.
  * @param rules - The `react-hook-form` validation rules.
- * @param helperText - Helper text to display below the radio input.
  * @param value - The value of the radio input.
  * @param props - Radio item and form item props.
  */
@@ -37,7 +35,6 @@ const MyRadio = <TFieldValues extends FieldValues>({
   name,
   label,
   rules,
-  helperText,
   value,
   ...props
 }: MyRadioProps<TFieldValues>) => {
@@ -48,20 +45,23 @@ const MyRadio = <TFieldValues extends FieldValues>({
         name={name}
         rules={rules}
         render={({ field }) => (
-          <FormItem className="flex flex-row items-start space-x-3">
-            <FormControl>
-              <RadioGroupItem
-                value={value}
-                checked={field.value === value}
-                onClick={() => field.onChange(value)}
-                {...props}
-              />
-            </FormControl>
-            <div className="space-y-1 leading-none">
-              {label && <FormLabel>{label}</FormLabel>}
-              {helperText && <FormDescription>{helperText}</FormDescription>}
-            </div>
-          </FormItem>
+          <FormLabel className={'block'}>
+            <FormItem className="flex flex-row items-start gap-3">
+              <FormControl>
+                <>
+                  <RadioGroupItem
+                    value={value}
+                    checked={field.value === value}
+                    onClick={() => field.onChange(value)}
+                    {...props}
+                  />
+                  <div className="space-y-1 leading-none">
+                    {label && <div>{label}</div>}
+                  </div>
+                </>
+              </FormControl>
+            </FormItem>
+          </FormLabel>
         )}
       />
     )) ||

@@ -1,3 +1,16 @@
+import { useForm } from 'react-hook-form';
+import { Form } from 'dgz-ui/form';
+import {
+  MyCheckbox,
+  MyDateRangePicker,
+  MyInput,
+  MySelect,
+  MyTextarea,
+} from './components';
+import { Button } from 'dgz-ui/button';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { z } from 'zod';
+
 function App() {
   // const [params, setParams] = useState<Record<string, unknown>>({
   //   page: 1,
@@ -72,17 +85,64 @@ function App() {
   // );
   //
   // console.log(params);
+  const form = useForm<{ name: string; range: { from: Date; to: Date } }>({
+    resolver: zodResolver(
+      z.object({
+        name: z.string().nonempty('this field is required'),
+        range: z.object({
+          from: z.date(),
+          to: z.date(),
+        }),
+      })
+    ),
+  });
+
+  console.log(form.watch());
+
   return (
-    <></>
-    // <DataTable<{ name: string; id: string; date: string }>
-    //   columns={columns}
-    //   tableKey={'table'}
-    //   rowKey={'id'}
-    //   filters={filters}
-    //   params={params}
-    //   onParamChange={setParams}
-    //   dataSource={data}
-    // />
+    <Form {...form}>
+      <form
+        className={'mx-auto max-w-2xl space-y-4'}
+        onSubmit={form.handleSubmit(console.log)}
+      >
+        <MyDateRangePicker
+          // disabled
+          control={form.control}
+          name={'range'}
+          placeholder={'Select date range'}
+        />
+        <div className={'flex items-end gap-3'}>
+          <MyInput
+            floatingError
+            label={'Label'}
+            required
+            control={form.control}
+            name={'name'}
+            placeholder={'Placeholder'}
+          />
+          <Button>Save</Button>
+        </div>
+
+        <MySelect
+          label={'Label'}
+          control={form.control}
+          name={'name'}
+          placeholder={'Placeholder'}
+          options={[]}
+        />
+
+        <MyTextarea
+          floatingError
+          label={'Label'}
+          required
+          control={form.control}
+          name={'name'}
+          placeholder={'Placeholder'}
+        />
+
+        <MyCheckbox label={'Label'} control={form.control} name={'name'} />
+      </form>
+    </Form>
   );
 }
 

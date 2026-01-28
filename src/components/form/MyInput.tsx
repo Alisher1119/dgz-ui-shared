@@ -1,6 +1,5 @@
 import {
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   type FormItemProps,
@@ -10,7 +9,6 @@ import {
   type InputProps,
 } from 'dgz-ui/form';
 import type { FieldPath, FieldValues } from 'react-hook-form';
-import { twMerge } from 'tailwind-merge';
 import { get } from 'lodash';
 import { cn } from 'dgz-ui/utils';
 
@@ -29,7 +27,6 @@ export type MyInputProps<TFieldValues extends FieldValues> =
  * @param control - The `react-hook-form` control object.
  * @param name - The name of the field in `react-hook-form`.
  * @param label - The label to display for the input.
- * @param helperText - Helper text to display below the input.
  * @param required - Whether the field is required.
  * @param className - Custom CSS class name.
  * @param rules - The `react-hook-form` validation rules.
@@ -47,12 +44,6 @@ export const MyInput = <TFieldValues extends FieldValues>({
   floatingError,
   ...props
 }: MyInputProps<TFieldValues>) => {
-  const labelElm = label && (
-    <FormLabel>
-      {label} {required && <span className={'text-red-600'}>*</span>}
-    </FormLabel>
-  );
-
   return (
     (name && control && (
       <FormField<TFieldValues, FieldPath<TFieldValues>>
@@ -60,8 +51,12 @@ export const MyInput = <TFieldValues extends FieldValues>({
         name={name}
         rules={rules}
         render={({ field, formState }) => (
-          <FormItem>
-            {labelElm}
+          <FormItem className={cn(floatingError && 'space-y-0')}>
+            {label && (
+              <FormLabel>
+                {label} {required && <span className={'text-red-600'}>*</span>}
+              </FormLabel>
+            )}
             <FormControl>
               <Input
                 variant={
@@ -79,11 +74,12 @@ export const MyInput = <TFieldValues extends FieldValues>({
                     field.onChange(value);
                   }
                 }}
-                className={twMerge(['mt-2', className])}
+                className={cn(className)}
               />
             </FormControl>
-            {helperText && <FormDescription>{helperText}</FormDescription>}
-            <FormMessage className={cn(floatingError && 'absolute')} />
+            <FormMessage
+              className={cn(floatingError && 'absolute -bottom-5')}
+            />
           </FormItem>
         )}
       />

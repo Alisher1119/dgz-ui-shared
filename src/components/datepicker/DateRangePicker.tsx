@@ -1,17 +1,18 @@
 import { type ReactNode, useEffect, useMemo, useState } from 'react';
 import { type DateRange } from 'react-day-picker';
-import { Calendar, DATE } from 'dgz-ui/calendar';
+import { Calendar, type CalendarProps, DATE } from 'dgz-ui/calendar';
 import dayjs from 'dayjs';
 import { useTranslation } from 'react-i18next';
 import { cn } from 'dgz-ui/utils';
 import { Popover, PopoverContent, PopoverTrigger } from 'dgz-ui/popover';
-import { Button, type ButtonProps } from 'dgz-ui/button';
-import { Calendar1 } from 'lucide-react';
+import { Button } from 'dgz-ui/button';
+import { Calendar1, XIcon } from 'lucide-react';
+import { Input, type InputProps } from 'dgz-ui/form';
 
 /**
  * Props for the DateRangePicker component.
  */
-type DateRangePickerProps = ButtonProps & {
+export type DateRangePickerProps = Omit<CalendarProps, 'mode' | 'disabled'> & {
   /** The date format string (e.g., 'YYYY-MM-DD'). */
   format?: string;
   /** Placeholder text when no date is selected. */
@@ -24,6 +25,8 @@ type DateRangePickerProps = ButtonProps & {
   error?: string;
   /** Callback function when a date range is selected. */
   onRangeSelected?: (value?: DateRange) => void;
+  inputProps?: InputProps;
+  disabled?: boolean;
 };
 
 /**
@@ -32,6 +35,7 @@ type DateRangePickerProps = ButtonProps & {
 type PresetType = DateRange & {
   /** Label for the preset (e.g., "Last 7 days"). */
   label: ReactNode;
+  isActive?: boolean;
 };
 
 /**
@@ -51,7 +55,9 @@ export const DateRangePicker = ({
   timezone,
   onRangeSelected = () => {},
   placeholder,
+  disabled,
   error,
+  inputProps,
   ...props
 }: DateRangePickerProps) => {
   const { t } = useTranslation();
@@ -105,108 +111,122 @@ export const DateRangePicker = ({
         to: today.toDate(),
         label: t('Last 12 months'),
       },
-    ];
-  }, [t]);
+    ].map((item) => ({
+      ...item,
+      isActive:
+        selected?.from?.getTime() === item.from.getTime() &&
+        selected?.to?.getTime() === item.to.getTime(),
+    }));
+  }, [t, selected]);
 
   const handleRangeSelect = (range: DateRange) => {
-    const { from, to } = range;
-    setDate({ from, to });
-    if (from && to) {
-      onRangeSelected({ from, to });
+    setDate(range);
+    if (range?.from && range?.to) {
+      onRangeSelected(range);
       setOpen(false);
     }
   };
 
+  console.log(selected);
   return (
-    <div className={cn('grid gap-2', className)}>
-      <Popover open={open} onOpenChange={setOpen}>
-        <PopoverTrigger asChild>
-          <Button
-            id="date"
-            size={'sm'}
-            variant={'secondary'}
-            className={cn(
-              'text-secondary !text-body-sm-regular border-border-alpha-strong focus:ring-item-primary mb-0 min-w-[170px] justify-between bg-transparent pl-3 text-left font-normal hover:bg-transparent',
-              error &&
-                'focus:ring-item-destructive border-item-destructive bg-item-destructive-focus text-item-destructive hover:bg-item-destructive-focus dark:bg-transparent',
-              !date && 'text-primary'
-            )}
-            {...props}
-          >
-            {date?.from ? (
-              date.to ? (
-                <>
-                  {dayjs(date.from).format(format)} -{' '}
-                  {dayjs(date.to).format(format)}
-                </>
-              ) : (
-                dayjs(date.from).format(format)
-              )
-            ) : (
-              <span className={'text-secondary'}>{placeholder}</span>
-            )}
-            <Calendar1 className={'text-secondary'} />
-          </Button>
-        </PopoverTrigger>
-        <PopoverContent className="flex w-auto p-0" align="end" side={'bottom'}>
-          <div
-            className={
-              'border-border-alpha-light flex flex-col space-y-1 border-e p-2'
-            }
-          >
-            {presets.map((preset, index) => (
-              <Button
-                size={'xs'}
-                key={index}
-                variant={'ghost'}
-                className={'justify-start'}
-                onClick={() => handleRangeSelect(preset)}
-              >
-                {preset.label}
-              </Button>
-            ))}
-          </div>
-          <Calendar
-            className={'border-border-alpha-light border-e'}
-            mode="single"
-            endMonth={date?.to}
-            selected={date?.from}
-            selectedToDate={date?.to}
-            selectedFromDate={date?.from}
-            timeZone={timezone}
-            disabled={
-              date?.to
-                ? {
-                    after: date.to,
-                  }
-                : undefined
-            }
-            onSelect={(from) => {
-              setDate({ ...date, from: from as Date | undefined });
-            }}
-          />
-          <Calendar
-            mode="single"
-            startMonth={date?.from}
-            selected={date?.to}
-            timeZone={timezone}
-            disabled={
+    <Popover open={open} onOpenChange={setOpen}>
+      <PopoverTrigger asChild className={'m-0!'} disabled={disabled}>
+        <div className={'relative'}>
+          <Input
+            variant={error ? 'failure' : 'default'}
+            {...inputProps}
+            readOnly
+            value={
               date?.from
-                ? {
-                    before: date.from,
-                  }
-                : undefined
+                ? date.to
+                  ? `${dayjs(date.from).format(format)}-${dayjs(date.to).format(format)}`
+                  : dayjs(date.from).format(format)
+                : ''
             }
-            selectedToDate={date?.to}
-            selectedFromDate={date?.from}
-            onSelect={(to) => {
-              if (date) {
-                handleRangeSelect({ ...date, to: to as Date | undefined });
-              }
-            }}
+            placeholder={placeholder}
+            disabled={disabled}
+            className={cn(className)}
           />
-        </PopoverContent>
-      </Popover>
-    </div>
+          {date && (
+            <XIcon
+              onClick={() => {
+                setDate(undefined);
+                onRangeSelected?.(undefined);
+              }}
+              className={cn(
+                'text-secondary absolute top-3 right-8 size-4 cursor-pointer',
+                disabled && 'pointer-events-none opacity-50'
+              )}
+            />
+          )}
+          <Calendar1
+            className={cn(
+              'text-secondary absolute top-2.5 right-2 size-5',
+              disabled && 'pointer-events-none opacity-50'
+            )}
+          />
+        </div>
+      </PopoverTrigger>
+      <PopoverContent className="flex w-auto p-0" align="end" side={'bottom'}>
+        <div
+          className={
+            'border-border-alpha-light flex flex-col space-y-1 border-e p-2'
+          }
+        >
+          {presets.map((preset, index) => (
+            <Button
+              size={'xs'}
+              key={index}
+              variant={preset.isActive ? 'default' : 'ghost'}
+              className={'justify-start'}
+              onClick={() => handleRangeSelect(preset)}
+            >
+              {preset.label}
+            </Button>
+          ))}
+        </div>
+        <Calendar
+          {...props}
+          className={'border-border-alpha-light border-e'}
+          mode="single"
+          endMonth={date?.to}
+          selected={date?.from}
+          selectedToDate={date?.to}
+          selectedFromDate={date?.from}
+          timeZone={timezone}
+          disabled={
+            date?.to
+              ? {
+                  after: date.to,
+                }
+              : undefined
+          }
+          onSelect={(from) => {
+            setDate({ ...date, from: from as Date | undefined });
+          }}
+        />
+        <Calendar
+          {...props}
+          mode="single"
+          startMonth={date?.from}
+          selected={date?.to}
+          timeZone={timezone}
+          disabled={
+            date?.from
+              ? {
+                  before: date.from,
+                }
+              : undefined
+          }
+          selectedToDate={date?.to}
+          selectedFromDate={date?.from}
+          onSelect={(to) => {
+            if (date) {
+              handleRangeSelect({ ...date, to: to as Date | undefined });
+            }
+          }}
+        />
+      </PopoverContent>
+    </Popover>
   );
 };

@@ -1,6 +1,5 @@
 import {
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   type FormItemProps,
@@ -31,7 +30,6 @@ export type MyTimePickerProps<TFieldValues extends FieldValues> =
  * @param control - The `react-hook-form` control object.
  * @param name - The name of the field in `react-hook-form`.
  * @param label - The label to display for the time picker.
- * @param helperText - Helper text to display below the time picker.
  * @param required - Whether the field is required.
  * @param className - Custom CSS class name.
  * @param rules - The `react-hook-form` validation rules.
@@ -42,32 +40,28 @@ export const MyTimePicker = <TFieldValues extends FieldValues>({
   control,
   name,
   label,
-  helperText,
   required,
   className,
   rules,
   floatingError,
   ...props
 }: MyTimePickerProps<TFieldValues>) => {
-  const labelElm = label && (
-    <FormLabel>
-      {label} {required && <span className={'text-red-600'}>*</span>}
-    </FormLabel>
-  );
-
   return name && control ? (
     <FormField<TFieldValues, FieldPath<TFieldValues>>
       control={control}
       name={name}
       rules={rules}
       render={({ field }) => (
-        <FormItem>
-          {labelElm}
+        <FormItem className={cn(floatingError && 'space-y-0')}>
+          {label && (
+            <FormLabel>
+              {label} {required && <span className={'text-red-600'}>*</span>}
+            </FormLabel>
+          )}
           <FormControl>
             <TimePicker className={'mt-2'} {...field} {...props} />
           </FormControl>
-          {helperText && <FormDescription>{helperText}</FormDescription>}
-          <FormMessage className={cn(floatingError && 'absolute')} />
+          <FormMessage className={cn(floatingError && 'absolute -bottom-5')} />
         </FormItem>
       )}
     />

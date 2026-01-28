@@ -34,7 +34,6 @@ export type MyMaskInputProps<TFieldValues extends FieldValues> =
  * @param name - The name of the field in `react-hook-form`.
  * @param label - The label to display for the mask input.
  * @param rules - The `react-hook-form` validation rules.
- * @param helperText - Helper text to display below the mask input.
  * @param required - Whether the field is required.
  * @param floatingError - Whether to show the error message in a floating container.
  * @param props - MaskInput and form item props.
