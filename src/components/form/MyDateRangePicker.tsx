@@ -16,7 +16,10 @@ import { DateRangePicker, type DateRangePickerProps } from '../datepicker';
  * @template TFieldValues - The type of the form values.
  */
 export type MyDateRangePickerProps<TFieldValues extends FieldValues> =
-  FormItemProps<TFieldValues> & DateRangePickerProps;
+  FormItemProps<TFieldValues> &
+    Omit<DateRangePickerProps, 'required'> & {
+      required?: boolean;
+    };
 
 /**
  * MyDateRangePicker renders a date range selector integrated with react-hook-form.
