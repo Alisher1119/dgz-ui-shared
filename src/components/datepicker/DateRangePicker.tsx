@@ -12,7 +12,10 @@ import { useTranslation } from 'react-i18next';
 /**
  * Props for the DateRangePicker component.
  */
-export type DateRangePickerProps = Omit<CalendarProps, 'mode' | 'disabled'> & {
+export type DateRangePickerProps = Omit<
+  CalendarProps,
+  'mode' | 'disabled' | 'selected'
+> & {
   /** The date format string (e.g., 'YYYY-MM-DD'). */
   format?: string;
   /** Placeholder text when no date is selected. */
