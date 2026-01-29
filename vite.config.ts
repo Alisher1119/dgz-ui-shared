@@ -97,7 +97,18 @@ export default defineConfig({
       },
     },
     rollupOptions: {
-      external: ['react', 'react-dom', 'dgz-ui'],
+      external: [
+        'react',
+        'react-dom',
+        'i18next',
+        'react-i18next',
+        'dayjs',
+        'lucide-react',
+        'react-hook-form',
+        'tailwindcss',
+        'tailwindcss-animate',
+        'dgz-ui',
+      ],
       output: [
         {
           format: 'es',
