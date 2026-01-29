@@ -7,7 +7,14 @@ import { defineConfig } from 'vite';
 export default defineConfig({
   plugins: [react(), tailwindcss()],
   resolve: {
-    dedupe: ['react', 'react-dom', 'i18next', 'react-i18next'],
+    dedupe: [
+      'react',
+      'react-dom',
+      'i18next',
+      'react-i18next',
+      'dayjs',
+      'dgz-ui',
+    ],
   },
   test: {
     globals: true,
@@ -86,7 +93,14 @@ export default defineConfig({
       },
     },
     rollupOptions: {
-      external: ['react', 'react-dom', 'i18next', 'react-i18next'],
+      external: [
+        'react',
+        'react-dom',
+        'i18next',
+        'react-i18next',
+        'dayjs',
+        'dgz-ui',
+      ],
       output: [
         {
           format: 'es',

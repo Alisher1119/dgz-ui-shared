@@ -22,5 +22,3 @@ export const createConfirmPasswordSchema = (
 export type ConfirmPasswordDto = z.infer<
   ReturnType<typeof createConfirmPasswordSchema>
 >;
-
-export default createConfirmPasswordSchema;
