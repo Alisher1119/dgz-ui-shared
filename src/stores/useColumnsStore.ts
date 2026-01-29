@@ -1,5 +1,5 @@
-import { persist } from 'zustand/middleware';
 import { create } from 'zustand';
+import { persist } from 'zustand/middleware';
 
 /**
  * State shape for the columns store.

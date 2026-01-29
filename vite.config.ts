@@ -1,7 +1,7 @@
 /// <reference types="vitest/config" />
-import { resolve } from 'path';
 import tailwindcss from '@tailwindcss/vite';
 import react from '@vitejs/plugin-react';
+import { resolve } from 'path';
 import { defineConfig } from 'vite';
 
 export default defineConfig({
@@ -13,6 +13,10 @@ export default defineConfig({
       'i18next',
       'react-i18next',
       'dayjs',
+      'lucide-react',
+      'react-hook-form',
+      'tailwindcss',
+      'tailwindcss-animate',
       'dgz-ui',
     ],
   },
@@ -99,6 +103,10 @@ export default defineConfig({
         'i18next',
         'react-i18next',
         'dayjs',
+        'lucide-react',
+        'react-hook-form',
+        'tailwindcss',
+        'tailwindcss-animate',
         'dgz-ui',
       ],
       output: [

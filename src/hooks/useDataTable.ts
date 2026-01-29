@@ -1,6 +1,6 @@
-import { useCallback, useEffect, useState } from 'react';
 import type { CheckedState } from '@radix-ui/react-checkbox';
 import { isEqual } from 'lodash';
+import { useCallback, useEffect, useState } from 'react';
 
 /**
  * Props for the useDataTable hook.

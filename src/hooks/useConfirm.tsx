@@ -1,6 +1,6 @@
+import { uniqueId } from 'lodash';
 import { useCallback } from 'react';
 import { toast } from 'react-toastify/unstyled';
-import { uniqueId } from 'lodash';
 import { Confirm, PasswordConfirm } from '../components';
 import type { ConfirmPasswordDto } from '../schemas';
 

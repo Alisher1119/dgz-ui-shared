@@ -1,3 +1,7 @@
+import { cn } from 'dgz-ui/utils';
+import { saveAs } from 'file-saver';
+import { isNumber } from 'lodash';
+import { ChevronLeft, ChevronRight, Download, X } from 'lucide-react';
 import {
   type HTMLAttributes,
   memo,
@@ -7,10 +11,6 @@ import {
   useMemo,
   useState,
 } from 'react';
-import { ChevronLeft, ChevronRight, Download, X } from 'lucide-react';
-import { isNumber } from 'lodash';
-import { cn } from 'dgz-ui/utils';
-import { saveAs } from 'file-saver';
 
 /**
  * Interface representing an image item in the gallery.

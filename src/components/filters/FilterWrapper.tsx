@@ -1,17 +1,17 @@
-import { memo, type ReactNode, useCallback, useEffect, useState } from 'react';
-import { get } from 'lodash';
-import type { FieldValues } from 'react-hook-form';
-import { ChevronDown, ListFilterIcon, ListFilterPlusIcon } from 'lucide-react';
 import { Button, type ButtonProps } from 'dgz-ui/button';
+import { Form, type Option } from 'dgz-ui/form';
 import {
   Popover,
   type PopoverContainerProps,
   PopoverContent,
   PopoverTrigger,
 } from 'dgz-ui/popover';
-import { Form, type Option } from 'dgz-ui/form';
-import { MyInput, MySelect } from '../form';
+import { get } from 'lodash';
+import { ChevronDown, ListFilterIcon, ListFilterPlusIcon } from 'lucide-react';
+import { memo, type ReactNode, useCallback, useEffect, useState } from 'react';
+import type { FieldValues } from 'react-hook-form';
 import { useFilter } from '../../hooks';
+import { MyInput, MySelect } from '../form';
 
 /**
  * Interface representing a filter configuration.
@@ -37,8 +37,7 @@ export interface FilterInterface {
  * Props for the FilterWrapper component.
  */
 export interface FilterWrapperProps
-  extends Omit<ButtonProps, 'title'>,
-    PopoverContainerProps {
+  extends Omit<ButtonProps, 'title'>, PopoverContainerProps {
   /** Array of filter definitions to render. */
   filters: FilterInterface[];
   /** Current active parameters/filters. */

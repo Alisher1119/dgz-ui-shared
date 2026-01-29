@@ -1,15 +1,17 @@
-import { Input } from 'dgz-ui/form';
-import { useTranslation } from 'react-i18next';
 import { Button } from 'dgz-ui/button';
+import { Input } from 'dgz-ui/form';
+import { cn } from 'dgz-ui/utils';
 import { SearchIcon } from 'lucide-react';
 import type { FormEvent, HTMLAttributes } from 'react';
-import { cn } from 'dgz-ui/utils';
+import { useTranslation } from 'react-i18next';
 
 /**
  * Props for the Search component.
  */
-export interface SearchProps
-  extends Omit<HTMLAttributes<HTMLInputElement>, 'defaultValue' | 'name'> {
+export interface SearchProps extends Omit<
+  HTMLAttributes<HTMLInputElement>,
+  'defaultValue' | 'name'
+> {
   /** The name attribute for the input field. */
   name?: string;
   /** Placeholder text for the search input. */

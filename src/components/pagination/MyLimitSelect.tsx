@@ -1,4 +1,3 @@
-import { useTranslation } from 'react-i18next';
 import {
   Select,
   SelectContent,
@@ -7,6 +6,7 @@ import {
   SelectValue,
   type Option,
 } from 'dgz-ui/form';
+import { useTranslation } from 'react-i18next';
 
 export const DEFAULT_LIMIT = 50;
 export const DEFAULT_ITEMS_LIMIT = 12;

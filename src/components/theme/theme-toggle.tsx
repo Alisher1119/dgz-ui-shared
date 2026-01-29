@@ -1,12 +1,12 @@
-import { Moon, Sun } from 'lucide-react';
+import { Button } from 'dgz-ui/button';
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from 'dgz-ui/dropdown';
+import { Moon, Sun } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
-import { Button } from 'dgz-ui/button';
 import { ThemeMode } from '../../enums';
 import { useTheme } from '../../hooks';
 

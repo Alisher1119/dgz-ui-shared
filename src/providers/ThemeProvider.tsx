@@ -1,6 +1,6 @@
 import { type ReactNode, useEffect, useState } from 'react';
-import { ThemeMode } from '../enums';
 import { ThemeProviderContext } from '../contexts';
+import { ThemeMode } from '../enums';
 
 /**
  * Props for the ThemeProvider component.

@@ -1,6 +1,6 @@
-import { useForm } from 'react-hook-form';
-import { useEffect } from 'react';
 import { entries } from 'lodash';
+import { useEffect } from 'react';
+import { useForm } from 'react-hook-form';
 
 /**
  * Props for the useFilter hook.

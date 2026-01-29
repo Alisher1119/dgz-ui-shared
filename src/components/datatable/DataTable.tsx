@@ -1,4 +1,4 @@
-import { RefreshCw } from 'lucide-react';
+import { RiArrowDownSLine, RiLayoutColumnLine } from '@remixicon/react';
 import { Button } from 'dgz-ui/button';
 import {
   type DropdownContainerProps,
@@ -9,13 +9,18 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from 'dgz-ui/dropdown';
-import { MyLimitSelect, MyPagination } from '../pagination';
-import { useTranslation } from 'react-i18next';
-import { RiArrowDownSLine, RiLayoutColumnLine } from '@remixicon/react';
-import { type ReactNode, useEffect, useState } from 'react';
 import { get, isEmpty } from 'lodash';
-import { MyTable, type MyTableProps } from './MyTable';
+import { RefreshCw } from 'lucide-react';
+import { type ReactNode, useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useColumns } from '../../hooks';
+import type { ColumnType } from '../../types';
+import { type ActionInterface, Actions, type ActionsProps } from '../actions';
+import {
+  ExportData,
+  type ExportDataInterface,
+  type ExportDataProps,
+} from '../export';
 import {
   type FilterInterface,
   FilterWrapper,
@@ -24,14 +29,9 @@ import {
   type SearchProps,
 } from '../filters';
 import { Loader } from '../loader';
-import { type ActionInterface, Actions, type ActionsProps } from '../actions';
-import {
-  ExportData,
-  type ExportDataInterface,
-  type ExportDataProps,
-} from '../export';
-import type { ColumnType } from '../../types';
+import { MyLimitSelect, MyPagination } from '../pagination';
 import type { MyPaginationProps } from '../pagination/MyPagination.tsx';
+import { MyTable, type MyTableProps } from './MyTable';
 
 /**
  * Minimal pagination wrapper contract used by `DataTable`.
@@ -224,8 +224,8 @@ export interface DataTableProps<
  */
 export const DataTable = <
   TData,
-  TPaginationData extends
-    PaginationInterface<TData> = PaginationInterface<TData>,
+  TPaginationData extends PaginationInterface<TData> =
+    PaginationInterface<TData>,
 >({
   dataSource,
   columns,

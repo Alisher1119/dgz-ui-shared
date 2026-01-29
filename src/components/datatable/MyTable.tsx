@@ -1,8 +1,4 @@
-import {
-  ArrowDownWideNarrow,
-  ArrowUpDown,
-  ArrowUpWideNarrow,
-} from 'lucide-react';
+import { Checkbox } from 'dgz-ui/form';
 import {
   Table,
   TableBody,
@@ -11,15 +7,19 @@ import {
   TableHeader,
   TableRow,
 } from 'dgz-ui/table';
-import { get } from 'lodash';
-import { type ComponentProps, useEffect } from 'react';
-import type { ColumnType } from '../../types';
-import { DEFAULT_LIMIT } from '../pagination/MyLimitSelect';
-import { useDataTable, useSortable, type UseSortableProps } from '../../hooks';
-import { Checkbox } from 'dgz-ui/form';
 import { cn } from 'dgz-ui/utils';
+import { get } from 'lodash';
+import {
+  ArrowDownWideNarrow,
+  ArrowUpDown,
+  ArrowUpWideNarrow,
+} from 'lucide-react';
+import { type ComponentProps, useEffect } from 'react';
 import { SortOrder } from '../../enums';
+import { useDataTable, useSortable, type UseSortableProps } from '../../hooks';
+import type { ColumnType } from '../../types';
 import { Empty } from '../empty';
+import { DEFAULT_LIMIT } from '../pagination/MyLimitSelect';
 
 /**
  * Props for the MyTable component.

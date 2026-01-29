@@ -1,4 +1,4 @@
-import { type ReactNode } from 'react';
+import { type AlertDialogProps } from '@radix-ui/react-alert-dialog';
 import {
   AlertDialog,
   AlertDialogAction,
@@ -10,8 +10,8 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from 'dgz-ui/alert-dialog';
+import { type ReactNode } from 'react';
 import { useTranslation } from 'react-i18next';
-import { type AlertDialogProps } from '@radix-ui/react-alert-dialog';
 
 /**
  * Props for the Confirm component.

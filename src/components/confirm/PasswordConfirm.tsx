@@ -1,3 +1,4 @@
+import { zodResolver } from '@hookform/resolvers/zod';
 import {
   AlertDialog,
   AlertDialogAction,
@@ -8,17 +9,16 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from 'dgz-ui/alert-dialog';
-import { useTranslation } from 'react-i18next';
-import { type ConfirmProps } from './Confirm';
 import { Form } from 'dgz-ui/form';
-import { MyInput } from '../form';
 import { useMemo } from 'react';
 import { useForm } from 'react-hook-form';
-import { zodResolver } from '@hookform/resolvers/zod';
+import { useTranslation } from 'react-i18next';
 import {
   type ConfirmPasswordDto,
   createConfirmPasswordSchema,
 } from '../../schemas';
+import { MyInput } from '../form';
+import { type ConfirmProps } from './Confirm';
 
 /**
  * Props for the PasswordConfirm component.

@@ -1,7 +1,7 @@
-import { FolderOpen } from 'lucide-react';
-import { useTranslation } from 'react-i18next';
-import type { HTMLAttributes, ReactNode } from 'react';
 import { cn } from 'dgz-ui/utils';
+import { FolderOpen } from 'lucide-react';
+import type { HTMLAttributes, ReactNode } from 'react';
+import { useTranslation } from 'react-i18next';
 
 export interface EmptyProps extends HTMLAttributes<HTMLDivElement> {
   icon?: ReactNode;

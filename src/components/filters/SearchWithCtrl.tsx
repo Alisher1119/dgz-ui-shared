@@ -1,12 +1,12 @@
-import type { CardProps } from 'dgz-ui/card';
-import { useState } from 'react';
-import { Input } from 'dgz-ui/form';
-import { useTranslation } from 'react-i18next';
-import { Button } from 'dgz-ui/button';
 import { RiSearchLine } from '@remixicon/react';
-import { get } from 'lodash';
-import { Keyboard } from '../../enums';
+import { Button } from 'dgz-ui/button';
+import type { CardProps } from 'dgz-ui/card';
+import { Input } from 'dgz-ui/form';
 import { cn } from 'dgz-ui/utils';
+import { get } from 'lodash';
+import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
+import { Keyboard } from '../../enums';
 
 /**
  * Props for the SearchWithCtrl component.

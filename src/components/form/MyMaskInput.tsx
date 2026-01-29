@@ -1,4 +1,3 @@
-import type { FieldPath, FieldValues } from 'react-hook-form';
 import {
   FormControl,
   FormField,
@@ -10,6 +9,7 @@ import {
   type MaskInputProps,
 } from 'dgz-ui/form';
 import { cn } from 'dgz-ui/utils';
+import type { FieldPath, FieldValues } from 'react-hook-form';
 
 /**
  * Props for the MyMaskInput component.

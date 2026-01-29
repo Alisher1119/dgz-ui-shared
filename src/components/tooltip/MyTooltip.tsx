@@ -1,3 +1,4 @@
+import { type TooltipContentProps } from '@radix-ui/react-tooltip';
 import {
   Tooltip,
   TooltipContent,
@@ -5,7 +6,6 @@ import {
   TooltipTrigger,
 } from 'dgz-ui/tooltip';
 import { type ReactNode } from 'react';
-import { type TooltipContentProps } from '@radix-ui/react-tooltip';
 
 /**
  * Props for the MyTooltip component.

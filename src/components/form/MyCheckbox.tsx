@@ -1,4 +1,3 @@
-import type { FieldPath, FieldValues } from 'react-hook-form';
 import {
   Checkbox,
   type CheckboxProps,
@@ -9,6 +8,7 @@ import {
   FormLabel,
 } from 'dgz-ui/form';
 import { useId } from 'react';
+import type { FieldPath, FieldValues } from 'react-hook-form';
 
 /**
  * Props for the MyCheckbox component.

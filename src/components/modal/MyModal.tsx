@@ -1,4 +1,4 @@
-import type { ReactNode } from 'react';
+import type { DialogProps } from '@radix-ui/react-dialog';
 import {
   Dialog,
   type DialogContainerProps,
@@ -9,8 +9,8 @@ import {
   DialogTitle,
   DialogTrigger,
 } from 'dgz-ui/dialog';
-import type { DialogProps } from '@radix-ui/react-dialog';
 import { cn } from 'dgz-ui/utils';
+import type { ReactNode } from 'react';
 
 /**
  * Props for the MyModal component.

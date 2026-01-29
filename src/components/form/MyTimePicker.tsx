@@ -1,3 +1,4 @@
+import { TimePicker, type TimePickerProps } from 'dgz-ui/calendar';
 import {
   FormControl,
   FormField,
@@ -6,9 +7,8 @@ import {
   FormLabel,
   FormMessage,
 } from 'dgz-ui/form';
-import type { FieldPath, FieldValues } from 'react-hook-form';
-import { TimePicker, type TimePickerProps } from 'dgz-ui/calendar';
 import { cn } from 'dgz-ui/utils';
+import type { FieldPath, FieldValues } from 'react-hook-form';
 
 /**
  * Props for the MyTimePicker component.

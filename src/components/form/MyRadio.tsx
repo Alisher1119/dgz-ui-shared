@@ -6,8 +6,8 @@ import {
   FormLabel,
   RadioGroupItem,
 } from 'dgz-ui/form';
-import type { FieldPath, FieldValues } from 'react-hook-form';
 import React, { useId } from 'react';
+import type { FieldPath, FieldValues } from 'react-hook-form';
 
 type RadioItemProps = React.ComponentPropsWithoutRef<typeof RadioGroupItem>;
 

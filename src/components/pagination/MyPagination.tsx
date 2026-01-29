@@ -1,4 +1,11 @@
 import {
+  type Option,
+  Select,
+  SelectTrigger,
+  SelectValue,
+  VirtualizedSelectContent,
+} from 'dgz-ui/form';
+import {
   Pagination,
   PaginationContent,
   PaginationItem,
@@ -7,15 +14,8 @@ import {
   PaginationPrevious,
 } from 'dgz-ui/pagination';
 import { cn } from 'dgz-ui/utils';
-import { useTranslation } from 'react-i18next';
-import {
-  type Option,
-  Select,
-  SelectTrigger,
-  SelectValue,
-  VirtualizedSelectContent,
-} from 'dgz-ui/form';
 import { type HTMLAttributes, useCallback, useMemo } from 'react';
+import { useTranslation } from 'react-i18next';
 
 /**
  * Props for the MyPagination component.

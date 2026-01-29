@@ -8,9 +8,9 @@ import {
   ReactSelect,
   type ReactSelectProps,
 } from 'dgz-ui/form';
+import { cn } from 'dgz-ui/utils';
 import { get } from 'lodash';
 import type { FieldPath, FieldValues } from 'react-hook-form';
-import { cn } from 'dgz-ui/utils';
 
 /**
  * Props for the MySelect component.

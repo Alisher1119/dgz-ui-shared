@@ -7,8 +7,8 @@ import {
   Switch,
   type SwitchProps,
 } from 'dgz-ui/form';
-import type { FieldPath, FieldValues } from 'react-hook-form';
 import { useId } from 'react';
+import type { FieldPath, FieldValues } from 'react-hook-form';
 
 /**
  * Props for the MySwitch component.
