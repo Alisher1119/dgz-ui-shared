@@ -32,6 +32,7 @@ export type MyTextareaProps<TFieldValues extends FieldValues> =
  * @param className - Custom CSS class name.
  * @param floatingError - Whether to show the error message in a floating container.
  * @param props - Textarea and form item props.
+ * @returns A textarea component integrated with react-hook-form.
  */
 export const MyTextarea = <TFieldValues extends FieldValues>({
   control,
@@ -52,7 +53,7 @@ export const MyTextarea = <TFieldValues extends FieldValues>({
         render={({ field, formState }) => (
           <FormItem className={cn(floatingError && 'space-y-0')}>
             {label && (
-              <FormLabel>
+              <FormLabel className={'block'}>
                 {label} {required && <span className={'text-red-600'}>*</span>}
               </FormLabel>
             )}

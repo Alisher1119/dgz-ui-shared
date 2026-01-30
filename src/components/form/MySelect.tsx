@@ -38,6 +38,7 @@ export type MySelectProps<TFieldValues extends FieldValues> =
  * @param onChange - Optional callback for change events.
  * @param floatingError - Whether to show the error message in a floating container.
  * @param props - Select and form item props.
+ * @returns A select component integrated with react-hook-form.
  */
 export const MySelect = <TFieldValues extends FieldValues>({
   control,
@@ -68,7 +69,7 @@ export const MySelect = <TFieldValues extends FieldValues>({
           return (
             <FormItem className={cn(floatingError && 'space-y-0')}>
               {label && (
-                <FormLabel>
+                <FormLabel className={'block'}>
                   {label}{' '}
                   {required && <span className={'text-red-600'}>*</span>}
                 </FormLabel>

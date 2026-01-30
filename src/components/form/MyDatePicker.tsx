@@ -44,7 +44,10 @@ export type MyDatePickerProps<TFieldValues extends FieldValues> =
  * @param placeholder - The placeholder text when no date selected.
  * @param floatingError - Whether to show the error message in a floating container.
  * @param register - The `react-hook-form` register function.
+ * @param disabled - Whether the date picker is disabled.
+ * @param inputProps - Props passed to the underlying Input component.
  * @param props - Calendar, button and form item props.
+ * @returns A date picker component integrated with react-hook-form.
  */
 export const MyDatePicker = <TFieldValues extends FieldValues>({
   control,
@@ -70,7 +73,7 @@ export const MyDatePicker = <TFieldValues extends FieldValues>({
         render={({ field, formState }) => (
           <FormItem className={cn(floatingError && 'space-y-0')}>
             {label && (
-              <FormLabel>
+              <FormLabel className={'block'}>
                 {label} {required && <span className={'text-red-600'}>*</span>}
               </FormLabel>
             )}

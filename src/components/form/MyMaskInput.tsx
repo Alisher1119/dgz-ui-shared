@@ -56,7 +56,7 @@ export const MyMaskInput = <TFieldValues extends FieldValues>({
         render={({ field }) => (
           <FormItem className={cn(floatingError && 'space-y-0')}>
             {label && (
-              <FormLabel>
+              <FormLabel className={'block'}>
                 {label} {required && <span className={'text-red-600'}>*</span>}
               </FormLabel>
             )}

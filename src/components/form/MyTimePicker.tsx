@@ -35,6 +35,7 @@ export type MyTimePickerProps<TFieldValues extends FieldValues> =
  * @param rules - The `react-hook-form` validation rules.
  * @param floatingError - Whether to show the error message in a floating container.
  * @param props - TimePicker and form item props.
+ * @returns A time picker component integrated with react-hook-form.
  */
 export const MyTimePicker = <TFieldValues extends FieldValues>({
   control,
@@ -54,7 +55,7 @@ export const MyTimePicker = <TFieldValues extends FieldValues>({
       render={({ field }) => (
         <FormItem className={cn(floatingError && 'space-y-0')}>
           {label && (
-            <FormLabel>
+            <FormLabel className={'block'}>
               {label} {required && <span className={'text-red-600'}>*</span>}
             </FormLabel>
           )}

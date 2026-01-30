@@ -50,6 +50,9 @@ type PresetType = DateRange & {
  * @param props.onRangeSelected - Callback when a full range is selected.
  * @param props.placeholder - Placeholder when no date selected.
  * @param props.error - Optional error message that adjusts styling.
+ * @param props.inputProps - Props passed to the underlying Input component.
+ * @param props.disabled - Whether the date range picker is disabled.
+ * @returns A date range picker component.
  */
 export const DateRangePicker = ({
   className,

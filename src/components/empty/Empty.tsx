@@ -3,15 +3,22 @@ import { FolderOpen } from 'lucide-react';
 import type { HTMLAttributes, ReactNode } from 'react';
 import { useTranslation } from 'react-i18next';
 
+/**
+ * Props for the Empty component.
+ */
 export interface EmptyProps extends HTMLAttributes<HTMLDivElement> {
+  /** Optional custom icon. Defaults to a folder icon. */
   icon?: ReactNode;
 }
 
 /**
  * Empty displays a simple empty state with an optional icon and message.
  *
- * @param props.children - Optional custom message/content.
- * @param props.icon - Optional custom icon. Defaults to a folder icon.
+ * @param children - Optional custom message/content.
+ * @param icon - Optional custom icon. Defaults to a folder icon.
+ * @param className - Additional CSS classes.
+ * @param props - Additional HTML attributes for the container.
+ * @returns A centered empty state component.
  */
 export const Empty = ({ children, icon, className, ...props }: EmptyProps) => {
   const { t } = useTranslation();

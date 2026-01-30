@@ -33,6 +33,7 @@ export type MyDateRangePickerProps<TFieldValues extends FieldValues> =
  * @param format - The date format for display.
  * @param placeholder - The placeholder text when no date is selected.
  * @param props - DateRangePicker props and form item props.
+ * @returns A date range picker integrated with react-hook-form.
  */
 export const MyDateRangePicker = <TFieldValues extends FieldValues>({
   control,
@@ -53,7 +54,7 @@ export const MyDateRangePicker = <TFieldValues extends FieldValues>({
         render={({ field, formState }) => (
           <FormItem className={cn(floatingError && 'space-y-0')}>
             {label && (
-              <FormLabel>
+              <FormLabel className={'block'}>
                 {label} {required && <span className={'text-red-600'}>*</span>}
               </FormLabel>
             )}

@@ -11,11 +11,20 @@ import { ThemeMode } from '../../enums';
 import { useTheme } from '../../hooks';
 
 /**
+ * Props for the ThemeToggle component.
+ */
+export interface ThemeToggleProps {
+  /** Optional className passed to the trigger button. */
+  className?: string;
+}
+
+/**
  * ThemeToggle provides a dropdown to switch between Light, Dark, and System themes.
  *
- * @param props.className - Optional className passed to the trigger button.
+ * @param className - Optional className passed to the trigger button.
+ * @returns A dropdown menu to switch themes.
  */
-export function ThemeToggle({ className }: { className?: string }) {
+export function ThemeToggle({ className }: ThemeToggleProps) {
   const { t } = useTranslation();
   const { setTheme } = useTheme();
 

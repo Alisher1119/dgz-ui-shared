@@ -15,7 +15,7 @@ type RadioItemProps = React.ComponentPropsWithoutRef<typeof RadioGroupItem>;
  * Props for the MyRadio component.
  * @template TFieldValues - The type of the form values.
  */
-type MyRadioProps<TFieldValues extends FieldValues> =
+export type MyRadioProps<TFieldValues extends FieldValues> =
   FormItemProps<TFieldValues> & RadioItemProps;
 
 /**
@@ -29,6 +29,7 @@ type MyRadioProps<TFieldValues extends FieldValues> =
  * @param rules - The `react-hook-form` validation rules.
  * @param value - The value of the radio input.
  * @param props - Radio item and form item props.
+ * @returns A radio button item.
  */
 const MyRadio = <TFieldValues extends FieldValues>({
   control,
