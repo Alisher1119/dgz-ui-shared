@@ -133,7 +133,6 @@ export const DateRangePicker = ({
     }
   };
 
-  console.log(selected);
   return (
     <Popover open={open} onOpenChange={setOpen}>
       <PopoverTrigger asChild className={'m-0!'} disabled={disabled}>
