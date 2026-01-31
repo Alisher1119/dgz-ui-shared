@@ -1,2 +1,2 @@
-import 'dgz-ui/dist/dgz-ui.css';
+import 'dgz-ui/styles.css';
 import './index.css';
