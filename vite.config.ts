@@ -3,9 +3,68 @@ import tailwindcss from '@tailwindcss/vite';
 import react from '@vitejs/plugin-react';
 import { resolve } from 'path';
 import { defineConfig } from 'vite';
+import dtsPlugin from 'vite-plugin-dts';
+
+const componentEntries = [
+  'confirm',
+  'datatable',
+  'datepicker',
+  'empty',
+  'filters',
+  'modal',
+  'pagination',
+  'scroll',
+  'tooltip',
+  'gallery',
+  'form',
+  'theme',
+  'loader',
+  'actions',
+  'export',
+] as const;
+
+const utilEntries = ['enums', 'hooks', 'types', 'stores', 'providers'] as const;
+
+const entries = {
+  index: resolve(__dirname, 'src/index.ts'),
+  ...Object.fromEntries(
+    componentEntries.map((name) => [
+      `components/${name}/index`,
+      resolve(__dirname, `src/components/${name}/index.ts`),
+    ])
+  ),
+  ...Object.fromEntries(
+    utilEntries.map((name) => [
+      `${name}/index`,
+      resolve(__dirname, `src/${name}/index.ts`),
+    ])
+  ),
+};
+
+const external = [
+  'react',
+  'react-dom',
+  'react/jsx-runtime',
+  'i18next',
+  'react-i18next',
+  'dayjs',
+  'lucide-react',
+  'react-hook-form',
+  'tailwindcss',
+  /^dgz-ui(\/.*)?$/,
+];
 
 export default defineConfig({
-  plugins: [react(), tailwindcss()],
+  plugins: [
+    react(),
+    tailwindcss(),
+    dtsPlugin({
+      include: ['src/**/*'],
+      exclude: ['src/**/*.test.*', 'src/**/*.spec.*'],
+      outDir: 'dist/types',
+      tsconfigPath: './tsconfig.json',
+    }),
+  ],
   resolve: {
     dedupe: [
       'react',
@@ -15,8 +74,6 @@ export default defineConfig({
       'dayjs',
       'lucide-react',
       'react-hook-form',
-      'tailwindcss',
-      'tailwindcss-animate',
       'dgz-ui',
     ],
   },
@@ -26,99 +83,32 @@ export default defineConfig({
     setupFiles: './src/setupTests.ts',
   },
   build: {
+    sourcemap: true,
+    minify: 'esbuild',
     lib: {
-      entry: {
-        index: resolve(__dirname, 'src/index.ts'),
-        'components/confirm/index': resolve(
-          __dirname,
-          'src/components/confirm/index.ts'
-        ),
-        'components/datatable/index': resolve(
-          __dirname,
-          'src/components/datatable/index.ts'
-        ),
-        'components/datepicker/index': resolve(
-          __dirname,
-          'src/components/datepicker/index.ts'
-        ),
-        'components/empty/index': resolve(
-          __dirname,
-          'src/components/empty/index.ts'
-        ),
-        'components/filters/index': resolve(
-          __dirname,
-          'src/components/filters/index.ts'
-        ),
-        'components/modal/index': resolve(
-          __dirname,
-          'src/components/modal/index.ts'
-        ),
-        'components/pagination/index': resolve(
-          __dirname,
-          'src/components/pagination/index.ts'
-        ),
-        'components/scroll/index': resolve(
-          __dirname,
-          'src/components/scroll/index.ts'
-        ),
-        'components/tooltip/index': resolve(
-          __dirname,
-          'src/components/tooltip/index.ts'
-        ),
-        'components/gallery/index': resolve(
-          __dirname,
-          'src/components/gallery/index.ts'
-        ),
-        'components/form/index': resolve(
-          __dirname,
-          'src/components/form/index.ts'
-        ),
-        'components/theme/index': resolve(
-          __dirname,
-          'src/components/theme/index.ts'
-        ),
-        'components/loader/index': resolve(
-          __dirname,
-          'src/components/loader/index.ts'
-        ),
-        'components/actions/index': resolve(
-          __dirname,
-          'src/components/actions/index.ts'
-        ),
-        'components/export/index': resolve(
-          __dirname,
-          'src/components/export/index.ts'
-        ),
-        'enums/index': resolve(__dirname, 'src/enums/index.ts'),
-        'hooks/index': resolve(__dirname, 'src/hooks/index.ts'),
-        'types/index': resolve(__dirname, 'src/types/index.ts'),
-        'stores/index': resolve(__dirname, 'src/stores/index.ts'),
-        'providers/index': resolve(__dirname, 'src/providers/index.ts'),
-      },
+      entry: entries,
     },
     rollupOptions: {
-      external: [
-        'react',
-        'react-dom',
-        'i18next',
-        'react-i18next',
-        'dayjs',
-        'lucide-react',
-        'react-hook-form',
-        'tailwindcss',
-        'tailwindcss-animate',
-        'dgz-ui',
-      ],
+      external: (id) => {
+        return external.some((pattern) =>
+          pattern instanceof RegExp
+            ? pattern.test(id)
+            : id === pattern || id.startsWith(`${pattern}/`)
+        );
+      },
       output: [
         {
           format: 'es',
           dir: 'dist',
           entryFileNames: '[name].es.js',
+          chunkFileNames: 'chunks/[name]-[hash].es.js',
         },
         {
           format: 'cjs',
           dir: 'dist',
           entryFileNames: '[name].cjs.js',
+          chunkFileNames: 'chunks/[name]-[hash].cjs.js',
+          interop: 'auto',
         },
       ],
     },
