@@ -82,7 +82,7 @@ export const FilterWrapper = memo(function FilterWrapper({
   const [open, setOpen] = useState(false);
   const { form } = useFilter({ params });
 
-  const { watch, getValues, handleSubmit, control, reset } = form;
+  const { watch, handleSubmit, control, reset } = form;
 
   useEffect(() => {
     let hasFilter = false;
@@ -99,8 +99,8 @@ export const FilterWrapper = memo(function FilterWrapper({
   const values = watch();
 
   useEffect(() => {
-    onChange?.(getValues());
-  }, [values]);
+    onChange?.(values);
+  }, [values, onChange]);
 
   const handleFilter = useCallback(
     (data = {}) => {
@@ -139,7 +139,7 @@ export const FilterWrapper = memo(function FilterWrapper({
             ) : (
               <ListFilterIcon className={'size-5'} />
             )}{' '}
-            <span className={'hidden lg:!inline'}>{title || 'Filter'}</span>
+            <span className={'hidden lg:inline!'}>{title || 'Filter'}</span>
             <ChevronDown />
           </div>
         </Button>

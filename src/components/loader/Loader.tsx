@@ -1,5 +1,5 @@
 import type { HTMLAttributes } from 'react';
-import Spin from './Spin.tsx';
+import Spin from './Spin';
 
 /**
  * Loader shows a centered spinning indicator inside a container.

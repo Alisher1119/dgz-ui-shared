@@ -1,4 +1,4 @@
-import Loader from './Loader.tsx';
-import Spin from './Spin.tsx';
+import Loader from './Loader';
+import Spin from './Spin';
 
 export { Loader, Spin };

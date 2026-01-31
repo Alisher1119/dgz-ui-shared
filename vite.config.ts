@@ -5,39 +5,36 @@ import { resolve } from 'path';
 import { defineConfig } from 'vite';
 import dtsPlugin from 'vite-plugin-dts';
 
-const componentEntries = [
+const components = [
+  'actions',
   'confirm',
   'datatable',
   'datepicker',
   'empty',
+  'export',
   'filters',
+  'form',
+  'gallery',
+  'loader',
   'modal',
   'pagination',
   'scroll',
-  'tooltip',
-  'gallery',
-  'form',
   'theme',
-  'loader',
-  'actions',
-  'export',
+  'tooltip',
 ] as const;
 
-const utilEntries = ['enums', 'hooks', 'types', 'stores', 'providers'] as const;
+const utils = ['enums', 'hooks', 'providers', 'stores', 'types'] as const;
 
 const entries = {
-  index: resolve(__dirname, 'src/index.ts'),
+  index: 'src/index.ts',
   ...Object.fromEntries(
-    componentEntries.map((name) => [
+    components.map((name) => [
       `components/${name}/index`,
-      resolve(__dirname, `src/components/${name}/index.ts`),
+      `src/components/${name}/index.ts`,
     ])
   ),
   ...Object.fromEntries(
-    utilEntries.map((name) => [
-      `${name}/index`,
-      resolve(__dirname, `src/${name}/index.ts`),
-    ])
+    utils.map((name) => [`${name}/index`, `src/${name}/index.ts`])
   ),
 };
 
@@ -51,7 +48,6 @@ const external = [
   'lucide-react',
   'react-hook-form',
   'tailwindcss',
-  /^dgz-ui(\/.*)?$/,
 ];
 
 export default defineConfig({
@@ -59,23 +55,17 @@ export default defineConfig({
     react(),
     tailwindcss(),
     dtsPlugin({
-      include: ['src/**/*'],
-      exclude: ['src/**/*.test.*', 'src/**/*.spec.*'],
+      include: ['src'],
+      exclude: ['src/**/*.test.*', 'src/**/*.spec.*', 'src/setupTests.ts'],
       outDir: 'dist/types',
-      tsconfigPath: './tsconfig.json',
+      tsconfigPath: './tsconfig.build.json',
+      copyDtsFiles: true,
+      rollupTypes: false,
+      strictOutput: false,
     }),
   ],
   resolve: {
-    dedupe: [
-      'react',
-      'react-dom',
-      'i18next',
-      'react-i18next',
-      'dayjs',
-      'lucide-react',
-      'react-hook-form',
-      'dgz-ui',
-    ],
+    dedupe: external.filter((e) => e !== 'react/jsx-runtime'),
   },
   test: {
     globals: true,
@@ -85,17 +75,20 @@ export default defineConfig({
   build: {
     sourcemap: true,
     minify: 'esbuild',
+    cssCodeSplit: false,
     lib: {
-      entry: entries,
+      entry: Object.fromEntries(
+        Object.entries(entries).map(([key, value]) => [
+          key,
+          resolve(__dirname, value),
+        ])
+      ),
+      cssFileName: 'styles',
     },
     rollupOptions: {
-      external: (id) => {
-        return external.some((pattern) =>
-          pattern instanceof RegExp
-            ? pattern.test(id)
-            : id === pattern || id.startsWith(`${pattern}/`)
-        );
-      },
+      external: (id) =>
+        external.some((ext) => id === ext || id.startsWith(`${ext}/`)) ||
+        /^dgz-ui(\/.*)?$/.test(id),
       output: [
         {
           format: 'es',
