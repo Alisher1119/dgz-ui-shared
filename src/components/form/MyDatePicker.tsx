@@ -13,7 +13,7 @@ import {
 import { Popover, PopoverContent, PopoverTrigger } from 'dgz-ui/popover';
 import { cn } from 'dgz-ui/utils';
 import { get } from 'lodash';
-import { CalendarIcon } from 'lucide-react';
+import { Calendar1 } from 'lucide-react';
 import type { FieldPath, FieldValues } from 'react-hook-form';
 
 /**
@@ -80,36 +80,28 @@ export const MyDatePicker = <TFieldValues extends FieldValues>({
             <Popover>
               <PopoverTrigger asChild>
                 <FormControl>
-                  <Input
-                    {...inputProps}
-                    variant={
-                      get(formState.errors, `${name}.message`)
-                        ? 'failure'
-                        : 'default'
-                    }
-                    disabled={disabled}
-                    {...field}
-                    readOnly
-                    placeholder={placeholder || 'Pick a date'}
-                    value={dayjs(field.value).format(format)}
-                    className={cn('m-0 text-start', className)}
-                  />
-                  <Input
-                    {...inputProps}
-                    readOnly
-                    variant={
-                      get(formState.errors, `${name}.message`)
-                        ? 'failure'
-                        : 'default'
-                    }
-                  >
-                    {field.value
-                      ? dayjs(field.value).format(format)
-                      : placeholder
-                        ? placeholder
-                        : 'Pick a date'}
-                    <CalendarIcon className="ml-auto size-4" />
-                  </Input>
+                  <div>
+                    <Input
+                      {...inputProps}
+                      variant={
+                        get(formState.errors, `${name}.message`)
+                          ? 'failure'
+                          : 'default'
+                      }
+                      disabled={disabled}
+                      {...field}
+                      readOnly
+                      placeholder={placeholder || 'Pick a date'}
+                      value={dayjs(field.value).format(format)}
+                      className={cn('m-0 text-start', className)}
+                    />
+                    <Calendar1
+                      className={cn(
+                        'text-secondary absolute top-2.5 right-2 size-5',
+                        disabled && 'pointer-events-none opacity-50'
+                      )}
+                    />
+                  </div>
                 </FormControl>
               </PopoverTrigger>
               {!disabled && (

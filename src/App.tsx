@@ -5,6 +5,7 @@ import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import {
   MyCheckbox,
+  MyDatePicker,
   MyDateRangePicker,
   MyInput,
   MyMaskInput,
@@ -94,6 +95,7 @@ function App() {
     checkbox: boolean;
     radio: string;
     time: string;
+    date: Date;
   }>({
     resolver: zodResolver(
       z.object({
@@ -105,6 +107,7 @@ function App() {
         checkbox: z.boolean(),
         radio: z.string(),
         time: z.string(),
+        date: z.date(),
       })
     ),
   });
@@ -117,6 +120,12 @@ function App() {
         className={'mx-auto max-w-2xl space-y-4'}
         onSubmit={form.handleSubmit(console.log)}
       >
+        <MyDatePicker
+          // disabled
+          control={form.control}
+          name={'date'}
+          placeholder={'Select date'}
+        />
         <MyDateRangePicker
           // disabled
           control={form.control}
