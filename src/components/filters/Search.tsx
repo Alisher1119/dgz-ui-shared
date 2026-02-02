@@ -55,6 +55,12 @@ export const Search = ({
             evt.preventDefault();
           }
         }}
+        onKeyDown={(event) => {
+          if (event.key === Keyboard.ENTER) {
+            event.stopPropagation();
+            event.preventDefault();
+          }
+        }}
       />
       <Button
         type={'button'}
