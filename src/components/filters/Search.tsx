@@ -1,73 +1,71 @@
+import { RiSearchLine } from '@remixicon/react';
 import { Button } from 'dgz-ui/button';
-import { Input } from 'dgz-ui/form';
+import type { CardProps } from 'dgz-ui/card';
+import { Input, type InputProps } from 'dgz-ui/form';
 import { cn } from 'dgz-ui/utils';
-import { SearchIcon } from 'lucide-react';
-import type { FormEvent, HTMLAttributes } from 'react';
+import { get } from 'lodash';
+import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import { Keyboard } from '../../enums';
 
 /**
  * Props for the Search component.
  */
-export interface SearchProps extends Omit<
-  HTMLAttributes<HTMLInputElement>,
-  'defaultValue' | 'name'
-> {
-  /** The name attribute for the input field. */
-  name?: string;
-  /** Placeholder text for the search input. */
+export type SearchProps = Omit<CardProps, 'title'> & {
+  /** Custom placeholder text for the input. */
   placeholder?: string;
-  /** Default value for the search input. */
-  defaultValue?: FormDataEntryValue | null;
-  /** Callback function executed when search is submitted. */
-  onSearchChange: (search?: FormDataEntryValue) => void;
-}
+  /** Callback fired when the search is triggered. */
+  onSearchChange: (search?: string) => void;
+  inputProps?: InputProps;
+};
 
 /**
- * Search input with submit button that emits value via onSearchChange on submit.
+ * Search input with a submit button that triggers a search action.
  *
- * @param props.name - Form field name for search input. Defaults to "search".
- * @param props.defaultValue - Default search value.
- * @param props.onSearchChange - Callback fired with submitted value.
+ * This component renders a search input field and a search button. The search
+ * is triggered when the user presses Enter or clicks the button. The search
+ * value is then passed to the `onSearchChange` callback.
+ *
+ * @param {SearchProps} props - The props for the component.
+ * @param {string} [props.placeholder] - Optional placeholder text for the input field.
+ * @param {Function} props.onSearchChange - Callback function that is called when a search is performed.
+ * @param {string} [props.className] - Optional class name for the component.
+ * @param {InputProps} [props.inputProps] - Optional props to pass to the underlying Input component.
  */
 export const Search = ({
-  name = 'search',
-  defaultValue,
-  onSearchChange,
   placeholder,
+  onSearchChange,
   className,
+  inputProps,
   ...props
 }: SearchProps) => {
   const { t } = useTranslation();
-
-  const handleSearch = (evt: FormEvent<HTMLFormElement>) => {
-    const formData = new FormData(evt.currentTarget);
-    onSearchChange(formData.get(name) || undefined);
-    evt.preventDefault();
-    evt.stopPropagation();
-  };
+  const [search, setSearch] = useState('');
 
   return (
-    <form
-      className={cn('relative w-full max-w-64 min-w-40', className)}
-      onSubmit={handleSearch}
-    >
+    <div {...props} className={cn('relative w-full', className)}>
       <Input
-        {...props}
-        className={'h-8 rounded-lg'}
-        name={name}
-        placeholder={placeholder || t('Search...')}
-        defaultValue={defaultValue ? `${defaultValue}` : ''}
+        {...inputProps}
+        placeholder={placeholder || t('Type text and press Enter')}
+        onInput={(evt) => setSearch(get(evt, 'target.value', ''))}
+        onKeyUp={(evt) => {
+          if (evt.key === Keyboard.ENTER) {
+            onSearchChange(search || undefined);
+            evt.stopPropagation();
+            evt.preventDefault();
+          }
+        }}
       />
       <Button
-        type={'submit'}
+        type={'button'}
         variant={'ghost'}
         className={
-          'text-foreground absolute top-0 right-0 cursor-pointer rounded-md !bg-transparent'
+          'text-foreground absolute top-0 right-0 cursor-pointer rounded-md bg-transparent!'
         }
-        size={'sm'}
+        onClick={() => onSearchChange(search)}
       >
-        <SearchIcon />
+        <RiSearchLine />
       </Button>
-    </form>
+    </div>
   );
 };

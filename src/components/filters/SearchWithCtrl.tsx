@@ -1,7 +1,7 @@
 import { RiSearchLine } from '@remixicon/react';
 import { Button } from 'dgz-ui/button';
 import type { CardProps } from 'dgz-ui/card';
-import { Input } from 'dgz-ui/form';
+import { Input, type InputProps } from 'dgz-ui/form';
 import { cn } from 'dgz-ui/utils';
 import { get } from 'lodash';
 import { useState } from 'react';
@@ -16,30 +16,33 @@ type SearchWithCtrlProps = Omit<CardProps, 'title'> & {
   placeholder?: string;
   /** Callback fired when the search is triggered. */
   onSearchChange: (search?: string) => void;
+  inputProps?: InputProps;
 };
 
 /**
- * SearchWithCtrl is a search input that submits when user presses Ctrl + Enter
- * or clicks the search button.
+ * A search input that submits when the user presses Ctrl + Enter or clicks the search button.
  *
- * @param props.placeholder - Custom placeholder text.
- * @param props.onSearchChange - Callback fired with search value.
+ * @param {SearchWithCtrlProps} props - The props for the component.
+ * @param {string} [props.placeholder] - Custom placeholder text for the input.
+ * @param {Function} props.onSearchChange - Callback fired with the search value.
+ * @param {string} [props.className] - Optional class name for the component.
+ * @param {InputProps} [props.inputProps] - Optional props to pass to the underlying Input component.
  */
 export const SearchWithCtrl = ({
   placeholder,
   onSearchChange,
   className,
+  inputProps,
   ...props
 }: SearchWithCtrlProps) => {
   const { t } = useTranslation();
   const [search, setSearch] = useState('');
 
   return (
-    <div {...props} className={cn('relative my-2 w-full', className)}>
+    <div {...props} className={cn('relative w-full', className)}>
       <Input
-        placeholder={
-          placeholder ? placeholder : t('Type text and press CTRL + Enter')
-        }
+        {...inputProps}
+        placeholder={placeholder || t('Type text and press CTRL + Enter')}
         onInput={(evt) => setSearch(get(evt, 'target.value', ''))}
         onKeyUp={(evt) => {
           if (evt.key === Keyboard.ENTER) {
@@ -55,7 +58,7 @@ export const SearchWithCtrl = ({
         type={'button'}
         variant={'ghost'}
         className={
-          'text-foreground absolute top-0 right-0 cursor-pointer rounded-md !bg-transparent'
+          'text-foreground absolute top-0 right-0 cursor-pointer rounded-md bg-transparent!'
         }
         onClick={() => onSearchChange(search)}
       >
