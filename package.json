@@ -1,6 +1,6 @@
 {
   "name": "dgz-ui-shared",
-  "version": "1.2.2",
+  "version": "1.2.3",
   "description": "Custom ui library using React.js, Shadcn/ui, TailwindCSS, Typescript, dgz-ui library",
   "keywords": [
     "dgz-ui",
@@ -174,10 +174,14 @@
   },
   "dependencies": {
     "@hookform/resolvers": "^5.0.1",
+    "dayjs": "^1.11.19",
     "file-saver": "^2.0.5",
     "lodash": "^4.17.21",
+    "lucide-react": "^0.563.0",
+    "react-hook-form": "^7.71.1",
     "react-responsive": "^10.0.1",
     "react-toastify": "^11.0.5",
+    "tailwindcss": "^4.1.18",
     "zod": "^3.25.67",
     "zustand": "^5.0.5"
   },
@@ -212,20 +216,13 @@
     "vitest": "^3.1.4"
   },
   "peerDependencies": {
-    "dayjs": "^1.11.19",
-    "dgz-ui": "^1.4.5",
+    "dgz-ui": "^1.4.6",
     "i18next": "^25.8.0",
-    "lucide-react": "^0.563.0",
     "react": "^19.0.1",
     "react-dom": "^19.0.1",
-    "react-hook-form": "^7.71.1",
-    "react-i18next": "^16.5.4",
-    "tailwindcss": "^4.1.18"
+    "react-i18next": "^16.5.4"
   },
   "peerDependenciesMeta": {
-    "dayjs": {
-      "optional": true
-    },
     "i18next": {
       "optional": true
     },
