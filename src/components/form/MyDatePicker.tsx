@@ -80,7 +80,7 @@ export const MyDatePicker = <TFieldValues extends FieldValues>({
             <Popover>
               <PopoverTrigger asChild>
                 <FormControl>
-                  <div>
+                  <div className={'relative'}>
                     <Input
                       {...inputProps}
                       variant={
