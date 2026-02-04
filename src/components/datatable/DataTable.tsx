@@ -9,6 +9,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from 'dgz-ui/dropdown';
+import { cn } from 'dgz-ui/utils';
 import { get, isEmpty } from 'lodash';
 import { RefreshCw } from 'lucide-react';
 import { type ReactNode, useEffect, useState } from 'react';
@@ -285,6 +286,7 @@ export const DataTable = <
             {hasSearch && (
               <Search
                 {...searchProps}
+                className={cn('max-w-60', searchProps?.className)}
                 defaultValue={get(params, 'search', '') as string}
                 onSearchChange={(search) =>
                   onParamChange?.({ ...params, search, page: 1 })
