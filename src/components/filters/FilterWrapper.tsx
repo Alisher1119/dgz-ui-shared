@@ -146,7 +146,7 @@ export const FilterWrapper = memo(function FilterWrapper({
       </PopoverTrigger>
       <PopoverContent side={'bottom'} align={'end'} {...contentProps}>
         <Form {...form}>
-          <form onSubmit={handleSubmit(handleFilter)}>
+          <form onSubmit={handleSubmit(handleFilter)} className={'space-y-4'}>
             <div className={'h-full shrink space-y-6 p-1'}>
               {filters.map((filter) =>
                 filter.options ? (

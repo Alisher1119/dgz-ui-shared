@@ -286,7 +286,7 @@ export const DataTable = <
             {hasSearch && (
               <Search
                 {...searchProps}
-                className={cn('max-w-60', searchProps?.className)}
+                className={cn('h-8 max-w-60', searchProps?.className)}
                 defaultValue={get(params, 'search', '') as string}
                 onSearchChange={(search) =>
                   onParamChange?.({ ...params, search, page: 1 })
