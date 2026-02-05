@@ -29,6 +29,23 @@ export interface GalleryItem {
 }
 
 /**
+ * Props for the Thumbnail component.
+ */
+export interface ThumbnailProps extends Omit<
+  HTMLAttributes<HTMLDivElement>,
+  'onClick'
+> {
+  /** The gallery item to display as a thumbnail. */
+  image: GalleryItem;
+  /** The index of the item in the gallery. */
+  index: number;
+  /** Callback executed when the thumbnail is clicked. */
+  onClick: (index: number) => void;
+  /** URL used when the thumbnail image fails to load. */
+  fallbackImage?: string;
+}
+
+/**
  * Interface representing a custom action button in the fullscreen view.
  */
 export interface GalleryActionButton {
@@ -48,6 +65,8 @@ export interface GalleryActionButton {
 export type MyGalleryProps = HTMLAttributes<HTMLDivElement> & {
   /** Array of gallery items to display. */
   images: GalleryItem[];
+  /** Additional props to pass to each thumbnail component. */
+  thumbnailProps?: ThumbnailProps;
   /** URL used when an image fails to load. */
   fallbackImage?: string;
   /** Custom action buttons rendered in fullscreen. */
@@ -102,12 +121,9 @@ const Thumbnail = memo(
     index,
     onClick,
     fallbackImage,
-  }: {
-    image: GalleryItem;
-    index: number;
-    onClick: (index: number) => void;
-    fallbackImage?: string;
-  }) => {
+    className,
+    ...props
+  }: ThumbnailProps) => {
     const [imgError, setImgError] = useState(false);
 
     const handleError = () => {
@@ -116,8 +132,12 @@ const Thumbnail = memo(
 
     return (
       <div
+        {...props}
         key={image.id}
-        className="aspect-video cursor-pointer overflow-hidden rounded-lg bg-gray-200 transition-opacity hover:opacity-80"
+        className={cn(
+          'aspect-video cursor-pointer overflow-hidden rounded-lg bg-gray-200 transition-opacity hover:opacity-80',
+          className
+        )}
         onClick={() => onClick(index)}
       >
         <img
@@ -141,12 +161,14 @@ const Thumbnail = memo(
  * Includes keyboard navigation, download action, optional info overlay, and fallbacks.
  *
  * @param props.images - Array of gallery items to display.
+ * @param props.thumbnailProps - Additional props to pass to each thumbnail component.
  * @param props.fallbackImage - URL used when an image fails to load.
  * @param props.actionButtons - Custom action buttons rendered in fullscreen.
  * @param props.hasInfo - Whether to show image title overlay on thumbnails.
  */
 const MyGalleryComponent = ({
   images,
+  thumbnailProps,
   actionButtons = [],
   fallbackImage,
   className,
@@ -356,6 +378,7 @@ const MyGalleryComponent = ({
         {images.map((image, index) => (
           <div className={'relative'} key={image.id}>
             <Thumbnail
+              {...thumbnailProps}
               image={image}
               index={index}
               onClick={openFullscreen}
