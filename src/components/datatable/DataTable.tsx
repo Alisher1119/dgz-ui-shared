@@ -286,7 +286,14 @@ export const DataTable = <
             {hasSearch && (
               <Search
                 {...searchProps}
-                className={cn('h-8 max-w-60', searchProps?.className)}
+                inputProps={{
+                  ...searchProps?.inputProps,
+                  className: cn('h-8', searchProps?.inputProps?.className),
+                }}
+                className={cn(
+                  'max-w-64 [&_button]:-top-1',
+                  searchProps?.className
+                )}
                 defaultValue={get(params, 'search', '') as string}
                 onSearchChange={(search) =>
                   onParamChange?.({ ...params, search, page: 1 })
@@ -316,7 +323,7 @@ export const DataTable = <
                     {columnsVisibilityProps?.title || (
                       <>
                         <RiLayoutColumnLine />{' '}
-                        <span className={'hidden lg:!inline'}>
+                        <span className={'hidden lg:inline!'}>
                           {t('Customize columns')}
                         </span>
                         <RiArrowDownSLine />
