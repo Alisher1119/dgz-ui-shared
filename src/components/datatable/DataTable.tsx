@@ -291,7 +291,7 @@ export const DataTable = <
                   className: cn('h-8', searchProps?.inputProps?.className),
                 }}
                 className={cn(
-                  'max-w-64 [&_button]:-top-1',
+                  'max-w-78 [&_button]:-top-1',
                   searchProps?.className
                 )}
                 defaultValue={get(params, 'search', '') as string}
