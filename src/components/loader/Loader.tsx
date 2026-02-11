@@ -5,6 +5,7 @@ import Spin from './Spin';
  * Loader shows a centered spinning indicator inside a container.
  *
  * @param props - Optional div HTML attributes.
+ * @returns A loader component with a spinning indicator.
  */
 const Loader = (props?: HTMLAttributes<HTMLDivElement>) => {
   return (

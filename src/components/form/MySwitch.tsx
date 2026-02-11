@@ -26,6 +26,7 @@ export type MySwitchProps<TFieldValues extends FieldValues> =
  * @param label - The label to display for the switch.
  * @param rules - The `react-hook-form` validation rules.
  * @param props - Switch and form item props.
+ * @returns A toggle switch component, or null if name or control are missing.
  */
 export const MySwitch = <TFieldValues extends FieldValues>({
   control,

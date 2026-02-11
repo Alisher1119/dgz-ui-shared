@@ -4,7 +4,9 @@ import type { ComponentProps } from 'react';
 /**
  * ScrollArea is a simple styled scrollable container div.
  *
- * @param props - Native div props. className extends default scrollbar styles.
+ * @param props - Native div props.
+ * @param className - className extends default scrollbar styles.
+ * @returns A scrollable container component.
  */
 export const ScrollArea = ({ className, ...props }: ComponentProps<'div'>) => {
   return (
