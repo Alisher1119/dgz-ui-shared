@@ -8,6 +8,7 @@ import {
   DropdownMenuTrigger,
 } from 'dgz-ui/dropdown';
 import type { ReactNode } from 'react';
+import { useTranslation } from 'react-i18next';
 
 /**
  * Interface representing a single action item.
@@ -41,6 +42,8 @@ export const Actions = ({
   contentProps,
   title,
 }: ActionsProps) => {
+  const { t } = useTranslation();
+
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild {...triggerProps}>
@@ -50,7 +53,7 @@ export const Actions = ({
           className={'ml-auto rounded-lg px-3'}
         >
           <RiPlayList2Line />{' '}
-          <span className={'hidden lg:!inline'}>{title || 'Actions'}</span>
+          <span className={'hidden lg:inline!'}>{title || t('Actions')}</span>
           <RiArrowDownSLine />
         </Button>
       </DropdownMenuTrigger>

@@ -10,6 +10,7 @@ import { get } from 'lodash';
 import { ChevronDown, ListFilterIcon, ListFilterPlusIcon } from 'lucide-react';
 import { memo, type ReactNode, useCallback, useEffect, useState } from 'react';
 import type { FieldValues } from 'react-hook-form';
+import { useTranslation } from 'react-i18next';
 import { useFilter } from '../../hooks';
 import { MyInput, MySelect } from '../form';
 
@@ -78,6 +79,7 @@ export const FilterWrapper = memo(function FilterWrapper({
   applyText,
   ...btnProps
 }: FilterWrapperProps) {
+  const { t } = useTranslation();
   const [isFiltered, setIsFiltered] = useState(false);
   const [open, setOpen] = useState(false);
   const { form } = useFilter({ params });
@@ -139,7 +141,7 @@ export const FilterWrapper = memo(function FilterWrapper({
             ) : (
               <ListFilterIcon className={'size-5'} />
             )}{' '}
-            <span className={'hidden lg:inline!'}>{title || 'Filter'}</span>
+            <span className={'hidden lg:inline!'}>{title || t('Filter')}</span>
             <ChevronDown />
           </div>
         </Button>
@@ -178,10 +180,10 @@ export const FilterWrapper = memo(function FilterWrapper({
                 size={'sm'}
                 onClick={handleReset}
               >
-                {resetText || 'Reset'}
+                {resetText || t('Reset')}
               </Button>
               <Button type="submit" size={'sm'}>
-                {applyText || 'Apply'}
+                {applyText || t('Apply')}
               </Button>
             </div>
           </form>

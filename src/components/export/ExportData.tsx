@@ -8,6 +8,7 @@ import {
   DropdownMenuTrigger,
 } from 'dgz-ui/dropdown';
 import type { ReactNode } from 'react';
+import { useTranslation } from 'react-i18next';
 import { Spin } from '../loader';
 
 /**
@@ -59,6 +60,8 @@ export const ExportData = ({
   contentProps,
   title,
 }: ExportDataProps) => {
+  const { t } = useTranslation();
+
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild {...triggerProps}>
@@ -68,7 +71,7 @@ export const ExportData = ({
           className={'ml-auto rounded-lg px-3'}
         >
           {loading ? <Spin /> : <RiFileChartLine />}{' '}
-          <span className={'hidden lg:!inline'}>{title || 'Export'}</span>
+          <span className={'hidden lg:inline!'}>{title || t('Export')}</span>
           <RiArrowDownSLine />
         </Button>
       </DropdownMenuTrigger>
