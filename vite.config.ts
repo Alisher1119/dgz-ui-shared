@@ -49,7 +49,6 @@ const external = [
   'react/jsx-runtime',
   'i18next',
   'react-i18next',
-  'dayjs',
   'lucide-react',
   'react-hook-form',
   'tailwindcss',

@@ -176,7 +176,6 @@
   },
   "dependencies": {
     "@hookform/resolvers": "^5.0.1",
-    "dayjs": "^1.11.19",
     "dgz-ui": "^1.4.12",
     "file-saver": "^2.0.5",
     "lodash": "^4.17.21",
