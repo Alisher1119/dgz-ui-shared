@@ -1,4 +1,3 @@
-import dayjs from 'dayjs';
 import { Calendar, type CalendarProps, DATE } from 'dgz-ui/calendar';
 import {
   FormControl,
@@ -11,7 +10,7 @@ import {
   type InputProps,
 } from 'dgz-ui/form';
 import { Popover, PopoverContent, PopoverTrigger } from 'dgz-ui/popover';
-import { cn } from 'dgz-ui/utils';
+import { cn, dayjs } from 'dgz-ui/utils';
 import { get } from 'lodash';
 import { Calendar1 } from 'lucide-react';
 import type { FieldPath, FieldValues } from 'react-hook-form';
