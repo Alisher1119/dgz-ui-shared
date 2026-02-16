@@ -368,7 +368,7 @@ export const DataTable = <
                 params={params}
                 onChange={handleFilterChange}
                 onFilter={(filter) => {
-                  onParamChange?.({ ...params, ...filter, page: 1 });
+                  onParamChange?.({ ...filter, page: 1 });
                   handleFilterChange?.(filter);
                 }}
               />

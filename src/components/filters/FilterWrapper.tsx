@@ -114,16 +114,15 @@ export const FilterWrapper = memo(function FilterWrapper({
 
   const handleReset = useCallback(() => {
     reset();
-    if (onFilter && params) {
+    if (onFilter) {
       onFilter({
-        ...params,
         ...Object.fromEntries(
           filters.map((filter) => [filter.name, undefined])
         ),
       });
     }
     setOpen(false);
-  }, [onFilter, reset, params, filters]);
+  }, [onFilter, reset, filters]);
 
   return (
     <Popover open={open} onOpenChange={setOpen}>
