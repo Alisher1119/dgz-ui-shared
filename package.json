@@ -174,14 +174,17 @@
     "test": "vitest run",
     "typecheck": "tsc --noEmit"
   },
+  "overrides": {
+    "quill": "2.0.2"
+  },
   "dependencies": {
     "@hookform/resolvers": "^5.0.1",
-    "dgz-ui": "^1.4.12",
+    "dgz-ui": "^1.4.13",
     "file-saver": "^2.0.5",
     "lodash": "^4.17.21",
     "lucide-react": "^0.563.0",
-    "react": "^19.2.4",
-    "react-dom": "^19.2.4",
+    "react": "^19.0.1",
+    "react-dom": "^19.0.1",
     "react-hook-form": "^7.71.1",
     "react-responsive": "^10.0.1",
     "react-toastify": "^11.0.5",
@@ -230,7 +233,6 @@
     "vitest": "^3.1.4"
   },
   "peerDependencies": {
-    "dgz-ui": "^1.4.7",
     "i18next": "^25.8.0",
     "react": "^19.0.1",
     "react-dom": "^19.0.1",

@@ -67,7 +67,7 @@ export const MySelect = <TFieldValues extends FieldValues>({
           };
 
           return (
-            <FormItem className={cn(floatingError && 'space-y-0')}>
+            <FormItem>
               {label && (
                 <FormLabel className={'block'}>
                   {label}{' '}

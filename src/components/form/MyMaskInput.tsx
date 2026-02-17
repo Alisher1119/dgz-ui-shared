@@ -9,6 +9,7 @@ import {
   type MaskInputProps,
 } from 'dgz-ui/form';
 import { cn } from 'dgz-ui/utils';
+import { get } from 'lodash';
 import type { FieldPath, FieldValues } from 'react-hook-form';
 
 /**
@@ -53,8 +54,8 @@ export const MyMaskInput = <TFieldValues extends FieldValues>({
         control={control}
         name={name}
         rules={rules}
-        render={({ field }) => (
-          <FormItem className={cn(floatingError && 'space-y-0')}>
+        render={({ field, formState }) => (
+          <FormItem>
             {label && (
               <FormLabel className={'block'}>
                 {label} {required && <span className={'text-red-600'}>*</span>}
@@ -68,6 +69,11 @@ export const MyMaskInput = <TFieldValues extends FieldValues>({
                 unmask
                 {...field}
                 {...props}
+                variant={
+                  get(formState.errors, `${name}.message`)
+                    ? 'failure'
+                    : 'default'
+                }
                 onAccept={(value) => field.onChange(value)}
               />
             </FormControl>

@@ -50,7 +50,7 @@ export const MyInput = <TFieldValues extends FieldValues>({
         name={name}
         rules={rules}
         render={({ field, formState }) => (
-          <FormItem className={cn(floatingError && 'space-y-0')}>
+          <FormItem>
             {label && (
               <FormLabel className={'block'}>
                 {label} {required && <span className={'text-red-600'}>*</span>}

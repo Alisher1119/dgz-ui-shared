@@ -133,7 +133,6 @@ function App() {
           placeholder={'Select date range'}
         />
         <MyMaskInput
-          floatingError
           label={'Label'}
           required
           mask={'000000'}

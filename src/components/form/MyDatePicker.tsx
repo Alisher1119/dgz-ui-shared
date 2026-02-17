@@ -44,6 +44,7 @@ export type MyDatePickerProps<TFieldValues extends FieldValues> =
  * @param floatingError - Whether to show the error message in a floating container.
  * @param register - The `react-hook-form` register function.
  * @param disabled - Whether the date picker is disabled.
+ * @param className - Additional CSS classes.
  * @param inputProps - Props passed to the underlying Input component.
  * @param props - Calendar, button and form item props.
  * @returns A date picker component integrated with react-hook-form.
@@ -70,7 +71,7 @@ export const MyDatePicker = <TFieldValues extends FieldValues>({
         name={name}
         rules={rules}
         render={({ field, formState }) => (
-          <FormItem className={cn(floatingError && 'space-y-0')}>
+          <FormItem>
             {label && (
               <FormLabel className={'block'}>
                 {label} {required && <span className={'text-red-600'}>*</span>}
