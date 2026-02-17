@@ -84,9 +84,11 @@ export const MySelect = <TFieldValues extends FieldValues>({
                   error={!!get(formState.errors, `${name}`)}
                 />
               </FormControl>
-              <FormMessage
-                className={cn(floatingError && 'absolute -bottom-5')}
-              />
+              {get(formState.errors, name, '') && (
+                <FormMessage
+                  className={cn(floatingError && 'absolute -bottom-5')}
+                />
+              )}
             </FormItem>
           );
         }}

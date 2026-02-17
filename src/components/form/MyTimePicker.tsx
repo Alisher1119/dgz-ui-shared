@@ -8,6 +8,7 @@ import {
   FormMessage,
 } from 'dgz-ui/form';
 import { cn } from 'dgz-ui/utils';
+import { get } from 'lodash';
 import type { FieldPath, FieldValues } from 'react-hook-form';
 
 /**
@@ -52,7 +53,7 @@ export const MyTimePicker = <TFieldValues extends FieldValues>({
       control={control}
       name={name}
       rules={rules}
-      render={({ field }) => (
+      render={({ field, formState }) => (
         <FormItem>
           {label && (
             <FormLabel className={'block'}>
@@ -62,7 +63,11 @@ export const MyTimePicker = <TFieldValues extends FieldValues>({
           <FormControl>
             <TimePicker {...field} {...props} />
           </FormControl>
-          <FormMessage className={cn(floatingError && 'absolute -bottom-5')} />
+          {get(formState.errors, name, '') && (
+            <FormMessage
+              className={cn(floatingError && 'absolute -bottom-5')}
+            />
+          )}
         </FormItem>
       )}
     />

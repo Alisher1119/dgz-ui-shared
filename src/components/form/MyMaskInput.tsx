@@ -77,9 +77,11 @@ export const MyMaskInput = <TFieldValues extends FieldValues>({
                 onAccept={(value) => field.onChange(value)}
               />
             </FormControl>
-            <FormMessage
-              className={cn(floatingError && 'absolute -bottom-5')}
-            />
+            {get(formState.errors, name, '') && (
+              <FormMessage
+                className={cn(floatingError && 'absolute -bottom-5')}
+              />
+            )}
           </FormItem>
         )}
       />

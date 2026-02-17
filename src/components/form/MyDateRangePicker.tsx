@@ -69,9 +69,11 @@ export const MyDateRangePicker = <TFieldValues extends FieldValues>({
                 />
               </div>
             </FormControl>
-            <FormMessage
-              className={cn(floatingError && 'absolute -bottom-5')}
-            />
+            {get(formState.errors, name, '') && (
+              <FormMessage
+                className={cn(floatingError && 'absolute -bottom-5')}
+              />
+            )}
           </FormItem>
         )}
       />

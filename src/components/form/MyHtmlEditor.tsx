@@ -9,6 +9,7 @@ import {
   type HtmlEditorProps,
 } from 'dgz-ui/form';
 import { cn } from 'dgz-ui/utils';
+import { get } from 'lodash';
 import type { FieldPath, FieldValues } from 'react-hook-form';
 
 /**
@@ -60,7 +61,11 @@ export const MyHtmlEditor = <TFieldValues extends FieldValues>({
           <FormControl>
             <HtmlEditor {...field} {...props} />
           </FormControl>
-          <FormMessage className={cn(floatingError && 'absolute -bottom-5')} />
+          {get(formState.errors, name, '') && (
+            <FormMessage
+              className={cn(floatingError && 'absolute -bottom-5')}
+            />
+          )}
         </FormItem>
       )}
     />
