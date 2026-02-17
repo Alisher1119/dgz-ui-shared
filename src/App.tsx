@@ -152,7 +152,6 @@ function App() {
         />
         <div className={'flex items-end gap-3'}>
           <MyInput
-            floatingError
             label={'Label'}
             required
             control={form.control}

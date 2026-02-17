@@ -62,26 +62,26 @@ export const MyMaskInput = <TFieldValues extends FieldValues>({
               </FormLabel>
             )}
             <FormControl>
-              <MaskInput
-                thousandsSeparator={' '}
-                lazy={false}
-                placeholderChar="_"
-                unmask
-                {...field}
-                {...props}
-                variant={
-                  get(formState.errors, `${name}.message`)
-                    ? 'failure'
-                    : 'default'
-                }
-                onAccept={(value) => field.onChange(value)}
-              />
+              <div>
+                <MaskInput
+                  thousandsSeparator={' '}
+                  lazy={false}
+                  placeholderChar="_"
+                  unmask
+                  {...field}
+                  {...props}
+                  variant={
+                    get(formState.errors, `${name}.message`)
+                      ? 'failure'
+                      : 'default'
+                  }
+                  onAccept={(value) => field.onChange(value)}
+                />
+                <FormMessage
+                  className={cn(floatingError && 'absolute -bottom-5')}
+                />
+              </div>
             </FormControl>
-            {get(formState.errors, name, '') && (
-              <FormMessage
-                className={cn(floatingError && 'absolute -bottom-5')}
-              />
-            )}
           </FormItem>
         )}
       />

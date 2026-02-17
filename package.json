@@ -1,6 +1,6 @@
 {
   "name": "dgz-ui-shared",
-  "version": "1.2.24",
+  "version": "1.2.25",
   "description": "Custom ui library using React.js, Shadcn/ui, TailwindCSS, Typescript, dgz-ui library",
   "keywords": [
     "dgz-ui",

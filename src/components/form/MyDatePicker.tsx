@@ -101,6 +101,9 @@ export const MyDatePicker = <TFieldValues extends FieldValues>({
                         disabled && 'pointer-events-none opacity-50'
                       )}
                     />
+                    <FormMessage
+                      className={cn(floatingError && 'absolute -bottom-5')}
+                    />
                   </div>
                 </FormControl>
               </PopoverTrigger>
@@ -115,11 +118,6 @@ export const MyDatePicker = <TFieldValues extends FieldValues>({
                 </PopoverContent>
               )}
             </Popover>
-            {get(formState.errors, name, '') && (
-              <FormMessage
-                className={cn(floatingError && 'absolute -bottom-5')}
-              />
-            )}
           </FormItem>
         )}
       />

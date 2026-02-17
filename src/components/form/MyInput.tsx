@@ -57,30 +57,30 @@ export const MyInput = <TFieldValues extends FieldValues>({
               </FormLabel>
             )}
             <FormControl>
-              <Input
-                variant={
-                  get(formState.errors, `${name}.message`)
-                    ? 'failure'
-                    : 'default'
-                }
-                {...props}
-                {...field}
-                onChange={(event) => {
-                  const value = event.target.value;
-                  if (props.type === 'number') {
-                    field.onChange(value ? Number(value) : undefined);
-                  } else {
-                    field.onChange(value);
+              <div>
+                <Input
+                  variant={
+                    get(formState.errors, `${name}.message`)
+                      ? 'failure'
+                      : 'default'
                   }
-                }}
-                className={cn(className)}
-              />
+                  {...props}
+                  {...field}
+                  onChange={(event) => {
+                    const value = event.target.value;
+                    if (props.type === 'number') {
+                      field.onChange(value ? Number(value) : undefined);
+                    } else {
+                      field.onChange(value);
+                    }
+                  }}
+                  className={cn(className)}
+                />
+                <FormMessage
+                  className={cn(floatingError && 'absolute -bottom-5')}
+                />
+              </div>
             </FormControl>
-            {get(formState.errors, name, '') && (
-              <FormMessage
-                className={cn(floatingError && 'absolute -bottom-5')}
-              />
-            )}
           </FormItem>
         )}
       />

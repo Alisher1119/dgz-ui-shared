@@ -58,22 +58,22 @@ export const MyTextarea = <TFieldValues extends FieldValues>({
               </FormLabel>
             )}
             <FormControl>
-              <Textarea
-                variant={
-                  get(formState.errors, `${name}.message`)
-                    ? 'failure'
-                    : 'default'
-                }
-                {...props}
-                {...field}
-                className={cn(className)}
-              />
+              <div>
+                <Textarea
+                  variant={
+                    get(formState.errors, `${name}.message`)
+                      ? 'failure'
+                      : 'default'
+                  }
+                  {...props}
+                  {...field}
+                  className={cn(className)}
+                />
+                <FormMessage
+                  className={cn(floatingError && 'absolute -bottom-5')}
+                />
+              </div>
             </FormControl>
-            {get(formState.errors, name, '') && (
-              <FormMessage
-                className={cn(floatingError && 'absolute -bottom-5')}
-              />
-            )}
           </FormItem>
         )}
       />
