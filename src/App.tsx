@@ -130,6 +130,7 @@ function App() {
           // disabled
           control={form.control}
           name={'range'}
+          label={'Label'}
           placeholder={'Select date range'}
         />
         <MyMaskInput

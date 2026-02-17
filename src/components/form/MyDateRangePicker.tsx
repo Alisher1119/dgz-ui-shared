@@ -59,13 +59,15 @@ export const MyDateRangePicker = <TFieldValues extends FieldValues>({
               </FormLabel>
             )}
             <FormControl>
-              <DateRangePicker
-                {...props}
-                error={`${get(formState.errors, name, '')}`}
-                selected={field.value}
-                onRangeSelected={field.onChange}
-                placeholder={placeholder}
-              />
+              <div>
+                <DateRangePicker
+                  {...props}
+                  error={`${get(formState.errors, name, '')}`}
+                  selected={field.value}
+                  onRangeSelected={field.onChange}
+                  placeholder={placeholder}
+                />
+              </div>
             </FormControl>
             <FormMessage
               className={cn(floatingError && 'absolute -bottom-5')}
