@@ -61,8 +61,8 @@ export const MyMaskInput = <TFieldValues extends FieldValues>({
                 {label} {required && <span className={'text-red-600'}>*</span>}
               </FormLabel>
             )}
-            <FormControl>
-              <div>
+            <div>
+              <FormControl>
                 <MaskInput
                   thousandsSeparator={' '}
                   lazy={false}
@@ -77,11 +77,11 @@ export const MyMaskInput = <TFieldValues extends FieldValues>({
                   }
                   onAccept={(value) => field.onChange(value)}
                 />
-                <FormMessage
-                  className={cn(floatingError && 'absolute -bottom-5')}
-                />
-              </div>
-            </FormControl>
+              </FormControl>
+              <FormMessage
+                className={cn(floatingError && 'absolute -bottom-5')}
+              />
+            </div>
           </FormItem>
         )}
       />

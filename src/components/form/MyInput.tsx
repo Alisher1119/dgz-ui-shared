@@ -56,8 +56,8 @@ export const MyInput = <TFieldValues extends FieldValues>({
                 {label} {required && <span className={'text-red-600'}>*</span>}
               </FormLabel>
             )}
-            <FormControl>
-              <div>
+            <div>
+              <FormControl>
                 <Input
                   variant={
                     get(formState.errors, `${name}.message`)
@@ -76,11 +76,11 @@ export const MyInput = <TFieldValues extends FieldValues>({
                   }}
                   className={cn(className)}
                 />
-                <FormMessage
-                  className={cn(floatingError && 'absolute -bottom-5')}
-                />
-              </div>
-            </FormControl>
+              </FormControl>
+              <FormMessage
+                className={cn(floatingError && 'absolute -bottom-5')}
+              />
+            </div>
           </FormItem>
         )}
       />

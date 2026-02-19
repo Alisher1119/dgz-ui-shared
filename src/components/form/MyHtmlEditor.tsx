@@ -45,30 +45,31 @@ export const MyHtmlEditor = <TFieldValues extends FieldValues>({
   floatingError,
   ...props
 }: MyHtmlEditorProps<TFieldValues>) => {
-  return name && control ? (
-    <FormField<TFieldValues, FieldPath<TFieldValues>>
-      control={control}
-      name={name}
-      rules={rules}
-      render={({ field }) => (
-        <FormItem>
-          {label && (
-            <FormLabel className={'block'}>
-              {label} {required && <span className={'text-red-600'}>*</span>}
-            </FormLabel>
-          )}
-          <FormControl>
+  return (
+    (name && control && (
+      <FormField<TFieldValues, FieldPath<TFieldValues>>
+        control={control}
+        name={name}
+        rules={rules}
+        render={({ field }) => (
+          <FormItem>
+            {label && (
+              <FormLabel className={'block'}>
+                {label} {required && <span className={'text-red-600'}>*</span>}
+              </FormLabel>
+            )}
             <div>
-              <HtmlEditor {...field} {...props} />
+              <FormControl>
+                <HtmlEditor {...field} {...props} />
+              </FormControl>
               <FormMessage
                 className={cn(floatingError && 'absolute -bottom-5')}
               />
             </div>
-          </FormControl>
-        </FormItem>
-      )}
-    />
-  ) : (
-    <HtmlEditor {...props} />
+          </FormItem>
+        )}
+      />
+    )) ||
+    null
   );
 };

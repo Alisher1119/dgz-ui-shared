@@ -74,8 +74,8 @@ export const MySelect = <TFieldValues extends FieldValues>({
                   {required && <span className={'text-red-600'}>*</span>}
                 </FormLabel>
               )}
-              <FormControl>
-                <div>
+              <div>
+                <FormControl>
                   <ReactSelect
                     className={cn(className)}
                     {...props}
@@ -84,11 +84,11 @@ export const MySelect = <TFieldValues extends FieldValues>({
                     options={options}
                     error={!!get(formState.errors, `${name}`)}
                   />
-                  <FormMessage
-                    className={cn(floatingError && 'absolute -bottom-5')}
-                  />
-                </div>
-              </FormControl>
+                </FormControl>
+                <FormMessage
+                  className={cn(floatingError && 'absolute -bottom-5')}
+                />
+              </div>
             </FormItem>
           );
         }}

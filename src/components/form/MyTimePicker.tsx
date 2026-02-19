@@ -58,15 +58,15 @@ export const MyTimePicker = <TFieldValues extends FieldValues>({
             <FormLabel className={'block'}>
               {label} {required && <span className={'text-red-600'}>*</span>}
             </FormLabel>
-          )}
-          <FormControl>
-            <div>
+          )}{' '}
+          <div>
+            <FormControl>
               <TimePicker {...field} {...props} />
-              <FormMessage
-                className={cn(floatingError && 'absolute -bottom-5')}
-              />
-            </div>
-          </FormControl>
+            </FormControl>
+            <FormMessage
+              className={cn(floatingError && 'absolute -bottom-5')}
+            />
+          </div>
         </FormItem>
       )}
     />

@@ -57,8 +57,8 @@ export const MyTextarea = <TFieldValues extends FieldValues>({
                 {label} {required && <span className={'text-red-600'}>*</span>}
               </FormLabel>
             )}
-            <FormControl>
-              <div>
+            <div>
+              <FormControl>
                 <Textarea
                   variant={
                     get(formState.errors, `${name}.message`)
@@ -69,11 +69,11 @@ export const MyTextarea = <TFieldValues extends FieldValues>({
                   {...field}
                   className={cn(className)}
                 />
-                <FormMessage
-                  className={cn(floatingError && 'absolute -bottom-5')}
-                />
-              </div>
-            </FormControl>
+              </FormControl>
+              <FormMessage
+                className={cn(floatingError && 'absolute -bottom-5')}
+              />
+            </div>
           </FormItem>
         )}
       />

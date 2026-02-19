@@ -79,8 +79,8 @@ export const MyDatePicker = <TFieldValues extends FieldValues>({
             )}
             <Popover>
               <PopoverTrigger asChild>
-                <FormControl>
-                  <div className={'relative'}>
+                <div className={'relative'}>
+                  <FormControl>
                     <Input
                       {...inputProps}
                       variant={
@@ -95,17 +95,17 @@ export const MyDatePicker = <TFieldValues extends FieldValues>({
                       value={dayjs(field.value).format(format)}
                       className={cn('m-0 text-start', className)}
                     />
-                    <Calendar1
-                      className={cn(
-                        'text-secondary absolute top-2.5 right-2 size-5',
-                        disabled && 'pointer-events-none opacity-50'
-                      )}
-                    />
-                    <FormMessage
-                      className={cn(floatingError && 'absolute -bottom-5')}
-                    />
-                  </div>
-                </FormControl>
+                  </FormControl>
+                  <Calendar1
+                    className={cn(
+                      'text-secondary absolute top-2.5 right-2 size-5',
+                      disabled && 'pointer-events-none opacity-50'
+                    )}
+                  />
+                  <FormMessage
+                    className={cn(floatingError && 'absolute -bottom-5')}
+                  />
+                </div>
               </PopoverTrigger>
               {!disabled && (
                 <PopoverContent className="w-auto p-0" align="start">
