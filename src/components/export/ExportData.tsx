@@ -64,14 +64,14 @@ export const ExportData = ({
 
   return (
     <DropdownMenu>
-      <DropdownMenuTrigger asChild {...triggerProps}>
+      <DropdownMenuTrigger asChild {...triggerProps} className={'grow'}>
         <Button
           variant="secondary"
           size={'sm'}
           className={'ml-auto rounded-lg px-3'}
         >
           {loading ? <Spin /> : <RiFileChartLine />}{' '}
-          <span className={'hidden lg:inline!'}>{title || t('Export')}</span>
+          <span className={'hidden md:inline!'}>{title || t('Export')}</span>
           <RiArrowDownSLine />
         </Button>
       </DropdownMenuTrigger>

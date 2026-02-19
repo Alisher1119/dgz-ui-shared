@@ -126,7 +126,7 @@ export const FilterWrapper = memo(function FilterWrapper({
 
   return (
     <Popover open={open} onOpenChange={setOpen}>
-      <PopoverTrigger {...triggerProps}>
+      <PopoverTrigger {...triggerProps} className={'grow'}>
         <Button
           asChild
           size={'sm'}
@@ -140,7 +140,7 @@ export const FilterWrapper = memo(function FilterWrapper({
             ) : (
               <ListFilterIcon className={'size-5'} />
             )}{' '}
-            <span className={'hidden lg:inline!'}>{title || t('Filter')}</span>
+            <span className={'hidden md:inline!'}>{title || t('Filter')}</span>
             <ChevronDown />
           </div>
         </Button>

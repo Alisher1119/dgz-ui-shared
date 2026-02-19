@@ -46,14 +46,14 @@ export const Actions = ({
 
   return (
     <DropdownMenu>
-      <DropdownMenuTrigger asChild {...triggerProps}>
+      <DropdownMenuTrigger asChild className={'grow'} {...triggerProps}>
         <Button
           variant="secondary"
           size={'sm'}
           className={'ml-auto rounded-lg px-3'}
         >
           <RiPlayList2Line />{' '}
-          <span className={'hidden lg:inline!'}>{title || t('Actions')}</span>
+          <span className={'hidden md:inline!'}>{title || t('Actions')}</span>
           <RiArrowDownSLine />
         </Button>
       </DropdownMenuTrigger>

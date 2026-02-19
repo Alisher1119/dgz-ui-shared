@@ -29,6 +29,7 @@ import {
   Search,
   type SearchProps,
 } from '../filters';
+import { AppliedFilters } from '../filters/AppliedFilters.tsx';
 import { Loader } from '../loader';
 import { MyLimitSelect, MyPagination } from '../pagination';
 import type { MyPaginationProps } from '../pagination/MyPagination.tsx';
@@ -102,6 +103,8 @@ export interface DataTableProps<
   dataKey?: keyof TPaginationData;
   /** Whether to show the columns visibility dropdown. */
   hasColumnsVisibilityDropdown?: true;
+  /** Whether to show the columns visibility dropdown. */
+  showAppliedFilters?: boolean;
   /** Callback when columns are updated (e.g., visibility toggled). */
   onColumnsUpdate?: (columns: ColumnType<TData>[]) => void;
   /** Whether the export action is loading. */
@@ -249,6 +252,7 @@ export const DataTable = <
   exportLoading = false,
   onColumnsUpdate,
   hasColumnsVisibilityDropdown,
+  showAppliedFilters = false,
   onSelectedItemsChange,
   actionProps,
   filterWrapperProps,
@@ -274,24 +278,24 @@ export const DataTable = <
   return (
     <div
       className={
-        'border-border-alpha-light flex grow flex-col overflow-auto rounded-xl border shadow-xs'
+        'border-border-alpha-light flex grow flex-col space-y-4 overflow-auto rounded-xl border p-4 shadow-xs'
       }
     >
       {(hasSearch ||
         (hasColumnsVisibilityDropdown && tableKey) ||
         !isEmpty(exportOptions) ||
         !isEmpty(filters)) && (
-        <div className="flex shrink-0 flex-col items-center justify-between gap-3 p-4 lg:flex-row">
+        <div className="flex shrink-0 flex-col items-center justify-between gap-3 lg:flex-row">
           <div className={'w-full shrink'}>
             {hasSearch && (
               <Search
                 {...searchProps}
                 inputProps={{
                   ...searchProps?.inputProps,
-                  className: cn('h-8', searchProps?.inputProps?.className),
+                  className: cn('h-8 grow', searchProps?.inputProps?.className),
                 }}
                 className={cn(
-                  'max-w-78 [&_button]:-top-1',
+                  'max-w-full lg:max-w-78 [&_button]:-top-1',
                   searchProps?.className
                 )}
                 defaultValue={get(params, 'search', '') as string}
@@ -301,7 +305,11 @@ export const DataTable = <
               />
             )}
           </div>
-          <div className={'flex shrink-0 items-center justify-end gap-3'}>
+          <div
+            className={
+              'flex w-full shrink-0 items-center justify-end gap-3 lg:w-auto'
+            }
+          >
             {exportOptions && (
               <ExportData
                 {...exportOptionsProps}
@@ -313,6 +321,7 @@ export const DataTable = <
               <DropdownMenu>
                 <DropdownMenuTrigger
                   asChild
+                  className={'grow'}
                   {...columnsVisibilityProps?.triggerProps}
                 >
                   <Button
@@ -323,7 +332,7 @@ export const DataTable = <
                     {columnsVisibilityProps?.title || (
                       <>
                         <RiLayoutColumnLine />{' '}
-                        <span className={'hidden lg:inline!'}>
+                        <span className={'hidden md:inline!'}>
                           {t('Customize columns')}
                         </span>
                         <RiArrowDownSLine />
@@ -376,6 +385,16 @@ export const DataTable = <
           </div>
         </div>
       )}
+      {showAppliedFilters && !isEmpty(filters) && (
+        <AppliedFilters
+          filters={filters}
+          params={params}
+          onFilter={(filter) => {
+            onParamChange?.({ ...filter, page: 1 });
+            handleFilterChange?.(filter);
+          }}
+        />
+      )}
       <div className={'flex flex-col overflow-auto border-y'}>
         {!loading ? (
           <MyTable<TData>
@@ -403,7 +422,7 @@ export const DataTable = <
         )}
       </div>
       {hasPagination && (
-        <div className="flex shrink-0 flex-col items-center justify-between gap-3 p-4 lg:flex-row">
+        <div className="flex shrink-0 flex-wrap items-center justify-center gap-3 p-4 lg:justify-between">
           <div className="text-sm">
             <MyLimitSelect
               onLimitChange={(limit) =>
