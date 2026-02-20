@@ -278,123 +278,129 @@ export const DataTable = <
   return (
     <div
       className={
-        'border-border-alpha-light flex grow flex-col space-y-4 overflow-auto rounded-xl border p-4 shadow-xs'
+        'border-border-alpha-light flex grow flex-col overflow-auto rounded-xl border shadow-xs'
       }
     >
-      {(hasSearch ||
-        (hasColumnsVisibilityDropdown && tableKey) ||
-        !isEmpty(exportOptions) ||
-        !isEmpty(filters)) && (
-        <div className="flex shrink-0 flex-col items-center justify-between gap-3 lg:flex-row">
-          <div className={'w-full shrink'}>
-            {hasSearch && (
-              <Search
-                {...searchProps}
-                inputProps={{
-                  ...searchProps?.inputProps,
-                  className: cn('h-8 grow', searchProps?.inputProps?.className),
-                }}
-                className={cn(
-                  'max-w-full lg:max-w-78 [&_button]:-top-1',
-                  searchProps?.className
-                )}
-                defaultValue={get(params, 'search', '') as string}
-                onSearchChange={(search) =>
-                  onParamChange?.({ ...params, search, page: 1 })
-                }
-              />
-            )}
-          </div>
-          <div
-            className={
-              'flex w-full shrink-0 items-center justify-end gap-3 lg:w-auto'
-            }
-          >
-            {exportOptions && (
-              <ExportData
-                {...exportOptionsProps}
-                options={exportOptions}
-                loading={exportLoading}
-              />
-            )}
-            {hasColumnsVisibilityDropdown && tableKey && (
-              <DropdownMenu>
-                <DropdownMenuTrigger
-                  asChild
-                  className={'grow'}
-                  {...columnsVisibilityProps?.triggerProps}
-                >
-                  <Button
-                    variant="secondary"
-                    size={'sm'}
-                    className={'ml-auto rounded-lg px-3'}
+      <div className={'space-y-4 p-4'}>
+        {(hasSearch ||
+          (hasColumnsVisibilityDropdown && tableKey) ||
+          !isEmpty(exportOptions) ||
+          !isEmpty(filters)) && (
+          <div className="flex shrink-0 flex-col items-center justify-between gap-3 lg:flex-row">
+            <div className={'w-full shrink'}>
+              {hasSearch && (
+                <Search
+                  {...searchProps}
+                  inputProps={{
+                    ...searchProps?.inputProps,
+                    className: cn(
+                      'h-8 grow',
+                      searchProps?.inputProps?.className
+                    ),
+                  }}
+                  className={cn(
+                    'max-w-full lg:max-w-78 [&_button]:-top-1',
+                    searchProps?.className
+                  )}
+                  defaultValue={get(params, 'search', '') as string}
+                  onSearchChange={(search) =>
+                    onParamChange?.({ ...params, search, page: 1 })
+                  }
+                />
+              )}
+            </div>
+            <div
+              className={
+                'flex w-full shrink-0 items-center justify-end gap-3 lg:w-auto'
+              }
+            >
+              {exportOptions && (
+                <ExportData
+                  {...exportOptionsProps}
+                  options={exportOptions}
+                  loading={exportLoading}
+                />
+              )}
+              {hasColumnsVisibilityDropdown && tableKey && (
+                <DropdownMenu>
+                  <DropdownMenuTrigger
+                    asChild
+                    className={'grow'}
+                    {...columnsVisibilityProps?.triggerProps}
                   >
-                    {columnsVisibilityProps?.title || (
-                      <>
-                        <RiLayoutColumnLine />{' '}
-                        <span className={'hidden md:inline!'}>
-                          {t('Customize columns')}
-                        </span>
-                        <RiArrowDownSLine />
-                      </>
-                    )}
-                  </Button>
-                </DropdownMenuTrigger>
-                <DropdownMenuContent
-                  align="end"
-                  {...columnsVisibilityProps?.contentProps}
-                >
-                  <DropdownMenuItem
-                    className="capitalize"
-                    onClick={resetColumns}
+                    <Button
+                      variant="secondary"
+                      size={'sm'}
+                      className={'ml-auto rounded-lg px-3'}
+                    >
+                      {columnsVisibilityProps?.title || (
+                        <>
+                          <RiLayoutColumnLine />{' '}
+                          <span className={'hidden md:inline!'}>
+                            {t('Customize columns')}
+                          </span>
+                          <RiArrowDownSLine />
+                        </>
+                      )}
+                    </Button>
+                  </DropdownMenuTrigger>
+                  <DropdownMenuContent
+                    align="end"
+                    {...columnsVisibilityProps?.contentProps}
                   >
-                    <RefreshCw />{' '}
-                    {columnsVisibilityProps?.resetText || t('Reset columns')}
-                  </DropdownMenuItem>
-                  <DropdownMenuSeparator />
-                  {formattedColumns.map((column) => {
-                    return (
-                      <DropdownMenuCheckboxItem
-                        key={column.key}
-                        className="capitalize"
-                        checked={!column.hidden}
-                        onCheckedChange={(value) =>
-                          handleColumnsChange(column, !value)
-                        }
-                      >
-                        {column.name}
-                      </DropdownMenuCheckboxItem>
-                    );
-                  })}
-                </DropdownMenuContent>
-              </DropdownMenu>
-            )}
-            {actions && <Actions {...actionProps} actions={actions} />}
-            {filters && (
-              <FilterWrapper
-                {...filterWrapperProps}
-                filters={filters}
-                params={params}
-                onChange={handleFilterChange}
-                onFilter={(filter) => {
-                  onParamChange?.({ ...filter, page: 1 });
-                  handleFilterChange?.(filter);
-                }}
-              />
-            )}
+                    <DropdownMenuItem
+                      className="capitalize"
+                      onClick={resetColumns}
+                    >
+                      <RefreshCw />{' '}
+                      {columnsVisibilityProps?.resetText || t('Reset columns')}
+                    </DropdownMenuItem>
+                    <DropdownMenuSeparator />
+                    {formattedColumns.map((column) => {
+                      return (
+                        <DropdownMenuCheckboxItem
+                          key={column.key}
+                          className="capitalize"
+                          checked={!column.hidden}
+                          onCheckedChange={(value) =>
+                            handleColumnsChange(column, !value)
+                          }
+                        >
+                          {column.name}
+                        </DropdownMenuCheckboxItem>
+                      );
+                    })}
+                  </DropdownMenuContent>
+                </DropdownMenu>
+              )}
+              {actions && <Actions {...actionProps} actions={actions} />}
+              {filters && (
+                <FilterWrapper
+                  {...filterWrapperProps}
+                  filters={filters}
+                  params={params}
+                  onChange={handleFilterChange}
+                  onFilter={(filter) => {
+                    onParamChange?.({ ...filter, page: 1 });
+                    handleFilterChange?.(filter);
+                  }}
+                />
+              )}
+            </div>
           </div>
-        </div>
-      )}
-      {showAppliedFilters && !isEmpty(filters) && (
-        <AppliedFilters
-          filters={filters}
-          params={params}
-          onFilter={(filter) => {
-            onParamChange?.({ ...filter, page: 1 });
-            handleFilterChange?.(filter);
-          }}
-        />
-      )}
+        )}
+        {showAppliedFilters && !isEmpty(filters) && (
+          <AppliedFilters
+            filters={filters}
+            params={params}
+            onFilter={(filter) => {
+              onParamChange?.({ ...filter, page: 1 });
+              handleFilterChange?.(filter);
+            }}
+          />
+        )}
+      </div>
+
       <div className={'flex flex-col overflow-auto border-y'}>
         {!loading ? (
           <MyTable<TData>

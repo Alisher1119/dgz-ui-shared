@@ -40,7 +40,14 @@ export const AppliedFilters = memo(function FilterWrapper({
 
   const filterObject = useMemo(
     () =>
-      Object.fromEntries(filters?.map((filter) => [filter.name, filter]) || []),
+      Object.fromEntries(
+        filters?.map((filter) => [
+          filter.name,
+          Object.fromEntries(
+            filter.options?.map(({ label, value }) => [value, label]) || []
+          ),
+        ]) || []
+      ),
     [filters]
   );
 
@@ -51,20 +58,22 @@ export const AppliedFilters = memo(function FilterWrapper({
         .map(([key, value]) =>
           Array.isArray(value) ? (
             <ButtonGroup key={key}>
-              {value.map((val, index) => (
-                <Button
-                  size={'sm'}
-                  key={index}
-                  onClick={() => {
-                    onFilter?.({
-                      ...params,
-                      [key]: value.filter((v) => v !== val),
-                    });
-                  }}
-                >
-                  {t(val)} <XIcon />
-                </Button>
-              ))}
+              {value
+                .filter((val) => filterObject?.[key]?.[val] && val)
+                .map((val, index) => (
+                  <Button
+                    size={'sm'}
+                    key={index}
+                    onClick={() => {
+                      onFilter?.({
+                        ...params,
+                        [key]: value.filter((v) => v !== val),
+                      });
+                    }}
+                  >
+                    {t(String(filterObject?.[key]?.[val] || ''))} <XIcon />
+                  </Button>
+                ))}
             </ButtonGroup>
           ) : (
             <Button
@@ -73,7 +82,8 @@ export const AppliedFilters = memo(function FilterWrapper({
                 onFilter?.(omit(params, key));
               }}
             >
-              {t(String(value || ''))} <XIcon />
+              {t(String(filterObject?.[key]?.[value as string] || ''))}{' '}
+              <XIcon />
             </Button>
           )
         )}
