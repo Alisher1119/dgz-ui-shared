@@ -274,11 +274,12 @@ export const DataTable = <
 
   return (
     <div
-      className={
-        'border-border-alpha-light flex grow flex-col overflow-auto rounded-xl border shadow-xs'
-      }
+      className={cn(
+        'border-border-alpha-light relative flex grow flex-col overflow-auto rounded-xl border shadow-xs',
+        className
+      )}
     >
-      <div className={'flex flex-col gap-4 p-4'}>
+      <div className={'flex shrink-0 flex-col gap-4 p-4'}>
         {(hasSearch ||
           (hasColumnsVisibilityDropdown && tableKey) ||
           !isEmpty(exportOptions) ||
@@ -394,12 +395,7 @@ export const DataTable = <
         )}
       </div>
 
-      <div
-        className={cn(
-          'relative flex flex-col overflow-auto border-y',
-          className
-        )}
-      >
+      <div className={cn('flex grow flex-col overflow-auto border-y')}>
         {!loading ? (
           <MyTable<TData>
             {...props}
