@@ -287,7 +287,7 @@ export const DataTable = <
           !isEmpty(exportOptions) ||
           !isEmpty(filters)) && (
           <div className="flex shrink-0 flex-col items-center justify-between gap-3 lg:flex-row">
-            <div className={'w-full shrink'}>
+            <div className={'w-full shrink-0 grow lg:w-auto'}>
               {hasSearch && (
                 <Search
                   {...searchProps}
@@ -311,7 +311,7 @@ export const DataTable = <
             </div>
             <div
               className={
-                'flex w-full shrink-0 items-center justify-end gap-3 lg:w-auto'
+                'flex w-full shrink items-center justify-end gap-3 lg:w-auto'
               }
             >
               {exportOptions && (
