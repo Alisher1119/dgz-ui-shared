@@ -131,7 +131,7 @@ export const FilterWrapper = memo(function FilterWrapper({
           asChild
           size={'sm'}
           variant="secondary"
-          className={'ml-auto px-3'}
+          className={'ml-auto w-full px-3'}
           {...btnProps}
         >
           <div className={'flex items-center'}>

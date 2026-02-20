@@ -83,21 +83,46 @@ function App() {
 
   return (
     <div className={'pl-63.75'}>
-      <DataTable
-        rowKey={'id'}
-        filters={filters}
-        params={params}
-        hasSearch
-        hasPagination
-        showAppliedFilters
-        hasCheckbox
-        actions={[{ label: '123', onClick: () => console.log('123') }]}
-        exportOptions={[{ label: '123', onClick: () => console.log('123') }]}
-        hasColumnsVisibilityDropdown
-        onParamChange={setParams}
-        tableKey={'table'}
-        columns={columns}
-      />
+      <div className={'relative max-h-full w-full overflow-auto p-4'}>
+        <DataTable
+          rowKey={'id'}
+          filters={filters}
+          params={params}
+          hasSearch
+          hasPagination
+          showAppliedFilters
+          hasCheckbox
+          actions={[{ label: '123', onClick: () => console.log('123') }]}
+          exportOptions={[{ label: '123', onClick: () => console.log('123') }]}
+          hasColumnsVisibilityDropdown
+          onParamChange={setParams}
+          tableKey={'table'}
+          hasNumbers
+          isStickyHeader
+          loading={true}
+          columns={columns}
+          exportLoading={true}
+          data-testid={'TEST_ID.INCIDENTS.dataTable'}
+          filterWrapperProps={{
+            triggerProps: {
+              'data-testid': `TEST_ID.PAGE.filters`,
+            },
+          }}
+          exportOptionsProps={{
+            triggerProps: {
+              'data-testid': `TEST_ID.PAGE.export`,
+            },
+          }}
+          columnsVisibilityProps={{
+            triggerProps: {
+              'data-testid': `TEST_ID.PAGE.customizeColumns`,
+            },
+          }}
+          searchProps={{
+            placeholder: 'Search...',
+          }}
+        />
+      </div>
     </div>
   );
 }

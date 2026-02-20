@@ -70,7 +70,11 @@ export const ExportData = ({
           size={'sm'}
           className={'ml-auto rounded-lg px-3'}
         >
-          {loading ? <Spin /> : <RiFileChartLine />}{' '}
+          {loading ? (
+            <Spin className={'text-item-primary'} />
+          ) : (
+            <RiFileChartLine />
+          )}{' '}
           <span className={'hidden md:inline!'}>{title || t('Export')}</span>
           <RiArrowDownSLine />
         </Button>

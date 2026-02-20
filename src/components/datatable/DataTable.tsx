@@ -281,13 +281,13 @@ export const DataTable = <
         'border-border-alpha-light flex grow flex-col overflow-auto rounded-xl border shadow-xs'
       }
     >
-      <div className={'space-y-4 p-4'}>
+      <div className={'flex flex-col gap-4 p-4'}>
         {(hasSearch ||
           (hasColumnsVisibilityDropdown && tableKey) ||
           !isEmpty(exportOptions) ||
           !isEmpty(filters)) && (
-          <div className="flex shrink-0 flex-col items-center justify-between gap-3 lg:flex-row">
-            <div className={'w-full shrink-0 grow lg:w-auto'}>
+          <div className="flex flex-col justify-between gap-3 lg:flex-row lg:items-center">
+            <div className={'grow'}>
               {hasSearch && (
                 <Search
                   {...searchProps}
@@ -299,7 +299,7 @@ export const DataTable = <
                     ),
                   }}
                   className={cn(
-                    'max-w-full lg:max-w-78 [&_button]:-top-1',
+                    'max-w-full lg:max-w-80 [&_button]:-top-1',
                     searchProps?.className
                   )}
                   defaultValue={get(params, 'search', '') as string}
@@ -309,11 +309,7 @@ export const DataTable = <
                 />
               )}
             </div>
-            <div
-              className={
-                'flex w-full shrink items-center justify-end gap-3 lg:w-auto'
-              }
-            >
+            <div className={'flex items-center justify-end gap-3'}>
               {exportOptions && (
                 <ExportData
                   {...exportOptionsProps}
