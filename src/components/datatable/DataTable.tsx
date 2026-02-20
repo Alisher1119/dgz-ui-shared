@@ -233,14 +233,10 @@ export const DataTable = <
 >({
   dataSource,
   columns,
-  onRowClick,
   rowKey,
-  hasNumbers,
   hasSearch,
   exportOptions,
-  hasCheckbox,
   hasPagination,
-  isStickyHeader,
   onParamChange,
   dataKey = 'docs',
   loading,
@@ -260,6 +256,7 @@ export const DataTable = <
   columnsVisibilityProps,
   paginationProps,
   searchProps,
+  className,
   ...props
 }: DataTableProps<TData, TPaginationData>) => {
   const { t } = useTranslation();
@@ -397,7 +394,12 @@ export const DataTable = <
         )}
       </div>
 
-      <div className={'flex flex-col overflow-auto border-y'}>
+      <div
+        className={cn(
+          'relative flex flex-col overflow-auto border-y',
+          className
+        )}
+      >
         {!loading ? (
           <MyTable<TData>
             {...props}
@@ -409,11 +411,7 @@ export const DataTable = <
             rows={get(dataSource, dataKey, []) as TData[]}
             rowKey={rowKey}
             selectedItems={selectedRows}
-            isStickyHeader={isStickyHeader}
             columns={formattedColumns}
-            hasCheckbox={hasCheckbox}
-            hasNumbers={hasNumbers}
-            onRowClick={onRowClick}
             onSelectedItemsChange={setSelectedRows}
             onSortOrderChange={({ sortField, sortOrder }) => {
               onParamChange?.({ ...params, sortField, sortOrder });

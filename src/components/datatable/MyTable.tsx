@@ -60,6 +60,18 @@ export interface MyTableProps<TData> extends ComponentProps<'table'> {
  * sorting/selection state via hooks and callbacks.
  *
  * @template TData - The row data type.
+ * @param rows
+ * @param columns
+ * @param onRowClick
+ * @param rowKey
+ * @param params
+ * @param hasNumbers
+ * @param hasCheckbox
+ * @param selectedItems
+ * @param onSelectedItemsChange
+ * @param onSortOrderChange
+ * @param isStickyHeader
+ * @param className
  * @param props - Component props.
  * @returns React element containing the table.
  */
@@ -104,7 +116,7 @@ export const MyTable = <TData,>({
   }, [selectedRows, selectedItems, onSelectedItemsChange]);
 
   return (
-    <Table {...props} className={cn('relative', className)}>
+    <Table {...props}>
       <TableHeader
         className={cn('bg-bg', isStickyHeader && 'sticky top-0 z-1')}
       >
