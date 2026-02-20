@@ -299,7 +299,7 @@ export const DataTable = <
                     ),
                   }}
                   className={cn(
-                    'max-w-full lg:max-w-80 [&_button]:-top-1',
+                    'max-w-full lg:max-w-80! [&_button]:-top-1',
                     searchProps?.className
                   )}
                   defaultValue={get(params, 'search', '') as string}

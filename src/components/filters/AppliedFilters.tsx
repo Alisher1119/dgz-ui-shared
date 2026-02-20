@@ -51,11 +51,18 @@ export const AppliedFilters = memo(function FilterWrapper({
     [filters]
   );
 
+  const paramsArr = useMemo(
+    () =>
+      Object.entries(params || {}).filter(
+        ([key, value]) => !!filterObject?.[key] && !isEmpty(value)
+      ),
+    [filterObject, params]
+  );
+
   return (
-    <div {...props} className={cn('flex flex-wrap gap-2', className)}>
-      {Object.entries(params || {})
-        .filter(([key, value]) => !!filterObject?.[key] && !isEmpty(value))
-        .map(([key, value]) =>
+    !isEmpty(paramsArr) && (
+      <div {...props} className={cn('flex flex-wrap gap-2', className)}>
+        {paramsArr.map(([key, value]) =>
           Array.isArray(value) ? (
             <ButtonGroup key={key}>
               {value
@@ -87,6 +94,7 @@ export const AppliedFilters = memo(function FilterWrapper({
             </Button>
           )
         )}
-    </div>
+      </div>
+    )
   );
 });
