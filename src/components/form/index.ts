@@ -7,6 +7,7 @@ export * from './MyInput';
 export * from './MyMaskInput';
 export * from './MyRadio';
 export * from './MySelect';
+export * from './MyShadcnSelect';
 export * from './MySwitch';
 export * from './MyTextarea';
 export * from './MyTimePicker';

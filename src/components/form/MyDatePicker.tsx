@@ -1,4 +1,9 @@
-import { Calendar, type CalendarProps, DATE } from 'dgz-ui/calendar';
+import {
+  Calendar,
+  type CalendarProps,
+  DATE,
+  TimePicker,
+} from 'dgz-ui/calendar';
 import {
   FormControl,
   FormField,
@@ -24,9 +29,14 @@ export type MyDatePickerProps<TFieldValues extends FieldValues> =
     Omit<CalendarProps, 'mode' | 'disabled'> & {
       /** Date format string for display. */
       format?: string;
+      /** Props passed to the underlying Input component. */
       inputProps?: Omit<InputProps, 'onSelect'>;
+      /** Placeholder text when no date is selected. */
       placeholder?: string;
+      /** Whether the date picker is disabled. */
       disabled?: boolean;
+      /** When true, shows a TimePicker below the calendar for time selection. */
+      showTime?: true;
     };
 
 /**
@@ -45,6 +55,7 @@ export type MyDatePickerProps<TFieldValues extends FieldValues> =
  * @param register - The `react-hook-form` register function.
  * @param disabled - Whether the date picker is disabled.
  * @param className - Additional CSS classes.
+ * @param showTime - When true, shows a TimePicker below the calendar for time selection.
  * @param inputProps - Props passed to the underlying Input component.
  * @param props - Calendar, button and form item props.
  * @returns A date picker component integrated with react-hook-form.
@@ -61,6 +72,7 @@ export const MyDatePicker = <TFieldValues extends FieldValues>({
   disabled,
   register,
   className,
+  showTime,
   inputProps,
   ...props
 }: MyDatePickerProps<TFieldValues>) => {
@@ -115,6 +127,22 @@ export const MyDatePicker = <TFieldValues extends FieldValues>({
                     selected={field.value}
                     onSelect={field.onChange}
                   />
+                  {showTime && (
+                    <div className={'px-4 pb-3'}>
+                      <TimePicker
+                        value={dayjs(field.value as Date).format('HH:mm')}
+                        onChange={(time) => {
+                          const [hour, minute] = time.split(':');
+                          field.onChange(
+                            dayjs(field.value)
+                              .set('hour', Number(hour))
+                              .set('minute', Number(minute))
+                              .toDate()
+                          );
+                        }}
+                      />
+                    </div>
+                  )}
                 </PopoverContent>
               )}
             </Popover>
