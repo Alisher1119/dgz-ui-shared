@@ -26,7 +26,7 @@ import type { FieldPath, FieldValues } from 'react-hook-form';
  */
 export type MyDatePickerProps<TFieldValues extends FieldValues> =
   FormItemProps<TFieldValues> &
-    Omit<CalendarProps, 'mode' | 'disabled'> & {
+    Omit<CalendarProps, 'mode' | 'disabled' | 'required'> & {
       /** Date format string for display. */
       format?: string;
       /** Props passed to the underlying Input component. */
@@ -37,6 +37,8 @@ export type MyDatePickerProps<TFieldValues extends FieldValues> =
       disabled?: boolean;
       /** When true, shows a TimePicker below the calendar for time selection. */
       showTime?: true;
+
+      required?: true;
     };
 
 /**

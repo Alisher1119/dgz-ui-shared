@@ -18,7 +18,7 @@ import { DateRangePicker, type DateRangePickerProps } from '../datepicker';
 export type MyDateRangePickerProps<TFieldValues extends FieldValues> =
   FormItemProps<TFieldValues> &
     Omit<DateRangePickerProps, 'required'> & {
-      required?: boolean;
+      required?: true;
     };
 
 /**
