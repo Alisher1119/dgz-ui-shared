@@ -3,7 +3,7 @@ import { Button } from 'dgz-ui/button';
 import type { CardProps } from 'dgz-ui/card';
 import { Input, type InputProps } from 'dgz-ui/form';
 import { cn } from 'dgz-ui/utils';
-import { get } from 'lodash';
+import get from 'lodash.get';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Keyboard } from '../../enums';
@@ -27,6 +27,7 @@ type SearchWithCtrlProps = Omit<CardProps, 'title'> & {
  * @param {Function} props.onSearchChange - Callback fired with the search value.
  * @param {string} [props.className] - Optional class name for the component.
  * @param {InputProps} [props.inputProps] - Optional props to pass to the underlying Input component.
+ * @returns {JSX.Element} A search input field with Ctrl+Enter support
  */
 export const SearchWithCtrl = ({
   placeholder,

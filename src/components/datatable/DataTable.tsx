@@ -10,7 +10,8 @@ import {
   DropdownMenuTrigger,
 } from 'dgz-ui/dropdown';
 import { cn } from 'dgz-ui/utils';
-import { get, isEmpty } from 'lodash';
+import get from 'lodash.get';
+import isEmpty from 'lodash.isempty';
 import { RefreshCw } from 'lucide-react';
 import { type ReactNode, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -139,34 +140,6 @@ export interface DataTableProps<
  * - Persists column visibility per `tableKey` via `useColumns` and informs parent with `onColumnsUpdate`.
  * - Renders header controls only when the related feature is enabled/has content.
  *
- * Props Overview
- * - `dataSource` — Paginated data source object that contains rows (see `dataKey`) and pagination metadata.
- * - `columns` — Column definitions passed to `MyTable`.
- * - `onRowClick` — Callback when a row is clicked.
- * - `rowKey` — Property name used as a unique row key.
- * - `hasNumbers` — Whether to show the row numbers column.
- * - `hasSearch` — Set to `true` to display the search input in the header.
- * - `exportOptions` — Export menu options shown by `ExportData` (see `ExportDataInterface[]`).
- * - `exportLoading` — When `true`, shows a spinner in the Export button to indicate an export action is in progress.
- * - `hasCheckbox` — Whether to show the selection checkbox column.
- * - `hasPagination` — Set to `true` to render the pagination footer.
- * - `isStickyHeader` — Whether to keep the table header sticky.
- * - `onParamChange` — Emits parameter changes for pagination/sorting/search/filters.
- * - `dataKey` — Key within `dataSource` that contains the row array. Defaults to `"docs"`.
- * - `loading` — If `true`, shows a loading state instead of the table rows.
- * - `tableKey` — Unique key for persisting column visibility state.
- * - `filters` — Filter configurations to render in the header.
- * - `actions` — Header actions independent of selected rows.
- * - `handleFilterChange` — Callback executed when filter values change.
- * - `params` — Current list parameters (pagination, sort, search, filters).
- * - `hasColumnsVisibilityDropdown` — Set to `true` to show the columns customize dropdown.
- * - `onColumnsUpdate` — Notifies parent whenever the internal columns state changes (after formatting/visibility).
- * - `actionProps` — Props passed to the `Actions` component.
- * - `filterWrapperProps` — Props passed to the `FilterWrapper` component.
- * - `exportOptionsProps` — Props passed to the `ExportData` component.
- * - `columnsVisibilityProps` — Props passed to the columns visibility dropdown.
- * - `onSelectedItemsChange` — Callback when selected rows change (requires `hasCheckbox`).
- *
  * Accessibility
  * - Header controls and dropdowns reuse shared primitives that include keyboard and ARIA support.
  *
@@ -223,8 +196,36 @@ export interface DataTableProps<
  * - When arrays like `exportOptions`, `filters`, or `actions` are empty, their sections are not rendered.
  * - Sorting emits `{ sortField, sortOrder }` through `onParamChange` when the user toggles a column sort.
  *
- * Returns
- * - React element that renders a complete data table experience.
+ * @template TData - Row data type.
+ * @template TPaginationData - Pagination wrapper type.
+ * @param dataSource - Paginated data source object.
+ * @param columns - Column definitions.
+ * @param rowKey - Property name used as a unique row key.
+ * @param hasSearch - Whether to display the search input.
+ * @param exportOptions - Export menu options.
+ * @param hasPagination - Whether to render the pagination footer.
+ * @param onParamChange - Emits parameter changes for pagination/sorting/search/filters.
+ * @param dataKey - Key within `dataSource` that contains the row array.
+ * @param loading - Whether the table data is loading.
+ * @param tableKey - Unique key for persisting column visibility state.
+ * @param filters - Filter configurations to render.
+ * @param actions - Header actions.
+ * @param handleFilterChange - Callback executed when filter values change.
+ * @param params - Current list parameters.
+ * @param exportLoading - Whether the export action is loading.
+ * @param onColumnsUpdate - Notifies parent whenever columns state changes.
+ * @param hasColumnsVisibilityDropdown - Whether to show columns customize dropdown.
+ * @param showAppliedFilters - Whether to show applied filters.
+ * @param onSelectedItemsChange - Callback when selected rows change.
+ * @param actionProps - Props for the Actions component.
+ * @param filterWrapperProps - Props for the FilterWrapper component.
+ * @param exportOptionsProps - Props for the ExportData component.
+ * @param columnsVisibilityProps - Props for columns visibility dropdown.
+ * @param paginationProps - Props for the MyPagination component.
+ * @param searchProps - Props for the Search component.
+ * @param className - Additional CSS classes.
+ * @param props - Additional props passed to MyTable.
+ * @returns {JSX.Element} React element that renders a complete data table experience.
  */
 export const DataTable = <
   TData,

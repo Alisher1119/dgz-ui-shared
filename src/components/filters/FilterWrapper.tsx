@@ -6,7 +6,7 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from 'dgz-ui/popover';
-import { get } from 'lodash';
+import get from 'lodash.get';
 import { ChevronDown, ListFilterIcon, ListFilterPlusIcon } from 'lucide-react';
 import { memo, type ReactNode, useCallback, useEffect, useState } from 'react';
 import type { FieldValues } from 'react-hook-form';
@@ -65,6 +65,7 @@ export interface FilterWrapperProps
  * @param props.onFilter - Callback fired when user applies filters.
  * @param props.onCancel - Callback fired on cancel.
  * @param props.onChange - Callback fired whenever filter form values change.
+ * @returns {JSX.Element} A filter button that opens a popover with filter controls
  */
 export const FilterWrapper = memo(function FilterWrapper({
   filters,

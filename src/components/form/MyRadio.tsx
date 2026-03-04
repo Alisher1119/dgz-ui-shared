@@ -29,7 +29,7 @@ export type MyRadioProps<TFieldValues extends FieldValues> =
  * @param rules - The `react-hook-form` validation rules.
  * @param value - The value of the radio input.
  * @param props - Radio item and form item props.
- * @returns A radio button item.
+ * @returns {JSX.Element | null} A radio button item with form integration, or null if name/control are missing
  */
 const MyRadio = <TFieldValues extends FieldValues>({
   control,

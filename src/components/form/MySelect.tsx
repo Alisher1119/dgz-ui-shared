@@ -9,7 +9,7 @@ import {
   type ReactSelectProps,
 } from 'dgz-ui/form';
 import { cn } from 'dgz-ui/utils';
-import { get } from 'lodash';
+import get from 'lodash.get';
 import type { FieldPath, FieldValues } from 'react-hook-form';
 
 /**
@@ -38,7 +38,7 @@ export type MySelectProps<TFieldValues extends FieldValues> =
  * @param onChange - Optional callback for change events.
  * @param floatingError - Whether to show the error message in a floating container.
  * @param props - Select and form item props.
- * @returns A select component integrated with react-hook-form.
+ * @returns {JSX.Element | null} A select component integrated with react-hook-form, or null if name/control are missing
  */
 export const MySelect = <TFieldValues extends FieldValues>({
   control,

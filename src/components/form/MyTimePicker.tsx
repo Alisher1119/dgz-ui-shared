@@ -35,7 +35,7 @@ export type MyTimePickerProps<TFieldValues extends FieldValues> =
  * @param rules - The `react-hook-form` validation rules.
  * @param floatingError - Whether to show the error message in a floating container.
  * @param props - TimePicker and form item props.
- * @returns A time picker component integrated with react-hook-form.
+ * @returns {JSX.Element} A time picker component integrated with react-hook-form, or standalone TimePicker if no form integration
  */
 export const MyTimePicker = <TFieldValues extends FieldValues>({
   control,

@@ -10,7 +10,7 @@ export type SpinProps = HTMLAttributes<HTMLOrSVGElement>;
  * Spin renders a simple SVG spinner. You can override className to change size/color.
  *
  * @param props - Optional HTML/SVG attributes applied to the svg element.
- * @returns An SVG spinner element.
+ * @returns {JSX.Element} An SVG spinner element.
  */
 const Spin = (props?: SpinProps) => {
   return (

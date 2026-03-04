@@ -10,7 +10,7 @@ import {
   AlertDialogTrigger,
 } from 'dgz-ui/alert-dialog';
 import { Form } from 'dgz-ui/form';
-import { useMemo } from 'react';
+import { type JSX, useMemo } from 'react';
 import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import {
@@ -31,7 +31,12 @@ export interface PasswordConfirmProps extends Omit<ConfirmProps, 'onConfirm'> {
 /**
  * PasswordConfirm prompts the user to enter their password to confirm an action and submits via onSubmit.
  *
+ * @param title
+ * @param description
+ * @param children
+ * @param onSubmit
  * @param props - Dialog props with title/description/trigger and onSubmit handler.
+ * @returns {JSX.Element} A password confirmation dialog component
  */
 export const PasswordConfirm = ({
   title,
@@ -39,7 +44,7 @@ export const PasswordConfirm = ({
   children,
   onSubmit,
   ...props
-}: PasswordConfirmProps) => {
+}: PasswordConfirmProps): JSX.Element => {
   const { t } = useTranslation();
   const schema = useMemo(() => createConfirmPasswordSchema(t), [t]);
   const form = useForm<ConfirmPasswordDto>({

@@ -1,4 +1,6 @@
 import type { Preview } from '@storybook/react-vite';
+import 'dgz-ui/styles.css';
+import '../src/index.css';
 
 const preview: Preview = {
   parameters: {

@@ -1,4 +1,3 @@
-import { uniqueId } from 'lodash';
 import { useCallback } from 'react';
 import { toast } from 'react-toastify/unstyled';
 import { Confirm, PasswordConfirm } from '../components';
@@ -8,11 +7,13 @@ import type { ConfirmPasswordDto } from '../schemas';
  * useConfirm provides helpers to prompt the user for confirmation.
  * It renders toast-based dialogs for simple confirm and password-confirm.
  *
- * @returns confirm and confirmPassword functions.
+ * @returns {Object} Confirmation functions
+ * @returns {(options: { onConfirm: () => void }) => void} confirm - Shows a simple confirmation dialog
+ * @returns {(options: { onSubmit: (data: ConfirmPasswordDto) => void }) => void} confirmPassword - Shows a password confirmation dialog
  */
 export const useConfirm = () => {
   const confirm = useCallback(({ onConfirm }: { onConfirm: () => void }) => {
-    const toastId = uniqueId();
+    const toastId = crypto.randomUUID();
     toast.warning(<></>, {
       toastId: toastId,
       autoClose: false,
@@ -33,7 +34,7 @@ export const useConfirm = () => {
 
   const confirmPassword = useCallback(
     ({ onSubmit }: { onSubmit: (data: ConfirmPasswordDto) => void }) => {
-      const toastId = uniqueId();
+      const toastId = crypto.randomUUID();
       toast.warning(<></>, {
         position: 'bottom-left',
         toastId: toastId,

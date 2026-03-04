@@ -9,7 +9,7 @@ import {
   type InputProps,
 } from 'dgz-ui/form';
 import { cn } from 'dgz-ui/utils';
-import { get } from 'lodash';
+import get from 'lodash.get';
 import type { FieldPath, FieldValues } from 'react-hook-form';
 
 /**
@@ -32,6 +32,7 @@ export type MyInputProps<TFieldValues extends FieldValues> =
  * @param rules - The `react-hook-form` validation rules.
  * @param floatingError - Whether to show the error message in a floating container.
  * @param props - Input and form item props.
+ * @returns {JSX.Element | null} An input field with form integration and validation, or null if name/control are missing
  */
 export const MyInput = <TFieldValues extends FieldValues>({
   control,

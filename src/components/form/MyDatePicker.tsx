@@ -16,7 +16,7 @@ import {
 } from 'dgz-ui/form';
 import { Popover, PopoverContent, PopoverTrigger } from 'dgz-ui/popover';
 import { cn, dayjs } from 'dgz-ui/utils';
-import { get } from 'lodash';
+import get from 'lodash.get';
 import { Calendar1 } from 'lucide-react';
 import type { FieldPath, FieldValues } from 'react-hook-form';
 
@@ -60,7 +60,7 @@ export type MyDatePickerProps<TFieldValues extends FieldValues> =
  * @param showTime - When true, shows a TimePicker below the calendar for time selection.
  * @param inputProps - Props passed to the underlying Input component.
  * @param props - Calendar, button and form item props.
- * @returns A date picker component integrated with react-hook-form.
+ * @returns {JSX.Element | null} A date picker component integrated with react-hook-form, or null if name/control are missing.
  */
 export const MyDatePicker = <TFieldValues extends FieldValues>({
   control,

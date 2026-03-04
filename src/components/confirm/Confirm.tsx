@@ -10,7 +10,7 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from 'dgz-ui/alert-dialog';
-import { type ReactNode } from 'react';
+import { type JSX, type ReactNode } from 'react';
 import { useTranslation } from 'react-i18next';
 
 /**
@@ -30,7 +30,12 @@ export type ConfirmProps = AlertDialogProps & {
 /**
  * Confirm renders a confirmation dialog and calls onConfirm when user confirms.
  *
+ * @param title
+ * @param description
+ * @param children
+ * @param onConfirm
  * @param props - Radix AlertDialog props plus content and onConfirm callback.
+ * @returns {JSX.Element} A confirmation dialog component
  */
 export const Confirm = ({
   title,
@@ -38,7 +43,7 @@ export const Confirm = ({
   children,
   onConfirm,
   ...props
-}: ConfirmProps) => {
+}: ConfirmProps): JSX.Element => {
   const { t } = useTranslation();
 
   return (

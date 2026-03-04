@@ -21,6 +21,7 @@ export type ThemeProviderProps = {
  * @param props.children - Child components.
  * @param props.defaultTheme - Default theme mode.
  * @param props.storageKey - Local storage key for persistence.
+ * @returns {JSX.Element} Context provider wrapping children with theme state
  */
 export function ThemeProvider({
   children,

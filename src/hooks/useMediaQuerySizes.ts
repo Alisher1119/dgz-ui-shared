@@ -3,7 +3,14 @@ import { useMediaQuery } from 'react-responsive';
 /**
  * useMediaQuerySizes exposes a set of media query booleans for responsive breakpoints.
  *
- * @returns Flags for xxxl, xxl, xl, lg, md, sm, xs breakpoints.
+ * @returns {Object} Breakpoint flags object
+ * @returns {boolean} xxxl - True if viewport width >= 116rem (1856px)
+ * @returns {boolean} xxl - True if viewport width >= 96rem (1536px)
+ * @returns {boolean} xl - True if viewport width >= 80rem (1280px)
+ * @returns {boolean} lg - True if viewport width >= 64rem (1024px)
+ * @returns {boolean} md - True if viewport width >= 48rem (768px)
+ * @returns {boolean} sm - True if viewport width >= 40rem (640px)
+ * @returns {boolean} xs - True if viewport width < 40rem (640px)
  */
 export const useMediaQuerySizes = () => {
   const xxxl = useMediaQuery({

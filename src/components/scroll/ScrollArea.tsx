@@ -6,7 +6,7 @@ import type { ComponentProps } from 'react';
  *
  * @param props - Native div props.
  * @param className - className extends default scrollbar styles.
- * @returns A scrollable container component.
+ * @returns {JSX.Element} A scrollable container component.
  */
 export const ScrollArea = ({ className, ...props }: ComponentProps<'div'>) => {
   return (

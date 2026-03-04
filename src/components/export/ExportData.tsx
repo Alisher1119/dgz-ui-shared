@@ -52,6 +52,13 @@ export interface ExportDataProps extends DropdownContainerProps {
  *
  * Internationalization
  * - The button label is translated via `react-i18next` using the `Export` key.
+ *
+ * @param options - Array of export actions with label and onClick handler.
+ * @param loading - When true, shows a spinner in the button.
+ * @param triggerProps - Props passed to the dropdown trigger.
+ * @param contentProps - Props passed to the dropdown content.
+ * @param title - Optional title for the export button.
+ * @returns {JSX.Element} React element rendering the export data dropdown.
  */
 export const ExportData = ({
   options,

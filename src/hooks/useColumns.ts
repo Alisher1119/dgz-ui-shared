@@ -1,4 +1,5 @@
-import { get, isEmpty, set } from 'lodash';
+import get from 'lodash.get';
+import isEmpty from 'lodash.isempty';
 import { useCallback, useEffect, useMemo } from 'react';
 import { useColumnsStore } from '../stores';
 import type { ColumnType } from '../types';
@@ -19,20 +20,24 @@ export interface UseColumnsProps<TData> {
  * Returns formatted columns and helpers to toggle/reset visibility.
  *
  * @template TData - Row data type.
- * @param props.key - Unique key for storing visibility per table.
- * @param props.columns - Original column definitions.
+ * @param key - Unique key for storing visibility per table.
+ * @param columns - Original column definitions.
+ * @returns {Object} Column management object
+ * @returns {ColumnType<TData>[]} formattedColumns - Filtered columns with visibility applied from store
+ * @returns {(column: ColumnType<TData>, value: boolean) => void} handleColumnsChange - Function to toggle column visibility
+ * @returns {() => void} resetColumns - Function to reset all columns to their default visibility
  */
 export const useColumns = <TData>({
   key,
   columns = [],
-}: UseColumnsProps<TData>) => {
+}: UseColumnsProps<TData>): object => {
   const { storedColumns, setColumns } = useColumnsStore();
 
   useEffect(() => {
     if (isEmpty(get(storedColumns, key)) && !isEmpty(columns)) {
       const columnsObj = {};
       columns.forEach((column) => {
-        set(columnsObj, column.key, !!column.hidden);
+        Object.assign(columnsObj, { [column.key]: !!column.hidden });
       });
       setColumns({
         ...storedColumns,
@@ -58,7 +63,7 @@ export const useColumns = <TData>({
   const handleColumnsChange = useCallback(
     (column: ColumnType<TData>, value: boolean) => {
       const columnsObj = get(storedColumns, key, {});
-      set(columnsObj, column.key, value);
+      Object.assign(columnsObj, { [column.key]: value });
 
       setColumns({
         ...storedColumns,
@@ -71,7 +76,7 @@ export const useColumns = <TData>({
   const resetColumns = useCallback(() => {
     const columnsObj: Record<string, boolean> = {};
     columns.forEach((column) => {
-      set(columnsObj, column.key, !!column.hidden);
+      Object.assign(columnsObj, { [column.key]: !!column.hidden });
     });
 
     setColumns({

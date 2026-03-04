@@ -18,7 +18,7 @@ export interface EmptyProps extends HTMLAttributes<HTMLDivElement> {
  * @param icon - Optional custom icon. Defaults to a folder icon.
  * @param className - Additional CSS classes.
  * @param props - Additional HTML attributes for the container.
- * @returns A centered empty state component.
+ * @returns {JSX.Element} A centered empty state component.
  */
 export const Empty = ({ children, icon, className, ...props }: EmptyProps) => {
   const { t } = useTranslation();

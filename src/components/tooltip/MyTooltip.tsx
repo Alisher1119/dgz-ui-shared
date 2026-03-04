@@ -26,7 +26,8 @@ export type MyTooltipProps = Omit<TooltipContentProps, 'content'> & {
  * @param props.content - Content shown inside the tooltip.
  * @param props.children - Element that triggers the tooltip.
  * @param props.show - Whether to render the tooltip; if false, renders children only.
- * @param props.asChild - Whether to render the tooltip tigger as child element.
+ * @param props.asChild - Whether to render the tooltip trigger as child element.
+ * @returns {JSX.Element} Either a tooltip-wrapped element or just the children
  */
 export const MyTooltip = ({
   content,

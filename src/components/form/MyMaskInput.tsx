@@ -9,7 +9,7 @@ import {
   type MaskInputProps,
 } from 'dgz-ui/form';
 import { cn } from 'dgz-ui/utils';
-import { get } from 'lodash';
+import get from 'lodash.get';
 import type { FieldPath, FieldValues } from 'react-hook-form';
 
 /**
@@ -37,7 +37,7 @@ export type MyMaskInputProps<TFieldValues extends FieldValues> =
  * @param required - Whether the field is required.
  * @param floatingError - Whether to show the error message in a floating container.
  * @param props - MaskInput and form item props.
- * @returns React element rendering a masked input with label, helper text, and validation message.
+ * @returns {JSX.Element | null} A masked input with label, helper text, and validation message, or null if name/control are missing
  */
 export const MyMaskInput = <TFieldValues extends FieldValues>({
   control,

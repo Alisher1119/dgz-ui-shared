@@ -9,7 +9,7 @@ import {
   type TextareaProps,
 } from 'dgz-ui/form';
 import { cn } from 'dgz-ui/utils';
-import { get } from 'lodash';
+import get from 'lodash.get';
 import type { FieldPath, FieldValues } from 'react-hook-form';
 
 /**
@@ -32,7 +32,7 @@ export type MyTextareaProps<TFieldValues extends FieldValues> =
  * @param className - Custom CSS class name.
  * @param floatingError - Whether to show the error message in a floating container.
  * @param props - Textarea and form item props.
- * @returns A textarea component integrated with react-hook-form.
+ * @returns {JSX.Element | null} A textarea component integrated with react-hook-form, or null if name/control are missing
  */
 export const MyTextarea = <TFieldValues extends FieldValues>({
   control,

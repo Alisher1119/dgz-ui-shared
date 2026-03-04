@@ -2,8 +2,11 @@ import { useCallback, useEffect, useState } from 'react';
 import { SortOrder } from '../enums';
 
 export interface UseSortableProps<TData> {
+  /** Current field being sorted by */
   sortField?: keyof TData;
+  /** Current sort order (ASC or DESC) */
   sortOrder?: SortOrder;
+  /** Callback triggered when sort state changes */
   onSortOrderChange?: (
     newSortOrder: Omit<UseSortableProps<TData>, 'onSortOrderChange'>
   ) => void;
@@ -14,15 +17,18 @@ export interface UseSortableProps<TData> {
  * Cycles through ASC -> DESC -> none for a given field and emits changes.
  *
  * @template TData - Row data type.
- * @param props.sortField - Current sorted field.
- * @param props.sortOrder - Current sort order.
- * @param props.onSortOrderChange - Callback with new sort state.
+ * @param sortField - Current sorted field.
+ * @param sortOrder - Current sort order.
+ * @param onSortOrderChange - Callback with new sort state.
+ * @returns {Object} Sort management object
+ * @returns {Object} sortObject - Current sort state with sortField and sortOrder
+ * @returns {(field: keyof TData) => void} handleSort - Function to trigger sort on a field
  */
 export const useSortable = <TData>({
   sortField,
   sortOrder,
   onSortOrderChange,
-}: UseSortableProps<TData>) => {
+}: UseSortableProps<TData>): object => {
   const [sortObject, setSortObject] = useState<{
     sortField?: keyof TData;
     sortOrder?: SortOrder;

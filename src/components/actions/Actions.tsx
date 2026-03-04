@@ -33,8 +33,11 @@ export interface ActionsProps extends DropdownContainerProps {
 /**
  * Actions renders a dropdown menu with a list of action items.
  *
- * @param props.actions - Array of actions with label and onClick handler.
- * @returns React element rendering the actions dropdown.
+ * @param actions - Array of actions with label and onClick handler.
+ * @param triggerProps - Props passed to the dropdown trigger.
+ * @param contentProps - Props passed to the dropdown content.
+ * @param title - Optional title for the actions button.
+ * @returns {JSX.Element} React element rendering the actions dropdown.
  */
 export const Actions = ({
   actions,

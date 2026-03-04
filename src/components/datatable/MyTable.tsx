@@ -8,7 +8,7 @@ import {
   TableRow,
 } from 'dgz-ui/table';
 import { cn } from 'dgz-ui/utils';
-import { get } from 'lodash';
+import get from 'lodash.get';
 import {
   ArrowDownWideNarrow,
   ArrowUpDown,
@@ -60,20 +60,20 @@ export interface MyTableProps<TData> extends ComponentProps<'table'> {
  * sorting/selection state via hooks and callbacks.
  *
  * @template TData - The row data type.
- * @param rows
- * @param columns
- * @param onRowClick
- * @param rowKey
- * @param params
- * @param hasNumbers
- * @param hasCheckbox
- * @param selectedItems
- * @param onSelectedItemsChange
- * @param onSortOrderChange
- * @param isStickyHeader
- * @param className
+ * @param rows - Array of data rows.
+ * @param columns - Column definitions.
+ * @param onRowClick - Callback when a row is clicked.
+ * @param rowKey - Unique key for each row.
+ * @param params - Current table parameters.
+ * @param hasNumbers - Whether to show row numbers.
+ * @param hasCheckbox - Whether to show selection checkboxes.
+ * @param selectedItems - Array of currently selected item keys.
+ * @param onSelectedItemsChange - Callback when selected items change.
+ * @param onSortOrderChange - Callback when sort order changes.
+ * @param isStickyHeader - Whether the header should stick to the top.
+ * @param className - Additional CSS classes.
  * @param props - Component props.
- * @returns React element containing the table.
+ * @returns {JSX.Element} React element containing the table.
  */
 export const MyTable = <TData,>({
   rows = [],

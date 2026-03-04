@@ -7,7 +7,7 @@ import {
   FormMessage,
 } from 'dgz-ui/form';
 import { cn } from 'dgz-ui/utils';
-import { get } from 'lodash';
+import get from 'lodash.get';
 import type { FieldPath, FieldValues } from 'react-hook-form';
 import { DateRangePicker, type DateRangePickerProps } from '../datepicker';
 
@@ -33,7 +33,7 @@ export type MyDateRangePickerProps<TFieldValues extends FieldValues> =
  * @param format - The date format for display.
  * @param placeholder - The placeholder text when no date is selected.
  * @param props - DateRangePicker props and form item props.
- * @returns A date range picker integrated with react-hook-form.
+ * @returns {JSX.Element | null} A date range picker integrated with react-hook-form, or null if name/control are missing
  */
 export const MyDateRangePicker = <TFieldValues extends FieldValues>({
   control,

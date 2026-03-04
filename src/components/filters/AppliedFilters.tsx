@@ -2,14 +2,14 @@ import { ButtonGroup } from 'dgz-ui';
 import { Button } from 'dgz-ui/button';
 import type { CardProps } from 'dgz-ui/card';
 import { cn } from 'dgz-ui/utils';
-import { isEmpty, omit } from 'lodash';
+import isEmpty from 'lodash.isempty';
 import { XIcon } from 'lucide-react';
 import { memo, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import type { FilterInterface } from './FilterWrapper.tsx';
 
 /**
- * Props for the FilterWrapper component.
+ * Props for the AppliedFilters component.
  */
 export interface AppliedFiltersProps extends CardProps {
   /** Array of filter definitions to render. */
@@ -21,13 +21,13 @@ export interface AppliedFiltersProps extends CardProps {
 }
 
 /**
- * FilterWrapper shows a popover with a dynamic list of field filters and emits selected filter values.
+ * AppliedFilters displays active filter values as removable buttons/tags.
  *
- * @param props.filters - Array of filter definitions to render.
- * @param props.params - Current params used to detect active filters.
- * @param props.onFilter - Callback fired when user applies filters.
- * @param props.onCancel - Callback fired on cancel.
- * @param props.onChange - Callback fired whenever filter form values change.
+ * @param props.filters - Array of filter definitions to map values to labels.
+ * @param props.params - Current active filter parameters.
+ * @param props.onFilter - Callback fired when a filter is removed.
+ * @param props.className - Additional CSS classes.
+ * @returns {JSX.Element | false} A list of active filter buttons or false if no filters are active
  */
 export const AppliedFilters = memo(function FilterWrapper({
   filters,
@@ -86,7 +86,10 @@ export const AppliedFilters = memo(function FilterWrapper({
             <Button
               size={'sm'}
               onClick={() => {
-                onFilter?.(omit(params, key));
+                const paramValues = { ...params };
+
+                delete paramValues[key];
+                onFilter?.(paramValues);
               }}
             >
               {t(String(filterObject?.[key]?.[value as string] || ''))}{' '}

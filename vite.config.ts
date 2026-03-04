@@ -30,7 +30,14 @@ const components = [
   'theme',
   'tooltip',
 ] as const;
-const utils = ['enums', 'hooks', 'providers', 'stores', 'types'] as const;
+const utils = [
+  'enums',
+  'hooks',
+  'providers',
+  'stores',
+  'types',
+  'utils',
+] as const;
 const entries = {
   index: 'src/index.ts',
   ...Object.fromEntries(

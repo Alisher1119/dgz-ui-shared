@@ -1,6 +1,5 @@
 import { cn } from 'dgz-ui/utils';
 import { saveAs } from 'file-saver';
-import { isNumber } from 'lodash';
 import { ChevronLeft, ChevronRight, Download, X } from 'lucide-react';
 import {
   type HTMLAttributes,
@@ -75,7 +74,10 @@ export type MyGalleryProps = HTMLAttributes<HTMLDivElement> & {
   hasInfo?: true;
 };
 
-// Default action buttons moved outside component to prevent recreation on each render
+/**
+ * Creates the default action buttons for the gallery fullscreen view.
+ * @returns {GalleryActionButton[]} Array containing the default download button
+ */
 const createDefaultActions = (): GalleryActionButton[] => [
   {
     icon: <Download size={20} />,
@@ -86,7 +88,14 @@ const createDefaultActions = (): GalleryActionButton[] => [
   },
 ];
 
-// FullscreenImage component to handle image loading errors
+/**
+ * FullscreenImage component that displays an image with fallback support.
+ * @param {Object} props - Component props
+ * @param {string} props.src - Source URL of the image
+ * @param {string} props.alt - Alt text for the image
+ * @param {string} [props.fallbackImage] - URL to use if the main image fails to load
+ * @returns {JSX.Element} An img element with error handling
+ */
 const FullscreenImage = memo(
   ({
     src,
@@ -114,7 +123,11 @@ const FullscreenImage = memo(
   }
 );
 
-// Thumbnail component to optimize rendering of grid items
+/**
+ * Thumbnail component that displays a clickable gallery image preview.
+ * @param {ThumbnailProps} props - Component props
+ * @returns {JSX.Element} A clickable thumbnail with error handling
+ */
 const Thumbnail = memo(
   ({
     image,
@@ -165,6 +178,7 @@ const Thumbnail = memo(
  * @param props.fallbackImage - URL used when an image fails to load.
  * @param props.actionButtons - Custom action buttons rendered in fullscreen.
  * @param props.hasInfo - Whether to show image title overlay on thumbnails.
+ * @returns {JSX.Element} A gallery component with thumbnail grid and fullscreen viewer
  */
 const MyGalleryComponent = ({
   images,
@@ -296,7 +310,7 @@ const MyGalleryComponent = ({
         </div>
 
         {/* Left Navigation */}
-        {isNumber(selectedIndex) && selectedIndex > 0 && (
+        {(selectedIndex || 0) > 0 && (
           <button
             onClick={goToPrevious}
             className="bg-opacity-50 hover:bg-opacity-70 bg-bg text-secondary absolute top-1/2 left-2 z-50 -translate-y-1/2 rounded-full p-3 transition-all"
@@ -307,7 +321,7 @@ const MyGalleryComponent = ({
         )}
 
         {/* Right Navigation */}
-        {isNumber(selectedIndex) && selectedIndex < images.length - 1 && (
+        {(selectedIndex || 0) < images.length - 1 && (
           <button
             onClick={goToNext}
             className="bg-opacity-0 hover:bg-opacity-100 text-secondary bg-bg absolute top-1/2 right-2 z-50 -translate-y-1/2 rounded-full p-3 transition-all"

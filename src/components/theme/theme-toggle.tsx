@@ -22,7 +22,7 @@ export interface ThemeToggleProps {
  * ThemeToggle provides a dropdown to switch between Light, Dark, and System themes.
  *
  * @param className - Optional className passed to the trigger button.
- * @returns A dropdown menu to switch themes.
+ * @returns {JSX.Element} A dropdown menu to switch themes.
  */
 export function ThemeToggle({ className }: ThemeToggleProps) {
   const { t } = useTranslation();

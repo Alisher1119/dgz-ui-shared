@@ -41,15 +41,15 @@ export type MyModalProps = DialogProps &
  * It provides a structured layout with a header, scrollable content area, and optional footer.
  *
  * @component
- * @param header
- * @param footer
- * @param trigger
- * @param children
- * @param size
- * @param className
- * @param triggerProps
- * @param contentProps
- * @param {MyModalProps} props - The props for the MyModal component.
+ * @param {ReactNode} props.header - The content to be displayed in the modal header
+ * @param {ReactNode} props.footer - The content to be displayed in the modal footer
+ * @param {ReactNode} props.trigger - The element that triggers the modal when clicked
+ * @param {ReactNode} props.children - The main content of the modal
+ * @param {'lg' | 'xl' | '2xl' | '3xl' | '4xl' | '5xl' | '6xl' | '7xl' | 'full'} props.size - The maximum width size of the modal (default: 'lg')
+ * @param {string} props.className - Additional CSS classes for the modal content
+ * @param {DialogContainerProps['triggerProps']} props.triggerProps - Props passed to the DialogTrigger component
+ * @param {DialogContainerProps['contentProps']} props.contentProps - Props passed to the DialogContent component
+ * @returns {JSX.Element} A modal dialog component
  *
  * @example
  * <MyModal

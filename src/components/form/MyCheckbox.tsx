@@ -26,7 +26,7 @@ export type MyCheckboxProps<TFieldValues extends FieldValues> =
  * @param label - The label to display for the checkbox.
  * @param rules - The `react-hook-form` validation rules.
  * @param props - Checkbox and form item props.
- * @returns A checkbox component wrapped with form handling logic.
+ * @returns {JSX.Element | null} A checkbox component wrapped with form handling logic, or null if name/control are missing
  */
 export const MyCheckbox = <TFieldValues extends FieldValues>({
   control,

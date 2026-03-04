@@ -13,7 +13,7 @@ import {
   type Option,
 } from 'dgz-ui/form';
 import { cn } from 'dgz-ui/utils';
-import { get } from 'lodash';
+import get from 'lodash.get';
 import type { FieldPath, FieldValues } from 'react-hook-form';
 
 /**
@@ -51,7 +51,7 @@ export type MyShadcnSelectProps<TFieldValues extends FieldValues> =
  * @param placeholder - Placeholder text when no option is selected.
  * @param disabled - Whether the select is disabled.
  * @param onChange - Callback fired when the selected value changes.
- * @returns A select component integrated with react-hook-form.
+ * @returns {JSX.Element | false} A select component integrated with react-hook-form, or false if name/control are missing
  */
 export const MyShadcnSelect = <TFieldValues extends FieldValues>({
   control,

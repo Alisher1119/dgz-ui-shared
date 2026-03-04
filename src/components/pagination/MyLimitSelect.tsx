@@ -8,9 +8,14 @@ import {
 } from 'dgz-ui/form';
 import { useTranslation } from 'react-i18next';
 
+/** Default number of items per page (50) */
 export const DEFAULT_LIMIT = 50;
+
+/** Default number of items per page for card/grid layouts (12) */
 export const DEFAULT_ITEMS_LIMIT = 12;
 
+/** Default pagination limit options */
+// eslint-disable-next-line react-refresh/only-export-components
 export const DEFAULT_OPTIONS: Option[] = [
   {
     value: 10,
@@ -45,9 +50,9 @@ export interface MyLimitSelectProps {
 /**
  * MyLimitSelect lets the user change the number of rows per page.
  *
- * @param props.defaultValue - Default limit value.
- * @param props.options - Select options to show.
- * @param props.onLimitChange - Callback when a new limit is selected.
+ * @param defaultValue - Default limit value.
+ * @param options - Select options to show.
+ * @param onLimitChange - Callback when a new limit is selected.
  */
 export const MyLimitSelect = ({
   defaultValue = DEFAULT_LIMIT,

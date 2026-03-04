@@ -1,6 +1,6 @@
 import type { CheckedState } from '@radix-ui/react-checkbox';
-import { isEqual } from 'lodash';
 import { useCallback, useEffect, useState } from 'react';
+import { isEqual } from '../utils';
 
 /**
  * Props for the useDataTable hook.
@@ -18,13 +18,19 @@ export interface UseDataTableProps<TData> {
  * Provides helpers to select all on current page, select one, and query selection.
  *
  * @template TData - Row data type.
- * @param props.rows - Current rows rendered on the page.
- * @param props.defaultSelectedRows - Pre-selected row keys.
+ * @param rows - Current rows rendered on the page.
+ * @param defaultSelectedRows - Pre-selected row keys.
+ * @returns {Object} Row selection state and handlers
+ * @returns {TData[keyof TData][] | undefined} selectedRows - Array of selected row keys
+ * @returns {(key: TData[keyof TData]) => boolean} isRowSelected - Check if a specific row is selected
+ * @returns {(rowKey: keyof TData) => CheckedState} isAllRowsSelected - Check selection state of all rows on current page
+ * @returns {(rowKey: keyof TData, checked: boolean) => void} handleSelectAllRows - Toggle selection of all rows on current page
+ * @returns {(key: TData[keyof TData], checked: boolean) => void} handleSelectRow - Toggle selection of a specific row
  */
 export const useDataTable = <TData>({
   rows = [],
   defaultSelectedRows,
-}: UseDataTableProps<TData>) => {
+}: UseDataTableProps<TData>): object => {
   const [selectedRows, setSelectedRows] = useState<TData[keyof TData][]>();
 
   const handleSelectAllRows = useCallback(

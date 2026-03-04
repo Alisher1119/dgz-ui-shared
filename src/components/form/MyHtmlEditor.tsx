@@ -34,7 +34,7 @@ export type MyHtmlEditorProps<TFieldValues extends FieldValues> =
  * @param required - Whether the field is required.
  * @param floatingError - Whether to show the error message in a floating container.
  * @param props - HtmlEditor and form item props.
- * @returns React element rendering an HtmlEditor with label, helper text, and validation message.
+ * @returns {JSX.Element | null} An HtmlEditor component with label, helper text, and validation message, or null if name/control are missing
  */
 export const MyHtmlEditor = <TFieldValues extends FieldValues>({
   control,
