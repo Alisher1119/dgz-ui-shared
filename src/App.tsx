@@ -1,7 +1,13 @@
 import { Form } from 'dgz-ui/form';
 import { useMemo, useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { DataTable, type FilterInterface, MyDatePicker } from './components';
+import {
+  DataTable,
+  type FilterInterface,
+  MyDatePicker,
+  MyMaskInput,
+  MySwitch,
+} from './components';
 import type { ColumnType } from './types';
 
 function App() {
@@ -87,7 +93,16 @@ function App() {
   return (
     <div className={'pl-63.75'}>
       <Form {...form}>
-        <MyDatePicker control={form.control} name={'date'} />
+        <MyDatePicker control={form.control} name={'date'} label={'Date'} />
+        <MyMaskInput
+          lazy
+          mask={'+998000000'}
+          placeholder={'Placeholder'}
+          control={form.control}
+          name={'mask'}
+          label={'Mask'}
+        />
+        <MySwitch control={form.control} name={'switch'} label={'Switch'} />
       </Form>
 
       <div className={'relative max-h-full w-full overflow-auto p-4'}>

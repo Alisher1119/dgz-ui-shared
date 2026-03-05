@@ -62,9 +62,7 @@ const MyRadio = <TFieldValues extends FieldValues>({
                   {...props}
                 />
               </FormControl>
-              <div className="space-y-1 leading-none">
-                {label && <div>{label}</div>}
-              </div>
+              {label && <div className={'mt-0.5'}>{label}</div>}
             </FormItem>
           </FormLabel>
         )}
