@@ -106,7 +106,11 @@ export const MyDatePicker = <TFieldValues extends FieldValues>({
                       {...field}
                       readOnly
                       placeholder={placeholder || 'Pick a date'}
-                      value={dayjs(field.value).format(format)}
+                      value={
+                        field.value
+                          ? dayjs(field.value).format(format)
+                          : undefined
+                      }
                       className={cn('m-0 text-start', className)}
                     />
                   </FormControl>

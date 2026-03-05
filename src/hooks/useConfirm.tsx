@@ -1,4 +1,4 @@
-import { useCallback } from 'react';
+import { type ReactNode, useCallback } from 'react';
 import { toast } from 'react-toastify/unstyled';
 import { Confirm, PasswordConfirm } from '../components';
 import type { ConfirmPasswordDto } from '../schemas';
@@ -33,7 +33,15 @@ export const useConfirm = () => {
   }, []);
 
   const confirmPassword = useCallback(
-    ({ onSubmit }: { onSubmit: (data: ConfirmPasswordDto) => void }) => {
+    ({
+      onSubmit,
+      title,
+      description,
+    }: {
+      onSubmit: (data: ConfirmPasswordDto) => void;
+      title?: ReactNode;
+      description?: ReactNode;
+    }) => {
       const toastId = crypto.randomUUID();
       toast.warning(<></>, {
         position: 'bottom-left',
@@ -44,6 +52,8 @@ export const useConfirm = () => {
         render: (
           <PasswordConfirm
             defaultOpen
+            title={title}
+            description={description}
             onSubmit={(data) => {
               onSubmit(data);
               toast.dismiss(toastId);

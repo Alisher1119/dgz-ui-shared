@@ -1,5 +1,7 @@
+import { Form } from 'dgz-ui/form';
 import { useMemo, useState } from 'react';
-import { DataTable, type FilterInterface } from './components';
+import { useForm } from 'react-hook-form';
+import { DataTable, type FilterInterface, MyDatePicker } from './components';
 import type { ColumnType } from './types';
 
 function App() {
@@ -80,9 +82,14 @@ function App() {
     ],
     []
   );
+  const form = useForm();
 
   return (
     <div className={'pl-63.75'}>
+      <Form {...form}>
+        <MyDatePicker control={form.control} name={'date'} />
+      </Form>
+
       <div className={'relative max-h-full w-full overflow-auto p-4'}>
         <DataTable
           rowKey={'id'}

@@ -62,10 +62,10 @@ export const PasswordConfirm = ({
           <form onSubmit={form.handleSubmit(onSubmit)} className={'space-y-3'}>
             <AlertDialogHeader>
               <AlertDialogTitle>
-                {title || t('Confirm your password')}
+                {title ?? t('Confirm your password')}
               </AlertDialogTitle>
               <div className={'text-secondary text-body-sm-medium space-y-3'}>
-                {description ||
+                {description ??
                   t('Enter your account password to complete this action')}
                 <MyInput<ConfirmPasswordDto>
                   required
