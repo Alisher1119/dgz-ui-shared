@@ -30,7 +30,7 @@ export interface UseColumnsProps<TData> {
 export const useColumns = <TData>({
   key,
   columns = [],
-}: UseColumnsProps<TData>): object => {
+}: UseColumnsProps<TData>) => {
   const { storedColumns, setColumns } = useColumnsStore();
 
   useEffect(() => {

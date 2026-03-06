@@ -28,7 +28,7 @@ export const useSortable = <TData>({
   sortField,
   sortOrder,
   onSortOrderChange,
-}: UseSortableProps<TData>): object => {
+}: UseSortableProps<TData>) => {
   const [sortObject, setSortObject] = useState<{
     sortField?: keyof TData;
     sortOrder?: SortOrder;

@@ -26,7 +26,7 @@ export interface UseFilterProps {
  * const status = form.watch('status');
  * ```
  */
-export const useFilter = ({ params }: UseFilterProps): object => {
+export const useFilter = ({ params }: UseFilterProps) => {
   const form = useForm({ mode: 'onChange' });
 
   useEffect(() => {

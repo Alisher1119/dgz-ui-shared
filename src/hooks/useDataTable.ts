@@ -30,7 +30,7 @@ export interface UseDataTableProps<TData> {
 export const useDataTable = <TData>({
   rows = [],
   defaultSelectedRows,
-}: UseDataTableProps<TData>): object => {
+}: UseDataTableProps<TData>) => {
   const [selectedRows, setSelectedRows] = useState<TData[keyof TData][]>();
 
   const handleSelectAllRows = useCallback(
