@@ -45,7 +45,7 @@ export interface MyTableProps<TData> extends ComponentProps<'table'> {
   /** Array of currently selected item keys. */
   selectedItems?: TData[keyof TData][];
   /** Callback when selected items change. */
-  onSelectedItemsChange?: (selectedItems: TData[keyof TData][]) => void;
+  onSelectedItemsChange?: (selectedItems?: TData[keyof TData][]) => void;
   /** Callback when sort order changes. */
   onSortOrderChange?: (
     params: Omit<UseSortableProps<TData>, 'onSortOrderChange'>
@@ -107,13 +107,8 @@ export const MyTable = <TData,>({
   } = useDataTable<TData>({ rows, defaultSelectedRows: selectedItems });
 
   useEffect(() => {
-    if (
-      JSON.stringify(selectedItems) !== JSON.stringify(selectedRows) &&
-      selectedRows
-    ) {
-      onSelectedItemsChange?.(selectedRows);
-    }
-  }, [selectedRows, selectedItems, onSelectedItemsChange]);
+    onSelectedItemsChange?.(selectedRows);
+  }, [selectedRows, onSelectedItemsChange]);
 
   return (
     <Table {...props}>

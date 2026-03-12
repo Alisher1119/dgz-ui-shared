@@ -31,7 +31,9 @@ export const useDataTable = <TData>({
   rows = [],
   defaultSelectedRows,
 }: UseDataTableProps<TData>) => {
-  const [selectedRows, setSelectedRows] = useState<TData[keyof TData][]>();
+  const [selectedRows, setSelectedRows] = useState<
+    TData[keyof TData][] | undefined
+  >();
 
   const handleSelectAllRows = useCallback(
     (rowKey: keyof TData, checked: boolean) => {
@@ -52,12 +54,14 @@ export const useDataTable = <TData>({
   );
 
   useEffect(() => {
-    if (defaultSelectedRows) {
+    if (defaultSelectedRows && defaultSelectedRows.length > 0) {
       setSelectedRows((prevSelectedRows) =>
         isEqual(prevSelectedRows, defaultSelectedRows)
           ? prevSelectedRows
           : defaultSelectedRows
       );
+    } else {
+      setSelectedRows(undefined);
     }
   }, [defaultSelectedRows]);
 
