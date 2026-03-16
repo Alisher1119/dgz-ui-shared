@@ -261,7 +261,9 @@ export const DataTable = <
   ...props
 }: DataTableProps<TData, TPaginationData>) => {
   const { t } = useTranslation();
-  const [selectedRows, setSelectedRows] = useState<TData[keyof TData][]>([]);
+  const [selectedRows, setSelectedRows] = useState<
+    TData[keyof TData][] | undefined
+  >();
   const { formattedColumns, handleColumnsChange, resetColumns } =
     useColumns<TData>({ key: tableKey, columns });
 
@@ -430,7 +432,7 @@ export const DataTable = <
           </div>
           <div className="text-muted-foreground text-sm">
             {t('{{selectedCount}} of {{total}} row(s) selected', {
-              selectedCount: selectedRows.length,
+              selectedCount: selectedRows?.length ?? 0,
               total: dataSource?.total || 0,
             })}
           </div>
