@@ -319,7 +319,7 @@ export const DataTable = <
                 />
               )}
               {hasColumnsVisibilityDropdown && tableKey && (
-                <DropdownMenu>
+                <DropdownMenu modal={false}>
                   <DropdownMenuTrigger
                     asChild
                     className={'grow'}
@@ -346,6 +346,7 @@ export const DataTable = <
                     {...columnsVisibilityProps?.contentProps}
                   >
                     <DropdownMenuItem
+                      onSelect={(e) => e.preventDefault()}
                       className="capitalize"
                       onClick={resetColumns}
                     >
@@ -357,6 +358,7 @@ export const DataTable = <
                       return (
                         <DropdownMenuCheckboxItem
                           key={column.key}
+                          onSelect={(e) => e.preventDefault()}
                           className="capitalize"
                           checked={!column.hidden}
                           onCheckedChange={(value) =>
