@@ -32,6 +32,7 @@ export interface FilterInterface {
   isSearchable?: boolean;
   /** Options for select inputs. */
   options?: Option[];
+  access?: string[];
 }
 
 /**

@@ -1,6 +1,5 @@
 import type { CheckedState } from '@radix-ui/react-checkbox';
-import { useCallback, useEffect, useState } from 'react';
-import { isEqual } from '../utils';
+import { useCallback, useState } from 'react';
 
 /**
  * Props for the useDataTable hook.
@@ -33,7 +32,7 @@ export const useDataTable = <TData>({
 }: UseDataTableProps<TData>) => {
   const [selectedRows, setSelectedRows] = useState<
     TData[keyof TData][] | undefined
-  >();
+  >(defaultSelectedRows);
 
   const handleSelectAllRows = useCallback(
     (rowKey: keyof TData, checked: boolean) => {
@@ -52,18 +51,6 @@ export const useDataTable = <TData>({
     },
     [rows]
   );
-
-  useEffect(() => {
-    if (defaultSelectedRows && defaultSelectedRows.length > 0) {
-      setSelectedRows((prevSelectedRows) =>
-        isEqual(prevSelectedRows, defaultSelectedRows)
-          ? prevSelectedRows
-          : defaultSelectedRows
-      );
-    } else {
-      setSelectedRows(undefined);
-    }
-  }, [defaultSelectedRows]);
 
   const handleSelectRow = useCallback(
     (key: TData[keyof TData], checked: boolean) => {

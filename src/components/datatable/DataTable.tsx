@@ -13,7 +13,7 @@ import { cn } from 'dgz-ui/utils';
 import get from 'lodash.get';
 import isEmpty from 'lodash.isempty';
 import { RefreshCw } from 'lucide-react';
-import { type ReactNode, useEffect, useState } from 'react';
+import { type ReactNode, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useColumns } from '../../hooks';
 import type { ColumnType } from '../../types';
@@ -250,7 +250,6 @@ export const DataTable = <
   onColumnsUpdate,
   hasColumnsVisibilityDropdown,
   showAppliedFilters = false,
-  onSelectedItemsChange,
   actionProps,
   filterWrapperProps,
   exportOptionsProps,
@@ -261,19 +260,12 @@ export const DataTable = <
   ...props
 }: DataTableProps<TData, TPaginationData>) => {
   const { t } = useTranslation();
-  const [selectedRows, setSelectedRows] = useState<
-    TData[keyof TData][] | undefined
-  >();
   const { formattedColumns, handleColumnsChange, resetColumns } =
     useColumns<TData>({ key: tableKey, columns });
 
   useEffect(() => {
     onColumnsUpdate?.(formattedColumns);
   }, [formattedColumns, onColumnsUpdate]);
-
-  useEffect(() => {
-    onSelectedItemsChange?.(selectedRows);
-  }, [selectedRows, onSelectedItemsChange]);
 
   return (
     <div
@@ -411,9 +403,7 @@ export const DataTable = <
             }}
             rows={get(dataSource, dataKey, []) as TData[]}
             rowKey={rowKey}
-            selectedItems={selectedRows}
             columns={formattedColumns}
-            onSelectedItemsChange={setSelectedRows}
             onSortOrderChange={({ sortField, sortOrder }) => {
               onParamChange?.({ ...params, sortField, sortOrder });
             }}
@@ -434,7 +424,7 @@ export const DataTable = <
           </div>
           <div className="text-muted-foreground text-sm">
             {t('{{selectedCount}} of {{total}} row(s) selected', {
-              selectedCount: selectedRows?.length ?? 0,
+              selectedCount: props.selectedItems?.length ?? 0,
               total: dataSource?.total || 0,
             })}
           </div>

@@ -18,6 +18,7 @@ export interface ActionInterface {
   label: ReactNode;
   /** Callback function to execute when the action is clicked. */
   onClick: () => void;
+  access?: string[];
 }
 
 /**

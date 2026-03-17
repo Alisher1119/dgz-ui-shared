@@ -22,6 +22,7 @@ export interface ExportDataInterface {
   label: ReactNode;
   /** Callback executed when the export option is selected. */
   onClick: () => void;
+  access?: string[];
 }
 
 /**
