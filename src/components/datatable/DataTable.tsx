@@ -338,6 +338,7 @@ export const DataTable = <
                     {...columnsVisibilityProps?.contentProps}
                   >
                     <DropdownMenuItem
+                      data-testid={'reset-columns-button'}
                       onSelect={(e) => e.preventDefault()}
                       className="capitalize"
                       onClick={resetColumns}
