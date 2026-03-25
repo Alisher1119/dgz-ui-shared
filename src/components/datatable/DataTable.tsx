@@ -350,6 +350,7 @@ export const DataTable = <
                       return (
                         <DropdownMenuCheckboxItem
                           key={column.key}
+                          data-testid={column.key}
                           onSelect={(e) => e.preventDefault()}
                           className="capitalize"
                           checked={!column.hidden}
